@@ -3,13 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>跳轉頁面</title>
+    <title>index</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        html,body{
+            height: 100%;
+            width: 100%;
+        }
+        div{
+            background: url(/images/1920x1080_0.jpg);
+            background-size: cover;
+            min-height: 100%;
+            background-attachment: fixed;
+        }
+    </style>
+    <script type="text/javascript">
+
+        var URL = document.location.toString();
+        var useragent = navigator.userAgent;
+        useragent = useragent.toLowerCase();
+        
+        if( useragent.indexOf('iphone') != -1 ) location.replace("https://translate.google.com.tw/?hl=zh-TW");//iphone
+        else if( useragent.indexOf('ipad') != -1 || useragent.indexOf('ipod') != -1) location.replace("https://translate.google.com.tw/?hl=zh-TW");//ipad
+        else if( useragent.indexOf('android') != -1 ) {
+        if( ConsiderLimits() )
+        {
+        location.replace("https://translate.google.com.tw/?hl=zh-TW"); // android pad
+        }else{
+        location.replace("https://translate.google.com.tw/?hl=zh-TW"); // android phone
+        }
+        }else{
+        location.replace("https://www.google.com.tw/"); // PC
+        }
+        
+        function ConsiderLimits() {
+        if( screen.width >= 1024 && screen.height >= 600 )
+        return 1;
+        return 0;
+        }
+        
+        </script>
 </head>
 <body>
-    
-    <script>
-        window.location.replace("http://google.com");
-
-    </script>
+    <div class="min">
+        <div class="flex">
+            <div class="rect"></div>
+        </div>
+    </div>
 </body>
 </html>
