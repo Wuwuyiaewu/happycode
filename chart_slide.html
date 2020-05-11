@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/air-slider.min.css" />
+    <title>#29 圖表</title>
+    <style>
+      .swiper-container {
+        width: 600px;
+        height: 400px;
+      }
+      .swiper-slide {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+      }
+    </style>
+    <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.css" />
+    <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css" />
+    <script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
+  </head>
+  <body>
+    <!-- Swiper -->
+    <div class="swiper-container">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <canvas id="lineChart_0" height="400" width="400"></canvas>
+        </div>
+        <div class="swiper-slide">
+          <canvas id="lineChart_1" height="400" width="400"></canvas>
+        </div>
+        <div class="swiper-slide">
+          <canvas id="lineChart_2" height="400" width="400"></canvas>
+        </div>
+      </div>
+    </div>
+
+
+    <input type="text" onclick="change(value)" value="50">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    <script src="js/chart_data.js"></script>
+
+    <!-- Swiper JS -->
+    <script src="../package/js/swiper.min.js"></script>
+
+    <!-- Initialize Swiper -->
+    <script>
+      var swiper = new Swiper(".swiper-container", {
+        pagination: {
+          el: ".swiper-pagination",
+          type: "progressbar",
+        },
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+      });
+    </script>
+  </body>
+</html>
