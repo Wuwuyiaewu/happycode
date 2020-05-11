@@ -27,10 +27,55 @@ const list_element = document.getElementById("list");
 const pagination_element = document.getElementById("pagination");
 
 let current_page = 1;
-let row = 5;
+let rows = 5;
 
-function DisplayList(item, wrapper, row_per_page, page) {
+function DisplayList(item, wrapper, rows_per_page, page) {
   wrapper.innerHTML = "";
   page--;
-  let loop_strat = rows_per_page;
+  let start = rows_per_page * page;
+  console.log(
+    "start " + start,
+    "rows_per_page " + rows_per_page,
+    "page " + page
+  );
+  let end = start + rows_per_page;
+  console.log("end " + end);
+  let paginationItems = item.slice(start, end);
+  console.log("paginationItems " + paginationItems);
+
+  for (let i = 0; i < paginationItems.length; i++) {
+    let item = paginationItems[i];
+    console.log("item " + item);
+    let item_element = document.createElement("div");
+    item_element.classList.add("item");
+    item_element.innerText = item;
+    wrapper.appendChild(item_element);
+  }
 }
+
+function SetupPagination(items, wrapper, rows_per_page) {
+  wrapper.innerHTML = "";
+  let page_count = Math.ceil(items.length / rows_per_page);
+  console.log(`page_count ${page_count}, items.length ${items.length}, rows_per_page ${rows_per_page}`)
+  for (let i = 1; i < page_count + 1; i++) {
+    let btn = PaginationButton(i, items);
+    wrapper.appendChild(btn);
+  }
+}
+
+function PaginationButton(page, items) {
+  let button = document.createElement("button");
+  button.innerText = page;
+  if (current_page == page) button.classList.add("active");
+  button.addEventListener('click', function () {
+		current_page = page;
+		DisplayList(items, list_element, rows, current_page);
+		// let current_btn = document.querySelector('.pagenumbers button.active');
+		// current_btn.classList.remove('active');
+		// button.classList.add('active');
+	});
+
+	return button;
+}
+DisplayList(list_items, list_element, rows, current_page);
+SetupPagination(list_items, pagination_element, rows);
