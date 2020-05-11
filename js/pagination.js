@@ -29,6 +29,9 @@ const pagination_element = document.getElementById("pagination");
 let current_page = 1;
 let rows = 5;
 
+DisplayList(list_items, list_element, rows, current_page);
+SetupPagination(list_items, pagination_element, rows);
+
 function DisplayList(item, wrapper, rows_per_page, page) {
   wrapper.innerHTML = "";
   page--;
@@ -70,12 +73,10 @@ function PaginationButton(page, items) {
   button.addEventListener('click', function () {
 		current_page = page;
 		DisplayList(items, list_element, rows, current_page);
-		// let current_btn = document.querySelector('.pagenumbers button.active');
-		// current_btn.classList.remove('active');
-		// button.classList.add('active');
+		let current_btn = document.querySelector('.pagenumbers button.active');
+		current_btn.classList.remove('active');
+		button.classList.add('active');
 	});
 
 	return button;
 }
-DisplayList(list_items, list_element, rows, current_page);
-SetupPagination(list_items, pagination_element, rows);

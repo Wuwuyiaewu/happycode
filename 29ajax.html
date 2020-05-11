@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>29api串接</title>
+  </head>
+  <body>
+      <div class="wrapper">
+
+      </div>
+  </body>
+  <script>
+    $.ajax({
+      url: "http://uat.nb210.com/fApi/contentList",
+      type: "GET",
+      success: function (data) {
+        let wrap = document.getElementsByClassName('wrapper')
+        wrap.innerHTML = data
+        console.log(data)
+      },
+      error: function (e) {
+        //called when there is an error
+        //console.log(e.message);
+      },
+    });
+  </script>
+</html>

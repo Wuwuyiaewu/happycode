@@ -7,8 +7,8 @@
     <title>#29 圖表</title>
     <style>
       .swiper-container {
-        width: 600px;
-        height: 400px;
+        width: 50%;
+        height: auto;
       }
       .swiper-slide {
         display: flex;
@@ -25,13 +25,13 @@
     <div class="swiper-container">
       <div class="swiper-wrapper">
         <div class="swiper-slide">
-          <canvas id="lineChart_0" height="400" width="400"></canvas>
+          <canvas id="lineChart_0"></canvas>
         </div>
         <div class="swiper-slide">
-          <canvas id="lineChart_1" height="400" width="400"></canvas>
+          <canvas id="lineChart_1"></canvas>
         </div>
         <div class="swiper-slide">
-          <canvas id="lineChart_2" height="400" width="400"></canvas>
+          <canvas id="lineChart_2"></canvas>
         </div>
       </div>
     </div>
@@ -55,6 +55,7 @@
           nextEl: ".swiper-button-next",
           prevEl: ".swiper-button-prev",
         },
+        slidesPerView: 'auto'
       });
     </script>
   </body>
