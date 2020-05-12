@@ -59,7 +59,9 @@ function DisplayList(item, wrapper, rows_per_page, page) {
 function SetupPagination(items, wrapper, rows_per_page) {
   wrapper.innerHTML = "";
   let page_count = Math.ceil(items.length / rows_per_page);
-  console.log(`page_count ${page_count}, items.length ${items.length}, rows_per_page ${rows_per_page}`)
+  console.log(
+    `page_count ${page_count}, items.length ${items.length}, rows_per_page ${rows_per_page}`
+  );
   for (let i = 1; i < page_count + 1; i++) {
     let btn = PaginationButton(i, items);
     wrapper.appendChild(btn);
@@ -70,13 +72,13 @@ function PaginationButton(page, items) {
   let button = document.createElement("button");
   button.innerText = page;
   if (current_page == page) button.classList.add("active");
-  button.addEventListener('click', function () {
-		current_page = page;
-		DisplayList(items, list_element, rows, current_page);
-		let current_btn = document.querySelector('.pagenumbers button.active');
-		current_btn.classList.remove('active');
-		button.classList.add('active');
-	});
+  button.addEventListener("click", function () {
+    current_page = page;
+    DisplayList(items, list_element, rows, current_page);
+    let current_btn = document.querySelector(".pagenumbers button.active");
+    current_btn.classList.remove("active");
+    button.classList.add("active");
+  });
 
-	return button;
+  return button;
 }

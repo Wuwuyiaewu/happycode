@@ -7,13 +7,19 @@
     <title>#29 圖表</title>
     <style>
       .swiper-container {
-        width: 50%;
+        width: 80%;
         height: auto;
       }
       .swiper-slide {
         display: flex;
         justify-content: center;
         align-items: flex-start;
+      }
+      canvas {
+        /* background-image: url('images/360x640_2.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center; */
       }
     </style>
     <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.css" />
@@ -36,8 +42,7 @@
       </div>
     </div>
 
-
-    <input type="text" onclick="change(value)" value="50">
+    <input type="text" onclick="change(value)" value="50" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
     <script src="js/chart_data.js"></script>
 
@@ -55,7 +60,7 @@
           nextEl: ".swiper-button-next",
           prevEl: ".swiper-button-prev",
         },
-        slidesPerView: 'auto'
+        slidesPerView: "auto",
       });
     </script>
   </body>

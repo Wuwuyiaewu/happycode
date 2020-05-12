@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="js/vue.js"></script>
+    <title>Vue pratice</title>
+  </head>
+  <body>
+    <div id="app">
+      {{message}} {{name}} {{_data.jeff}}
+    </div>
+
+    <script>
+      let dataxxx = {
+        message: "資料一",
+        name: "資料二",
+      };
+
+      const App = new Vue({
+        el: "#app",
+        data: dataxxx,
+        methods: {
+          creattt() {
+            this.name = "資料三";
+            this._data.jeff = "jeffery";
+            console.log(this, "指向vue本身原形");
+          },
+        },
+        created() {
+          this.creattt();
+        },
+      });
+      App.$data.jeff = "david";
+    </script>
+  </body>
+</html>
