@@ -6,22 +6,16 @@
     <title>29api串接</title>
   </head>
   <body>
-      <div class="wrapper">
-
-      </div>
+    <div class="wrapper"></div>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js'></script>
   </body>
   <script>
     $.ajax({
-      url: "http://uat.nb210.com/fApi/contentList",
-      type: "GET",
-      success: function (data) {
-        let wrap = document.getElementsByClassName('wrapper')
-        wrap.innerHTML = data
-        console.log(data)
-      },
-      error: function (e) {
-        //called when there is an error
-        //console.log(e.message);
+      method:"post",
+      url: "https://testapi.ixmiddle.com/account/open/checkDemoMobileIsExit",
+      Authorization: "2c7971efb3296112b3b23ae4a703d147",
+      success: (response) => {
+        console.log(response);
       },
     });
   </script>

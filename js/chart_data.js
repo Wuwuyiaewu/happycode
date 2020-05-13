@@ -1,7 +1,6 @@
-let lineGold = [, 5030, 4090, 3450, 3260, 2950, ,];
+let lineGold = [, 5030, 4090, 3450, 3260, 7000, ,];
 let lineOil = [, 3100, 3300, 4200, 3900, 3600, ,];
 let lineTech = [, 5166, 4146, 4330, 4596, 4880, ,];
-
 function change(value) {
   lineGold[1] = value * 1;
   console.log(value, lineGold[1]);
@@ -67,12 +66,18 @@ function getChartData() {
         yAxes: [
           {
             ticks: {
-              max: 6000,
-              min: 800
+              max: 10000,
+              min: 200,
             },
           },
         ],
       },
+      legend: {
+        display: false,
+      },
+      responsive: true,
+      maintainAspectRatio: true,
+      aspectRatio: 2,
     },
   });
 

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>#32</title>
+  </head>
+  <body>
+    <script>
+      var xhr = new XMLHttpRequest();
+      xhr.withCredentials = true;
+
+      xhr.addEventListener("readystatechange", function () {
+        if (this.readyState === 4) {
+          console.log(this.responseText);
+        }
+      });
+
+      xhr.open(
+        "GET",
+        "https://oa.se6868a.com/account/open/captcha?uuid=5BAC099C-5173-48A0-A361-5F0B4982277D"
+      );
+      xhr.setRequestHeader("Content-Type", "application/json");
+      xhr.setRequestHeader("rpcType", "http");
+      xhr.setRequestHeader("httpMethod", "post");
+      xhr.setRequestHeader("method", "/account/open/captcha");
+      xhr.setRequestHeader(
+        "Authorization",
+        "Bearer 0b7985c0a21a59d513a009fd85b51285"
+      );
+      xhr.setRequestHeader("module", "uat-account");
+
+      xhr.send();
+    </script>
+  </body>
+</html>

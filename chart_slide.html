@@ -7,8 +7,7 @@
     <title>#29 圖表</title>
     <style>
       .swiper-container {
-        width: 80%;
-        height: auto;
+        max-width: 750px !important;
       }
       .swiper-slide {
         display: flex;
@@ -30,13 +29,17 @@
     <!-- Swiper -->
     <div class="swiper-container">
       <div class="swiper-wrapper">
-        <div class="swiper-slide">
-          <canvas id="lineChart_0"></canvas>
+        <div class="swiper-slide" style="position: relative; height: 100%;">
+          
+          <canvas id="lineChart_0">
+          </canvas>
         </div>
-        <div class="swiper-slide">
+        <div class="swiper-slide" style="position: relative; height: 100%;">
+          <title>美油</title>
           <canvas id="lineChart_1"></canvas>
         </div>
-        <div class="swiper-slide">
+        <div class="swiper-slide" style="position: relative; height: 100%;">
+          <title>TECH</title>
           <canvas id="lineChart_2"></canvas>
         </div>
       </div>
