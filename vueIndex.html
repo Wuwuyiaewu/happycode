@@ -7,31 +7,24 @@
     <title>Vue pratice</title>
   </head>
   <body>
-    <div id="app">
-      {{message}} {{name}} {{_data.jeff}}
-    </div>
-
+    <div id="app">{{ fullName }}</div>
     <script>
-      let dataxxx = {
-        message: "資料一",
-        name: "資料二",
-      };
-
-      const App = new Vue({
+      var vm = new Vue({
         el: "#app",
-        data: dataxxx,
-        methods: {
-          creattt() {
-            this.name = "資料三";
-            this._data.jeff = "jeffery";
-            console.log(this, "指向vue本身原形");
+        data: {
+          firstName: "Foo",
+          lastName: "Bar",
+          fullName: "Foo Bar",
+        },
+        watch: {
+          firstName: function (val) {
+            this.fullName = val + " " + this.lastName;
+          },
+          lastName: function (val) {
+            this.fullName = this.firstName + " " + val;
           },
         },
-        created() {
-          this.creattt();
-        },
       });
-      App.$data.jeff = "david";
     </script>
   </body>
 </html>

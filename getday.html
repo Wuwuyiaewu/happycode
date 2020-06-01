@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>日期</title>
+    <style>
+      .redbag2_day {
+        color: rgb(195, 172, 99);
+      }
+    </style>
+  </head>
+  <body>
+    <p id="nowDay" class="redbag2_day"></p>
+    <script>
+      let fullTime = new Date();
+      let year = fullTime.getFullYear();
+      let mon = fullTime.getMonth();
+      let dally = fullTime.getDate();
+      console.log(fullTime);
+      document.getElementById("nowDay").innerHTML = `${year}年${
+        mon + 1
+      }月${dally}日`;
+    </script>
+  </body>
+</html>
