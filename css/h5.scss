@@ -145,6 +145,9 @@ a {
 .f-3 {
   flex: 3;
 }
+.fdc{
+    flex-direction: column;
+}
 .jcc {
   justify-content: center;
 }
@@ -152,19 +155,22 @@ a {
   justify-content: space-between;
 }
 .fz-20 {
-  font-size: 20px;
+  font-size: .20rem;
+}
+.fz-22{
+    font-size: .22rem;
 }
 .fz-24 {
-  font-size: 24px;
+  font-size: .24rem;
 }
 .fz-32 {
-  font-size: 32px;
+  font-size: .32rem;
 }
 .fz-34 {
-  font-size: 34px;
+  font-size: .34rem;
 }
 .fz-40 {
-  font-size: 40px;
+  font-size: .40rem;
 }
 .color-gray {
   color: #888888;
@@ -177,7 +183,7 @@ a {
 }
 // wrap
 .outterWrap {
-  width: 600px;
+  width: 6.00rem;
   margin: 0 auto;
 }
 // section-0
@@ -185,13 +191,13 @@ a {
   .trade-0,
   .trade-1,
   .trade-2 {
-    padding: 0 15px;
+    padding: 0 .15rem;
     text-align: center;
     & h2 {
-      padding: 15px 0;
+      padding: .15rem 0;
     }
     & .log {
-      padding: 15px 0;
+      padding: .15rem 0;
     }
   }
   .trade-0 {
@@ -203,16 +209,16 @@ a {
 }
 // section-1
 .section-1 {
-  padding: 0 30px;
+  padding: 0 .30rem;
   .card {
-    border-top: 1px solid #888888;
-    padding: 15px 0;
+    border-top:.01rem solid #888888;
+    padding: .15rem 0;
   }
   h2 {
-    padding: 20px 0;
+    padding: .20rem 0;
   }
   .news {
-    height: 80px;
+    height: .80rem;
     text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -222,14 +228,18 @@ a {
   }
   .newsCaption {
     label {
-      border: 1px solid #999;
-      border-radius: 4px;
-      padding: 4px;
+      border:.01rem solid #999;
+      border-radius:.04rem;
+      padding:.04rem;
     }
     .beforeMin {
     }
   }
   .contentWrap {
-    margin-left: 15px;
+    margin-left: .15rem;
+  }
+  .contentImg{
+      width: 2.24rem;
+      height: 1.5rem;
   }
 }

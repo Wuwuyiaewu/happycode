@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./css/h5.css" />
+    <script src="./js/websocket.js"></script>
     <title>首頁</title>
   </head>
   <body>
@@ -34,7 +35,7 @@
           </p>
         </div>
       </section>
-      <section class="section-1">
+      <section class="section-1 d-flex fdc">
         <h2 class="fz-34">資訊參考</h2>
         <div class="card list-0 d-flex">
           <div class="content f-3">
@@ -43,7 +44,7 @@
                 【柏富日评】科技股再创新高纳指收盘涨破10000点，港股恒指低开0.21%
               </h2>
             </a>
-            <p class="newsCaption d-flex jcsb">
+            <p class="newsCaption d-flex jcsb fz-22">
               <label for="" class="brand">特斯拉</label>
               <span class="beforeMin">55分鐘前</span>
             </p>
@@ -59,7 +60,7 @@
                 【柏富日评】科技股再创新高纳指收盘涨破10000点，港股恒指低开0.21%
               </h2>
             </a>
-            <p class="newsCaption d-flex jcsb">
+            <p class="newsCaption d-flex jcsb fz-22">
               <label for="" class="brand">特斯拉</label>
               <span class="beforeMin">55分鐘前</span>
             </p>
@@ -75,7 +76,7 @@
                 【柏富日评】科技股再创新高纳指收盘涨破10000点，港股恒指低开0.21%
               </h2>
             </a>
-            <p class="newsCaption d-flex jcsb">
+            <p class="newsCaption d-flex jcsb fz-22">
               <label for="" class="brand">特斯拉</label>
               <span class="beforeMin">55分鐘前</span>
             </p>
@@ -86,5 +87,36 @@
         </div>
       </section>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
+    <script>
+      function recalc(x, bol) {
+        var clientWidth = $(window).width();
+        //var clientWidth = document.body.clientWidth;
+
+        if (bol && (!clientWidth || clientWidth > x)) {
+          document.documentElement.style.fontSize = "100px";
+          return;
+        }
+        document.documentElement.style.fontSize =
+          100 * (clientWidth / x) + "px";
+      }
+      var remCompute = function (width, device) {
+        if (window.addEventListener) {
+          recalc(width, device);
+          var resizeEvt =
+            "orientationchange" in window ? "orientationchange" : "resize";
+          window.addEventListener(
+            resizeEvt,
+            function () {
+              recalc(width, device);
+            },
+            false
+          );
+        }
+      };
+
+      remCompute(750, true);
+    </script>
+    
   </body>
 </html>
