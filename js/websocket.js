@@ -1,0 +1,44 @@
+//使用 WebSocket 的網址向 Server 開啟連結
+// let ws = new WebSocket('wss://api.dragonfly8.com/v/websocket')
+let ws = new WebSocket("wss://api.dragonfly8.com/websocket");
+let data = "";
+//開啟後執行的動作，指定一個 function 會在連結 WebSocket 後執行
+// ws.onopen = () => {
+//     console.log('open connection')
+//     ws.send('{"head":{"server":"yz","msgType":"login","sendTime":1591764739841,"Authorization":"Bearer ac289cb6cbd7531a75e4588c9aba8a45","lang":"zh-CN"},"content":{"company_id":"332005","login_name":"Guest","password":"","user_type":1,"appKey":"JW666key","clientIp":"100.117.155.246"},"device":"h5","trace":"7d0f5fc8-02a8-4b75-bcde-e66f60f5531e","version_code":1}')
+//     ws.send('{"head":{"server":"yz","msgType":"lastPrice","sendTime":1591764740088},"content":{"code_ids":[573153,573044]},"device":"h5","trace":"27ffe164-20f7-4a26-8dda-bcfb970e396e","version_code":1}')
+//     ws.send('{"head":{"server":"yz","msgType":"productSubscription","sendTime":1591764740088},"content":{"subscribeType":"reSubscribe","code_ids":[573153,573044],"type":"yz"},"device":"h5","trace":"e72a45f3-b506-42c6-b721-08a2f36d0e45","version_code":1}')
+// }
+
+ws.onopen = () => {
+  console.log("open connection");
+  ws.send({"head":{"server":"yz","msgType":"login","sendTime":1591780449842,"Authorization":"Bearer 00e94255335a32fc4e0f516bc461365a","lang":"zh-CN"},"content":{"company_id":"332005","login_name":"Guest","password":"","user_type":1,"appKey":"JW666key","clientIp":"100.117.155.242"},"device":"h5","trace":"26470b52-face-4a09-a343-7f79889eaeb2","version_code":1});
+  ws.send({"head":{"server":"yz","msgType":"login","sendTime":1591780449842,"Authorization":"Bearer 00e94255335a32fc4e0f516bc461365a","lang":"zh-CN"},"content":{"company_id":"332005","login_name":"Guest","password":"","user_type":1,"appKey":"JW666key","clientIp":"100.117.155.242"},"device":"h5","trace":"26470b52-face-4a09-a343-7f79889eaeb2","version_code":1});
+};
+
+//關閉後執行的動作，指定一個 function 會在連結中斷後執行
+ws.onclose = () => {
+  console.log("close connection");
+};
+
+//接收 Server 發送的訊息
+ws.onmessage = (event) => {
+  data = event;
+  let hk = document.getElementById("hk");
+  let yb = document.getElementById("yb");
+  let tx = document.getElementById("tx");
+  console.log(data);
+  switch (data[0] * 1) {
+    case 573097:
+      hk.innerHTML = `香港交易所${data[1]}`;
+      break;
+    case 573106:
+      yb.innerHTML = `友邦${data[1]}`;
+      break;
+    case 573100:
+      tx.innerHTML = `騰訊${data[1]}`;
+      break;
+    default:
+      break;
+  }
+};
