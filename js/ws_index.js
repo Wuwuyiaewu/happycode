@@ -316,7 +316,6 @@ function updateElementDiv(obj, data, event, last) {
   $(`.right-${obj.id}`).empty();
   $(`.right-${obj.id}`).text(lastpercent);
 }
-
 function addElementDiv(obj, data, event, last) {
   var parent = document.getElementById("parent");
   var outter = document.createElement("div");
@@ -331,9 +330,16 @@ function addElementDiv(obj, data, event, last) {
   stock.className = `fz-40 stock-${obj.id}`;
   stock.innerHTML = data.curPrice;
   let lastpercent = (data.changeAmount / last.lastPrice).toFixed(2);
+
   log.className = "d-flex jcsb fz-24";
-  log.innerHTML = `<span class="color-green left-${obj.id}">${data.changeAmount}</span
-  ><span class="color-green right-${obj.id}">${lastpercent}</span>`;
+  console.log(Math.sign(data.changeAmount));
+  if (data.changeAmount > 0) {
+    log.innerHTML = `<span class="color-green left-${obj.id}">+${data.changeAmount}</span
+	><span class="color-green right-${obj.id}">+${lastpercent}</span>`;
+  } else {
+    log.innerHTML = `<span class="color-red left-${obj.id}">${data.changeAmount}</span
+	><span class="color-red right-${obj.id}">${lastpercent}</span>`;
+  }
   parent.appendChild(outter);
   outter.appendChild(company);
   outter.appendChild(stock);
