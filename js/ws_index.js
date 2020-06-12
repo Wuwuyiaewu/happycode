@@ -296,11 +296,11 @@ function message_text (data) {
 			buyPrice       : split[1],
 			sellPrice      : split[2],
 			curPrice  	   : split[3],
-			changeAmount   : split[3] - lastPrice.lastPrice,
+			changeAmount   : (split[3] - lastPrice.lastPrice).toFixed(2),
 			time           : split[4],
 			highPrice      : split[5],
 			lowPrice       : split[6],
-			percent		   : real_percent
+			percent		   : real_percent.toFixed(2)
 		}
 
 		product['realtime'] = realtimePrice ; 
@@ -313,42 +313,43 @@ function message_text (data) {
 
 function updateUI(obj , data , event) {
 	var product_div = document.getElementById("product_"+obj.id);
-	if(product_div == null) {
-		addElementDiv(obj ,data, event);
-	} else {
-		updateElementDiv(obj ,data, event);
-	}
+	// if(product_div == null) {
+	// 	addElementDiv(obj ,data, event);
+	// } else {
+	// 	updateElementDiv(obj ,data, event);
+	// }
+	console.log(event)
 }
 
-function updateElementDiv(obj , data , event) {
-	$("#"+"event_"+obj.id).text(event);
-	var div_product = "#product_"+obj.id;
-	$(div_product+ " ul").empty();
-	for (let [key, value] of Object.entries(data)) {
-		$(div_product+ " ul").append(`<li>${key}: ${value}</li>`);
-	}
-}
+// function updateElementDiv(obj , data , event) {
+// 	$("#"+"event_"+obj.id).text(event);
+// 	var div_product = "#product_"+obj.id;
+// 	$(div_product+ " ul").empty();
+// 	for (let [key, value] of Object.entries(data)) {
+// 		$(div_product+ " ul").append(`<li>${key}: ${value}</li>`);
+// 	}
+// }
 
-function addElementDiv(obj , data, event) {
-	var parent = document.getElementById('parent');
-	var product = document.createElement("div");
-	var event = document.createElement("div");
-	var ul = document.createElement("ul");
+// function addElementDiv(obj , data, event) {
+// 	var parent = document.getElementById('parent');
+// 	var product = document.createElement("div");
+// 	var event = document.createElement("div");
+// 	var ul = document.createElement("ul");
 
-	for (let [key, value] of Object.entries(data)) {
-  		var li= document.createElement("li");
-  		li.innerHTML = `${key}: ${value}`;
-  		ul.appendChild(li);
-	}
+// 	for (let [key, value] of Object.entries(data)) {
+//   		var li= document.createElement("li");
+//   		li.innerHTML = `${key}: ${value}`;
+//   		ul.appendChild(li);
+// 	}
 
-	product.setAttribute("id", "product_"+obj.id);
-	product.innerHTML = obj.simplified; 
+// 	product.setAttribute("id", "product_"+obj.id);
+// 	product.innerHTML = obj.simplified; 
 
-	event.setAttribute("id", "event_"+obj.id);
+// 	event.setAttribute("id", "event_"+obj.id);
 
-	product.appendChild(event);
-	product.appendChild(ul);
-	parent.appendChild(product);
-}
+// 	product.appendChild(event);
+// 	product.appendChild(ul);
+// 	parent.appendChild(product);
+// }
 
 start();
