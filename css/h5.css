@@ -182,27 +182,27 @@ a {
 }
 
 .fz-20 {
-  font-size: .20rem;
+  font-size: 0.2rem;
 }
 
 .fz-22 {
-  font-size: .22rem;
+  font-size: 0.22rem;
 }
 
 .fz-24 {
-  font-size: .24rem;
+  font-size: 0.24rem;
 }
 
 .fz-32 {
-  font-size: .32rem;
+  font-size: 0.32rem;
 }
 
 .fz-34 {
-  font-size: .34rem;
+  font-size: 0.34rem;
 }
 
 .fz-40 {
-  font-size: .40rem;
+  font-size: 0.4rem;
 }
 
 .color-gray {
@@ -218,44 +218,44 @@ a {
 }
 
 .outterWrap {
-  width: 6.00rem;
+  width: 6rem;
   margin: 0 auto;
 }
 
-.section-0 .trade-0,
-.section-0 .trade-1,
-.section-0 .trade-2 {
-  padding: 0 .15rem;
+.section-0 .trade-513001,
+.section-0 .trade-513004,
+.section-0 .trade-513005 {
+  padding: 0 0.15rem;
   text-align: center;
 }
 
-.section-0 .trade-0 h2,
-.section-0 .trade-1 h2,
-.section-0 .trade-2 h2 {
-  padding: .15rem 0;
+.section-0 .trade-513001 h2,
+.section-0 .trade-513004 h2,
+.section-0 .trade-513005 h2 {
+  padding: 0.15rem 0;
 }
 
-.section-0 .trade-0 .log,
-.section-0 .trade-1 .log,
-.section-0 .trade-2 .log {
-  padding: .15rem 0;
+.section-0 .trade-513001 .log,
+.section-0 .trade-513004 .log,
+.section-0 .trade-513005 .log {
+  padding: 0.15rem 0;
 }
 
 .section-1 {
-  padding: 0 .30rem;
+  padding: 0 0.3rem;
 }
 
 .section-1 .card {
-  border-top: .01rem solid #888888;
-  padding: .15rem 0;
+  border-top: 0.01rem solid #888888;
+  padding: 0.15rem 0;
 }
 
 .section-1 h2 {
-  padding: .20rem 0;
+  padding: 0.2rem 0;
 }
 
 .section-1 .news {
-  height: .80rem;
+  height: 0.8rem;
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -265,13 +265,13 @@ a {
 }
 
 .section-1 .newsCaption label {
-  border: .01rem solid #999;
-  border-radius: .04rem;
-  padding: .04rem;
+  border: 0.01rem solid #999;
+  border-radius: 0.04rem;
+  padding: 0.04rem;
 }
 
 .section-1 .contentWrap {
-  margin-left: .15rem;
+  margin-left: 0.15rem;
 }
 
 .section-1 .contentImg {
