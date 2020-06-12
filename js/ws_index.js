@@ -1,10 +1,15 @@
 
-const APP_KEY = "yzPre";
-const WS_BASE_URL = "wss://preapi.dragonfly8.com/v/websocket";
-const HTTP_BASE_URL = "https://preapi.dragonfly8.com";
+//const APP_KEY = "yzPre";
+//const WS_BASE_URL = "wss://preapi.dragonfly8.com/v/websocket";
+//const HTTP_BASE_URL = "https://preapi.dragonfly8.com";
+//const GET_ACCOUNT_PROPERTIES = "/account/appProperties/getAccountProperties";
+
+const APP_KEY = "JW666key";
+const WS_BASE_URL = "wss://api.dragonfly8.com/websocket";
+const HTTP_BASE_URL = "https://api.dragonfly8.com";
 const GET_ACCOUNT_PROPERTIES = "/account/appProperties/getAccountProperties";
 
-var product_code_ids = [513006];
+var product_code_ids = [573097 , 573106 ,573100];
 
 var config = new Object({
 	companyid :"",
@@ -19,6 +24,9 @@ var account = new Object({
 	authorization : "",
 	userType : ""
 });
+
+var productionInfo = [];
+var lastPriceInfo = [];
 
 var http_request = new Object({
 
@@ -71,7 +79,6 @@ var ws_callback = new Object({
 	ws_init_success : function(socket) {
 		ws_request.login(socket);
 	} , 
-
 	ws_message_event : function (event) {
 		message_event(event);
 	},
@@ -107,9 +114,7 @@ var ws_request = new Object({
  				} catch(e) {
  					cb.ws_text_event(event.data);
  				}
- 				
  			}
-    		
 		}
 	},
 
@@ -138,6 +143,14 @@ var ws_request = new Object({
 		}
 		var request = this.getWsRequest('productSubscription',_content);
 		console.log(JSON.stringify(request))
+		ws.send(JSON.stringify(request));
+	},
+
+	lastPrice : function (codeIds) {
+		var _content = {
+			code_ids		: codeIds,
+		}
+		var request = this.getWsRequest('lastPrice',_content);
 		ws.send(JSON.stringify(request));
 	},
 	getWsRequest : function (msg_type , content) {
@@ -195,7 +208,6 @@ function start() {
 			account.accountNo = 'Guest';
 			account.userType = 1;
 		}
-
 		ws_request.init(ws_callback);
 	});
 	
@@ -210,9 +222,18 @@ function message_event(event) {
 	var msg = JSON.parse(event);
 	var msg_code = msg.msg_code;
 	console.log("msg code:"+msg_code);
-	if(msg_code == 'InitProductInfo') {
-		console.log("start login..");
+	if(msg_code == 'UserLoginInfoRet') {
+		ws_request.lastPrice(product_code_ids);
 		ws_request.productSubscription(product_code_ids);
+	}
+
+	if(msg_code == 'GroupSymbolListRet') {
+		productionInfo = msg.content.data_list;
+		console.log("msg productionInfo:"+event);
+	}
+
+	if(msg_code == 'LastPrice') {
+		lastPriceInfo = msg.content;
 	}
 }
 
@@ -227,19 +248,107 @@ function message_binary(binary_data) {
 }
 
 function message_text (data) {
-	//console.log(data);
+	//console.log(JSON.stringify(productionInfo));
 	if(data.startsWith('p(')) {
 		var substring = data.substring(2, data.length - 1);
 		var split = substring.split(",");
         if (split.length < 7) {
             console.log("报价有误  " + data);
+        }
+        var product = productionInfo.find(function(element) {
+			return element.id == split[0];
+		});
+
+		if (product == null)
+			return;
+        var last = lastPriceInfo.find(function(element) {
+        	return element.code_id == split[0];
+        });
+
+        let last_percent = 0.0;;
+        if(last.yesterday_price > 0.0) {
+        	last_percent = (last.cur_price - last.yesterday_price) / last.yesterday_price;
+        } else {
+        	last_percent = 0.0;
+        }
+
+		var lastPrice = {
+			sellRiseStatus : last.sell_price,
+			buyRiseStatus  : last.buy_price,
+			buyPrice       : last.buy_price,
+			sellPrice      : last.sell_price,
+			lastPrice      : last.yesterday_price,
+			curPrice  	   : last.cur_price,
+			changeAmount   : last.cur_price - last.yesterday_price,
+			percent		   : last_percent
 		}
-		var params = {
-			sym: split[0],
+
+		let real_percent = 0.0;
+		if(lastPrice.lastPrice > 0) {
+        	real_percent = ((split[3] - lastPrice.lastPrice)) / lastPrice.lastPrice;
+        } else {
+        	real_percent = 0.0;
+        }
+
+		var realtimePrice = {
+			sellRiseStatus : split[2],
+			buyRiseStatus  : split[1],
+			buyPrice       : split[1],
+			sellPrice      : split[2],
+			curPrice  	   : split[3],
+			changeAmount   : split[3] - lastPrice.lastPrice,
+			time           : split[4],
+			highPrice      : split[5],
+			lowPrice       : split[6],
+			percent		   : real_percent
 		}
-		document.getElementById('test').innerHTML = data;
-		console.log(params.sym)
+
+		product['realtime'] = realtimePrice ; 
+        updateUI(product , realtimePrice , data);
+		//console.log(product);
 	}
+
+
+}
+
+function updateUI(obj , data , event) {
+	var product_div = document.getElementById("product_"+obj.id);
+	if(product_div == null) {
+		addElementDiv(obj ,data, event);
+	} else {
+		updateElementDiv(obj ,data, event);
+	}
+}
+
+function updateElementDiv(obj , data , event) {
+	$("#"+"event_"+obj.id).text(event);
+	var div_product = "#product_"+obj.id;
+	$(div_product+ " ul").empty();
+	for (let [key, value] of Object.entries(data)) {
+		$(div_product+ " ul").append(`<li>${key}: ${value}</li>`);
+	}
+}
+
+function addElementDiv(obj , data, event) {
+	var parent = document.getElementById('parent');
+	var product = document.createElement("div");
+	var event = document.createElement("div");
+	var ul = document.createElement("ul");
+
+	for (let [key, value] of Object.entries(data)) {
+  		var li= document.createElement("li");
+  		li.innerHTML = `${key}: ${value}`;
+  		ul.appendChild(li);
+	}
+
+	product.setAttribute("id", "product_"+obj.id);
+	product.innerHTML = obj.simplified; 
+
+	event.setAttribute("id", "event_"+obj.id);
+
+	product.appendChild(event);
+	product.appendChild(ul);
+	parent.appendChild(product);
 }
 
 start();
