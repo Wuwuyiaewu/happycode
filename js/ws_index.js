@@ -1,14 +1,14 @@
-const APP_KEY = "yzPre";
-const WS_BASE_URL = "wss://preapi.dragonfly8.com/v/websocket";
-const HTTP_BASE_URL = "https://preapi.dragonfly8.com";
+//const APP_KEY = "yzPre";
+//const WS_BASE_URL = "wss://preapi.dragonfly8.com/v/websocket";
+//const HTTP_BASE_URL = "https://preapi.dragonfly8.com";
+//const GET_ACCOUNT_PROPERTIES = "/account/appProperties/getAccountProperties";
+
+const APP_KEY = "JW666key";
+const WS_BASE_URL = "wss://api.dragonfly8.com/websocket";
+const HTTP_BASE_URL = "https://api.dragonfly8.com";
 const GET_ACCOUNT_PROPERTIES = "/account/appProperties/getAccountProperties";
 
-// const APP_KEY = "JW666key";
-// const WS_BASE_URL = "wss://api.dragonfly8.com/websocket";
-// const HTTP_BASE_URL = "https://api.dragonfly8.com";
-// const GET_ACCOUNT_PROPERTIES = "/account/appProperties/getAccountProperties";
-
-var product_code_ids = [513001, 513004, 513005];
+var product_code_ids = [573097, 573100, 573106];
 
 var config = new Object({
   companyid: "",
@@ -48,7 +48,6 @@ var http_request = new Object({
   post_request: function (url, object, cb) {
     var http = this.http;
     var request_url = HTTP_BASE_URL + url;
-    console.log(request_url);
     http.open("POST", request_url, true);
 
     http.setRequestHeader("Content-type", "application/json");
@@ -79,8 +78,10 @@ var ws_callback = new Object({
   },
   ws_binary_event: function (binary_data) {
     message_binary(binary_data);
+    console.log("資料轉換blob", binary_data);
   },
   ws_text_event: function (text_data) {
+    console.log(text_data,'走這')
     message_text(text_data);
   },
 });
@@ -103,7 +104,7 @@ var ws_request = new Object({
         cb.ws_binary_event(event);
       } else {
         try {
-          cb.ws_message_event(event.data);
+            cb.ws_message_event(event.data);
         } catch (e) {
           cb.ws_text_event(event.data);
         }
@@ -132,7 +133,6 @@ var ws_request = new Object({
       type: "yz",
     };
     var request = this.getWsRequest("productSubscription", _content);
-    console.log(JSON.stringify(request));
     ws.send(JSON.stringify(request));
   },
 
@@ -153,7 +153,6 @@ var ws_request = new Object({
       head: this.getHead(msg_type),
       content: content,
     };
-    console.log(JSON.stringify(ws_request));
     return ws_request;
   },
 
@@ -205,9 +204,10 @@ function get_current_time() {
 }
 
 function message_event(event) {
+  //console.log(event)
   var msg = JSON.parse(event);
   var msg_code = msg.msg_code;
-  console.log("msg code:" + msg_code);
+  console.log("code:"+msg_code);
   if (msg_code == "UserLoginInfoRet") {
     ws_request.lastPrice(product_code_ids);
     ws_request.productSubscription(product_code_ids);
@@ -215,19 +215,27 @@ function message_event(event) {
 
   if (msg_code == "GroupSymbolListRet") {
     productionInfo = msg.content.data_list;
-    console.log("msg productionInfo:" + event);
+    console.log(msg);
   }
 
   if (msg_code == "LastPrice") {
     lastPriceInfo = msg.content;
+    update_Last_info_ui(lastPriceInfo)
+  }
+
+  if (msg_code == "HeartBeatConf") {
+    console.log("ping");
   }
 }
 
 function message_binary(binary_data) {
   var blob = binary_data.data;
+
   var reader = new FileReader();
   reader.onload = function (event) {
+    console.log(event, "event");
     var result = pako.inflate(event.target.result, { to: "string" });
+    //console.log(result, "result = pako");
     message_event(decodeURI(result));
   };
   reader.readAsArrayBuffer(blob);
@@ -235,6 +243,7 @@ function message_binary(binary_data) {
 
 function message_text(data) {
   // console.log(JSON.stringify(productionInfo));
+  console.log("走message_text");
   if (data.startsWith("p(")) {
     var substring = data.substring(2, data.length - 1);
     var split = substring.split(",");
@@ -291,7 +300,8 @@ function message_text(data) {
 
     product["realtime"] = realtimePrice;
     updateUI(product, realtimePrice, data, lastPrice);
-    // console.log(realtimePrice);
+  } else {
+    console.log()
   }
 }
 
@@ -304,12 +314,25 @@ function updateUI(obj, data, event, last) {
   }
   //   console.log(event);
 }
+let curPriceA = new Number();
+let curPriceB = new Number();
 
 function updateElementDiv(obj, data, event, last) {
   $("#" + "event_" + obj.id).text(event);
   var div_product = "#product_" + obj.id;
   $(`.stock-${obj.id}`).empty();
   $(`.stock-${obj.id}`).text(data.curPrice);
+  curPriceB = data.curPrice;
+  if (curPriceB > curPriceA) {
+    $(`.stock-${obj.id}`).addClass("color-green").removeClass("color-red");
+    curPriceA = curPriceB;
+  } else if (curPriceB == curPriceA) {
+    curPriceA = curPriceB;
+    return;
+  } else if (curPriceB < curPriceA) {
+    $(`.stock-${obj.id}`).addClass("color-red").removeClass("color-green");
+    curPriceA = curPriceB;
+  }
   $(`.left-${obj.id}`).empty();
   $(`.left-${obj.id}`).text(data.changeAmount);
   let lastpercent = (data.changeAmount / last.lastPrice).toFixed(2);
@@ -322,28 +345,30 @@ function addElementDiv(obj, data, event, last) {
   var company = document.createElement("h2");
   var stock = document.createElement("p");
   var log = document.createElement("p");
-  var updown = document.createElement("span");
   outter.setAttribute("id", "product_" + obj.id);
   outter.className = `trade-${obj.id} f-1`;
   company.className = "company fz-20 color-gray";
   company.innerHTML = obj.simplified;
   stock.className = `fz-40 stock-${obj.id}`;
   stock.innerHTML = data.curPrice;
+  curPriceA = data.curPrice;
   let lastpercent = (data.changeAmount / last.lastPrice).toFixed(2);
 
   log.className = "d-flex jcsb fz-24";
-  console.log(Math.sign(data.changeAmount));
   if (data.changeAmount > 0) {
     log.innerHTML = `<span class="color-green left-${obj.id}">+${data.changeAmount}</span
-	><span class="color-green right-${obj.id}">+${lastpercent}</span>`;
+ ><span class="color-green right-${obj.id}">+${lastpercent}</span>`;
   } else {
     log.innerHTML = `<span class="color-red left-${obj.id}">${data.changeAmount}</span
-	><span class="color-red right-${obj.id}">${lastpercent}</span>`;
+ ><span class="color-red right-${obj.id}">${lastpercent}</span>`;
   }
   parent.appendChild(outter);
   outter.appendChild(company);
   outter.appendChild(stock);
   outter.appendChild(log);
 }
+function update_Last_info_ui(param) { 
+  console.log(param)
+ }
 
 start();
