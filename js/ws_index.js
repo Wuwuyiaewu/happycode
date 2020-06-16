@@ -323,8 +323,28 @@ function updateUI(obj, data, event, last) {
   }
   //   console.log(event);
 }
-let curPriceA = new Number();
-let curPriceB = new Number();
+let curPriceA = [];
+let curPriceB = [];
+
+function colorJudge(obj, data, allStock) {
+  console.log(obj.id, data.curPrice);
+  for (let x = 0; x < allStock.length; x++) {
+    let y = allStock[x].id;
+    let z = obj.id;
+    if (`${y}` === `product_${z}`) {
+      curPriceA[x] = data.curPrice;
+      $(`.stock${x}`).text(curPriceA[x]);
+      if (curPriceB[x] === curPriceA[x]) {
+        console.log("二次");
+      }
+      curPriceB[x] = curPriceA[x];
+      if (curPriceB[x] === curPriceA[x]) {
+        console.log("相同");
+      }
+      console.log(curPriceA + "curPriceA", curPriceB + "curPriceB");
+    }
+  }
+}
 
 function updateElementDiv(obj, data, event, last) {
   let allStock = document.querySelectorAll(".stockarr");
@@ -333,14 +353,8 @@ function updateElementDiv(obj, data, event, last) {
     let z = obj.id;
     if (`${y}` === `product_${z}`) {
       $(`.stock${x}`).empty();
-      curPriceA = data.curPrice;
-      let upcolor = $(`.stock${x}`)
-        .addClass("color-green")
-        .removeClass("color-red");
-      let downcolor = $(`.stock${x}`)
-        .addClass("color-red")
-        .removeClass("color-green");
-      $(`.stock${x}`).text(curPriceA);
+      colorJudge(obj, data, allStock);
+      // $(`.stock${x}`).text(data.curPrice);
       $(`.Wave${x}`).empty();
       let judge = (data.curPrice - last.lastPrice).toFixed(2);
       if (judge > 0) {
@@ -410,5 +424,20 @@ function update_Last_info_ui(param) {
     }
   }
 }
+var urlString = location.href;
+var url = new URL(urlString);
+$(document).ready(function () {
+  if (url.searchParams.get("colorType") == 1) {
+    console.log(document.getElementsByClassName("color-green"));
+    $("color-green").attr("font-size", "30px");
+    $("color-red").attr("font-size", "30px");
+    console.log("綠漲紅跌");
+  } else if (url.searchParams.get("or") == 2) {
+    console.log(document.getElementsByClassName("color-green"));
+    $(".color-green").attr("color","#00ad88");
+    $(".color-red").attr("color","#e95a5a");
+    console.log("綠跌紅漲",$(".color-green"));
+  }
+});
 
 start();
