@@ -133,7 +133,13 @@ var ws_request = new Object({
     var request = this.getWsRequest("productSubscription", _content);
     ws.send(JSON.stringify(request));
   },
-
+  ping: function () {
+    var _content = {
+      beat: 1,
+    };
+    var request = this.getWsRequest("ping", _content);
+    ws.send(JSON.stringify(request));
+  },
   lastPrice: function (codeIds) {
     var _content = {
       code_ids: codeIds,
@@ -225,6 +231,12 @@ function message_event(event) {
     console.log("ping");
   }
 }
+
+// beat
+setInterval(() => {
+  ws_request.ping();
+  console.log("beat");
+}, 30000);
 
 function message_binary(binary_data) {
   var blob = binary_data.data;
@@ -329,9 +341,7 @@ function updateElementDiv(obj, data, event, last) {
         .addClass("color-red")
         .removeClass("color-green");
       $(`.stock${x}`).text(curPriceA);
-      if (curPriceA > curPriceB ? upcolor : downcolor) curPriceB = curPriceA;
       $(`.Wave${x}`).empty();
-      console.log(data.curPrice, last.lastPrice);
       let judge = (data.curPrice - last.lastPrice).toFixed(2);
       if (judge > 0) {
         $(`.Wave${x}`).text(`+${judge}`);
