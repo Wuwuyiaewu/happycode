@@ -78,10 +78,8 @@ var ws_callback = new Object({
   },
   ws_binary_event: function (binary_data) {
     message_binary(binary_data);
-    console.log("資料轉換blob", binary_data);
   },
   ws_text_event: function (text_data) {
-    console.log(text_data,'走這')
     message_text(text_data);
   },
 });
@@ -104,7 +102,7 @@ var ws_request = new Object({
         cb.ws_binary_event(event);
       } else {
         try {
-            cb.ws_message_event(event.data);
+          cb.ws_message_event(event.data);
         } catch (e) {
           cb.ws_text_event(event.data);
         }
@@ -207,7 +205,7 @@ function message_event(event) {
   //console.log(event)
   var msg = JSON.parse(event);
   var msg_code = msg.msg_code;
-  console.log("code:"+msg_code);
+  console.log("code:" + msg_code);
   if (msg_code == "UserLoginInfoRet") {
     ws_request.lastPrice(product_code_ids);
     ws_request.productSubscription(product_code_ids);
@@ -220,7 +218,7 @@ function message_event(event) {
 
   if (msg_code == "LastPrice") {
     lastPriceInfo = msg.content;
-    update_Last_info_ui(lastPriceInfo)
+    update_Last_info_ui(lastPriceInfo);
   }
 
   if (msg_code == "HeartBeatConf") {
@@ -243,7 +241,6 @@ function message_binary(binary_data) {
 
 function message_text(data) {
   // console.log(JSON.stringify(productionInfo));
-  console.log("走message_text");
   if (data.startsWith("p(")) {
     var substring = data.substring(2, data.length - 1);
     var split = substring.split(",");
@@ -301,7 +298,7 @@ function message_text(data) {
     product["realtime"] = realtimePrice;
     updateUI(product, realtimePrice, data, lastPrice);
   } else {
-    console.log()
+    console.log();
   }
 }
 
@@ -318,57 +315,93 @@ let curPriceA = new Number();
 let curPriceB = new Number();
 
 function updateElementDiv(obj, data, event, last) {
-  $("#" + "event_" + obj.id).text(event);
-  var div_product = "#product_" + obj.id;
-  $(`.stock-${obj.id}`).empty();
-  $(`.stock-${obj.id}`).text(data.curPrice);
-  curPriceB = data.curPrice;
-  if (curPriceB > curPriceA) {
-    $(`.stock-${obj.id}`).addClass("color-green").removeClass("color-red");
-    curPriceA = curPriceB;
-  } else if (curPriceB == curPriceA) {
-    curPriceA = curPriceB;
-    return;
-  } else if (curPriceB < curPriceA) {
-    $(`.stock-${obj.id}`).addClass("color-red").removeClass("color-green");
-    curPriceA = curPriceB;
+  // $("#" + "event_" + obj.id).text(event);
+  let allStock = document.querySelectorAll(".stockarr");
+  for (let x = 0; x < allStock.length; x++) {
+    let y = allStock[x].id;
+    let z = obj.id;
+    if(`${y}` === `product_${z}`){
+      $(`.stock${x}`).empty();
+      $(`.stock${x}`).text(data.curPrice);
+      $(`.Wave${x}`).empty();
+      console.log(data.curPrice,last.lastPrice)
+      let judge = data.curPrice - last.lastPrice
+      $(`.Wave${x}`).text((judge.toFixed(2)));
+
+    }
   }
-  $(`.left-${obj.id}`).empty();
-  $(`.left-${obj.id}`).text(data.changeAmount);
-  let lastpercent = (data.changeAmount / last.lastPrice).toFixed(2);
-  $(`.right-${obj.id}`).empty();
-  $(`.right-${obj.id}`).text(lastpercent);
+  // $(`.stock-${obj.id}`).empty();
+  // $(`.stock-${obj.id}`).text(data.curPrice);
+  // curPriceB = data.curPrice;
+  // if (curPriceB > curPriceA) {
+  //   $(`.stock-${obj.id}`).addClass("color-green").removeClass("color-red");
+  //   curPriceA = curPriceB;
+  // } else if (curPriceB == curPriceA) {
+  //   curPriceA = curPriceB;
+  //   return;
+  // } else if (curPriceB < curPriceA) {
+  //   $(`.stock-${obj.id}`).addClass("color-red").removeClass("color-green");
+  //   curPriceA = curPriceB;
+  // }
+  // $(`.left-${obj.id}`).empty();
+  // $(`.left-${obj.id}`).text(data.changeAmount);
+  // let lastpercent = (data.changeAmount / last.lastPrice).toFixed(2);
+  // $(`.right-${obj.id}`).empty();
+  // $(`.right-${obj.id}`).text(lastpercent);
 }
 function addElementDiv(obj, data, event, last) {
-  var parent = document.getElementById("parent");
-  var outter = document.createElement("div");
-  var company = document.createElement("h2");
-  var stock = document.createElement("p");
-  var log = document.createElement("p");
-  outter.setAttribute("id", "product_" + obj.id);
-  outter.className = `trade-${obj.id} f-1`;
-  company.className = "company fz-20 color-gray";
-  company.innerHTML = obj.simplified;
-  stock.className = `fz-40 stock-${obj.id}`;
-  stock.innerHTML = data.curPrice;
-  curPriceA = data.curPrice;
-  let lastpercent = (data.changeAmount / last.lastPrice).toFixed(2);
-
-  log.className = "d-flex jcsb fz-24";
-  if (data.changeAmount > 0) {
-    log.innerHTML = `<span class="color-green left-${obj.id}">+${data.changeAmount}</span
- ><span class="color-green right-${obj.id}">+${lastpercent}</span>`;
-  } else {
-    log.innerHTML = `<span class="color-red left-${obj.id}">${data.changeAmount}</span
- ><span class="color-red right-${obj.id}">${lastpercent}</span>`;
-  }
-  parent.appendChild(outter);
-  outter.appendChild(company);
-  outter.appendChild(stock);
-  outter.appendChild(log);
+  // var parent = document.getElementById("parent");
+  // var outter = document.createElement("div");
+  // var company = document.createElement("h2");
+  // var stock = document.createElement("p");
+  // var log = document.createElement("p");
+  // outter.setAttribute("id", "product_" + obj.id);
+  // outter.className = `trade-${obj.id} f-1`;
+  // company.className = "company fz-20 color-gray";
+  // company.innerHTML = obj.simplified;
+  //   stock.className = `fz-40 stock-${obj.id}`;
+  //   stock.innerHTML = data.curPrice;
+  //   curPriceA = data.curPrice;
+  //   let lastpercent = (data.changeAmount / last.lastPrice).toFixed(2);
+  //   log.className = "d-flex jcsb fz-24";
+  //   if (data.changeAmount > 0) {
+  //     log.innerHTML = `<span class="color-green left-${obj.id}">+${data.changeAmount}</span
+  //  ><span class="color-green right-${obj.id}">+${lastpercent}</span>`;
+  //   } else {
+  //     log.innerHTML = `<span class="color-red left-${obj.id}">${data.changeAmount}</span
+  //  ><span class="color-red right-${obj.id}">${lastpercent}</span>`;
+  //   }
+  //   parent.appendChild(outter);
+  //   outter.appendChild(company);
+  //   outter.appendChild(stock);
+  //   outter.appendChild(log);
 }
-function update_Last_info_ui(param) { 
-  console.log(param)
- }
+function update_Last_info_ui(param) {
+  let allStock = document.querySelectorAll(".stockarr");
+  for (let x = 0; x < allStock.length; x++) {
+    let y = allStock[x].id;
+    let z = param[x].code_id;
+
+    if (y === `product_${z}`) {
+      console.log(param[x]);
+      $(`.stock${x}`).text(param[x].cur_price);
+      let judge = param[x].cur_price - param[x].yesterday_price;
+      $(`.Wave${x}`).text(
+        (param[x].cur_price - param[x].yesterday_price).toFixed(2)
+      );
+      if (judge > 0) {
+        $(`.Wave${x}`).addClass("color-green").removeClass("color-red");
+      } else {
+        $(`.Wave${x}`).addClass("color-red").removeClass("color-green");
+      }
+      $(`.Amplitude${x}`).text((judge / param[x].yesterday_price).toFixed(2));
+      if (judge > 0) {
+        $(`.Amplitude${x}`).addClass("color-green").removeClass("color-red");
+      } else {
+        $(`.Amplitude${x}`).addClass("color-red").removeClass("color-green");
+      }
+    }
+  }
+}
 
 start();
