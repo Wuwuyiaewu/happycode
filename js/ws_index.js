@@ -320,14 +320,16 @@ function updateElementDiv(obj, data, event, last) {
   for (let x = 0; x < allStock.length; x++) {
     let y = allStock[x].id;
     let z = obj.id;
-    if(`${y}` === `product_${z}`){
+    if (`${y}` === `product_${z}`) {
       $(`.stock${x}`).empty();
       $(`.stock${x}`).text(data.curPrice);
       $(`.Wave${x}`).empty();
-      console.log(data.curPrice,last.lastPrice)
-      let judge = data.curPrice - last.lastPrice
-      $(`.Wave${x}`).text((judge.toFixed(2)));
-
+      console.log(data.curPrice, last.lastPrice);
+      let judge = data.curPrice - last.lastPrice;
+      $(`.Wave${x}`).text(judge.toFixed(2));
+      let yesterdarwave = (judge / last.lastPrice).toFixed(2);
+      $(`.Amplitude${x}`).empty();
+      $(`.Amplitude${x}`).text(`${yesterdarwave}%`);
     }
   }
   // $(`.stock-${obj.id}`).empty();
@@ -391,8 +393,14 @@ function update_Last_info_ui(param) {
       );
       if (judge > 0) {
         $(`.Wave${x}`).addClass("color-green").removeClass("color-red");
+        // $(`.Wave${x}`).text(
+        //   `+`
+        // );
       } else {
         $(`.Wave${x}`).addClass("color-red").removeClass("color-green");
+        // $(`.Wave${x}`).text(
+        //   `-`
+        // );
       }
       $(`.Amplitude${x}`).text((judge / param[x].yesterday_price).toFixed(2));
       if (judge > 0) {
