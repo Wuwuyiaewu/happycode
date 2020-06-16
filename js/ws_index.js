@@ -315,25 +315,33 @@ let curPriceA = new Number();
 let curPriceB = new Number();
 
 function updateElementDiv(obj, data, event, last) {
-  // $("#" + "event_" + obj.id).text(event);
   let allStock = document.querySelectorAll(".stockarr");
   for (let x = 0; x < allStock.length; x++) {
     let y = allStock[x].id;
     let z = obj.id;
     if (`${y}` === `product_${z}`) {
       $(`.stock${x}`).empty();
-      $(`.stock${x}`).text(data.curPrice);
+      curPriceA = data.curPrice;
+      let upcolor = $(`.stock${x}`)
+        .addClass("color-green")
+        .removeClass("color-red");
+      let downcolor = $(`.stock${x}`)
+        .addClass("color-red")
+        .removeClass("color-green");
+      $(`.stock${x}`).text(curPriceA);
+      if (curPriceA > curPriceB ? upcolor : downcolor) curPriceB = curPriceA;
       $(`.Wave${x}`).empty();
       console.log(data.curPrice, last.lastPrice);
       let judge = (data.curPrice - last.lastPrice).toFixed(2);
-      if(judge > 0){
+      if (judge > 0) {
         $(`.Wave${x}`).text(`+${judge}`);
-      }else{
+      } else {
         $(`.Wave${x}`).text(`-${judge}`);
       }
-      let yesterdarwave = (judge / last.lastPrice).toFixed(2);
+      let yesterdarwave = judge / last.lastPrice;
+      let percent = (Math.round(yesterdarwave * 10000) / 100).toFixed(2) + "%";
       $(`.Amplitude${x}`).empty();
-      $(`.Amplitude${x}`).text(`${yesterdarwave}%`);
+      $(`.Amplitude${x}`).text(`${percent}`);
     }
   }
 }
@@ -376,17 +384,14 @@ function update_Last_info_ui(param) {
       let judge = (param[x].cur_price - param[x].yesterday_price).toFixed(2);
       if (judge > 0) {
         $(`.Wave${x}`).addClass("color-green").removeClass("color-red");
-        $(`.Wave${x}`).text(
-          (`+${judge}`)
-        );
+        $(`.Wave${x}`).text(`+${judge}`);
       } else {
         $(`.Wave${x}`).addClass("color-red").removeClass("color-green");
-        $(`.Wave${x}`).text(
-          (`-${judge}`)
-        );
+        $(`.Wave${x}`).text(`-${judge}`);
       }
-      let yesterdarwave = (judge / param[x].yesterday_price).toFixed(2)
-      $(`.Amplitude${x}`).text(`${yesterdarwave}%`);
+      let yesterdarwave = judge / param[x].yesterday_price;
+      let percent = (Math.round(yesterdarwave * 10000) / 100).toFixed(2) + "%";
+      $(`.Amplitude${x}`).text(`${percent}`);
       if (judge > 0) {
         $(`.Amplitude${x}`).addClass("color-green").removeClass("color-red");
       } else {
