@@ -325,31 +325,17 @@ function updateElementDiv(obj, data, event, last) {
       $(`.stock${x}`).text(data.curPrice);
       $(`.Wave${x}`).empty();
       console.log(data.curPrice, last.lastPrice);
-      let judge = data.curPrice - last.lastPrice;
-      $(`.Wave${x}`).text(judge.toFixed(2));
+      let judge = (data.curPrice - last.lastPrice).toFixed(2);
+      if(judge > 0){
+        $(`.Wave${x}`).text(`+${judge}`);
+      }else{
+        $(`.Wave${x}`).text(`-${judge}`);
+      }
       let yesterdarwave = (judge / last.lastPrice).toFixed(2);
       $(`.Amplitude${x}`).empty();
       $(`.Amplitude${x}`).text(`${yesterdarwave}%`);
     }
   }
-  // $(`.stock-${obj.id}`).empty();
-  // $(`.stock-${obj.id}`).text(data.curPrice);
-  // curPriceB = data.curPrice;
-  // if (curPriceB > curPriceA) {
-  //   $(`.stock-${obj.id}`).addClass("color-green").removeClass("color-red");
-  //   curPriceA = curPriceB;
-  // } else if (curPriceB == curPriceA) {
-  //   curPriceA = curPriceB;
-  //   return;
-  // } else if (curPriceB < curPriceA) {
-  //   $(`.stock-${obj.id}`).addClass("color-red").removeClass("color-green");
-  //   curPriceA = curPriceB;
-  // }
-  // $(`.left-${obj.id}`).empty();
-  // $(`.left-${obj.id}`).text(data.changeAmount);
-  // let lastpercent = (data.changeAmount / last.lastPrice).toFixed(2);
-  // $(`.right-${obj.id}`).empty();
-  // $(`.right-${obj.id}`).text(lastpercent);
 }
 function addElementDiv(obj, data, event, last) {
   // var parent = document.getElementById("parent");
@@ -387,22 +373,20 @@ function update_Last_info_ui(param) {
     if (y === `product_${z}`) {
       console.log(param[x]);
       $(`.stock${x}`).text(param[x].cur_price);
-      let judge = param[x].cur_price - param[x].yesterday_price;
-      $(`.Wave${x}`).text(
-        (param[x].cur_price - param[x].yesterday_price).toFixed(2)
-      );
+      let judge = (param[x].cur_price - param[x].yesterday_price).toFixed(2);
       if (judge > 0) {
         $(`.Wave${x}`).addClass("color-green").removeClass("color-red");
-        // $(`.Wave${x}`).text(
-        //   `+`
-        // );
+        $(`.Wave${x}`).text(
+          (`+${judge}`)
+        );
       } else {
         $(`.Wave${x}`).addClass("color-red").removeClass("color-green");
-        // $(`.Wave${x}`).text(
-        //   `-`
-        // );
+        $(`.Wave${x}`).text(
+          (`-${judge}`)
+        );
       }
-      $(`.Amplitude${x}`).text((judge / param[x].yesterday_price).toFixed(2));
+      let yesterdarwave = (judge / param[x].yesterday_price).toFixed(2)
+      $(`.Amplitude${x}`).text(`${yesterdarwave}%`);
       if (judge > 0) {
         $(`.Amplitude${x}`).addClass("color-green").removeClass("color-red");
       } else {
