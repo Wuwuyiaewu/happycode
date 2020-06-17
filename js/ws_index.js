@@ -327,21 +327,22 @@ let curPriceA = [];
 let curPriceB = [];
 
 function colorJudge(obj, data, allStock) {
-  console.log(obj.id, data.curPrice);
+  // console.log(obj.id, data.curPrice);
   for (let x = 0; x < allStock.length; x++) {
     let y = allStock[x].id;
     let z = obj.id;
     if (`${y}` === `product_${z}`) {
       curPriceA[x] = data.curPrice;
       $(`.stock${x}`).text(curPriceA[x]);
-      if (curPriceB[x] === curPriceA[x]) {
-        console.log("二次");
+      if(curPriceA[x] >= curPriceB[x]){
+        $(`.stock${x}`).addClass("color-green").removeClass("color-red");
+        console.log('上漲',`B是${curPriceB[x]}，A是${curPriceA[x]}`)
+      }else{
+        $(`.stock${x}`).addClass("color-red").removeClass("color-green");
+        console.log('下跌',`B是${curPriceB[x]}，A是${curPriceA[x]}`)
       }
       curPriceB[x] = curPriceA[x];
-      if (curPriceB[x] === curPriceA[x]) {
-        console.log("相同");
-      }
-      console.log(curPriceA + "curPriceA", curPriceB + "curPriceB");
+
     }
   }
 }
@@ -360,7 +361,7 @@ function updateElementDiv(obj, data, event, last) {
       if (judge > 0) {
         $(`.Wave${x}`).text(`+${judge}`);
       } else {
-        $(`.Wave${x}`).text(`-${judge}`);
+        $(`.Wave${x}`).text(`${judge}`);
       }
       let yesterdarwave = judge / last.lastPrice;
       let percent = (Math.round(yesterdarwave * 10000) / 100).toFixed(2) + "%";
@@ -411,7 +412,7 @@ function update_Last_info_ui(param) {
         $(`.Wave${x}`).text(`+${judge}`);
       } else {
         $(`.Wave${x}`).addClass("color-red").removeClass("color-green");
-        $(`.Wave${x}`).text(`-${judge}`);
+        $(`.Wave${x}`).text(`${judge}`);
       }
       let yesterdarwave = judge / param[x].yesterday_price;
       let percent = (Math.round(yesterdarwave * 10000) / 100).toFixed(2) + "%";

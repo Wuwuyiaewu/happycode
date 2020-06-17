@@ -1,17 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title>promise</title>
-</head>
-<body>
+  </head>
+  <body>
+    <script src="./js/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
     <script>
-        console.dir(Promise);
-        const a = new Promise((one,two)=>{
-            one('success')
-        })
-        console.log(a)
+      const url = "https://jsonplaceholder.typicode.com/todos/1";
+      //   $.ajax({
+      //     url: url,
+      //     dataType: "json",
+      //     success: function (data) {
+      //       console.log(data);
+      //     },
+      //   });
+
+      let req = new XMLHttpRequest();
+      req.open("GET", `https://cors-anywhere.herokuapp.com/${url}`);
+      req.onload = () => {
+        if(req.status === 200){
+          console.log('成功')
+        }else{
+          console.log('失敗')
+        }
+      };
+
+      req.send()
     </script>
-</body>
+  </body>
 </html>
