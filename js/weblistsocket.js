@@ -340,7 +340,6 @@ function message_text(data) {
 }
 
 function updateUI(obj, data, event, last) {
-    console.log(obj,data)
     updateElementDiv(obj, data, event, last);
 }
 
@@ -352,7 +351,11 @@ function updateElementDiv(obj, data, event, last) {
   
 }
 function update_Last_info_ui(param) {
-  
+    let all = document.getElementById('stockList')
+    for (let x = 0; x < param.length; x++) {
+        console.log(`${param[x].code_id}`)
+    }
+
 }
 
 start();
