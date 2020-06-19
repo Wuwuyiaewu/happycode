@@ -8,7 +8,7 @@ const WS_BASE_URL = "wss://api.dragonfly8.com/websocket";
 const HTTP_BASE_URL = "https://api.dragonfly8.com";
 const GET_ACCOUNT_PROPERTIES = "/account/appProperties/getAccountProperties";
 
-var product_code_ids = [573097, 573100, 573106];
+var product_code_ids = [573097, 573100, 573106, 573102, 573112, 573105, 573094];
 // 0: 573102
 // 1: 573112
 // 2: 573105
@@ -340,125 +340,19 @@ function message_text(data) {
 }
 
 function updateUI(obj, data, event, last) {
-  var product_div = document.getElementById("product_" + obj.id);
-  if (product_div == null) {
-    addElementDiv(obj, data, event, last);
-  } else {
+    console.log(obj,data)
     updateElementDiv(obj, data, event, last);
-  }
-  //   console.log(event);
 }
-let curPriceA = [];
-let curPriceB = [];
 
 function colorJudge(obj, data, allStock) {
-  // console.log(obj.id, data.curPrice);
-  for (let x = 0; x < allStock.length; x++) {
-    let y = allStock[x].id;
-    let z = obj.id;
-    if (`${y}` === `product_${z}`) {
-      curPriceA[x] = data.curPrice;
-      $(`.stock${x}`).text(curPriceA[x]);
-      if (curPriceA[x] >= curPriceB[x]) {
-        $(`.stock${x}`).addClass("color-green").removeClass("color-red");
-      } else {
-        $(`.stock${x}`).addClass("color-red").removeClass("color-green");
-      }
-      curPriceB[x] = curPriceA[x];
-    }
-  }
+ 
 }
 
 function updateElementDiv(obj, data, event, last) {
-  let allStock = document.querySelectorAll(".stockarr");
-  for (let x = 0; x < allStock.length; x++) {
-    let y = allStock[x].id;
-    let z = obj.id;
-    if (`${y}` === `product_${z}`) {
-      $(`.stock${x}`).empty();
-      colorJudge(obj, data, allStock);
-      // $(`.stock${x}`).text(data.curPrice);
-      $(`.Wave${x}`).empty();
-      let judge = (data.curPrice - last.lastPrice).toFixed(2);
-      if (judge > 0) {
-        $(`.Wave${x}`).text(`+${judge}`);
-      } else {
-        $(`.Wave${x}`).text(`${judge}`);
-      }
-      let yesterdarwave = judge / last.lastPrice;
-      let percent = (Math.round(yesterdarwave * 10000) / 100).toFixed(2) + "%";
-      $(`.Amplitude${x}`).empty();
-      $(`.Amplitude${x}`).text(`${percent}`);
-    }
-  }
-}
-function addElementDiv(obj, data, event, last) {
-  // var parent = document.getElementById("parent");
-  // var outter = document.createElement("div");
-  // var company = document.createElement("h2");
-  // var stock = document.createElement("p");
-  // var log = document.createElement("p");
-  // outter.setAttribute("id", "product_" + obj.id);
-  // outter.className = `trade-${obj.id} f-1`;
-  // company.className = "company fz-20 color-gray";
-  // company.innerHTML = obj.simplified;
-  //   stock.className = `fz-40 stock-${obj.id}`;
-  //   stock.innerHTML = data.curPrice;
-  //   curPriceA = data.curPrice;
-  //   let lastpercent = (data.changeAmount / last.lastPrice).toFixed(2);
-  //   log.className = "d-flex jcsb fz-24";
-  //   if (data.changeAmount > 0) {
-  //     log.innerHTML = `<span class="color-green left-${obj.id}">+${data.changeAmount}</span
-  //  ><span class="color-green right-${obj.id}">+${lastpercent}</span>`;
-  //   } else {
-  //     log.innerHTML = `<span class="color-red left-${obj.id}">${data.changeAmount}</span
-  //  ><span class="color-red right-${obj.id}">${lastpercent}</span>`;
-  //   }
-  //   parent.appendChild(outter);
-  //   outter.appendChild(company);
-  //   outter.appendChild(stock);
-  //   outter.appendChild(log);
+  
 }
 function update_Last_info_ui(param) {
-  let allStock = document.querySelectorAll(".stockarr");
-  for (let x = 0; x < allStock.length; x++) {
-    let y = allStock[x].id;
-    let z = param[x].code_id;
-
-    if (y === `product_${z}`) {
-      console.log(param[x]);
-      $(`.stock${x}`).text(param[x].cur_price);
-      let judge = (param[x].cur_price - param[x].yesterday_price).toFixed(2);
-      if (judge > 0) {
-        $(`.Wave${x}`).addClass("color-green").removeClass("color-red");
-        $(`.Wave${x}`).text(`+${judge}`);
-      } else {
-        $(`.Wave${x}`).addClass("color-red").removeClass("color-green");
-        $(`.Wave${x}`).text(`${judge}`);
-      }
-      let yesterdarwave = judge / param[x].yesterday_price;
-      let percent = (Math.round(yesterdarwave * 10000) / 100).toFixed(2) + "%";
-      $(`.Amplitude${x}`).text(`${percent}`);
-      if (judge > 0) {
-        $(`.Amplitude${x}`).addClass("color-green").removeClass("color-red");
-      } else {
-        $(`.Amplitude${x}`).addClass("color-red").removeClass("color-green");
-      }
-    }
-  }
+  
 }
-var urlString = location.href;
-var url = new URL(urlString);
-$(document).ready(function () {
-  if (url.searchParams.get("colorType") == 1) {
-    $("color-green").attr("font-size", "30px");
-    $("color-red").attr("font-size", "30px");
-    console.log("綠漲紅跌");
-  } else if (url.searchParams.get("or") == 2) {
-    $(".color-green").attr("color", "#00ad88");
-    $(".color-red").attr("color", "#e95a5a");
-    console.log("綠跌紅漲", $(".color-green"));
-  }
-});
 
 start();
