@@ -56,9 +56,12 @@ var http_request = new Object({
   http: new XMLHttpRequest(),
   token: "",
 
-  init: function () {},
+  init: function () {
+    console.log(this.token)
+  },
 
-  get_account_properties: function (cb) {
+  get_account_properties: function (es) {
+    console.log(`${es}----第64行`)
     var _data = {};
     var _head = {
       appKey: APP_KEY,
@@ -67,7 +70,7 @@ var http_request = new Object({
       head: _head,
       data: _data,
     };
-    this.post_request(GET_ACCOUNT_PROPERTIES, account_properties_req, cb);
+    this.post_request(GET_ACCOUNT_PROPERTIES, account_properties_req, es);
   },
 
   post_request: function (url, object, cb) {
@@ -87,9 +90,9 @@ var http_request = new Object({
       if (http.readyState == 4 && http.status == 200) {
         account.authorization = http.getResponseHeader("Authorization");
         cb(http.responseText);
+        console.log(`${http.responseText}----第93行`)
       }
     };
-
     http.send(JSON.stringify(object));
   },
 });
@@ -101,6 +104,7 @@ function start() {
   http_request.init();
   http_request.get_account_properties(function (response) {
     var accountProperties = JSON.parse(response).data;
+    console.log(`${response}---第107行`)
     var transBaseConfigVo = accountProperties.transBaseConfigVo;
     var toKenCompanyInfoVo = accountProperties.toKenCompanyInfoVo;
 
@@ -236,7 +240,6 @@ function message_event(event) {
   //console.log(event)
   var msg = JSON.parse(event);
   var msg_code = msg.msg_code;
-  console.log("code:" + msg_code);
   if (msg_code == "UserLoginInfoRet") {
     ws_request.lastPrice(product_code_ids);
     ws_request.productSubscription(product_code_ids);
@@ -244,7 +247,6 @@ function message_event(event) {
 
   if (msg_code == "GroupSymbolListRet") {
     productionInfo = msg.content.data_list;
-    console.log(msg);
   }
 
   if (msg_code == "LastPrice") {
@@ -253,14 +255,12 @@ function message_event(event) {
   }
 
   if (msg_code == "HeartBeatConf") {
-    console.log("ping");
   }
 }
 
 // beat
 setInterval(() => {
   ws_request.ping();
-  console.log("beat");
 }, 30000);
 
 function message_binary(binary_data) {
@@ -268,7 +268,6 @@ function message_binary(binary_data) {
 
   var reader = new FileReader();
   reader.onload = function (event) {
-    console.log(event, "event");
     var result = pako.inflate(event.target.result, { to: "string" });
     //console.log(result, "result = pako");
     message_event(decodeURI(result));
@@ -282,7 +281,6 @@ function message_text(data) {
     var substring = data.substring(2, data.length - 1);
     var split = substring.split(",");
     if (split.length < 7) {
-      console.log("报价有误  " + data);
     }
     var product = productionInfo.find(function (element) {
       return element.id == split[0];
@@ -335,7 +333,6 @@ function message_text(data) {
     product["realtime"] = realtimePrice;
     updateUI(product, realtimePrice, data, lastPrice);
   } else {
-    console.log();
   }
 }
 
@@ -353,7 +350,6 @@ function updateElementDiv(obj, data, event, last) {
 function update_Last_info_ui(param) {
     let all = document.getElementById('stockList')
     for (let x = 0; x < param.length; x++) {
-        console.log(`${param[x].code_id}`)
     }
 
 }
