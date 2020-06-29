@@ -8,17 +8,32 @@
   </head>
   <body>
     <div id="app">
-
-      <input type="text" v-model="firstName" placeholder="firstname">
-      <input type="text" v-model="lastName" placeholder="lastname">
+      <input type="text" v-model="firstName" placeholder="firstname" />
+      <input type="text" v-model="lastName" placeholder="lastname" />
       名字是{{fullName}}
+      <div v-if="type === '6'">
+        A
+      </div>
+      <div v-else-if="type === 'B'">
+        B
+      </div>
+      <div v-else>
+        TYPE = C
+      </div>
     </div>
     <script>
+      const content = {
+        A: "content A",
+        B: "content B",
+        C: "content C",
+      };
       var vm = new Vue({
         el: "#app",
         data: {
           firstName: "Foo",
           lastName: "Bar",
+          show: true,
+          type: 6,
         },
         computed: {
           fullName: {
@@ -32,6 +47,9 @@
               this.firstName = names[0];
               this.lastName = names[names.length - 2];
             },
+          },
+          content() {
+            return content[this.type];
           },
         },
       });
