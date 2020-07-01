@@ -7,29 +7,65 @@
     <title>promise</title>
   </head>
   <body>
+    <form action="">
+      <label for="updown">
+        紅漲綠跌
+        <input type="radio" name="updown" id="updown" />
+      </label>
+      <label for="downup">
+        紅跌綠漲
+        <input type="radio" name="updown" id="downup" />
+      </label>
+    </form>
+    <p>顏色切換</p>
     <script src="./js/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
+    <script src="./js/vue.js"></script>
     <script>
-      const url = "https://jsonplaceholder.typicode.com/todos/1";
-      //   $.ajax({
-      //     url: url,
-      //     dataType: "json",
-      //     success: function (data) {
-      //       console.log(data);
-      //     },
-      //   });
+      var urlString = location.href;
+      let judge = urlString.includes("666");
+      if (judge) {
+        console.log(
+          `bingobingobingobingobingobingobingobingobingobingobingobingobingobingobingobingo`
+        );
+      } else {
+        console.log(
+          `nahnahnahnahnahnahnahnahnahnahnahnahnahnahnahnahnahnahnah`
+        );
+      }
 
-      let req = new XMLHttpRequest();
-      req.open("GET", `https://cors-anywhere.herokuapp.com/${url}`);
-      req.onload = () => {
-        if(req.status === 200){
-          console.log('成功')
-        }else{
-          console.log('失敗')
-        }
-      };
+      let redHappy = document.getElementById("updown");
+      redHappy.addEventListener("click",chagneone);
 
-      req.send()
+      function chagneone() {
+        location.href = `${urlString}?666`
+      }
+      // const url = "https://jsonplaceholder.typicode.com/todos";
+      // $.ajax({
+      //   url: url,
+      //   dataType: "json",
+      //   success: function (data) {
+      //     console.log(data);
+      //   },
+      // });
+
+      // let req = new XMLHttpRequest();
+      // req.open("GET", `https://cors-anywhere.herokuapp.com/${url}`);
+      // req.onload = () => {
+      //   if (req.status === 200) {
+      //     console.log("成功");
+      //   } else {
+      //     console.log("失敗");
+      //   }
+      // };
+      // req.send();
+
+      // let ouch = new Promise((res, ject) => {
+      //   res('res')
+      // });
+
+      // ouch.then((res) => {
+      //   console.log(`${res}`);
+      // });
     </script>
   </body>
 </html>
