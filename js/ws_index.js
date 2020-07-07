@@ -100,7 +100,9 @@ function start() {
 
   http_request.init();
   http_request.get_account_properties(function (response) {
+    
     var accountProperties = JSON.parse(response).data;
+    console.log(accountProperties);
     var transBaseConfigVo = accountProperties.transBaseConfigVo;
     var toKenCompanyInfoVo = accountProperties.toKenCompanyInfoVo;
 

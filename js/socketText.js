@@ -2,50 +2,88 @@ const APP_KEY = "JW666key";
 const WS_BASE_URL = "wss://api.dragonfly8.com/websocket";
 const HTTP_BASE_URL = "https://api.dragonfly8.com";
 const GET_ACCOUNT_PROPERTIES = "/account/appProperties/getAccountProperties";
+var _data = {};
+var _head = {
+  appKey: APP_KEY,
+};
+var account_properties_req = {
+  head: _head,
+  data: _data,
+};
+console.log(JSON.stringify(account_properties_req));
 
-var wsUri = WS_BASE_URL;
-var output;
-function init() {
-  output = document.getElementById("output");
-  testWebSocket();
-}
-function testWebSocket() {
-  websocket = new WebSocket(wsUri);
-  websocket.onopen = function (evt) {
-    onOpen(evt);
-  };
-  websocket.onclose = function (evt) {
-    onClose(evt);
-  };
-  websocket.onmessage = function (evt) {
-    onMessage(evt);
-  };
-  websocket.onerror = function (evt) {
-    onError(evt);
-  };
-}
-function onOpen(evt) {
-  writeToScreen("CONNECTED");
-  doSend({"head":{"server":"yz","msgType":"login","sendTime":1592548680698,"Authorization":"Bearer e96da9c48300715d4de6f00c8f94c9f3","lang":"zh-CN"},"content":{"company_id":"332005","login_name":"Guest","password":"","user_type":1,"appKey":"JW666key","clientIp":"100.117.155.219"},"device":"h5","trace":"6133ee14-1562-4a41-97fe-e4a0b178aa5f","version_code":1});
-}
-function onClose(evt) {
-  writeToScreen("DISCONNECTED");
-}
-function onMessage(evt) {
-  writeToScreen("RESPONSE: " + evt.data + "");
-  websocket.close();
-}
-function onError(evt) {
-  writeToScreen("ERROR: " + evt.data);
-}
-function doSend(message) {
-  writeToScreen("SENT: " + message);
-  websocket.send(message);
-}
-function writeToScreen(message) {
-  var pre = document.createElement("p");
-  pre.style.wordWrap = "break-word";
-  pre.innerHTML = message;
-  output.appendChild(pre);
-}
-window.addEventListener("load", init, false);
+var settings = {
+  "url": "https://api.dragonfly8.com/account/appProperties/getAccountProperties",
+  "method": "POST",
+  "timeout": 0,
+  "headers": {
+    "Content-type": "application/json",
+    "module": "uat-account",
+    "rpcType": "http",
+    "method": "/account/appProperties/getAccountProperties",
+    "httpMethod": "post"
+  },
+  "data": `{"head":{"appKey":"JW666key"},"data":{}}`,
+};
+var config = new Object({
+  companyid: "",
+  platform: "",
+});
+var account = new Object({
+  accountNo: "",
+  password: "",
+  accountType: "",
+  clientIp: "",
+  authorization: "",
+  userType: "",
+});
+
+$.ajax(settings).done(function (response) {
+  var accountProperties = response.data;
+  console.log(accountProperties);
+  var transBaseConfigVo = accountProperties.transBaseConfigVo;
+  var toKenCompanyInfoVo = accountProperties.toKenCompanyInfoVo;
+  config.companyid = transBaseConfigVo.companyId;
+  config.platform = transBaseConfigVo.platform;
+  account.clientIp = accountProperties.clientIp;
+  account.accountType = toKenCompanyInfoVo.accountType;
+});
+
+// var settings = {
+//   "url": "https://api.dragonfly8.com/account/appProperties/getAccountProperties",
+//   "method": "POST",
+//   "timeout": 0,
+//   "headers": {
+//     "Content-type": "application/json",
+//     "module": "uat-account",
+//     "rpcType": "http",
+//     "method": "/account/appProperties/getAccountProperties",
+//     "httpMethod": "post"
+//   },
+//   "data": JSON.stringify({"head":{"appKey":"JW666key"},"data":{}}),
+// };
+
+// $.ajax(settings).done(function (response) {
+//   console.log(response);
+// });
+
+// var xhr = new XMLHttpRequest();
+// xhr.open('POST', `${HTTP_BASE_URL}${GET_ACCOUNT_PROPERTIES}`, true);
+// xhr.setRequestHeader("Content-type", "application/json");
+// xhr.setRequestHeader("module", "uat-account");
+// xhr.setRequestHeader("rpcType", "http");
+// xhr.setRequestHeader("httpMethod", "post");
+// xhr.setRequestHeader("method", `${GET_ACCOUNT_PROPERTIES}`);
+
+// xhr.send(JSON.stringify(account_properties_req));
+// xhr.onreadystatechange = function () {
+//   if (xhr.readyState === 4) {
+//     if (xhr.status === 200) {
+//       let parsed = JSON.parse(xhr.responseText);
+//       console.log(parsed.data);
+//       document.getElementById('ajax').textContent = parsed.data.toKenCompanyInfoVo.apiToken;
+//     } else if (xhr.status === 404) {
+//       // Do something when file not found
+//     }
+//   }
+// };
