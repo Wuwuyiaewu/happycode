@@ -40,7 +40,7 @@ var account = new Object({
 
 $.ajax(settings).done(function (response) {
   var accountProperties = response.data;
-  console.log(accountProperties);
+  // console.log(accountProperties);
   var transBaseConfigVo = accountProperties.transBaseConfigVo;
   var toKenCompanyInfoVo = accountProperties.toKenCompanyInfoVo;
   config.companyid = transBaseConfigVo.companyId;
@@ -87,3 +87,34 @@ $.ajax(settings).done(function (response) {
 //     }
 //   }
 // };
+
+
+let oneApp = new Object({
+  one_logEn: function () {
+    console.log(`one_logEn_英文`);
+    twoApp.two_logCh()
+  }
+})
+
+
+let twoApp = {
+  two_logCh: function () {
+    console.log(`two_logCh_中文`);
+  }
+}
+
+
+function start() {
+  oneApp.one_logEn()
+}
+
+start()
+
+var ws = new WebSocket('ws://localhost:8080');
+ws.onopen = function () {
+  console.log('client: ws connection is open');
+  ws.send('hello');
+};
+ws.onmessage = function (e) {
+  console.log('client: received %s', e.data);
+};

@@ -9,7 +9,6 @@ const HTTP_BASE_URL = "https://api.dragonfly8.com";
 const GET_ACCOUNT_PROPERTIES = "/account/appProperties/getAccountProperties";
 
 var product_code_ids = [573097, 573100, 573106];
-// 0: 573102
 // 1: 573112
 // 2: 573105
 // 3: 573106
@@ -102,7 +101,6 @@ function start() {
   http_request.get_account_properties(function (response) {
     
     var accountProperties = JSON.parse(response).data;
-    console.log(accountProperties);
     var transBaseConfigVo = accountProperties.transBaseConfigVo;
     var toKenCompanyInfoVo = accountProperties.toKenCompanyInfoVo;
 
@@ -238,6 +236,7 @@ function message_event(event) {
   //console.log(event)
   var msg = JSON.parse(event);
   var msg_code = msg.msg_code;
+  console.log(`${event} 241`);
   console.log("code:" + msg_code);
   if (msg_code == "UserLoginInfoRet") {
     ws_request.lastPrice(product_code_ids);
@@ -246,7 +245,6 @@ function message_event(event) {
 
   if (msg_code == "GroupSymbolListRet") {
     productionInfo = msg.content.data_list;
-    console.log(msg);
   }
 
   if (msg_code == "LastPrice") {
@@ -255,14 +253,12 @@ function message_event(event) {
   }
 
   if (msg_code == "HeartBeatConf") {
-    console.log("ping");
   }
 }
 
 // beat
 setInterval(() => {
   ws_request.ping();
-  console.log("beat");
 }, 30000);
 
 function message_binary(binary_data) {
@@ -270,7 +266,6 @@ function message_binary(binary_data) {
 
   var reader = new FileReader();
   reader.onload = function (event) {
-    console.log(event, "event");
     var result = pako.inflate(event.target.result, { to: "string" });
     //console.log(result, "result = pako");
     message_event(decodeURI(result));
@@ -337,7 +332,6 @@ function message_text(data) {
     product["realtime"] = realtimePrice;
     updateUI(product, realtimePrice, data, lastPrice);
   } else {
-    console.log();
   }
 }
 
@@ -348,13 +342,11 @@ function updateUI(obj, data, event, last) {
   } else {
     updateElementDiv(obj, data, event, last);
   }
-  //   console.log(event);
 }
 let curPriceA = [];
 let curPriceB = [];
 
 function colorJudge(obj, data, allStock) {
-  // console.log(obj.id, data.curPrice);
   for (let x = 0; x < allStock.length; x++) {
     let y = allStock[x].id;
     let z = obj.id;
@@ -428,7 +420,6 @@ function update_Last_info_ui(param) {
     let z = param[x].code_id;
 
     if (y === `product_${z}`) {
-      console.log(param[x]);
       $(`.stock${x}`).text(param[x].cur_price);
       let judge = (param[x].cur_price - param[x].yesterday_price).toFixed(2);
       if (judge > 0) {
