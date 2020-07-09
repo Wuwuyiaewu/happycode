@@ -8,7 +8,7 @@ const WS_BASE_URL = "wss://api.dragonfly8.com/websocket";
 const HTTP_BASE_URL = "https://api.dragonfly8.com";
 const GET_ACCOUNT_PROPERTIES = "/account/appProperties/getAccountProperties";
 
-var product_code_ids = [573097, 573100, 573106];
+var product_code_ids = [573095, 573100, 573106];
 // 1: 573112
 // 2: 573105
 // 3: 573106
@@ -55,7 +55,7 @@ var http_request = new Object({
   http: new XMLHttpRequest(),
   token: "",
 
-  init: function () {},
+  init: function () { },
 
   get_account_properties: function (cb) {
     var _data = {};
@@ -99,7 +99,7 @@ function start() {
 
   http_request.init();
   http_request.get_account_properties(function (response) {
-    
+
     var accountProperties = JSON.parse(response).data;
     var transBaseConfigVo = accountProperties.transBaseConfigVo;
     var toKenCompanyInfoVo = accountProperties.toKenCompanyInfoVo;
@@ -454,4 +454,15 @@ $(document).ready(function () {
   }
 });
 
+function idControl() {
+
+}
+var vm = new Vue({
+  el: "#app",
+  data: {
+    product_code_ids: [573095, 573100, 573106],
+  },
+  computed: {
+  },
+});
 start();
