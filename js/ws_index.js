@@ -142,7 +142,8 @@ var ws_request = new Object({
     ws = new WebSocket(WS_BASE_URL);
     ws.onopen = () => {
       console.log("open connection");
-      cb.ws_init_success(ws);
+      this.login(ws)
+      // cb.ws_init_success(ws);
     };
 
     ws.onclose = () => {
@@ -151,6 +152,7 @@ var ws_request = new Object({
 
     ws.onmessage = (event) => {
       //cb.ws_message_event(event);
+      console.log(event.data,'進入onmessage');
       if (event.data instanceof Blob) {
         cb.ws_binary_event(event);
       } else {
@@ -236,7 +238,6 @@ function message_event(event) {
   //console.log(event)
   var msg = JSON.parse(event);
   var msg_code = msg.msg_code;
-  console.log(`${event} 241`);
   console.log("code:" + msg_code);
   if (msg_code == "UserLoginInfoRet") {
     ws_request.lastPrice(product_code_ids);
