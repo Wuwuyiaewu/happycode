@@ -7,7 +7,7 @@ const APP_KEY = "JW666key";
 const WS_BASE_URL = "wss://api.dragonfly8.com/websocket";
 const HTTP_BASE_URL = "https://api.dragonfly8.com";
 const GET_ACCOUNT_PROPERTIES = "/account/appProperties/getAccountProperties";
-var code_1 = 573095;
+var code_1 = 573097;
 var code_2 = 573100;
 var code_3 = 573106;
 var product_code_ids = [code_1, code_2, code_3];
@@ -457,5 +457,7 @@ $(document).ready(function () {
     console.log("綠跌紅漲", $(".color-green"));
   }
 });
+
+
 
 start();

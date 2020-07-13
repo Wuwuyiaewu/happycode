@@ -37,95 +37,95 @@
       -webkit-align-items: center;
       align-items: center;
     }
-    .pic{
+
+    .pic {
       background-size: cover;
       background-repeat: no-repeat;
       background-position: center;
-      
-    }
 
+    }
   </style>
 </head>
 
 <body>
   <div id="app">
-    <input type="text" :value="product_code_ids">
-  </div>
-  <div class="outterWrap">
-    <section class="section-0 d-flex jcsb" id="parent">
-      <div id="product_573095" class="trade-573097 f-1 stockarr">
-        <h2 class="company fz-20 color-gray">香港交易所</h2>
-        <p class="stock0 fz-40">---</p>
-        <p class="log d-flex jcsb fz-24">
-          <span class="Wave0">---</span><span class="Amplitude0">---</span>
-        </p>
-      </div>
-      <div id="product_573100" class="trade-573106 f-1 stockarr order-2">
-        <h2 class="company fz-20 color-gray">騰訊控股</h2>
-        <p class="stock1 fz-40">---</p>
-        <p class="log d-flex jcsb fz-24">
-          <span class="Wave1">---</span><span class="Amplitude1">---</span>
-        </p>
-      </div>
-      <div id="product_573106" class="trade-573100 f-1 stockarr order-1">
-        <h2 class="company fz-20 color-gray">友邦保險</h2>
-        <p class="stock2 fz-40">---</p>
-        <p class="log d-flex jcsb fz-24">
-          <span class="Wave2">---</span><span class="Amplitude2">---</span>
-        </p>
-      </div>
-    </section>
-    <section class="section-1 d-flex fdc">
-      <h2 class="fz-34">資訊參考</h2>
-      <div class="card list-0 d-flex">
-        <div class="content f-3">
-          <a href="javascript:;" class="link">
-            <h2 class="news fz-32">
-              【柏富日评】科技股再创新高纳指收盘涨破10000点，港股恒指低开0.21%
-            </h2>
-          </a>
-          <p class="newsCaption d-flex jcsb fz-22">
-            <label for="" class="brand">特斯拉</label>
-            <span class="beforeMin">55分鐘前</span>
+    <input type="text" :placeholder="text1" />
+    <div class="outterWrap">
+      <section class="section-0 d-flex jcsb" id="parent">
+        <div :id="text1" class="trade-573097 f-1 stockarr">
+          <h2 class="company fz-20 color-gray">香港交易所</h2>
+          <p class="stock0 fz-40">---</p>
+          <p class="log d-flex jcsb fz-24">
+            <span class="Wave0">---</span><span class="Amplitude0">---</span>
           </p>
         </div>
-        <a href="javascript:;" class="contentWrap f-1 link">
-          <img class="contentImg" src="./images/image.jpg" alt="" />
-        </a>
-      </div>
-      <div class="card list-1 d-flex">
-        <div class="content f-3">
-          <a href="javascript:;" class="link">
-            <h2 class="news fz-32">
-              【柏富日评】科技股再创新高纳指收盘涨破10000点，港股恒指低开0.21%
-            </h2>
-          </a>
-          <p class="newsCaption d-flex jcsb fz-22">
-            <label for="" class="brand">特斯拉</label>
-            <span class="beforeMin">55分鐘前</span>
+        <div id="product_573100" class="trade-573106 f-1 stockarr order-2">
+          <h2 class="company fz-20 color-gray">騰訊控股</h2>
+          <p class="stock1 fz-40">---</p>
+          <p class="log d-flex jcsb fz-24">
+            <span class="Wave1">---</span><span class="Amplitude1">---</span>
           </p>
         </div>
-        <a href="javascript:;" class="contentWrap f-1 link">
-          <img class="contentImg" src="./images/image.jpg" alt="" />
-        </a>
-      </div>
-      <div class="card list-2 d-flex">
-        <div class="content f-3">
-          <a href="javascript:;" class="link">
-            <h2 class="news fz-32">
-              【柏富日评】科技股再创新高纳指收盘涨破10000点，港股恒指低开0.21%
-            </h2>
-          </a>
-          <p class="newsCaption d-flex jcsb fz-22">
-            <label for="" class="brand">特斯拉</label>
-            <span class="beforeMin">55分鐘前</span>
+        <div id="product_573106" class="trade-573100 f-1 stockarr order-1">
+          <h2 class="company fz-20 color-gray">友邦保險</h2>
+          <p class="stock2 fz-40">---</p>
+          <p class="log d-flex jcsb fz-24">
+            <span class="Wave2">---</span><span class="Amplitude2">---</span>
           </p>
         </div>
-        <a href="javascript:;" class="contentWrap f-1 link">
-          <img class="contentImg" src="./images/image.jpg" alt="" />
-        </a>
-      </div>
-    </section>
+      </section>
+      <section class="section-1 d-flex fdc">
+        <h2 class="fz-34">資訊參考</h2>
+        <div class="card list-0 d-flex">
+          <div class="content f-3">
+            <a href="javascript:;" class="link">
+              <h2 class="news fz-32">
+                【柏富日评】科技股再创新高纳指收盘涨破10000点，港股恒指低开0.21%
+              </h2>
+            </a>
+            <p class="newsCaption d-flex jcsb fz-22">
+              <label for="" class="brand">特斯拉</label>
+              <span class="beforeMin">55分鐘前</span>
+            </p>
+          </div>
+          <a href="javascript:;" class="contentWrap f-1 link">
+            <img class="contentImg" src="./images/image.jpg" alt="" />
+          </a>
+        </div>
+        <div class="card list-1 d-flex">
+          <div class="content f-3">
+            <a href="javascript:;" class="link">
+              <h2 class="news fz-32">
+                【柏富日评】科技股再创新高纳指收盘涨破10000点，港股恒指低开0.21%
+              </h2>
+            </a>
+            <p class="newsCaption d-flex jcsb fz-22">
+              <label for="" class="brand">特斯拉</label>
+              <span class="beforeMin">55分鐘前</span>
+            </p>
+          </div>
+          <a href="javascript:;" class="contentWrap f-1 link">
+            <img class="contentImg" src="./images/image.jpg" alt="" />
+          </a>
+        </div>
+        <div class="card list-2 d-flex">
+          <div class="content f-3">
+            <a href="javascript:;" class="link">
+              <h2 class="news fz-32">
+                【柏富日评】科技股再创新高纳指收盘涨破10000点，港股恒指低开0.21%
+              </h2>
+            </a>
+            <p class="newsCaption d-flex jcsb fz-22">
+              <label for="" class="brand">特斯拉</label>
+              <span class="beforeMin">55分鐘前</span>
+            </p>
+          </div>
+          <a href="javascript:;" class="contentWrap f-1 link">
+            <img class="contentImg" src="./images/image.jpg" alt="" />
+          </a>
+        </div>
+      </section>
+    </div>
   </div>
   <script>
     function recalc(x, bol) {
@@ -160,6 +160,74 @@
       pagination: {
         el: '.swiper-pagination',
       },
+    });
+
+    function getData() {
+      $.ajax({
+        type: "GET",
+        url: '/fApi/dollars',
+        dataType: 'json',
+        success: function (msg) {
+          console.log(msg, '16:48');
+          if (msg) {
+            handlerData(msg);
+          } else {
+            return false;
+            console.log(msg);
+          }
+        }
+      });
+    }
+
+    function handlerData(msg) {
+      $('#json_0').text(msg.num1);
+      let st_1 = msg.stock_1;
+      let st_2 = msg.stock_2;
+      let st_3 = msg.stock_3;
+      $('#json_1').text(st_1);
+
+      console.log(typeof (msg))
+    }
+    var vm = new Vue({
+      el: "#app",
+      data: {
+        text1: `product_${code_1}`,
+      },
+      computed: {
+        st1() {
+          
+        }
+      },
+      methods: {
+        getData() {
+          $.ajax({
+            type: "GET",
+            url: '/fApi/dollars',
+            dataType: 'json',
+            success: function (msg) {
+              console.log(msg, '16:48');
+              if (msg) {
+                handlerData(msg);
+              } else {
+                return false;
+                console.log(msg);
+              }
+            }
+          });
+        },
+        handlerData(msg) {
+          $('#json_0').text(msg.num1);
+          let st_1 = msg.stock_1;
+          let st_2 = msg.stock_2;
+          let st_3 = msg.stock_3;
+          $('#json_1').text(st_1);
+
+          console.log(typeof (msg))
+        }
+      },
+      created() {
+
+      }
     });
   </script>
 </body>
