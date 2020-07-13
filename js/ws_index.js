@@ -7,8 +7,11 @@ const APP_KEY = "JW666key";
 const WS_BASE_URL = "wss://api.dragonfly8.com/websocket";
 const HTTP_BASE_URL = "https://api.dragonfly8.com";
 const GET_ACCOUNT_PROPERTIES = "/account/appProperties/getAccountProperties";
-
-var product_code_ids = [573095, 573100, 573106];
+var code_1 = 573095;
+var code_2 = 573100;
+var code_3 = 573106;
+var product_code_ids = [code_1, code_2, code_3];
+// var product_code_ids = [573095, 573100, 573106];
 // 1: 573112
 // 2: 573105
 // 3: 573106
@@ -455,15 +458,4 @@ $(document).ready(function () {
   }
 });
 
-function idControl() {
-
-}
-var vm = new Vue({
-  el: "#app",
-  data: {
-    product_code_ids: [573095, 573100, 573106],
-  },
-  computed: {
-  },
-});
 start();
