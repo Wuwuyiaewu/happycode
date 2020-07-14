@@ -4,26 +4,68 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="./js/vue.js"></script>
+  <script src="./js/axios.js"></script>
   <title>ix中間層連接</title>
 </head>
 
 <body>
-  <div id="ajax"></div>
-  <div id="output"></div>
-  <button class="check">check</button>
-  <div class="hide-t">如果搜尋有 sss 就隱藏我</div>
-  <section class="01">01</section>
-  <section class="02">02</section>
-  <section class="03">03</section>
-  <section class="04">04</section>
-  <section class="05">05</section>
-  <!-- <div class="hideX">ok</div> -->
+  <div id="app">
 
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js'></script>
+  </div>
+
   <script src="./js/socketText.js"></script>
   <script>
+    const data = JSON.stringify({ "head": { "appKey": "JW666key" }, "data": {} });
+    var vm = new Vue({
+      el: "#app",
+      data: {
+        ax_config: {
+          method: 'post',
+          url: 'https://api.dragonfly8.com/account/appProperties/getAccountProperties',
+          headers: {
+            'Content-type': 'application/json',
+            'module': 'uat-account',
+            'rpcType': 'http',
+            'method': '/account/appProperties/getAccountProperties',
+            'httpMethod': 'post'
+          },
+          data: data
+        },
+        config: {
+          companyid: "",
+          platform: "",
+        },
+        account: {
+          accountNo: "",
+          password: "",
+          accountType: "",
+          clientIp: "",
+          authorization: "",
+          userType: ""
+        }
+      },
+      computed: {
+      },
+      methods: {
+        send() {
+          axios(this.ax_config)
+            .then(function (response) {
+              console.log(JSON.stringify(response.data));
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+        }
+      },
+      mounted() {
 
-    
+      },
+      created() {
+        this.send()
+      }
+    });
+
   </script>
 </body>
 

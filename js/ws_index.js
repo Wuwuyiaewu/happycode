@@ -121,24 +121,26 @@ function start() {
       account.accountNo = "Guest";
       account.userType = 1;
     }
-    ws_request.init(ws_callback);
+    ws_request.init();
   });
 }
 
-var ws_callback = new Object({
-  ws_init_success: function (socket) {
-    ws_request.login(socket);
-  },
-  ws_message_event: function (event) {
-    message_event(event);
-  },
-  ws_binary_event: function (binary_data) {
-    message_binary(binary_data);
-  },
-  ws_text_event: function (text_data) {
-    message_text(text_data);
-  },
-});
+// var ws_callback = new Object({
+//   ws_init_success: function (socket) {
+//     ws_request.login(socket);
+//   },
+//   ws_message_event: function (event) {
+//     message_event(event);
+//   },
+//   ws_binary_event: function (binary_data) {
+//     message_binary(binary_data);
+//   },
+//   ws_text_event: function (text_data) {
+//     message_text(text_data);
+//   },
+console.log(`進入 message_text`);
+
+// });
 
 var ws_request = new Object({
   init: function (cb) {
@@ -155,14 +157,17 @@ var ws_request = new Object({
 
     ws.onmessage = (event) => {
       //cb.ws_message_event(event);
-      console.log(event.data,'進入onmessage');
+      console.log(event.data);
       if (event.data instanceof Blob) {
-        cb.ws_binary_event(event);
+        // cb.ws_binary_event(event);
+        message_binary(event)
       } else {
         try {
-          cb.ws_message_event(event.data);
+          // cb.ws_message_event(event.data);
+          message_event(event.data)
         } catch (e) {
-          cb.ws_text_event(event.data);
+          // cb.ws_text_event(event.data);
+          message_text(event.data)
         }
       }
     };
@@ -205,6 +210,13 @@ var ws_request = new Object({
     var request = this.getWsRequest("lastPrice", _content);
     ws.send(JSON.stringify(request));
   },
+  uptrend: function (codeIds) {
+    var _content = {
+      code_ids: codeIds,
+    };
+    var request = this.getWsRequest("uptrend", _content);
+    ws.send(JSON.stringify(request));
+  },
   getWsRequest: function (msg_type, content) {
     var ws_request = {
       trace: "h5_" + get_current_time(),
@@ -238,7 +250,7 @@ function get_current_time() {
 }
 
 function message_event(event) {
-  //console.log(event)
+  console.log(event)
   var msg = JSON.parse(event);
   var msg_code = msg.msg_code;
   console.log("code:" + msg_code);
@@ -255,8 +267,8 @@ function message_event(event) {
     lastPriceInfo = msg.content;
     update_Last_info_ui(lastPriceInfo);
   }
-
   if (msg_code == "HeartBeatConf") {
+    console.log(`中講`);
   }
 }
 
@@ -267,7 +279,6 @@ setInterval(() => {
 
 function message_binary(binary_data) {
   var blob = binary_data.data;
-
   var reader = new FileReader();
   reader.onload = function (event) {
     var result = pako.inflate(event.target.result, { to: "string" });
@@ -278,7 +289,9 @@ function message_binary(binary_data) {
 }
 
 function message_text(data) {
-  // console.log(JSON.stringify(productionInfo));
+  console.log(JSON.stringify(productionInfo));
+  console.log(`進入 message_text`);
+
   if (data.startsWith("p(")) {
     var substring = data.substring(2, data.length - 1);
     var split = substring.split(",");
@@ -450,11 +463,9 @@ $(document).ready(function () {
   if (url.searchParams.get("colorType") == 1) {
     $("color-green").attr("font-size", "30px");
     $("color-red").attr("font-size", "30px");
-    console.log("綠漲紅跌");
   } else if (url.searchParams.get("or") == 2) {
     $(".color-green").attr("color", "#00ad88");
     $(".color-red").attr("color", "#e95a5a");
-    console.log("綠跌紅漲", $(".color-green"));
   }
 });
 
