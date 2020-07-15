@@ -19,39 +19,43 @@
     const data = JSON.stringify({ "head": { "appKey": "JW666key" }, "data": {} });
     var vm = new Vue({
       el: "#app",
-      data: {
-        ax_config: {
-          method: 'post',
-          url: 'https://api.dragonfly8.com/account/appProperties/getAccountProperties',
-          headers: {
-            'Content-type': 'application/json',
-            'module': 'uat-account',
-            'rpcType': 'http',
-            'method': '/account/appProperties/getAccountProperties',
-            'httpMethod': 'post'
+      data() {
+        return {
+          ax_config: {
+            method: 'post',
+            url: 'https://api.dragonfly8.com/account/appProperties/getAccountProperties',
+            headers: {
+              'Content-type': 'application/json',
+              'module': 'uat-account',
+              'rpcType': 'http',
+              'method': '/account/appProperties/getAccountProperties',
+              'httpMethod': 'post'
+            },
+            data: data
           },
-          data: data
-        },
-        config: {
-          companyid: "",
-          platform: "",
-        },
-        account: {
-          accountNo: "",
-          password: "",
-          accountType: "",
-          clientIp: "",
-          authorization: "",
-          userType: ""
+          config: {
+            companyid: "",
+            platform: "",
+          },
+          account: {
+            accountNo: "",
+            password: "",
+            accountType: "",
+            clientIp: "",
+            authorization: "",
+            userType: ""
+          }
         }
       },
       computed: {
       },
       methods: {
         send() {
-          axios(this.ax_config)
+          let vm = this
+          axios(vm.ax_config)
             .then(function (response) {
               console.log(JSON.stringify(response.data));
+              console.log(response.headers, vm.account);
             })
             .catch(function (error) {
               console.log(error);
