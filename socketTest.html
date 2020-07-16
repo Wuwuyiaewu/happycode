@@ -21,6 +21,10 @@
       el: "#app",
       data() {
         return {
+          APP_KEY: 'JW666key',
+          WS_BASE_URL: 'wss://api.dragonfly8.com/websocket',
+          HTTP_BASE_URL: 'https://api.dragonfly8.com',
+          GET_ACCOUNT_PROPERTIES: '/account/appProperties/getAccountProperties',
           ax_config: {
             method: 'post',
             url: 'https://api.dragonfly8.com/account/appProperties/getAccountProperties',
@@ -44,7 +48,10 @@
             clientIp: "",
             authorization: "",
             userType: ""
-          }
+          },
+          resData: {
+          },
+          ws: new WebSocket(`wss://api.dragonfly8.com/websocket`)
         }
       },
       computed: {
@@ -54,12 +61,46 @@
           let vm = this
           axios(vm.ax_config)
             .then(function (response) {
-              console.log(JSON.stringify(response.data));
-              console.log(response.headers, vm.account);
+              vm.account.authorization = response.headers.authorization
+              vm.resData = response.data
+              console.log(response);
+
+              vm.get_account_properties(vm.resData)
             })
             .catch(function (error) {
-              console.log(error);
             });
+        },
+        get_account_properties(res) {
+          console.log(res);
+          let vm = this
+          vm.config.companyid = res.data.transBaseConfigVo.companyId
+          vm.config.platform = res.data.transBaseConfigVo.platform
+          vm.account.clientIp = res.data.clientIp;
+          vm.account.accountType = res.data.toKenCompanyInfoVo.accountType;
+          console.log(vm.config, vm.account);
+          if (res.data.toKenCompanyInfoVo.accountType == "real") {
+            vm.account.accountNo = res.data.toKenCompanyInfoVo.mobilePhone;
+            vm.account.userType = 0;
+          } else if (res.data.toKenCompanyInfoVo.accountType == "demo") {
+            vm.account.accountNo = res.data.toKenCompanyInfoVo.mobilePhone;
+            vm.account.userType = 1;
+          } else {
+            vm.account.accountNo = "Guest";
+            vm.account.userType = 1;
+          }
+          vm.init()
+        },
+        init(){
+          let vm = this
+          console.log("open connection");
+          vm.ws.open()
+          vm.login(vm.ws)
+          let xd = 'xd'
+          console.log(vm.xd);
+          
+        },
+        login(){
+
         }
       },
       mounted() {

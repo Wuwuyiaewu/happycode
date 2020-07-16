@@ -92,7 +92,6 @@ var http_request = new Object({
         cb(http.responseText);
       }
     };
-
     http.send(JSON.stringify(object));
   },
 });
