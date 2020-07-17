@@ -150,11 +150,9 @@ var ws_request = new Object({
       this.login(ws)
       // cb.ws_init_success(ws);
     };
-
     ws.onclose = () => {
       console.log("close connection");
     };
-
     ws.onmessage = (event) => {
       //cb.ws_message_event(event);
       console.log(event.data);
@@ -172,7 +170,6 @@ var ws_request = new Object({
       }
     };
   },
-
   login: function (ws) {
     var _content = {
       company_id: config.companyid,
@@ -182,7 +179,6 @@ var ws_request = new Object({
       appKey: APP_KEY,
       clientIp: account.clientIp,
     };
-
     var request = this.getWsRequest("login", _content);
     ws.send(JSON.stringify(request));
   },
