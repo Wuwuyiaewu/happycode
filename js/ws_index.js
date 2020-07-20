@@ -138,8 +138,6 @@ function start() {
 //   ws_text_event: function (text_data) {
 //     message_text(text_data);
 //   },
-console.log(`進入 message_text`);
-
 // });
 
 var ws_request = new Object({
@@ -155,7 +153,6 @@ var ws_request = new Object({
     };
     ws.onmessage = (event) => {
       //cb.ws_message_event(event);
-      console.log(event.data);
       if (event.data instanceof Blob) {
         // cb.ws_binary_event(event);
         message_binary(event)
@@ -166,6 +163,7 @@ var ws_request = new Object({
         } catch (e) {
           // cb.ws_text_event(event.data);
           message_text(event.data)
+          console.log(`進入message_text`);
         }
       }
     };
@@ -184,6 +182,7 @@ var ws_request = new Object({
   },
 
   productSubscription: function (codeIds) {
+    console.log(`進入productSubscription`);
     var _content = {
       subscribeType: "reSubscribe",
       code_ids: codeIds,
@@ -200,6 +199,8 @@ var ws_request = new Object({
     ws.send(JSON.stringify(request));
   },
   lastPrice: function (codeIds) {
+    console.log(`進入lastPrice`);
+    
     var _content = {
       code_ids: codeIds,
     };
@@ -246,7 +247,6 @@ function get_current_time() {
 }
 
 function message_event(event) {
-  console.log(event)
   var msg = JSON.parse(event);
   var msg_code = msg.msg_code;
   console.log("code:" + msg_code);
@@ -261,10 +261,10 @@ function message_event(event) {
 
   if (msg_code == "LastPrice") {
     lastPriceInfo = msg.content;
+    console.dir(lastPriceInfo)
     update_Last_info_ui(lastPriceInfo);
   }
   if (msg_code == "HeartBeatConf") {
-    console.log(`中講`);
   }
 }
 
@@ -278,16 +278,13 @@ function message_binary(binary_data) {
   var reader = new FileReader();
   reader.onload = function (event) {
     var result = pako.inflate(event.target.result, { to: "string" });
-    //console.log(result, "result = pako");
     message_event(decodeURI(result));
   };
   reader.readAsArrayBuffer(blob);
 }
 
 function message_text(data) {
-  console.log(JSON.stringify(productionInfo));
   console.log(`進入 message_text`);
-
   if (data.startsWith("p(")) {
     var substring = data.substring(2, data.length - 1);
     var split = substring.split(",");
