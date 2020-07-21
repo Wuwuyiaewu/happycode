@@ -22,7 +22,7 @@
       el: "#app",
       data() {
         return {
-          product_code_ids:[573095,573114,573101],
+          product_code_ids: [573095, 573114, 573101],
           APP_KEY: 'JW666key',
           WS_BASE_URL: 'wss://api.dragonfly8.com/websocket',
           HTTP_BASE_URL: 'https://api.dragonfly8.com',
@@ -68,7 +68,6 @@
             .then(function (response) {
               vm.account.authorization = response.headers.authorization
               vm.resData = response.data
-
               vm.get_account_properties(vm.resData)
             })
             .catch(function (error) {
@@ -124,10 +123,8 @@
             vm.message_binary(e)
           } else {
             try {
-              console.log(e,'128行');
               vm.message_event(e.data)
             } catch (e) {
-              console.log(e,'131行');
               vm.message_text(e.data)
             }
           }
@@ -139,12 +136,12 @@
           let vm = this
           reader.onload = function (event) {
             var result = pako.inflate(event.target.result, { to: "string" });
-            //console.log(result, "result = pako");
             vm.message_event(decodeURI(result));
           };
           reader.readAsArrayBuffer(blob);
         },
         productSubscription: function (codeIds) {
+          let vm = this
           var _content = {
             subscribeType: "reSubscribe",
             code_ids: codeIds,
@@ -154,10 +151,19 @@
           vm.websocketsend(JSON.stringify(request));
         },
         lastPrice: function (codeIds) {
+          let vm = this
           var _content = {
             code_ids: codeIds,
           };
           var request = this.getWsRequest("lastPrice", _content);
+          vm.websocketsend(JSON.stringify(request));
+        },
+        ping: function () {
+          let vm = this
+          var _content = {
+            beat: 1,
+          };
+          var request = this.getWsRequest("ping", _content);
           vm.websocketsend(JSON.stringify(request));
         },
         message_event(event) {
@@ -178,10 +184,11 @@
             // vm.update_Last_info_ui(lastPriceInfo);
           }
           if (msg_code == "HeartBeatConf") {
+            vm.ping()
           }
         },
         message_text(data) {
-          console.log(`進入 message_text`,data);
+          console.log(`進入 message_text`, data);
           if (data.startsWith("p(")) {
             var substring = data.substring(2, data.length - 1);
             var split = substring.split(",");
@@ -275,13 +282,19 @@
           var d = new Date();
           return d.getTime();
         },
-
+        timerPing() {
+          const vm = this
+          setInterval(() => {
+            vm.ping()
+          }, 30000);
+        }
       },
       mounted() {
 
       },
       created() {
         this.send()
+        this.timerPing()
       },
       destroyed() {
         this.websock.close() //离开路由之后断开websocket连接
