@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=yes">
+    <meta name="author" content="[2020.05] Designed by David; Coded by Jimmy, Ezey and Jeffery">
+    <link rel="stylesheet" href="promote/lp225/css/style.css">
+    <script src="/js/pako.js"></script>
+    <script src="/js/vue.js"></script>
+    <script src="/js/axios.js"></script>
+    <title>情浓端午 放粽回馈－智选天下</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="bg">
+            <div class="s1">
+                <div class="s1-rice1"></div>
+                <div class="s1-wave1"></div>
+                <div class="s1-rice2"></div>
+                <div class="s1-rice3"></div>
+                <div class="s1-wave2"></div>
+                <div class="s1-wave3"></div>
+                <div class="s1-boat1 wow fadeInUp" data-wow-delay="0.4s"></div>
+                <div class="s1-boat2 wow fadeInUp" data-wow-delay="0.8s"></div>
+                <div class="s1-title wow fadeIn"></div>
+                <div class="s1-plane"></div>
+                <div class="btn-row">
+                    <a href="javascript:void(0)" class="btn1 wow tada joinOpen" data-wow-delay="1.5s"
+                        >登入或註冊</a>
+                    <a href="https://cs.se6868x.com:8188/?company_id=14&chat_type=1&uagent=1000&lang=zh-cn&lastPageDesc=laoke06&reffer=guanwang"
+                        class="btn2 wow tada" data-wow-delay="1.5s"
+                        onclick="_gaq.push(['_trackEvent', $GA_NAME, 'customer_service','content_first', 1,true]);"
+                        target="_blank">咨询客服</a>
+                </div>
+            </div>
+        </div>
+        <div class="block"></div>
+    </div>
+    <div class="join" id="app">
+        <div class="join-s1">
+            <div class="join-close"></div>
+            <form action="javascript:;">
+                <input type="text" class="join-account" placeholder="帳號"
+                    name="personalInformation.passwordRaw" v-model="ax_config.data.data.accountNo">
+                <input type="text" class="join-phone" placeholder="密碼" id="mobilePhone_number"
+                    name="personalInformation.mobilePhone_number" v-model="ax_config.data.data.passWord">
+                <select name="" id="">
+                    <option v-model="ax_config.data.data.accountType">真實帳號</option>
+                    <option v-model="ax_config.data.data.accountType">模擬帳號</option>
+                </select>
+                <div class="tip" id="error_text">请输入开户登记手机号码</div>
+                <a href="javascript:;" type="submit" value="送出" @click="send" class="join-submit">点击提交</a>
+            </form>
+        </div>
+    </div>
+
+
+    <script src="promote/lp225/js/jquery-3.5.1.min.js"></script>
+    <script src="promote/lp225/js/main.js"></script>
+    <script src="promote/lp225/js/rem.js"></script>
+    <script type="text/javascript">
+        remCompute(750, true);
+    </script>
+    <script src="promote/lp225/js/wow.min.js"></script>
+    <script>
+        var $GA_NAME = "lp225_hd_customer_202006dwfz.html";
+    </script>
+    <script>
+        /* 登記參與 */
+        $(function openJoin() {
+            $('.joinOpen').click(function () {
+                $('html').css('overflow-y', 'hidden');
+                $('body').css('overflow-y', 'hidden');
+
+                activity.checkUserLogin();
+            })
+        });
+        $(function closeJoin() {
+            $('.join-close').click(function () {
+                $('.join').removeClass("open");
+                $('html').css('overflow-y', 'auto');
+                $('body').css('overflow-y', 'auto');
+            })
+        });
+    </script>
+
+
+    <script>
+        const data = JSON.stringify({ "head": { "appKey": "JW666key" }, "data": {} });
+        var vm = new Vue({
+            el: "#app",
+            data() {
+                return {
+                    product_code_ids: [573095, 573114, 573101],
+                    APP_KEY: 'JW666key',
+                    WS_BASE_URL: 'wss://api.dragonfly8.com/websocket',
+                    HTTP_BASE_URL: 'https://api.dragonfly8.com',
+                    GET_ACCOUNT_PROPERTIES: '/account/appProperties/getAccountProperties',
+                    ax_config: {
+                        method: 'post',
+                        url: 'https://api.dragonfly8.com/account/appProperties/getAccountProperties',
+                        headers: {
+                            'Content-type': 'application/json',
+                            'module': 'uat-account',
+                            'rpcType': 'http',
+                            'method': '/account/appProperties/getAccountProperties',
+                            'httpMethod': 'post'
+                        },
+                        data: {
+                            "head": { "appKey": "yz352001" }, "data": {
+                                "accountNo": "",
+                                "accountType": "real",
+                                "passWord": ""
+                            }
+                        }
+                    },
+                    config: {
+                        companyid: "",
+                        platform: "",
+                    },
+                    account: {
+                        accountNo: "",
+                        password: "",
+                        accountType: "",
+                        clientIp: "",
+                        authorization: "",
+                        userType: ""
+                    },
+                    _content: {},
+                    resData: {
+                    },
+                    productionInfo: [],
+                    lastPriceInfo: [],
+                    websock: null,
+                }
+            },
+            computed: {
+            },
+            methods: {
+                send() {
+                    let vm = this
+                    axios(vm.ax_config)
+                        .then(function (response) {
+                            console.log(response.data.code);
+                            if(response.data.code === 1){
+                                document.location.href="https://h5.smart-elite.com/yz352001/home"
+                            }else{
+                                alert('繼續在LP偽裝')
+                            }
+                            vm.account.authorization = response.headers.authorization
+                            vm.resData = response.data
+                            vm.get_account_properties(vm.resData)
+                        })
+                        .catch(function (error) {
+                        });
+                },
+                get_account_properties(res) {
+                    let vm = this
+                    vm.config.companyid = res.data.transBaseConfigVo.companyId
+                    vm.config.platform = res.data.transBaseConfigVo.platform
+                    vm.account.clientIp = res.data.clientIp;
+                    vm.account.accountType = res.data.toKenCompanyInfoVo.accountType;
+                    if (res.data.toKenCompanyInfoVo.accountType == "real") {
+                        vm.account.accountNo = res.data.toKenCompanyInfoVo.mobilePhone;
+                        vm.account.userType = 0;
+                    } else if (res.data.toKenCompanyInfoVo.accountType == "demo") {
+                        vm.account.accountNo = res.data.toKenCompanyInfoVo.mobilePhone;
+                        vm.account.userType = 1;
+                    } else {
+                        vm.account.accountNo = "Guest";
+                        vm.account.userType = 1;
+                    }
+                    vm.initWebSocket()
+                },
+                initWebSocket() { //初始化weosocket
+                    const wsuri = "wss://api.dragonfly8.com/websocket";
+                    this.websock = new WebSocket(wsuri);
+                    this.websock.onmessage = this.websocketonmessage;
+                    this.websock.onopen = this.websocketonopen;
+                    this.websock.onerror = this.websocketonerror;
+                    this.websock.onclose = this.websocketclose;
+                    console.log(`init`);
+
+                },
+                websocketonopen() { //连接建立之后执行send方法发送数据
+                    let vm = this
+                    let _content = {
+                        company_id: vm.config.companyid,
+                        login_name: vm.account.accountNo,
+                        password: vm.account.password,
+                        user_type: vm.account.userType,
+                        appKey: vm.APP_KEY,
+                        clientIp: vm.account.clientIp,
+                    };
+                    let request = vm.getWsRequest("login", _content)
+                    this.websocketsend(JSON.stringify(request));
+                },
+                websocketonerror() {//连接建立失败重连
+                    this.initWebSocket();
+                },
+                websocketonmessage(e) { //数据接收 判斷數值
+                    let vm = this
+                    if (e.data instanceof Blob) {
+                        vm.message_binary(e)
+                    } else {
+                        try {
+                            vm.message_event(e.data)
+                        } catch (e) {
+                            vm.message_text(e.data)
+                        }
+                    }
+
+                },
+                message_binary(binary_data) { //解碼後在執行 message_event
+                    var blob = binary_data.data;
+                    var reader = new FileReader();
+                    let vm = this
+                    reader.onload = function (event) {
+                        var result = pako.inflate(event.target.result, { to: "string" });
+                        vm.message_event(decodeURI(result));
+                    };
+                    reader.readAsArrayBuffer(blob);
+                },
+                productSubscription: function (codeIds) {
+                    let vm = this
+                    var _content = {
+                        subscribeType: "reSubscribe",
+                        code_ids: codeIds,
+                        type: "yz",
+                    };
+                    var request = this.getWsRequest("productSubscription", _content);
+                    vm.websocketsend(JSON.stringify(request));
+                },
+                lastPrice: function (codeIds) {
+                    let vm = this
+                    var _content = {
+                        code_ids: codeIds,
+                    };
+                    var request = this.getWsRequest("lastPrice", _content);
+
+                    vm.websocketsend(JSON.stringify(request));
+                },
+                ping: function () {
+                    var _content = {
+                        beat: 1,
+                    };
+                    console.log(`進入ping`);
+                    var request = this.getWsRequest("ping", _content);
+                    vm.websocketsend(JSON.stringify(request));
+                },
+                ping: function () {
+                    let vm = this
+                    var _content = {
+                        beat: 1,
+                    };
+                    var request = this.getWsRequest("ping", _content);
+                    vm.websocketsend(JSON.stringify(request));
+                },
+                message_event(event) {
+                    var msg = JSON.parse(event);
+                    var msg_code = msg.msg_code;
+                    console.log("code:" + msg_code, '判斷message_event執行事件');
+                    if (msg_code == "UserLoginInfoRet") {
+                        vm.lastPrice(vm.product_code_ids);
+                        vm.productSubscription(vm.product_code_ids);
+                    }
+                    if (msg_code == "InitProductInfo") {
+                    }
+                    if (msg_code == "GroupSymbolListRet") {
+                        vm.productionInfo = msg.content.data_list;
+                    }
+
+                    if (msg_code == "LastPrice") {
+                        vm.lastPriceInfo = msg.content;
+                        // vm.update_Last_info_ui(lastPriceInfo);
+                    }
+                    if (msg_code == "HeartBeatConf") {
+                        vm.ping()
+                    }
+                },
+                message_text(data) {
+                    console.log(`進入 message_text`, data);
+                    if (data.startsWith("p(")) {
+                        var substring = data.substring(2, data.length - 1);
+                        var split = substring.split(",");
+                        if (split.length < 7) {
+                            console.log("报价有误  " + data);
+                        }
+                        var product = productionInfo.find(function (element) {
+                            return element.id == split[0];
+                        });
+                        if (product == null) return;
+
+                        var last = lastPriceInfo.find(function (element) {
+                            return element.code_id == split[0];
+                        });
+
+                        let last_percent = 0.0;
+                        if (last.yesterday_price > 0.0) {
+                            last_percent =
+                                (last.cur_price - last.yesterday_price) / last.yesterday_price;
+                        } else {
+                            last_percent = 0.0;
+                        }
+
+                        var lastPrice = {
+                            sellRiseStatus: last.sell_price,
+                            buyRiseStatus: last.buy_price,
+                            buyPrice: last.buy_price,
+                            sellPrice: last.sell_price,
+                            lastPrice: last.yesterday_price,
+                            curPrice: last.cur_price,
+                            changeAmount: last.cur_price - last.yesterday_price,
+                            percent: last_percent,
+                        };
+
+                        let real_percent = 0.0;
+                        if (lastPrice.lastPrice > 0) {
+                            real_percent = (split[3] - lastPrice.lastPrice) / lastPrice.lastPrice;
+                        } else {
+                            real_percent = 0.0;
+                        }
+
+                        var realtimePrice = {
+                            sellRiseStatus: split[2],
+                            buyRiseStatus: split[1],
+                            buyPrice: split[1],
+                            sellPrice: split[2],
+                            curPrice: split[3],
+                            changeAmount: (split[3] - lastPrice.lastPrice).toFixed(2),
+                            time: split[4],
+                            highPrice: split[5],
+                            lowPrice: split[6],
+                            percent: real_percent,
+                        };
+
+                        product["realtime"] = realtimePrice;
+                        // vm.updateUI(product, realtimePrice, data, lastPrice);
+                    } else {
+                    }
+                },
+                websocketsend(Data) {//数据发送
+                    this.websock.send(Data);
+                },
+                websocketclose(e) {  //关闭
+                    console.log('断开连接', e);
+                },
+                getWsRequest: function (msg_type, content) {
+                    var ws_request = {
+                        trace: "h5_" + this.get_current_time(),
+                        platform: "h5",
+                        msg_code: msg_type,
+                        device: "h5",
+                        version_code: 1,
+                        head: this.getHead(msg_type),
+                        content: content,
+                    };
+                    return ws_request;
+                },
+                getHead: function (msg_type) {
+                    var _head = {
+                        server: vm.config.platform,
+                        msgType: msg_type,
+                        isVisitor: "false",
+                        userNo: "userNo-d-20190710001111109876",
+                        lang: "zh-CN",
+                        sendTime: this.get_current_time(),
+                        Authorization: vm.account.authorization,
+                    };
+                    return _head;
+                },
+                get_current_time() {
+                    var d = new Date();
+                    return d.getTime();
+                },
+                timerPing() {
+                    const vm = this
+                    setInterval(() => {
+                        vm.ping()
+                    }, 30000);
+                }
+            },
+            mounted() {
+
+            },
+            created() {
+                // this.send()
+                // this.timerPing()
+            },
+            destroyed() {
+                this.websock.close() //离开路由之后断开websocket连接
+            },
+        });
+
+    </script>
+
+</body>
+
+</html>

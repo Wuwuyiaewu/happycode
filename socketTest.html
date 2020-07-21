@@ -13,14 +13,17 @@
 <body>
   <div id="app">
     <form action="">
-      <input type="text" placeholder="帳號" :value="account.accountNo">
-      <input type="text" placeholder="密碼" :value="account.password">
-      <input type="submit" value="送出" @click="send">
+      <input type="text" placeholder="帳號" :value="ax_config.data.data.accountNo">
+      <input type="text" placeholder="密碼" :value="ax_config.data.data.passWord">
+      <select name="" id="">
+        <option value="real">真實帳號</option>
+        <option value="demo">模擬帳號</option>
+      </select>
+      <a href="javascript:;" type="submit" value="送出" @click="send">送出</a>
     </form>
 
   </div>
 
-  <script src="./js/socketText.js"></script>
   <script>
     const data = JSON.stringify({ "head": { "appKey": "JW666key" }, "data": {} });
     var vm = new Vue({
@@ -42,15 +45,21 @@
               'method': '/account/appProperties/getAccountProperties',
               'httpMethod': 'post'
             },
-            data: data
+            data: {
+              "head": { "appKey": "yz352001" }, "data": {
+                "accountNo": "13222333444",
+                "accountType": "demo",
+                "passWord": "mm123456"
+              }
+            }
           },
           config: {
             companyid: "",
             platform: "",
           },
           account: {
-            accountNo: "15301062020",
-            password: "Bf2020",
+            accountNo: "",
+            password: "",
             accountType: "",
             clientIp: "",
             authorization: "",
@@ -71,6 +80,8 @@
           let vm = this
           axios(vm.ax_config)
             .then(function (response) {
+              console.log(response.data.code);
+
               vm.account.authorization = response.headers.authorization
               vm.resData = response.data
               vm.get_account_properties(vm.resData)
@@ -84,16 +95,16 @@
           vm.config.platform = res.data.transBaseConfigVo.platform
           vm.account.clientIp = res.data.clientIp;
           vm.account.accountType = res.data.toKenCompanyInfoVo.accountType;
-          // if (res.data.toKenCompanyInfoVo.accountType == "real") {
-          //   vm.account.accountNo = res.data.toKenCompanyInfoVo.mobilePhone;
+          if (res.data.toKenCompanyInfoVo.accountType == "real") {
+            vm.account.accountNo = res.data.toKenCompanyInfoVo.mobilePhone;
             vm.account.userType = 0;
-          // } else if (res.data.toKenCompanyInfoVo.accountType == "demo") {
-          //   vm.account.accountNo = res.data.toKenCompanyInfoVo.mobilePhone;
-          //   vm.account.userType = 1;
-          // } else {
-          //   vm.account.accountNo = "Guest";
-            // vm.account.userType = 1;
-          // }
+          } else if (res.data.toKenCompanyInfoVo.accountType == "demo") {
+            vm.account.accountNo = res.data.toKenCompanyInfoVo.mobilePhone;
+            vm.account.userType = 1;
+          } else {
+            vm.account.accountNo = "Guest";
+            vm.account.userType = 1;
+          }
           vm.initWebSocket()
         },
         initWebSocket() { //初始化weosocket
@@ -308,8 +319,8 @@
 
       },
       created() {
-        this.send()
-        this.timerPing()
+        // this.send()
+        // this.timerPing()
       },
       destroyed() {
         this.websock.close() //离开路由之后断开websocket连接
