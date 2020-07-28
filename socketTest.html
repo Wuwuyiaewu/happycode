@@ -48,7 +48,7 @@
             data: {
               "head": { "appKey": "yz352001" }, "data": {
                 "accountNo": "13222333444",
-                "accountType": "demo",
+                "accountType": "real",
                 "passWord": "mm123456"
               }
             }
@@ -128,6 +128,8 @@
             clientIp: vm.account.clientIp,
           };
           let request = vm.getWsRequest("login", _content)
+          console.log(request);
+          
           this.websocketsend(JSON.stringify(request));
         },
         websocketonerror() {//连接建立失败重连
@@ -291,6 +293,7 @@
             content: content,
           };
           return ws_request;
+          console.log(ws_request);
         },
         getHead: function (msg_type) {
           var _head = {

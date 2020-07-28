@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iframe</title>
+</head>
+
+<body>
+    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quo, impedit animi dolore eos qui iure nulla tempora vel?
+    Perferendis quidem id ex obcaecati vero, modi ipsam. Minima, pariatur? Voluptatem, cupiditate minima sit suscipit
+    quod ex obcaecati illum provident quibusdam aspernatur possimus odio autem nulla error voluptatibus accusantium
+    dicta qui doloribus. Impedit, minima. Ab id repellendus fugiat repudiandae. Nesciunt id excepturi sapiente, adipisci
+    illo fugit quaerat similique unde ex natus sunt nulla nemo culpa? Mollitia ab laudantium ut animi ullam cumque non
+    natus tenetur eveniet atque sed perferendis asperiores quos officiis impedit quisquam inventore expedita, iste
+    incidunt nihil? Quae, possimus aut.
+    <script>
+        window.onmessage = function (e) {
+
+            var payload = JSON.parse(e.data);
+            localStorage.setItem(payload.key, payload.data);
+
+        };
+    </script>
+</body>
+
+</html>

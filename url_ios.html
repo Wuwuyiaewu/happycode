@@ -4,17 +4,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <script src="./js/axios.js"></script>
+    <title>插入iframe</title>
 </head>
 
 <body>
     <button onclick="gotourl()">點我觸發動作</button>
+
+
+    <iframe src="http://127.0.0.1:5501/iframe.html" frameborder="0"></iframe>
     <script>
+        let data = JSON.stringify({
+            "head": { "appKey": "yz352001" }, "data": {
+                "accountNo": "15000000995",
+                "accountType": "real",
+                "passWord": "A116868"
+            }
+        });
+        let config = {
+            method: 'post',
+            url: 'https://api.dragonfly8.com/account/appProperties/getAccountProperties',
+            headers: {
+                'Content-type': 'application/json',
+                'module': 'uat-account',
+                'rpcType': 'http',
+                'method': '/account/appProperties/getAccountProperties',
+                'httpMethod': 'post',
+                'trace': 'h5_' + get_current_time(),
+                'Authorization': ''
+            },
+            data: data
+        };
+        let login_data = {}
+        function get_current_time() {
+            var d = new Date();
+            return d.getTime();
+        };
         function gotourl() {
-            console.log('YOU CAR TOUCH THIS')
+            axios(config)
+                .then(function (response) {
+                    config.headers.method = '/account/front/user/info'
+                    config.url = 'https://api.dragonfly8.com/account/front/user/info'
+                    config.headers.Authorization = response.headers.authorization
+                    config.data = {
+                        "data": {},
+                        "head": {
+                            "appKey": "yzkey"
+                        }
+                    }
+                    console.log(config);
+                    return axios(config)
+                })
+                .then((res2) => {
+                    console.log(res2.data.data.mobile_phone, res2.data.data.customer_number);
+                })
+                .catch(function (error) {
+                    console.log(error, '第二次錯誤');
+                });
+
         }
 
     </script>
+
+    <script>
+
+    </script>
+
 </body>
 
 </html>
