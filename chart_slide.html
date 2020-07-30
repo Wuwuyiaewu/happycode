@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/air-slider.min.css" />
+    <title>#29 圖表</title>
+    <style>
+      .swiper-container {
+        max-width: 750px !important;
+      }
+      .swiper-slide {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+      }
+      canvas {
+        /* background-image: url('images/360x640_2.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center; */
+      }
+    </style>
+    <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.css" />
+    <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css" />
+    <script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
+  </head>
+  <body>
+    <!-- Swiper -->
+    <div class="swiper-container">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide" style="position: relative; height: 100%;">
+          
+          <canvas id="lineChart_0">
+          </canvas>
+        </div>
+        <div class="swiper-slide" style="position: relative; height: 100%;">
+          <title>美油</title>
+          <canvas id="lineChart_1"></canvas>
+        </div>
+        <div class="swiper-slide" style="position: relative; height: 100%;">
+          <title>TECH</title>
+          <canvas id="lineChart_2"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <input type="text" onclick="change(value)" value="50" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    <script src="js/chart_data.js"></script>
+
+    <!-- Swiper JS -->
+    <script src="../package/js/swiper.min.js"></script>
+
+    <!-- Initialize Swiper -->
+    <script>
+      var swiper = new Swiper(".swiper-container", {
+        pagination: {
+          el: ".swiper-pagination",
+          type: "progressbar",
+        },
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+        slidesPerView: "auto",
+      });
+    </script>
+  </body>
+</html>

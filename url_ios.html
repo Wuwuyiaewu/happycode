@@ -4,250 +4,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="./js/vue.js"></script>
     <script src="./js/axios.js"></script>
     <title>插入iframe</title>
 </head>
 
 <body>
-    <div id="app">
-        <button @click="gotourl">點我觸發動作</button>
-        <form action="">
-            <input type="text" placeholder="帳號" v-model="accountNo">
-            <input type="text" placeholder="密碼" v-model="password">
-            <select v-model="accountType">
-                <option value="real">真實帳號</option>
-                <option value="demo">模擬帳號</option>
-            </select>
-            <a href="javascript:;" @click="gotourl">提交</a>
-        </form>
-    </div>
+    <button onclick="gotourl()">點我觸發動作</button>
 
 
     <iframe src="http://127.0.0.1:5501/iframe.html" frameborder="0"></iframe>
-
     <script>
-        var vm = new Vue({
-            el: "#app",
-            data() {
-                return {
-                    webSocket: null,
-                    ws_url: 'wss://api.dragonfly8.com/websocket',
-                    types: '给后台参数',
-                    userdata: {
-                        head: { "appKey": "yz352001" },
-                        data: {
-                            accountNo:"",
-                            password:"",
-                            accountType:""
-                        }
-                    },
-                    accountNo: "15000000995",
-                    password: "A116868",
-                    accountType: "",
-                    config: {
-                        method: 'post',
-                        url: 'https://api.dragonfly8.com/account/appProperties/getAccountProperties',
-                        headers: {
-                            'Content-type': 'application/json',
-                            'module': 'uat-account',
-                            'rpcType': 'http',
-                            'method': '/account/appProperties/getAccountProperties',
-                            'httpMethod': 'post',
-                            'trace': 'h5_' + this.get_current_time(),
-                            'Authorization': ''
-                        },
-                        data: ""
-                    },
-                    ws_consis: {
-                        trace: "",
-                        version_code: 1,
-                        device: "",
-                        head: {
-                            server: "",
-                            msgType: "",
-                            sendTime: this.get_current_time(),
-                            Authorization: "",
-                            lang: "zh-CN"
-                        },
-                        content: {
-                            appKey: "",
-                            clientIp: "",
-                            company_id: "",
-                            login_name: "",
-                            password: "",
-                            user_type: ""
+        let data = JSON.stringify({
+            "head": { "appKey": "yz352001" }, "data": {
+                "accountNo": "15000000995",
+                "accountType": "real",
+                "passWord": "A116868"
+            }
+        });
+        let config = {
+            method: 'post',
+            url: 'https://api.dragonfly8.com/account/appProperties/getAccountProperties',
+            headers: {
+                'Content-type': 'application/json',
+                'module': 'uat-account',
+                'rpcType': 'http',
+                'method': '/account/appProperties/getAccountProperties',
+                'httpMethod': 'post',
+                'trace': 'h5_' + get_current_time(),
+                'Authorization': ''
+            },
+            data: data
+        };
+        let login_data = {}
+        function get_current_time() {
+            var d = new Date();
+            return d.getTime();
+        };
+        function gotourl() {
+            axios(config)
+                .then(function (response) {
+                    config.headers.method = '/account/front/user/info'
+                    config.url = 'https://api.dragonfly8.com/account/front/user/info'
+                    config.headers.Authorization = response.headers.authorization
+                    config.data = {
+                        "data": {},
+                        "head": {
+                            "appKey": "yzkey"
                         }
                     }
-                }
-            },
-            methods: {
-                get_current_time() {
-                    var d = new Date();
-                    return d.getTime();
-                },
-                gotourl() {
-                    let vm = this
-                    vm.config.data = JSON.stringify(vm.userdata)
-                    vm.accountType = "real"
-                    axios(vm.config)
-                        .then(function (response) {
-                            vm.config.headers.Authorization = response.headers.authorization
-                            vm.ws_consis.device = response.data.data.transBaseConfigVo.platform
-                            vm.ws_consis.head.Authorization = response.headers.authorization
-                            vm.ws_consis.head.server = response.data.data.transBaseConfigVo.platform
-                            vm.ws_consis.content.appKey = response.data.data.transBaseConfigVo.appKey
-                            vm.ws_consis.content.clientIp = response.data.data.clientIp
-                            vm.ws_consis.content.company_id = response.data.data.transBaseConfigVo.companyId
-                            vm.ws_consis.content.login_name = "visitor"
-                            vm.ws_consis.content.user_type = "-1"
-                            console.log(response);
-                            vm.initSocket()
-                        })
-                        .catch(function (error) {
-                            console.log(error, '第二次錯誤');
-                        });
+                    console.log(config);
+                    return axios(config)
+                })
+                .then((res2) => {
+                    console.log(res2.data.data.mobile_phone, res2.data.data.customer_number);
+                })
+                .catch(function (error) {
+                    console.log(error, '第二次錯誤');
+                });
 
-                },
-                realtourl() {
-                    let vm = this
-                    vm.userdata.accountNo = vm.accountNo
-                    vm.userdata.password = vm.password
-                    vm.userdata.accountType = vm.accountType
-                    vm.config.data = JSON.stringify(vm.userdata)
-                    axios(vm.config)
-                        .then(function (response) {
-                            vm.config.headers.Authorization = response.headers.authorization
-                            vm.ws_consis.head.Authorization = response.headers.authorization
-                            vm.ws_consis.head.server = response.data.data.transBaseConfigVo.platform
-                            vm.ws_consis.content.appKey = response.data.data.transBaseConfigVo.appKey
-                            vm.ws_consis.content.clientIp = response.data.data.clientIp
-                            vm.ws_consis.content.company_id = response.data.data.transBaseConfigVo.companyId
-                            vm.ws_consis.content.login_name = response.data.data.toKenCompanyInfoVo.loginName
-                            console.log(response);
-                            vm.initSocket()
-                        })
-                        .catch(function (error) {
-                            console.log(error, '第二次錯誤');
-                        });
-
-                },
-                // 建立连接
-                initSocket() {
-                    // 有参数的情况下：
-                    // let url = `ws://${this.url}/${this.types}`
-                    // 没有参数的情况:接口
-                    // let url1 = 'ws://localhost:9998'
-                    let vm = this
-                    this.webSocket = new WebSocket(vm.ws_url)
-                    this.webSocket.onmessage = this.webSocketOnMessage
-                    this.webSocket.onopen = this.webSocketOnOpen
-                    this.webSocket.onclose = this.webSocketOnClose
-                    this.webSocket.onerror = this.webSocketOnError
-
-                },
-                // 因為 head msg_type 和 content 每個街口都有不同
-                consis_ix_api(msg_type) {
-                    let vm = this
-                    let ws_request = {
-                        trace: "h5_" + vm.get_current_time(),
-                        msg_code: msg_type,
-                        device: vm.ws_consis.device,
-                        version_code: vm.ws_consis.version_code,
-                        head: vm.ws_consis.head,
-                        content: vm.ws_consis.content,
-                    };
-                    return ws_request;
-                    console.log('組完的資料', ws_request);
-                },
-                // 建立连接成功后的状态
-                webSocketOnOpen() {
-                    console.log('websocket连接成功');
-                    let vm = this
-                    //決定msg_type
-                    vm.ws_consis.head.msgType = "login"
-                    let request = vm.consis_ix_api()
-                    console.log(request);
-                    if (vm.webSocket.readyState === 1) {
-                        vm.webSocket.send(JSON.stringify(request));
-                    } else {
-                        //do something
-                        console.log(`失敗`);
-                        console.log(vm.webSocket.readyState);
-                    }
-                    // this.webSocket.send(request)
-                },
-                // 获取到后台消息的事件，操作数据的代码在onmessage中书写
-                webSocketOnMessage(res) {
-                    //给后台发送数据
-                    this.webSocket.send("发送数据");
-                },
-                // 关闭连接
-                webSocketOnClose() {
-                    this.webSocket.close()
-                    console.log('websocket连接已关闭');
-                },
-                //连接失败的事件
-                webSocketOnError(res) {
-                    console.log('websocket连接失败');
-                    // 打印失败的数据
-                    console.log(res);
-                }
-            },
-            created() {
-                // 页面打开就建立连接，根据业务需要
-                this.gotourl()
-            },
-            destroyed() {
-                // 页面销毁关闭连接
-                // this.webSocket.close()
-            },
         }
-        )
+
     </script>
+
     <script>
-        // let data = JSON.stringify({
-        //     "head": { "appKey": "yz352001" }, "data": {
-        //         "accountNo": "15000000995",
-        //         "accountType": "real",
-        //         "passWord": "A116868"
-        //     }
-        // });
-        // let config = {
-        //     method: 'post',
-        //     url: 'https://api.dragonfly8.com/account/appProperties/getAccountProperties',
-        //     headers: {
-        //         'Content-type': 'application/json',
-        //         'module': 'uat-account',
-        //         'rpcType': 'http',
-        //         'method': '/account/appProperties/getAccountProperties',
-        //         'httpMethod': 'post',
-        //         'trace': 'h5_' + get_current_time(),
-        //         'Authorization': ''
-        //     },
-        //     data: data
-        // };
-        // let login_data = {}
-        // function get_current_time() {
-        //     var d = new Date();
-        //     return d.getTime();
-        // };
-        // function gotourl() {
-        //     axios(config)
-        //         .then(function (response) {
-        //             config.headers.Authorization = response.headers.authorization
-
-        //             console.log(config);
-        //             return axios(config)
-        //         })
-        //         .catch(function (error) {
-        //             console.log(error, '第二次錯誤');
-        //         });
-
-        // }
-
 
     </script>
+
 </body>
 
 </html>

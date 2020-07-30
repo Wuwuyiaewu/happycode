@@ -110,8 +110,6 @@
         initWebSocket() { //初始化weosocket
           const wsuri = "wss://api.dragonfly8.com/websocket";
           this.websock = new WebSocket(wsuri);
-          console.log(this.websock);
-          
           this.websock.onmessage = this.websocketonmessage;
           this.websock.onopen = this.websocketonopen;
           this.websock.onerror = this.websocketonerror;
@@ -130,7 +128,7 @@
             clientIp: vm.account.clientIp,
           };
           let request = vm.getWsRequest("login", _content)
-          console.log(request,'131');
+          console.log(request);
           
           this.websocketsend(JSON.stringify(request));
         },
