@@ -7,9 +7,9 @@ const APP_KEY = "JW666key";
 const WS_BASE_URL = "wss://api.dragonfly8.com/websocket";
 const HTTP_BASE_URL = "https://api.dragonfly8.com";
 const GET_ACCOUNT_PROPERTIES = "/account/appProperties/getAccountProperties";
-var code_1 = 573160;
-var code_2 = 573159;
-var code_3 = 573161;
+var code_1 = 573097;
+var code_2 = 573100;
+var code_3 = 573106;
 var product_code_ids = [code_1, code_2, code_3];
 // 573160 那只100etf 573159道瓊etf 573161標普500etf
 // var product_code_ids = [573095, 573100, 573106];
@@ -182,13 +182,14 @@ var ws_request = new Object({
   },
 
   productSubscription: function (codeIds) {
-    console.log(`進入productSubscription`);
     var _content = {
       subscribeType: "reSubscribe",
       code_ids: codeIds,
       type: "yz",
     };
     var request = this.getWsRequest("productSubscription", _content);
+    console.log(`進入productSubscription`);
+    console.log(request);
     ws.send(JSON.stringify(request));
   },
   ping: function () {
@@ -251,12 +252,15 @@ function message_event(event) {
   var msg_code = msg.msg_code;
   console.log("code:" + msg_code);
   if (msg_code == "UserLoginInfoRet") {
-    ws_request.lastPrice(product_code_ids);
+    // ws_request.lastPrice(product_code_ids);
     ws_request.productSubscription(product_code_ids);
   }
 
   if (msg_code == "GroupSymbolListRet") {
     productionInfo = msg.content.data_list;
+    console.log(productionInfo);
+    
+    // update_Last_info_ui(productionInfo)
   }
 
   if (msg_code == "LastPrice") {
@@ -274,10 +278,15 @@ setInterval(() => {
 }, 30000);
 
 function message_binary(binary_data) {
+  console.log(`進入binary轉換`);
   var blob = binary_data.data;
+  console.log(binary_data);
+  
   var reader = new FileReader();
   reader.onload = function (event) {
     var result = pako.inflate(event.target.result, { to: "string" });
+    console.log(decodeURI(result));
+    
     message_event(decodeURI(result));
   };
   reader.readAsArrayBuffer(blob);

@@ -37,9 +37,9 @@
                     userdata: {
                         head: { "appKey": "yz352001" },
                         data: {
-                            accountNo:"",
-                            password:"",
-                            accountType:""
+                            accountNo: "",
+                            password: "",
+                            accountType: ""
                         }
                     },
                     accountNo: "15000000995",
@@ -111,19 +111,21 @@
                 },
                 realtourl() {
                     let vm = this
-                    vm.userdata.accountNo = vm.accountNo
-                    vm.userdata.password = vm.password
-                    vm.userdata.accountType = vm.accountType
                     vm.config.data = JSON.stringify(vm.userdata)
                     axios(vm.config)
                         .then(function (response) {
                             vm.config.headers.Authorization = response.headers.authorization
+                            vm.ws_consis.device = response.data.data.transBaseConfigVo.platform
                             vm.ws_consis.head.Authorization = response.headers.authorization
                             vm.ws_consis.head.server = response.data.data.transBaseConfigVo.platform
                             vm.ws_consis.content.appKey = response.data.data.transBaseConfigVo.appKey
                             vm.ws_consis.content.clientIp = response.data.data.clientIp
                             vm.ws_consis.content.company_id = response.data.data.transBaseConfigVo.companyId
-                            vm.ws_consis.content.login_name = response.data.data.toKenCompanyInfoVo.loginName
+                            vm.ws_consis.content.login_name = "visitor"
+                            vm.ws_consis.content.user_type = "0"
+                            vm.userdata.data.accountNo = vm.accountNo
+                            vm.userdata.data.password = vm.password
+                            vm.userdata.data.accountType = vm.accountType
                             console.log(response);
                             vm.initSocket()
                         })
