@@ -7,9 +7,9 @@ const APP_KEY = "JW666key";
 const WS_BASE_URL = "wss://api.dragonfly8.com/websocket";
 const HTTP_BASE_URL = "https://api.dragonfly8.com";
 const GET_ACCOUNT_PROPERTIES = "/account/appProperties/getAccountProperties";
-var code_1 = 573160;
-var code_2 = 573159;
-var code_3 = 573161;
+var code_1 = 573002;
+var code_2 = 573006;
+var code_3 = 573029;
 var product_code_ids = [code_1, code_2, code_3];
 // 573160 那只100etf 573159道瓊etf 573161標普500etf
 // var product_code_ids = [573095, 573100, 573106];
