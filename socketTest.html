@@ -4,9 +4,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script src="./js/pako.js"></script>
   <script src="./js/vue.js"></script>
   <script src="./js/axios.js"></script>
+  <script src="./js/pako.js"></script>
   <title>ix中間層連接</title>
 </head>
 
@@ -30,7 +30,7 @@
       el: "#app",
       data() {
         return {
-          product_code_ids: [573095, 573114, 573101],
+          product_code_ids: [573153, 573044, 573004],
           APP_KEY: 'JW666key',
           WS_BASE_URL: 'wss://api.dragonfly8.com/websocket',
           HTTP_BASE_URL: 'https://api.dragonfly8.com',
@@ -129,7 +129,7 @@
           };
           let request = vm.getWsRequest("login", _content)
           console.log(request);
-          
+
           this.websocketsend(JSON.stringify(request));
         },
         websocketonerror() {//连接建立失败重连
@@ -137,6 +137,7 @@
         },
         websocketonmessage(e) { //数据接收 判斷數值
           let vm = this
+          console.log(e)
           if (e.data instanceof Blob) {
             vm.message_binary(e)
           } else {
@@ -216,65 +217,66 @@
           }
         },
         message_text(data) {
-          console.log(`進入 message_text`, data);
-          if (data.startsWith("p(")) {
-            var substring = data.substring(2, data.length - 1);
-            var split = substring.split(",");
-            if (split.length < 7) {
-              console.log("报价有误  " + data);
-            }
-            var product = productionInfo.find(function (element) {
-              return element.id == split[0];
-            });
-            if (product == null) return;
+          console.log(JSON.stringify(data))
+          // console.log(`進入 message_text`, data);
+          // if (data.startsWith("p(")) {
+          //   var substring = data.substring(2, data.length - 1);
+          //   var split = substring.split(",");
+          //   if (split.length < 7) {
+          //     console.log("报价有误  " + data);
+          //   }
+          //   var product = productionInfo.find(function (element) {
+          //     return element.id == split[0];
+          //   });
+          //   if (product == null) return;
 
-            var last = lastPriceInfo.find(function (element) {
-              return element.code_id == split[0];
-            });
+          //   var last = lastPriceInfo.find(function (element) {
+          //     return element.code_id == split[0];
+          //   });
 
-            let last_percent = 0.0;
-            if (last.yesterday_price > 0.0) {
-              last_percent =
-                (last.cur_price - last.yesterday_price) / last.yesterday_price;
-            } else {
-              last_percent = 0.0;
-            }
+          //   let last_percent = 0.0;
+          //   if (last.yesterday_price > 0.0) {
+          //     last_percent =
+          //       (last.cur_price - last.yesterday_price) / last.yesterday_price;
+          //   } else {
+          //     last_percent = 0.0;
+          //   }
 
-            var lastPrice = {
-              sellRiseStatus: last.sell_price,
-              buyRiseStatus: last.buy_price,
-              buyPrice: last.buy_price,
-              sellPrice: last.sell_price,
-              lastPrice: last.yesterday_price,
-              curPrice: last.cur_price,
-              changeAmount: last.cur_price - last.yesterday_price,
-              percent: last_percent,
-            };
+          //   var lastPrice = {
+          //     sellRiseStatus: last.sell_price,
+          //     buyRiseStatus: last.buy_price,
+          //     buyPrice: last.buy_price,
+          //     sellPrice: last.sell_price,
+          //     lastPrice: last.yesterday_price,
+          //     curPrice: last.cur_price,
+          //     changeAmount: last.cur_price - last.yesterday_price,
+          //     percent: last_percent,
+          //   };
 
-            let real_percent = 0.0;
-            if (lastPrice.lastPrice > 0) {
-              real_percent = (split[3] - lastPrice.lastPrice) / lastPrice.lastPrice;
-            } else {
-              real_percent = 0.0;
-            }
+          //   let real_percent = 0.0;
+          //   if (lastPrice.lastPrice > 0) {
+          //     real_percent = (split[3] - lastPrice.lastPrice) / lastPrice.lastPrice;
+          //   } else {
+          //     real_percent = 0.0;
+          //   }
 
-            var realtimePrice = {
-              sellRiseStatus: split[2],
-              buyRiseStatus: split[1],
-              buyPrice: split[1],
-              sellPrice: split[2],
-              curPrice: split[3],
-              changeAmount: (split[3] - lastPrice.lastPrice).toFixed(2),
-              time: split[4],
-              highPrice: split[5],
-              lowPrice: split[6],
-              percent: real_percent,
-            };
+          //   var realtimePrice = {
+          //     sellRiseStatus: split[2],
+          //     buyRiseStatus: split[1],
+          //     buyPrice: split[1],
+          //     sellPrice: split[2],
+          //     curPrice: split[3],
+          //     changeAmount: (split[3] - lastPrice.lastPrice).toFixed(2),
+          //     time: split[4],
+          //     highPrice: split[5],
+          //     lowPrice: split[6],
+          //     percent: real_percent,
+          //   };
 
-            product["realtime"] = realtimePrice;
-            // vm.updateUI(product, realtimePrice, data, lastPrice);
-          } else {
-          }
+          //   product["realtime"] = realtimePrice;
+          //   // vm.updateUI(product, realtimePrice, data, lastPrice);
+          // } else {
+          // }
         },
         websocketsend(Data) {//数据发送
           this.websock.send(Data);

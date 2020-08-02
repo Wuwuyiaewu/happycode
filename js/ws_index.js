@@ -7,8 +7,8 @@ const APP_KEY = "JW666key";
 const WS_BASE_URL = "wss://api.dragonfly8.com/websocket";
 const HTTP_BASE_URL = "https://api.dragonfly8.com";
 const GET_ACCOUNT_PROPERTIES = "/account/appProperties/getAccountProperties";
-var code_1 = 573002;
-var code_2 = 573006;
+var code_1 = 573153;
+var code_2 = 573044;
 var code_3 = 573029;
 var product_code_ids = [code_1, code_2, code_3];
 // 573160 那只100etf 573159道瓊etf 573161標普500etf
@@ -284,7 +284,7 @@ function message_binary(binary_data) {
 }
 
 function message_text(data) {
-  console.log(`進入 message_text`);
+  console.log(`進入 message_text,${data}`);
   if (data.startsWith("p(")) {
     var substring = data.substring(2, data.length - 1);
     var split = substring.split(",");
