@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./js/vue.js"></script>
     <script src="./js/axios.js"></script>
     <title>插入iframe</title>
 </head>
@@ -14,10 +15,19 @@
 
     <iframe src="http://127.0.0.1:5501/iframe.html" frameborder="0"></iframe>
     <script>
-        let data = JSON.stringify({
-            "head": { "appKey": "yz352001" }, "data": {
+        var vm = new Vue({
+            el: "#app",
+            data() {
+                return {
+                    data: {
+                        "head": { "appKey": "yz352001" },
+                        "data": {
+                        }
+                    },
+                    
+                }
             }
-        });
+        })
         let config = {
             method: 'post',
             url: 'https://api.dragonfly8.com/account/appProperties/getAccountProperties',
