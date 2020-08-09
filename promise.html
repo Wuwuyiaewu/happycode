@@ -1,71 +1,150 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>promise</title>
-  </head>
-  <body>
-    <form action="">
-      <label for="updown">
-        紅漲綠跌
-        <input type="radio" name="updown" id="updown" />
-      </label>
-      <label for="downup">
-        紅跌綠漲
-        <input type="radio" name="updown" id="downup" />
-      </label>
-    </form>
-    <p>顏色切換</p>
-    <script src="./js/jquery.min.js"></script>
-    <script src="./js/vue.js"></script>
-    <script>
-      var urlString = location.href;
-      let judge = urlString.includes("666");
-      if (judge) {
-        console.log(
-          `bingobingobingobingobingobingobingobingobingobingobingobingobingobingobingobingo`
-        );
-      } else {
-        console.log(
-          `nahnahnahnahnahnahnahnahnahnahnahnahnahnahnahnahnahnahnah`
-        );
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>promise</title>
+</head>
+
+<body>
+  <div id="app">
+    <p>{{fapidata.profit}}</p>
+
+
+  </div>
+  <script src="./js/jquery.min.js"></script>
+  <script src="./js/vue.js"></script>
+  <script src="./js/axios.js"></script>
+  <script>
+    var vm = new Vue({
+      el: "#app",
+      data() {
+        return {
+          ax_data: {
+            "head": { "appKey": "yz352001" },
+            "data": { "login_name": "", "password": "", "accountType": "" }
+          },
+          config: {
+            method: 'post',
+            url: 'https://api.dragonfly8.com/account/appProperties/getAccountProperties',
+            headers: {
+              'Content-type': 'application/json',
+              'module': 'uat-account',
+              'rpcType': 'http',
+              'method': '/account/appProperties/getAccountProperties',
+              'httpMethod': 'post',
+              'trace': 'h5_' + this.get_current_time(),
+              'Authorization': ''
+            },
+
+            data: {
+              "head": { "appKey": "yz352001" },
+              "data": { "login_name": "", "password": "" }
+            },
+          },
+          content: {
+            "company_id": "",
+            "login_name": "",
+            "password": "",
+            "user_type": -1,
+            "appKey": "",
+            "clientIp": ""
+          },
+          aj_config: {
+            method: 'get',
+            url: '/json/lp251.json',
+          },
+          fapidata: {
+            "product_1": {
+              "q1": "",
+              "a1": "",
+              "q2": "",
+              "a2": ""
+            },
+            "product_2": {
+              "q1": "",
+              "a1": "",
+              "q2": "",
+              "a2": ""
+            },
+            "product_3": {
+              "q1": "",
+              "a1": "",
+              "q2": "",
+              "a2": ""
+            },
+            "direct": {
+              "做空": 0,
+              "做多": 1
+            },
+            "participants": Number,
+            "profit": Number
+          }
+        }
+      },
+      methods: {
+        get_current_time() {
+          var d = new Date();
+          return d.getTime();
+        },
+        gotourl() {
+          let vm = this
+          console.log(vm.config);
+          axios(vm.config)
+            .then(function (response) {
+              vm.config.headers.Authorization = response.headers.authorization
+              vm.config.data = vm.ax_data
+              console.log(response)
+              return axios(vm.config)
+            })
+            .catch(function (error) {
+              console.log(error, '第二次錯誤');
+            });
+        },
+        ajax_sample() {
+          let vm = this
+          axios(vm.aj_config)
+            .then((res) => {
+              vm.fapidata = res.data
+              console.log(res, vm.fapidata)
+            })
+            .catch(function (error) {
+              console.log(error)
+            })
+        },
+        Calculation() {
+          let vm = this
+          setInterval(() => {
+            if (vm.fapidata.profit < 1000000) {
+              vm.fapidata.profit = vm.fapidata.profit + 300000
+
+            } else if (vm.fapidata.profit > 1000000) {
+              vm.fapidata.profit = vm.fapidata.profit -200000
+            }
+            console.log('bin',vm.fapidata.profit)
+          }, 1000);
+        }
+      },
+      computed: {
+        newdata: function () {
+          let vm = this
+          let newdata = vm.fapidata.profit
+          return newdata
+        }
+      },
+      mounted() {
+      },
+      created() {
+        this.ajax_sample()
+        this.Calculation()
+      },
+      destroyed() {
       }
+    })
 
-      let redHappy = document.getElementById("updown");
-      redHappy.addEventListener("click",chagneone);
+  </script>
+</body>
 
-      function chagneone() {
-        location.href = `${urlString}?666`
-      }
-      // const url = "https://jsonplaceholder.typicode.com/todos";
-      // $.ajax({
-      //   url: url,
-      //   dataType: "json",
-      //   success: function (data) {
-      //     console.log(data);
-      //   },
-      // });
-
-      // let req = new XMLHttpRequest();
-      // req.open("GET", `https://cors-anywhere.herokuapp.com/${url}`);
-      // req.onload = () => {
-      //   if (req.status === 200) {
-      //     console.log("成功");
-      //   } else {
-      //     console.log("失敗");
-      //   }
-      // };
-      // req.send();
-
-      // let ouch = new Promise((res, ject) => {
-      //   res('res')
-      // });
-
-      // ouch.then((res) => {
-      //   console.log(`${res}`);
-      // });
-    </script>
-  </body>
 </html>
