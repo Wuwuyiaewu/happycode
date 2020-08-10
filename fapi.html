@@ -75,10 +75,7 @@
               "q2": "",
               "a2": ""
             },
-            "direct": {
-              "做空": 0,
-              "做多": 1
-            },
+            "direct": true,
             "participants": Number,
             "profit": Number
           }
@@ -119,7 +116,6 @@
           setInterval(() => {
             if (vm.fapidata.profit < 1000000) {
               vm.fapidata.profit = vm.fapidata.profit + 300000
-
             } else if (vm.fapidata.profit > 1000000) {
               vm.fapidata.profit = vm.fapidata.profit -200000
             }
