@@ -68,8 +68,6 @@
                         "appKey": "",
                         "clientIp": ""
                     },
-                    view: "",
-                    view2: ""
                 }
             },
             methods: {
@@ -84,11 +82,12 @@
                         .then(function (response) {
                             vm.config.headers.Authorization = response.headers.authorization
                             vm.config.data = vm.ax_data
+                            vm.config.headers.method = "/account/uac/auth/token"
                             console.log(response)
                             return axios(vm.config)
-                        })
-                        .then((res2) => {
-                            vm.view2 = res2
+                        }).
+                        then(function(res){
+                            console.log(res.data.data)
                         })
                         .catch(function (error) {
                             console.log(error, '第二次錯誤');
