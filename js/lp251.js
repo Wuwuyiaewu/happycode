@@ -37,10 +37,32 @@ var vm = new Vue({
                 url: '/json/lp251.json',
             },
             fapidata: {},
-            gb:null,
-            mb:null,
-            sadwq:66,
-            RankAccount:[]
+            gb: null,
+            mb: null,
+            sadwq: 66,
+            RankAccount_1: 50,
+            RankAccount_2: null,
+            RankAccount_3: null,
+            list: [
+                { account: this.radomAccount(), money: 200 },
+                { account: this.radomAccount(), money: 200 },
+                { account: this.radomAccount(), money: 200 },
+                { account: this.radomAccount(), money: 200 },
+                { account: this.radomAccount(), money: 200 },
+                { account: this.radomAccount(), money: 200 },
+                { account: this.radomAccount(), money: 200 },
+                { account: this.radomAccount(), money: 200 },
+                { account: this.radomAccount(), money: 200 },
+                { account: this.radomAccount(), money: 200 },
+                { account: this.radomAccount(), money: 200 },
+                { account: this.radomAccount(), money: 200 },
+                { account: this.radomAccount(), money: 200 },
+                { account: this.radomAccount(), money: 200 },
+                { account: this.radomAccount(), money: 200 }
+            ],
+            lim_1: 0,
+            lim_2: 0,
+            lim_3: 0
         }
     },
     methods: {
@@ -73,47 +95,115 @@ var vm = new Vue({
                     console.log(error)
                 })
         },
-        getRandom(min,max){
-            return Math.floor(Math.random()*(max-min+1))+min;
+        getRandom(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
         },
-        //   Calculation() {
-        //     let vm = this
-        //     setInterval(() => {
-        //       if (vm.fapidata.profit < 1000000) {
-        //         vm.fapidata.profit = vm.fapidata.profit + 300000
-        //       } else if (vm.fapidata.profit > 1000000) {
-        //         vm.fapidata.profit = vm.fapidata.profit - 200000
-        //       }
-        //       console.log('bin', vm.fapidata.profit)
-        //     }, 1000);
-        //   }
+        startAccM1(value) {
+            this.setAccountM1(value)
+        },
+        startAccM2(value) {
+            this.setAccountM2(value)
+        },
+        startAccM3(value) {
+            this.setAccountM3(value)
+        },
+        setAccountM1(nid) {
+            let vm = this
+            console.log(nid)
+            let id = vm.list[0].account
+            if (nid) {
+                id = nid
+            }
+            //設定 id 為帳號
+            vm.list.forEach((res, index) => {
+                if (res.account == id) {
+                    // 該res帳號 等於 id
+                    console.log(res.account + 'bingo')
+                    let myCount = setInterval(() => {
+                        res.money = res.money + this.getRandom(300, 500)
+                        if (res.money > 1000) {
+                            vm.list.splice(index, 1)
+                            console.log('結束M1')
+                            clearInterval(myCount)
+                            this.startAccM1(id)
+                        }
+                    }, 1000);
+                }
+            })
+        },
+        setAccountM2(nid) {
+            let vm = this
+            let id = vm.list[1].account
+            if (nid) {
+                id = nid
+            }
+            //設定 id 為帳號
+            vm.list.forEach((res, index) => {
+                if (res.account == id) {
+                    // 該res帳號 等於 id
+                    console.log(res.account + 'bingo')
+                    let myCount = setInterval(() => {
+                        res.money = res.money + this.getRandom(10, 25)
+                        if (res.money > 1000) {
+                            vm.list.splice(index, 1)
+                            console.log('結束M2')
+                            clearInterval(myCount)
+                            this.startAccM2(id)
+                        }
+                    }, 1000);
+                }
+            })
+        },
+        setAccountM3(nid) {
+            let vm = this
+            let id = vm.list[2].account
+            if (nid) {
+                id = nid
+            }
+            //設定 id 為帳號
+            vm.list.forEach((res, index) => {
+                if (res.account == id) {
+                    // 該res帳號 等於 id
+                    console.log(res.account + 'bingo')
+                    let myCount = setInterval(() => {
+                        res.money = res.money + this.getRandom(10,30)
+                        if (res.money > 1000) {
+                            vm.list.splice(index, 1)
+                            console.log('結束M3')
+                            clearInterval(myCount)
+                            this.startAccM3(id)
+                        }
+                    }, 1000);
+                }
+            })
+        },
+        radomAccount() {
+            let vm = this
+            let newdata = vm.getRandom(100, 999)
+            return `68***${newdata}`
+        }
     },
     computed: {
-        cal() {
+        doll() {
             let vm = this
-            let newdata = vm.getRandom(0,999)
-            return `68***${newdata}`
-            setInterval(() => {
-                
-            }, 1000);
+            let newSort = vm.list.sort((a, b) => {
+                return a.money < b.money ? 1 : -1
+            })
+            return newSort
         }
     },
-    watch:{
-        gb(value,oldv){
-            this.mb = value * 1024;
-        },
-        mb(value){
-            this.gb = value / 1024;
-        },
-        sadwq(val){
-            this.gb = val / 6;
-        }
+    watch: {
     },
     mounted() {
         let recaptchaScript = document.createElement('script')
         recaptchaScript.setAttribute('src', './js/ws_index_251.js')
         console.log(recaptchaScript)
         document.head.appendChild(recaptchaScript)
+
+        this.setAccountM1()
+        this.setAccountM2()
+        this.setAccountM3()
+
     },
     created() {
         this.ajax_sample()

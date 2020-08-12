@@ -10,6 +10,7 @@ const GET_ACCOUNT_PROPERTIES = "/account/appProperties/getAccountProperties";
 var code_1 = document.querySelector('.stock0').id;
 var code_2 = document.querySelector('.stock1').id;
 var code_3 = document.querySelector('.stock2').id;
+console.log(code_1,code_2)
 var product_code_ids = [code_1, code_2, code_3];
 // 573160 那只100etf 573159道瓊etf 573161標普500etf
 // var product_code_ids = [573095, 573100, 573106];
@@ -387,7 +388,6 @@ function colorJudge(product, realtimePrice, allStock) {
 
 function updateElementDiv(product, realtimePrice, data, lastPrice) {
 	//console.log(product[0],realtimePrice,lastPrice)
-	console.log(product[0])
 	let allStock = document.querySelectorAll(".stockarr");
 	for (let x = 0; x < allStock.length; x++) {
 		let y = allStock[x].id;

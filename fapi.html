@@ -12,10 +12,28 @@
 <body>
   <div class="wrapper" id="app">
     <div class="mainbg"></div>
+    <!-- <div v-for="item in doll" :key="item.account">
+      {{item.account}} {{item.money}}
+    </div>
+    <div>
+      {{doll.account}} {{doll.money}}
+    </div> -->
+
+    <!-- <li v-for="item in doll" :key="item.account">
+      <span class="count"><i>{{item.account}}</i><b></b></span>
+      <span class="direct" v-if="fapidata.direct === 'true'"><i>方向</i><b>做多</b></span>
+      <span class="direct" v-else><i>方向</i><b>做空</b></span>
+      <span class="benit"><i>{{item.money}}</i><b></b></span>
+      <a class="fllowbtn"></a>
+    </li> -->
+
+    <!-- <p v-if="lim_1===0">{{cal1}} {{RankAccount_1}}</p>
+    <p v-if="lim_2===0">{{cal2}} {{RankAccount_2}}</p>
+    <p v-if="lim_3===0">{{cal3}} {{RankAccount_3}}</p> -->
     <div class="banner fadeIn wow">
-      <input type="number" v-model.number="gb" style="border: paleturquoise 3px solid;">
+      <!-- <input type="number" v-model.number="gb" style="border: paleturquoise 3px solid;">
       <input type="number" v-model.number="mb" style="border: paleturquoise 3px solid;">
-      <input type="number" v-model.number="sadwq" style="border: paleturquoise 3px solid;">
+      <input type="number" v-model.number="sadwq" style="border: paleturquoise 3px solid;"> -->
       <div class="main-con">
         <div class="main-title bounceIn wow"></div>
         <span class="sub-title1"></span>
@@ -149,25 +167,11 @@
     <div class="part2">
       <div class="main-con wow bounceInUp">
         <ul class="top-con">
-          <li :data-value="cal">
-            <span class="count"><i>账号</i><b>{{cal}}</b></span>
+          <li v-for="(item,index) in doll.slice(0,3)" :key="index">
+            <span class="count"><i>{{item.account}}</i><b></b></span>
             <span class="direct" v-if="fapidata.direct === 'true'"><i>方向</i><b>做多</b></span>
             <span class="direct" v-else><i>方向</i><b>做空</b></span>
-            <span class="benit"><i>盈利</i><b></b></span>
-            <a class="fllowbtn"></a>
-          </li>
-          <li>
-            <span class="count"><i>账号</i><b>{{cal}}</b></span>
-            <span class="direct" v-if="fapidata.direct === 'true'"><i>方向</i><b>做多</b></span>
-            <span class="direct" v-else><i>方向</i><b>做空</b></span>
-            <span class="benit"><i>盈利</i><b></b></span>
-            <a class="fllowbtn"></a>
-          </li>
-          <li class="item3">
-            <span class="count"><i>账号</i><b>{{cal}}</b></span>
-            <span class="direct" v-if="fapidata.direct === 'true'"><i>方向</i><b>做多</b></span>
-            <span class="direct" v-else><i>方向</i><b>做空</b></span>
-            <span class="benit"><i>盈利</i><b></b></span>
+            <span class="benit"><i>{{item.money}}</i><b></b></span>
             <a class="fllowbtn"></a>
           </li>
         </ul>

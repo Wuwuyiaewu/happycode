@@ -11,7 +11,7 @@
 
 <body>
     <div id="app">
-        <button @click="gotourl()">點我觸發動作</button>
+        <button @click="gotourl">點我觸發動作</button>
         <br>
         <input type="text" placeholder="輸入帳號" :value="ax_data.data.login_name">
         <input type="text" placeholder="輸入密碼" :value="ax_data.data.password">
@@ -22,7 +22,7 @@
 
     <script>
         let account_type = {
-            selected:"請選擇模式",
+            selected: "請選擇模式",
             account_value: [
                 {
                     "name": "真實帳號",
@@ -86,13 +86,23 @@
                             console.log(response)
                             return axios(vm.config)
                         }).
-                        then(function(res){
-                            console.log(res.data.data)
+                        then(function (res) {
+                            vm.config.url = "https://api.chongontrading.com/fcc/fcc_user/list?pageIndex=1&pageSize=10"
+                            vm.config.method = "get"
+                            vm.config.headers = {
+                                "Content-type": "application/json;charset=utf-8",
+                                "authorization":'Bearer '+ res.data.data.token
+                            }
+                            return axios(vm.config)
+
+                        }).then((res)=>{
+                            /// 訊息流東西在這
+                            console.log(res.data)
                         })
                         .catch(function (error) {
                             console.log(error, '第二次錯誤');
                         });
-                }
+                },
             },
             mounted() {
             },
