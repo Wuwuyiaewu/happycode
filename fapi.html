@@ -125,11 +125,11 @@
             </li>
             <li>
               <h3>参与人数</h3>
-              <span class="benit">{{fapidata.participants_1}}</span>
+              <span class="benit">{{people_1_n}}</span>
             </li>
             <li>
               <h3>总盈利($)</h3>
-              <span class="benit">{{fapidata.profit_1}}</span>
+              <span class="benit">{{profit_1_n}}</span>
             </li>
           </ul>
           <ul class="profitlist downtablist" style="display: none;">
@@ -139,11 +139,11 @@
             </li>
             <li>
               <h3>参与人数</h3>
-              <span class="benit">{{fapidata.participants_2}}</span>
+              <span class="benit">{{people_2_n}}</span>
             </li>
             <li>
               <h3>总盈利($)</h3>
-              <span class="benit">{{fapidata.profit_2}}</span>
+              <span class="benit">{{profit_2_n}}</span>
             </li>
           </ul>
           <ul class="profitlist downtablist" style="display: none;">
@@ -153,11 +153,11 @@
             </li>
             <li>
               <h3>参与人数</h3>
-              <span class="benit">{{fapidata.participants_3}}</span>
+              <span class="benit">{{people_3_n}}</span>
             </li>
             <li>
               <h3>总盈利($)</h3>
-              <span class="benit">{{fapidata.profit_3}}</span>
+              <span class="benit">{{people_3_n}}</span>
             </li>
           </ul>
         </div>
@@ -178,6 +178,39 @@
       </div>
     </div>
     <!--part2 end-->
+
+    <div class="popbox">
+      <div class="poptablist">
+        <div class="shadow"></div>
+        <div class="bombox">
+          <s class="closebtn" @click="startPop">XXX</s>
+          <p class="tips">{{data_pop1}}平仓{{fapidata.product_1}}</p>
+          <h3 class="benit">盈利<b>{{random_profit1}}</b></h3>
+          <a href="" class="bom-fllowbtn"></a>
+          <span class="hidetips"><i class="circle" :class="{on:isOpen}" @click="!isOpen"></i>不再提示</span>
+        </div>
+      </div>
+      <div class="poptablist" style="display: none;">
+        <div class="shadow"></div>
+        <div class="bombox">
+          <s class="closebtn">XXX</s>
+          <p class="tips">{{data_pop2}}平仓{{fapidata.product_2}}</p>
+          <h3 class="benit">盈利<b>{{random_profit2}}</b></h3>
+          <a href="" class="bom-fllowbtn"></a>
+          <span class="hidetips"><i class="circle" :class="{on:isOpen}" @click="!isOpen"></i>不再提示</span>
+        </div>
+      </div>
+      <div class="poptablist" style="display: none;">
+        <div class="shadow"></div>
+        <div class="bombox">
+          <s class="closebtn">XXX</s>
+          <p class="tips">{{data_pop3}}平仓{{fapidata.product_3}}</p>
+          <h3 class="benit">盈利<b>{{random_profit3}}</b></h3>
+          <a href="" class="bom-fllowbtn"></a>
+          <span class="hidetips"><i class="circle" :class="{on:isOpen}" @click="isOpen = !isOpen"></i>不再提示</span>
+        </div>
+      </div>
+    </div>
   </div>
   <script src="./js/jquery.min.js"></script>
   <script src="./js/rem.js"></script>
@@ -197,6 +230,7 @@
         $(".tablist li").eq(index).show().siblings().hide();
         $(".downtablist").eq(index).show().siblings().hide();
       });
+      
       // $(".fllowbtn").click(function () {
       //     $(".shadow").show();
       //     $(".bombox").show();

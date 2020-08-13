@@ -557,6 +557,7 @@ html{
   background-size: 100% 100%;
 }
 .bombox .hidetips{
+  
   display: block;
   font-size:0.26rem;
   color:rgba(152,152,152,1);
