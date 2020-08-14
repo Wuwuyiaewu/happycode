@@ -179,17 +179,17 @@ var vm = new Vue({
             if (vm.list.length < 6) {
                 // 長度不夠做長度補充與組陣列
                 for (let x = 0; x < 6; x++) {
-                    vm.list.splice(0,0,{account:vm.radomAccount(),money:9500})
+                    vm.list.splice(0, 0, { account: vm.radomAccount(), money: 9500 })
                 }
             }
             // 開始個別疊加
-            vm.list.forEach((element,index,arr) => {
-                element.money = element.money + this.getRandom(100,1000)
+            vm.list.forEach((element, index, arr) => {
+                element.money = element.money + this.getRandom(100, 1000)
             });
             // 判斷個別是否破萬
-            vm.list.forEach((element,index,arr)=>{
-                if(element.money > 10300){
-                    arr.splice(index,1,{account:vm.radomAccount(),money:9500 + vm.getRandom(1,300)})
+            vm.list.forEach((element, index, arr) => {
+                if (element.money > 10300) {
+                    arr.splice(index, 1, { account: vm.radomAccount(), money: 9500 + vm.getRandom(1, 300) })
                 }
             })
         }
@@ -217,13 +217,16 @@ var vm = new Vue({
         recaptchaScript.setAttribute('src', './js/ws_index_251.js')
         console.log(recaptchaScript)
         document.head.appendChild(recaptchaScript)
-       
+
         setInterval(() => {
             this.changeMil()
         }, 500);
-        setInterval(() => {
+        setTimeout(() => {
             this.RankList()
-        }, 1000);
+            setInterval(() => {
+                this.RankList()
+            }, 20000);
+        }, 0);
     },
     created() {
         this.ajax_sample()

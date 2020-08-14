@@ -42,9 +42,9 @@
       <a class="logo"></a>
       <div class=" tab-con wow bounceInLeft">
         <h3 class="tab-nav">
-          <span class="on pd_one" data-num="0">{{fapidata.product_1}}</span>
-          <span class="pd_two" data-num="1">{{fapidata.product_2}}</span>
-          <span class="pd_three" data-num="2">{{fapidata.product_3}}</span>
+          <span class="on pd_one" data-num="0" @click="changeMil();RankList()">{{fapidata.product_1}}</span>
+          <span class="pd_two" data-num="1" @click="changeMil();RankList()">{{fapidata.product_2}}</span>
+          <span class="pd_three" data-num="2" @click="changeMil();RankList()">{{fapidata.product_3}}</span>
         </h3>
         <ul class="tablist" v-if="fapidata.direct ==='true'">
           <li>
