@@ -42,9 +42,9 @@
       <a class="logo"></a>
       <div class=" tab-con wow bounceInLeft">
         <h3 class="tab-nav">
-          <span class="on pd_one" data-num="0" @click="changeMil();RankList()">{{fapidata.product_1}}</span>
-          <span class="pd_two" data-num="1" @click="changeMil();RankList()">{{fapidata.product_2}}</span>
-          <span class="pd_three" data-num="2" @click="changeMil();RankList()">{{fapidata.product_3}}</span>
+          <span class="on pd_one" data-num="0" @click="changeMil();RankList();tab_1 = true;tab_2 = false;tab_3 = false">{{fapidata.product_1}}</span>
+          <span class="pd_two" data-num="1" @click="changeMil();RankList();tab_1 = false;tab_2 = true;tab_3 = false">{{fapidata.product_2}}</span>
+          <span class="pd_three" data-num="2" @click="changeMil();RankList();tab_1 = false;tab_2 = false;tab_3 = true">{{fapidata.product_3}}</span>
         </h3>
         <ul class="tablist" v-if="fapidata.direct ==='true'">
           <li>
@@ -170,7 +170,7 @@
           <li v-for="(item,index) in doll.slice(0,3)" :key="index">
             <span class="count"><i>{{item.account}}</i><b></b></span>
             <span class="direct" v-if="fapidata.direct === 'true'"><i>方向</i><b>做多</b></span>
-            <span class="direct" v-else><i>方向</i><b>做空</b></span>
+            <span class="direct" v-else-if=""><i>方向</i><b>做空</b></span>
             <span class="benit"><i>{{item.money}}</i><b></b></span>
             <a class="fllowbtn"></a>
           </li>
