@@ -64,9 +64,9 @@ var vm = new Vue({
       people_3_o: null,
       people_3_n: null,
       isOpen: false,
-      tab_1: true,
-      tab_2: false,
-      tab_3: false,
+      tab_1: "true",
+      tab_2: "false",
+      tab_3: "false",
     };
   },
   methods: {
