@@ -42,71 +42,78 @@
       <a class="logo"></a>
       <div class=" tab-con wow bounceInLeft">
         <h3 class="tab-nav">
-          <span class="on pd_one" data-num="0" @click="changeMil();RankList();tab_1 = 'true';tab_2 = 'false';tab_3 = 'false'">{{fapidata.product_1}}</span>
-          <span class="pd_two" data-num="1" @click="changeMil();RankList();tab_1 = 'false';tab_2 = 'true';tab_3 = 'false'">{{fapidata.product_2}}</span>
-          <span class="pd_three" data-num="2" @click="changeMil();RankList();tab_1 = 'false';tab_2 = 'false';tab_3 = 'true'">{{fapidata.product_3}}</span>
+          <span class="on pd_one" data-num="0"
+            @click="changeMil();RankList();tab_1 = 'true';tab_2 = 'false';tab_3 = 'false'">{{fapidata.product_1}}</span>
+          <span class="pd_two" data-num="1"
+            @click="changeMil();RankList();tab_1 = 'false';tab_2 = 'true';tab_3 = 'false'">{{fapidata.product_2}}</span>
+          <span class="pd_three" data-num="2"
+            @click="changeMil();RankList();tab_1 = 'false';tab_2 = 'false';tab_3 = 'true'">{{fapidata.product_3}}</span>
         </h3>
-        <ul class="tablist" v-if="fapidata.direct ==='true'">
+        <ul class="tablist">
           <li>
-            <div>
-              <h3>{{fapidata.b_pd1_q1}}</h3>
-              <p>{{fapidata.b_pd1_a1}}</p>
+            <div v-if="fapidata.direct1 ==='true'">
+              <div>
+                <h3>{{fapidata.b_pd1_q1}}</h3>
+                <p>{{fapidata.b_pd1_a1}}</p>
+              </div>
+              <div class="problem">
+                <h3>{{fapidata.b_pd1_q2}}</h3>
+                <p>{{fapidata.b_pd1_a2}}</p>
+              </div>
             </div>
-            <div class="problem">
-              <h3>{{fapidata.b_pd1_q2}}</h3>
-              <p>{{fapidata.b_pd1_a2}}</p>
-            </div>
-          </li>
-          <li style="display: none;">
-            <div>
-              <h3>{{fapidata.b_pd2_q1}}</h3>
-              <p>{{fapidata.b_pd2_a1}}</p>
-            </div>
-            <div class="problem">
-              <h3>{{fapidata.b_pd2_q2}}</h3>
-              <p>{{fapidata.b_pd2_a2}}</p>
-            </div>
-          </li>
-          <li style="display: none;">
-            <div>
-              <h3>{{fapidata.b_pd3_q1}}</h3>
-              <p>{{fapidata.b_pd3_a1}}</p>
-            </div>
-            <div class="problem">
-              <h3>{{fapidata.b_pd3_q2}}</h3>
-              <p>{{fapidata.b_pd3_a2}}</p>
-            </div>
-          </li>
-        </ul>
-        <ul class="tablist" v-else>
-          <li>
-            <div>
-              <h3>{{fapidata.s_pd1_q1}}</h3>
-              <p>{{fapidata.s_pd1_a1}}</p>
-            </div>
-            <div class="problem">
-              <h3>{{fapidata.s_pd1_q2}}</h3>
-              <p>{{fapidata.s_pd1_a2}}</p>
+            <div v-if="fapidata.direct1 ==='false'">
+              <div>
+                <h3>{{fapidata.s_pd1_q1}}</h3>
+                <p>{{fapidata.s_pd1_a1}}</p>
+              </div>
+              <div class="problem">
+                <h3>{{fapidata.s_pd1_q2}}</h3>
+                <p>{{fapidata.s_pd1_a2}}</p>
+              </div>
             </div>
           </li>
           <li style="display: none;">
-            <div>
-              <h3>{{fapidata.s_pd2_q1}}</h3>
-              <p>{{fapidata.s_pd2_a1}}</p>
+            <div v-if="fapidata.direct2 ==='true'">
+              <div>
+                <h3>{{fapidata.b_pd2_q1}}</h3>
+                <p>{{fapidata.b_pd2_a1}}</p>
+              </div>
+              <div class="problem">
+                <h3>{{fapidata.b_pd2_q2}}</h3>
+                <p>{{fapidata.b_pd2_a2}}</p>
+              </div>
             </div>
-            <div class="problem">
-              <h3>{{fapidata.s_pd2_q2}}</h3>
-              <p>{{fapidata.s_pd2_a2}}</p>
+            <div v-if="fapidata.direct2 ==='false'">
+              <div>
+                <h3>{{fapidata.s_pd2_q1}}</h3>
+                <p>{{fapidata.s_pd2_a1}}</p>
+              </div>
+              <div class="problem">
+                <h3>{{fapidata.s_pd2_q2}}</h3>
+                <p>{{fapidata.s_pd2_a2}}</p>
+              </div>
             </div>
           </li>
           <li style="display: none;">
-            <div>
-              <h3>{{fapidata.s_pd3_q1}}</h3>
-              <p>{{fapidata.s_pd3_a1}}</p>
+            <div v-if="fapidata.direct3 ==='true'">
+              <div>
+                <h3>{{fapidata.b_pd3_q1}}</h3>
+                <p>{{fapidata.b_pd3_a1}}</p>
+              </div>
+              <div class="problem">
+                <h3>{{fapidata.b_pd3_q2}}</h3>
+                <p>{{fapidata.b_pd3_a2}}</p>
+              </div>
             </div>
-            <div class="problem">
-              <h3>{{fapidata.s_pd3_q2}}</h3>
-              <p>{{fapidata.s_pd3_a2}}</p>
+            <div v-else-if="fapidata.direct1 ==='false'">
+              <div>
+                <h3>{{fapidata.s_pd3_q1}}</h3>
+                <p>{{fapidata.s_pd3_a1}}</p>
+              </div>
+              <div class="problem">
+                <h3>{{fapidata.s_pd3_q2}}</h3>
+                <p>{{fapidata.s_pd3_a2}}</p>
+              </div>
             </div>
           </li>
         </ul>
@@ -234,7 +241,7 @@
         $(".tablist li").eq(index).show().siblings().hide();
         $(".downtablist").eq(index).show().siblings().hide();
       });
-      
+
       // $(".fllowbtn").click(function () {
       //     $(".shadow").show();
       //     $(".bombox").show();
