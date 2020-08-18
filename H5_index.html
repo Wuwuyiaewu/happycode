@@ -1,0 +1,521 @@
+<!DOCTYPE html><html lang=en data-buildtime="2020-07-18 17:52"><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge, chrome=1"><meta name=viewport content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"><meta name=x5-orientation content=portrait><meta name=screen-orientation content=portrait><meta content="telephone=no" name=format-detection><meta http-equiv=Cache-Control content="no-cache, no-store, must-revalidate"><meta http-equiv=Pragma content=no-cache><meta http-equiv=Expires content=0><link rel=icon href=https://img.yienecom.com/favicon.ico><title>Trade</title>
+
+	<script>(function () {
+			try {
+				// 禁止自己嵌套自己
+				if (top !== window && top.location.host === window.location.host) {
+					top.location = window.location
+				}
+			} catch (error) { }
+			if ("devicePixelRatio" in window) {
+				var style = document.createElement("STYLE");
+				var docEl = document.documentElement;
+				var header = document.getElementsByTagName("HEAD")[0];
+				var dpr = 0;
+				var isIPhone = navigator.appVersion.match(/iphone/gi);
+				var isAndroid = navigator.appVersion.match(/android/gi);
+				var baseDpr = "devicePixelRatio" in window ? devicePixelRatio : 1;
+				var dpr = baseDpr;
+				if (baseDpr >= 3 && (!dpr || dpr >= 3)) {
+					dpr = 3;
+				} else if (baseDpr >= 2 && (!dpr || dpr >= 2)) {
+					dpr = 2;
+				} else {
+					dpr = 1;
+				}
+				var deviceType = isIPhone ? "iphone" : (isAndroid ? "android" : "other")
+				docEl.setAttribute("data-dpr", dpr);
+				docEl.setAttribute("data-device-type", deviceType);
+				var width = document.documentElement.clientWidth;
+				var height = document.documentElement.clientHeight;
+				if (!isIPhone && (screen.availWidth != width)) {
+					width = screen.availWidth;
+					height = screen.availHeight;
+				};
+				var portrait = ((Math.min(width, height, 750) / 100) * 10);
+				if (deviceType === 'other') {
+					var pageWidth = 600;
+					document.documentElement.clientWidth = 600
+					portrait = pageWidth / 10;
+					style.innerHTML = "html { font-size: " + portrait / 1.4 + "px!important;width:" + pageWidth + "px!important;margin:0 auto;position:relative; } html .m-navBar, html .errorFixedTip, html .topNav,html[data-device-type] .van-popup--top,html[data-device-type] .van-popup--bottom {width:" + pageWidth + "px!important;left:50%!important;margin-left:-" + pageWidth / 2 + "px;}";
+				} else {
+					style.innerHTML = "html { font-size: " + portrait + "px!important; }";
+				}
+
+				header.appendChild(style);
+			}
+		})();</script><script>
+
+	// var pageStart = Date.now()
+	// console.log('pageStart', pageStart)
+	// new VConsole()</script><script src="https://img.yienecom.com/charting_library/charting_library.min.js?t=2"></script><script src="https://img.yienecom.com/libs/vueBase.f4befa3e.js?t=2"></script><link href=https://img.yienecom.com/static/css/chunk-vendors.4069a2a8.css rel=stylesheet><link href=https://img.yienecom.com/static/css/index.63407467.css rel=stylesheet></head>
+
+
+	<body>
+
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="js/wow.min.js"></script>
+		<script type="text/javascript" src="js/rem.js"></script>
+		<link href="css/animate.css" type="text/css" rel="stylesheet" />
+		<link href="css/layout.css" type="text/css" rel="stylesheet" />
+
+		<!--<div id="screen_popup" class="screen_popup">
+			<div class="popup_content">
+				<div class="iphone">
+					<img src="images/iphone.png" class="front">
+					<p>
+						<img src="images/screen1.jpg">
+						<img src="images/screen2.jpg">
+					</p>
+					<div class="hand"></div>
+				</div>
+				<p>使用APP过程中，若需要返回上一级页面，<br>请从屏幕左边缘向右侧大力滑动。</p>
+				<div class="wrap" style="display: flex; align-items: center; justify-content: center;">
+					<input type="checkbox" id="doNotRemind" style="margin-right: 3px;">
+					<p>下次别提醒我</p>
+				</div>
+				<div class="close_btn" onClick="popupStorage()">了解</div>
+			</div>
+		</div>
+		<script>
+			$(document).ready(function () {
+				remCompute(750, true);
+			});
+		</script>
+		<script>
+			document.getElementById('screen_popup').style.display = "none";
+			const showInIphone = () => {
+				if (typeof window !== 'undefined' && window) {
+					if (/iphone/gi.test(window.navigator.userAgent) == true) {
+						document.getElementById('screen_popup').style.display = "block";
+					};
+				};
+			};			
+
+			var doNotRemind = document.getElementById("doNotRemind");
+			if (localStorage.getItem('slideConfirm') !== 'true' && location.pathname == "/yz352001/home") {
+				showInIphone();
+			}
+
+			const popupStorage = function() {
+				document.getElementById('screen_popup').style.display = "none";
+				if (doNotRemind.checked == true){
+					localStorage.setItem('slideConfirm', 'true');
+				}
+			}
+			/*此片段請放在 </body> 開頭標籤之前*/
+		</script> -->
+
+		<style>* {
+			padding: 0;
+			margin: 0;
+			}
+
+			html,
+			body,
+			#app {
+				height: 100%;
+				margin:0 auto;
+			}
+
+			/* .mainColor {
+			color: #477fd3 !important;
+			}
+			.mainColorBg {
+			background-color: #477fd3 !important;
+			}
+			.subColor {
+			color: #10b873 !important;
+			}
+			.subColorBg {
+			background-color: #10b873 !important;
+			}
+			.riseColor {
+			color: #e3525c !important;
+			}
+			.riseColorBg {
+			background-color: #e3525c !important;
+			}
+			.fallColor {
+			color: #10b873 !important;
+			}
+			.fallColorBg {
+			background-color: #10b873 !important;
+			} */
+			#app.loading:empty::after,
+			.loadIcon::after {
+				content: '';
+				position: absolute;
+				left: 50%;
+				top: 50%;
+				margin: -30px 0 0 -15px;
+				width: 30px;
+				height: 30px;
+				background: url(/images/loading.svg) center no-repeat;
+				background-size: 100%;
+				-webkit-animation: loading 1s linear infinite;
+				animation: loading 1s linear infinite;
+				opacity: 0.7;
+			}
+
+
+			@-webkit-keyframes loading {
+				0% {
+					transform: translateZ(0) rotate(0deg);
+				}
+
+				100% {
+					transform: translateZ(0) rotate(360deg);
+				}
+			}
+
+			@keyframes loading {
+				0% {
+					transform: translateZ(0) rotate(0deg);
+				}
+
+				100% {
+					transform: translateZ(0) rotate(360deg);
+				}
+			}
+
+			#skeleton_trade,
+			#skeleton_home {
+				position: absolute;
+				left: 0;
+				top: 0;
+				width: 100%;
+				height: 100%;
+				background-color: #fff;
+				-webkit-animation: skeleton_loading .8s ease-in infinite alternate;
+				animation: skeleton_loading .8s ease-in infinite alternate;
+			}
+
+			.skeleton_top {
+				position: relative;
+				padding: 10px 0 10px 10px;
+				height: 40px;
+				width: 100%;
+				box-sizing: border-box;
+			}
+
+			.skeleton_top::before {
+				content: '';
+				display: block;
+				width: 8vw;
+				height: 18px;
+				background-color: #e9e9e9;
+				box-shadow: 11vw 0 #e9e9e9, 22vw 0 #e9e9e9, 33vw 0 #e9e9e9, 44vw 0 #e9e9e9, 55vw 0 #e9e9e9, 65vw 0 #e9e9e9, 75vw 0 #e9e9e9, 86vw 0 #e9e9e9;
+			}
+
+			.skeleton_middle {
+				position: relative;
+				margin: 10px 10px 15px;
+				border-bottom: 1px solid #e9e9e9;
+				height: 50px;
+			}
+
+			.skeleton_middle:last-child {
+				border-bottom: 0;
+			}
+
+			.skeleton_middle .left {
+				position: absolute;
+				left: 0;
+				width: 60px;
+				height: 12px;
+				background-color: #e9e9e9;
+				box-shadow: 0 18px #e9e9e9;
+			}
+
+			.skeleton_middle .center {
+				position: absolute;
+				left: 40%;
+				width: 70px;
+				height: 12px;
+				background-color: #e9e9e9;
+			}
+
+			.skeleton_middle .right {
+				position: absolute;
+				right: 0;
+				width: 70px;
+				height: 12px;
+				background-color: #e9e9e9;
+				box-shadow: 0 18px #e9e9e9;
+			}
+
+			.skeleton_home_m1 {
+				height: 139px;
+				background-color: #e9e9e9;
+			}
+
+			.skeleton_flex {
+				display: -webkit-box;
+				display: flex;
+				-webkit-box-pack: justify;
+				justify-content: space-between;
+			}
+
+			.skeleton_home_m2 {
+				padding: 20px 20px 0;
+				height: 2.1rem;
+				box-sizing: border-box;
+			}
+
+			.skeleton_home_m2 span {
+				margin: 5px 0 0 0;
+				width: 18%;
+				height: 8px;
+				background-color: #e9e9e9;
+				box-shadow: 0 20px #e9e9e9, 0 40px #e9e9e9;
+			}
+
+			.skeleton_home_m5,
+			.skeleton_home_m4,
+			.skeleton_home_m3 {
+				position: relative;
+				padding: 20px 20px 0;
+			}
+
+			.skeleton_home_m3 {
+				padding: 20px 20px 0;
+				height: 2.4rem;
+				box-sizing: border-box;
+			}
+
+			.skeleton_home_m3 span {
+				width: 1.8rem;
+				height: 1.8rem;
+				border-radius: 50%;
+				background-color: #e9e9e9;
+			}
+
+			.skeleton_home_m4 span {
+				width: 48%;
+				height: 1.7rem;
+				border-radius: 4px;
+				background-color: #e9e9e9;
+			}
+
+			.cl::after {
+				content: '';
+				display: block;
+				clear: both;
+			}
+
+			.skeleton_home_m5 .rightGray {
+				float: right;
+				width: 30%;
+				height: 2rem;
+				border-radius: 4px;
+				background-color: #e9e9e9;
+			}
+
+			.skeleton_home_m5 .line1 {
+				margin-top: 5px;
+				float: left;
+				width: 62%;
+				height: 8px;
+				background-color: #e9e9e9;
+				box-shadow: 0 20px #e9e9e9;
+			}
+
+			.skeleton_home_m5 .leftGrayIcon {
+				margin-top: 1.4rem;
+				clear: left;
+				float: left;
+				width: 30px;
+				height: 5px;
+				background-color: #e9e9e9;
+			}
+
+			@-webkit-keyframes skeleton_loading {
+				0% {
+					opacity: 1;
+				}
+
+				100% {
+					opacity: 0.5;
+				}
+			}
+
+			@keyframes skeleton_loading {
+				0% {
+					opacity: 1;
+				}
+
+				100% {
+					opacity: 0.5;
+				}
+			}
+
+			/* 兼容03旧包的刘海屏 */
+			.old03 {
+				border-top: 34px solid #fff;
+			}
+			.old03 #topNav {
+				border-top: 34px solid #fff;
+				box-sizing: content-box;
+			}
+			.old03 .form-account-wrap .header {
+				top: 34px !important;
+			}
+
+		</style><div id=skeleton_home><p class=skeleton_home_m1></p><p class="skeleton_home_m2 skeleton_flex"><span></span><span></span><span></span></p><p class="skeleton_home_m3 skeleton_flex"><span></span><span></span><span></span></p><p class="skeleton_home_m4 skeleton_flex"><span></span><span></span></p><div class="skeleton_home_m5 cl"><div class=rightGray></div><p class=line1></p><span class=leftGrayIcon></span></div><div class="skeleton_home_m5 cl"><div class=rightGray></div><p class=line1></p><span classs=leftGrayIcon></span></div><div class="skeleton_home_m5 cl"><div class=rightGray></div><p class=line1></p><span class=leftGrayIcon></span></div>
+
+		<script>(function () {
+				var skeleton_wrapper = document.querySelector('#skeleton_home')
+				if (!/\/\w+\/(home)?$/.test(location.pathname)) {
+					document.body.removeChild(skeleton_wrapper);
+				}
+			})()</script></div><div id=skeleton_trade><p class=skeleton_top></p><div class=skeleton_middle><span class=left></span> <span class=center></span> <span class=right></span></div><script>(function () {
+			var skeleton_wrapper = document.querySelector('#skeleton_trade')
+			if (/\/\w+\/(trade|selfSymbol)/.test(location.pathname)) {
+				var SkeletonStr = '<div class="skeleton_middle"> <span class="left"></span> <span class="center"></span> <span class="right"></span> </div>';
+				for (var SkeletonI = 0; SkeletonI < 3; SkeletonI++) {
+					SkeletonStr += SkeletonStr;
+				}
+				var SkeletonEmptyDiv = document.createElement('div')
+				SkeletonEmptyDiv.innerHTML = SkeletonStr
+				skeleton_wrapper.appendChild(SkeletonEmptyDiv);
+			} else {
+				document.body.removeChild(skeleton_wrapper);
+			}
+		})()</script></div><div id=app></div><script>if (!/\/\w+\/(trade|selfSymbol|home)/.test(location.pathname)) {
+			document.querySelector('#app').classList.add('loading')
+		}</script><script>// 兼容QQ浏览器的toLocaleString方法
+
+
+
+		var dateFormatStr = new Date().toLocaleString('cn', { hour12: false, hour: '2-digit', minute: '2-digit' })
+		var isIPhone = navigator.appVersion.match(/iphone/gi)
+		var isAndroid = navigator.appVersion.match(/android/gi)
+		var docEl = document.documentElement
+		docEl.setAttribute('data-device-type', isIPhone ? 'iphone' : isAndroid ? 'android' : 'other')
+		if (dateFormatStr && dateFormatStr.length > 5) {
+			document.write('<script src="\/js\/intl\/intl.js"><\/script>')
+			document.write('<script src="\/js\/intl\/zh.js"><\/script>')
+		}
+		var htmlKey = location.pathname.split('/')[1]
+		var uatHost = ['192.168.35.218', 'testixmiddle.', 'testweb.', 'localhost', '192.168.1.', 'gcpuatixmiddle', 'preixmiddle', 'gcppreixmiddle']
+		var isPRD = true;
+		(function () {
+			var hostname = location.hostname;
+			for (var i = 0; i < uatHost.length; i++) {
+				if (hostname.indexOf(uatHost[i]) === 0) {
+					isPRD = false;
+					break;
+				}
+			}
+		})();
+		var prdService = 'api.dragonfly8.com' // 线上网关地址
+		var uatService = 'testapi.ixmiddle.com' // 线上网关地址 yz_uat: testapi.ixmiddle.com 4K_uat: gcpuatapi.ixmiddle.site
+		if (location.hostname.indexOf('testixmiddle.ixmiddle') > -1) {
+			uatService = 'testapi.ixmiddle.com'
+		} else if (location.hostname.indexOf('gcpuatixmiddle.ixmiddle') > -1) {
+			uatService = 'gcpuatapi.ixmiddle.site'
+		} else if (location.hostname.indexOf('gcppreixmiddle.ixmiddle') > -1) {
+			uatService = 'gcppreapi.ixmiddle.site'
+		} else if (location.hostname.indexOf('preixmiddle.ixmiddle') > -1) {
+			uatService = 'preapi.dragonfly8.com'
+		}
+		window['serviceUrl'] = isPRD ? prdService : uatService
+		window['socketUrl'] = isPRD ? prdService : uatService</script><script src=https://img.yienecom.com/static/js/chunk-vendors.1342ad20.js></script><script src=https://img.yienecom.com/static/js/index.4978a567.js></script>
+
+		<script>
+
+			let pathDict = {
+				"lp139": "https://www.se6868x.com/03-App-lp/lp139_hd_D024BW_P032AX_201907khz.html",
+				"lp196": "https://www.se6868x.com/03-App-lp/lp196_cg_D024BW_P032AX_captain.html",
+				"lp195": "https://www.se6868x.com/03-App-lp/lp195_hd_D024BW_P032AX_gold500.html",
+				"lp235": "https://www.se6868x.com/03-App-lp/lp235_cg_mxcp.html",
+				"K45": "https://www.se6868x.com/03-App-lp/K45.html",
+				"strategy":"https://www.se6868x.com/03-App-lp/strategy2020-1.html",
+				"zhixuan02":"https://m.se6868x.com/zhixuan01/index.html",
+				"home_v2":"https://www.se6868x.com/03-App-lp/home_v2.html",
+				"home_v3":"https://www.se6868x.com/03-App-lp/home_v3.html",
+			};
+			
+			let pathDict2 = {
+				"h5.alfg6116.com" : "https://www.se6868x.com/03-App-lp/K45.html",
+				"h5.vividdu.com" : "https://www.se6868x.com/03-App-lp/lp263_moni_50.html",
+				"h5.fgfhh35.com":"https://www.se6868x.com/03-App-lp/03h5v4.html"
+			}
+
+
+			let h5Path='https://h5.smart-elite.com';
+
+
+			if(vm._isMounted){
+				let urlSwitch = setInterval(()=> {
+					let iframe = document.querySelector('iframe');
+					if (iframe==null) return;
+					let iframeParam = iframe.src;					
+					if (iframeParam.indexOf(h5Path)==0){
+						let loginData = localStorage.getItem('loginData__yz352001');
+						let localUrl = location.search;
+						console.log(localUrl);
+						console.log(loginData);
+						let pathName = new URL(window.location.href).searchParams.get("path");
+						let hostName = location.host; 
+						let isEmptyPath = ((pathName==null || pathName=='') && pathDict[pathName]==null);
+						console.log('pathName = ' + pathName);
+						console.log('hostName = ' + hostName);
+						console.log('isEmptyPath = ' + isEmptyPath);
+						if (!isEmptyPath){
+							localStorage.setItem('lpName',pathName);
+						} else {
+							localStorage.setItem('hostName',hostName);
+						}
+						
+						let urlLpName = localStorage.getItem('lpName');
+						let urlHostName = localStorage.getItem('hostName')
+
+						if (iframe) {
+							if(!loginData && urlLpName in pathDict && urlLpName!==null){
+								console.log('success');
+								document.documentElement.classList.remove('old03');
+								iframe.setAttribute('src',pathDict[urlLpName]+localUrl);
+								//clearInterval(urlSwitch);
+								return;
+							} else if (!loginData && iframeParam.includes(urlLpName) && urlLpName in pathDict && urlLpName!==null) {
+								console.log('success1');
+								document.documentElement.classList.remove('old03');
+								iframe.setAttribute('src',pathDict[urlLpName]+localUrl);
+								//clearInterval(urlSwitch);
+								return;
+							} else if (!loginData && urlHostName in pathDict2 && urlHostName!==null) {
+								console.log('success3');
+								document.documentElement.classList.remove('old03');
+								iframe.setAttribute('src',pathDict2[urlHostName]);
+								return;
+							} else if (!loginData && iframeParam.includes(urlHostName) && urlHostName in pathDict && urlHostName!==null) {
+								console.log('success4');
+								document.documentElement.classList.remove('old03');
+								iframe.setAttribute('src',pathDict2[urlHostName]);
+								return;
+							}
+							else if (loginData){
+								console.log('success2');
+								clearInterval(urlSwitch);
+							}
+							else{
+								console.log('error');
+								clearInterval(urlSwitch);
+								return;
+							}
+						}						
+					}
+				}, 50);
+			};
+
+		</script>
+		<script>
+			if (location.href.indexOf('terminal=ios') > -1) document.documentElement.classList.add('old03'); // 兼容03旧包的刘海屏
+
+		</script>
+
+	</body>
+	<script src="https://www.se6868x.com/ix/web-new/homehtml/js/click.js"></script>
+</html>
