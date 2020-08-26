@@ -1,26 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>日期</title>
-    <style>
-      .redbag2_day {
-        color: rgb(195, 172, 99);
-      }
-    </style>
-  </head>
-  <body>
-    <p id="nowDay" class="redbag2_day"></p>
-    <script>
-      let fullTime = new Date();
-      let year = fullTime.getFullYear();
-      let mon = fullTime.getMonth();
-      let dally = fullTime.getDate();
-      console.log(fullTime);
-      document.getElementById("nowDay").innerHTML = `${year}年${
-        mon + 1
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>日期</title>
+  <style>
+    .redbag2_day {
+      display: flex;
+      justify-content: center;
+      align-content: center;
+      width: 100%;
+      height: 100%;
+      font-size: 60px;
+      color: rgb(195, 172, 99);
+    }
+  </style>
+</head>
+
+<body>
+  <p id="nowDay" class="redbag2_day"></p>
+  <p id="endDay" class="redbag2_day"></p>
+
+
+<!-- TradingView Widget BEGIN -->
+<div class="tradingview-widget-container">
+  <div id="tradingview_ba947"></div>
+  <div class="tradingview-widget-copyright"><a href="https://tw.tradingview.com/symbols/NASDAQ-AAPL/" rel="noopener" target="_blank"><span class="blue-text">AAPL 圖表</span></a>由TradingView提供</div>
+  <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+  <script type="text/javascript">
+  new TradingView.widget(
+  {
+  "width": 980,
+  "height": 610,
+  "symbol": "NASDAQ:AAPL",
+  "interval": "D",
+  "timezone": "Asia/Shanghai",
+  "theme": "light",
+  "style": "1",
+  "locale": "zh_TW",
+  "toolbar_bg": "#f1f3f6",
+  "enable_publishing": false,
+  "hide_top_toolbar": true,
+  "hide_legend": true,
+  "save_image": false,
+  "container_id": "tradingview_ba947"
+}
+  );
+  </script>
+</div>
+<!-- TradingView Widget END -->
+
+  <script>
+    let fullTime = new Date();
+    let year = fullTime.getFullYear();
+    let mon = fullTime.getMonth();
+    let dally = fullTime.getDate();
+
+
+    var today = new Date();
+    let eyear = today.getFullYear();
+    let emon = today.getMonth() + 1;
+    let edally = today.getDate();
+    var lastDayOfMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0);
+
+    document.getElementById("nowDay").innerHTML = `${year}年${
+      mon + 1
       }月${dally}日`;
-    </script>
-  </body>
+    document.getElementById("endDay").innerHTML = `${lastDayOfMonth}`
+  </script>
+</body>
+
 </html>

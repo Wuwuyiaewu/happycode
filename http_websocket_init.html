@@ -4,48 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="./js/vue.js"></script>
-    <script src="./js/axios.js"></script>
-    <title>websocket_發送</title>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.7/vue.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.js'></script>
+
+    <title>websocket_發送_推入573005示範</title>
 </head>
 
 <body>
     <div id="app">
-        <button @click="gotourl">點我觸發動作</button>
-        <br>
-        <input type="text" placeholder="輸入帳號" :value="ax_data.data.login_name">
-        <input type="text" placeholder="輸入密碼" :value="ax_data.data.password">
-        <select>
-            <option v-for="list in ax_data.data.accountType" :value="list.val">{{list.name}}</option>
-        </select>
-        <p>
-            {{price}}
-        </p>
-
+        {{price}}
     </div>
-
     <script>
-        let account_type = {
-            selected: "請選擇模式",
-            account_value: [
-                {
-                    "name": "真實帳號",
-                    "val": "real"
-                },
-                {
-                    "name": "模擬帳號",
-                    "val": "demo"
-                }
-            ]
-        }
         var vm = new Vue({
             el: "#app",
             data() {
                 return {
-                    ax_data: {
-                        "head": { "appKey": "yz352001" },
-                        "data": { "login_name": "", "password": "", "accountType": account_type.account_value }
-                    },
                     Http_config: {
                         method: 'post',
                         url: 'https://api.dragonfly8.com/account/appProperties/getAccountProperties',
@@ -90,10 +63,13 @@
                 }
             },
             methods: {
+                // 時間具有唯一性
                 get_current_time() {
                     var d = new Date();
                     return d.getTime();
                 },
+                // 要做 ws 以前都要先做 http 發送登入，才能夠要到 token 做 ws 操作 ix 文檔
+                // https://testdocs.ixmiddle.com/ixmiddle/http-interface-doc/account/appProperties/getAccountProperties.html
                 gotourl() {
                     let vm = this
                     axios(vm.Http_config, vm.ax_data)
@@ -102,7 +78,7 @@
                             // 應該為動態 url
                             vm.Ws_config.url = 'wss://api.dragonfly8.com/websocket'
                             vm.Ws_config.method = 'get'
-                            // 從 HTTP 所取得的 response 帶入ws head
+                            // 從 HTTP 所取得的 response 帶入 ws head
                             vm.Ws_config.head.Authorization = response.headers.authorization
                             vm.Ws_config.head.msgType = 'login'
                             vm.Ws_config.content.appKey = response.data.data.transBaseConfigVo.appKey
@@ -153,9 +129,6 @@
                     vm.Ws_config.content = _content
                     vm.websocketsend(JSON.stringify(vm.Ws_config));
                 },
-                WsText(e) {
-
-                },
                 Wsevent(e) {
                     // 使用 switch 去判斷 msgType 
                     // 再決定發送什麼 Ws 格式
@@ -177,22 +150,34 @@
                             console.log('推入ID')
                             vm.product.push(numSplit)
                         }
+                        // 
+                        //取得 websocket 的資料
+                        //
                         vm.price = split
-                        console.log(vm.product)
-                        // 格式
+
+
+                        // 初始化格式
+                        // ws 登入後會還傳數據
+                        // 將數據轉換成可以比對的 msg_type 
+                        // msg_type 請看 ix 文檔
+                        // https://testdocs.ixmiddle.com/ixmiddle/ix-socket-proxy-doc/trade-login.html
 
                     } else if (typeof (e) === "string" && e.toString().indexOf("p(") < 0) {
                         var msg = JSON.parse(e);
                         var msg_code = msg.msg_code;
                     }
+                    // 做法是比對到什麼樣的回傳訊息
+                    // 做什麼樣的事情
                     switch (msg_code) {
+                        // 比對到使用者登入
                         case "UserLoginInfoRet":
+                            // 重新組 content 去做下一次發送訊息
+                            // 現在要做的事訂閱產品時實數據 參考 ix 文檔
+                            // https://testdocs.ixmiddle.com/ixmiddle/ix-socket-proxy-doc/product_subscription.html
                             _content = {
-                                //
                                 // 注入產品 ID 陣列 
                                 // e.g 573004 = 黃金價格
                                 code_ids: [573005],
-                                //
                                 subscribeType: "reSubscribe",
                                 type: "yz"
                             }
