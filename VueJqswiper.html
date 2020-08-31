@@ -1,13 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VueJqswiper</title>
+    <style>
+        .active {
+            color: powderblue;
+            font-weight: 900;
+        }
+
+        .fades-enter-active,
+        .fades-leave-active {
+            transition: opacity .5s;
+        }
+
+        .fades-enter,
+        .fades-leave-to
+
+        /* .fade-leave-active below version 2.1.8 */
+            {
+            opacity: 0;
+        }
+    </style>
 </head>
+
 <body>
-    
+    <div id="app">
+        <transition-group tag="div" name="fades">
+            <h1 v-for="(title,index) in title" v-show="index === active" :key="title">{{title}}</h1>
+        </transition-group>
+        <button v-for="(num,index) in title" :class="{active:index === active}">{{num}}</button>
+        <button @click="change(active-1)">pre</button>
+        <button @click="change(active+1)">next</button>
+    </div>
     <script src="js/vue.js"></script>
+    <script src="js/axios.js"></script>
     <script src="js/jquery.min.js"></script>
+    <script>
+        (function (Vue) {
+            let vm = new Vue({
+                el: '#app',
+                data: {
+                    active: 1,
+                    title: [
+                        'slide1',
+                        'slide2',
+                        'slide3',
+                        'slide4',
+                        'slide5',
+                    ]
+                },
+                computed: {
+                    total() {
+                        return vm.title.length
+                    }
+                },
+                methods: {
+                    change(index) {
+                        let vm = this
+                        vm.active = (index + vm.total) % vm.total
+                    },
+                    get() {
+                        var _data = '';
+                        var _config = {
+                            method: 'get',
+                            url: 'https://api.bingxuegirl.com/inv/currencies',
+                            headers: {
+                                "Access-Control-Allow-Origin": "*"
+                            },
+                            data: _data
+                        };
+                        axios(_config)
+                            .then(function (response) {
+                                console.log(JSON.stringify(response.data));
+                            })
+                            .catch(function (error) {
+                                console.log(error);
+                            });
+                    }
+                },
+                created(){
+                    this.get()
+                }
+            })
+        })(Vue)
+
+
+
+    </script>
 </body>
+
 </html>
