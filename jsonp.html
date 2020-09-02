@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jsonp</title>
+</head>
+
+<body>
+    <div id="app"></div>
+    <p id="paragraphElement"></p>
+
+    <script>
+        window.onload = createScriptDynamically();
+        function createScriptDynamically() {
+
+            // Set the url to the web service API from where  
+            // the data to be retrieve 
+            var url =
+                "https://itunes.apple.com/search?term=taylor+swift&limit=5&callback=processData";
+
+            // Create the script element dynamically through JavaScript  
+            var scriptElement = document.createElement("script");
+
+            // Set the src and id attributes of the script element 
+            scriptElement.setAttribute("src", url);
+            scriptElement.setAttribute("id", "jsonp");
+            var oldScriptElement = document.getElementById("jsonp");
+
+            // Get the head element 
+            var head = document.getElementsByTagName("head")[0];
+            if (oldScriptElement == null) {
+
+                /* If there is no script element then append 
+                a new element to the head. */
+                head.appendChild(scriptElement);
+            }
+            else {
+
+                /* If there is already a element in the head,  
+                then replace it with the new script element. */
+                head.replaceChild(scriptElement, oldScriptElement);
+            }
+        }
+
+        function processData(myObj) {
+            console.log(myObj);
+
+            /* Function to display the track name and the 
+            genre name from the received data. */
+            var para = document.getElementById("paragraphElement");
+
+            for (var i = 0; i < myObj.resultCount; i++) {
+                para.innerHTML = para.innerHTML + myObj.results[i].trackName
+                    + "[" + myObj.results[i].primaryGenreName + "]" + "<br>";
+            }
+        } 
+    </script>
+
+
+    <script src="./js/vue.js"></script>
+    <script src="./js/axios.js"></script>
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data() {
+                return {
+                }
+            },
+            methods: {
+                gotourl() {
+                    let vm = this
+                    let url = "https://www.se6868x.com/fApi/lp251"
+                    axios(url, {
+                        method: 'GET',
+                        mode: 'no-cors',
+                        headers: {
+                            'Access-Control-Allow-Origin': '*',
+                            'Content-Type': 'application/json',
+                        },
+                        withCredentials: true,
+                        credentials: 'same-origin',
+                    }).then(response => {
+                    })
+                },
+            },
+            mounted() {
+            },
+            created() {
+                this.gotourl()
+            },
+            destroyed() {
+            }
+        })
+
+    </script>
+</body>
+
+</html>
