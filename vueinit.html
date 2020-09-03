@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vueinit</title>
+</head>
+<body>
+    <script src="js/axios.js"></script>
+    <script src="js/vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data() {
+                return {
+                }
+            },
+            methods: {
+                axios() {
+                    let vm = this
+                    axios()
+                        .then(function (response) {
+                          
+                        })
+                        .catch(function (error) {
+                            console.log(error, '第一次錯誤');
+                        });
+                },
+            },
+            mounted() {
+            },
+            created() {
+            },
+            destroyed() {
+            }
+        })
+
+    </script>
+</body>
+</html>
