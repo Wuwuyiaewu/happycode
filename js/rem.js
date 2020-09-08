@@ -1,5 +1,5 @@
 function recalc(x,bol) {
-	var clientWidth = $(window).width();
+	var clientWidth = window.innerWidth;
 	//var clientWidth = document.body.clientWidth;
 
 	if (bol && (!clientWidth || clientWidth > x)) {

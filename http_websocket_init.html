@@ -8,12 +8,101 @@
     <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.js'></script>
 
     <title>websocket_發送_推入573005示範</title>
+    <style>
+        ul,
+        li {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .list_wrap {
+            width: 7.5rem;
+        }
+
+        .productList_alink {
+            max-width: 7.5rem;
+            width: 100%;
+        }
+        .productList_left{
+            flex: 1 1 50%;
+        }
+        .productList_left span{
+            line-height: 0.48rem;
+            font-size: 0.32rem;
+        }
+        .productList_right{
+            flex: 1 1 50%;
+        }
+        .productList_right span{
+            font-size: 0.26rem;
+            text-align: center;
+        }
+        .productList_right span:nth-child(1){
+            flex: 1 1 100%;
+        }
+        .productList_right span:nth-child(2){
+            flex: 1 1 50%;
+        }
+        .productList_right span:nth-child(3){
+            flex: 1 1 50%;
+        }
+        .u-flex {
+            display: flex;
+        }
+        .u-fw{
+            flex-wrap: wrap;
+        }
+        .jcc{
+            justify-content: center;
+        }
+        .aic{
+            align-items: center;
+        }
+    </style>
 </head>
 
 <body>
     <div id="app">
-        {{temp}}
+        <button @click="selectProduct = '贵金属'">贵金属</button>
+        <button @click="selectProduct = '能源'">能源</button>
+        <button @click="selectProduct = '外汇'">外汇</button>
+        <button @click="selectProduct = '指数'">指数</button>
+        <button @click="selectProduct = '农产品'">农产品</button>
+        <button @click="selectProduct = '美股'">美股</button>
+        <button @click="selectProduct = '港股'">港股</button>
+        <button @click="selectProduct = '参考'">参考</button>
+        {{selectProduct}}
+
+        <!-- buy_price: 2322.01
+        code_id: 573003
+        cur_price: 2313.89
+        high_price: 2321.85
+        low_price: 2300.23
+        open_price: 2302.29
+        sell_price: 2305.76
+        seq: 1747288
+        time: 1599556295
+        yesterday_price: 2299.97 -->
+        <ul>
+            <li v-for="(item,key) in temps" class="list_wrap">
+                <a href="javascript:;" class="u-flex productList_alink aic">
+                    <div class="productList_left u-flex aic">
+                        <span>{{item.code_id}}</span>
+                    </div>
+                    <div class="productList_right u-flex jcc u-fw">
+                        <span>{{item.cur_price}}</span>
+                        <span>{{(item.cur_price - item.yesterday_price).toFixed(2)}}</span>
+                        <span>{{((item.cur_price - item.yesterday_price) / item.yesterday_price).toFixed(2)}}%</span>
+                    </div>
+                </a>
+            </li>
+        </ul>
     </div>
+    <script src="./js/rem.js"></script>
+    <script type="text/javascript">
+        remCompute(750, true);
+    </script>
     <script>
         const WS_BASE_URL = "wss://api.mircoinfolab.com/websocket";
         const HTTP_BASE_URL = "https://api.mircoinfolab.com";
@@ -64,6 +153,7 @@
                             user_type: 1
                         },
                     },
+                    selectProduct: '贵金属',
                     singleProduct: [],
                     // 所有產品 id
                     typeId: [],
@@ -73,21 +163,35 @@
 
                 }
             },
+            computed:{
+                temps(){
+                    let vm = this
+                    return vm.temp
+                }
+            },
             methods: {
                 // 時間具有唯一性
                 get_current_time() {
                     var d = new Date();
                     return d.getTime();
                 },
+                changeView(){
+                    let vm = this
+                    vm.sortProduct.forEach(el=>{
+                        if(el.title === vm.selectProduct){
+                            vm.temp = el.id
+                            console.log(vm.temp)
+                        }
+                    })
+                },
                 // 要做 ws 以前都要先做 http 發送登入，才能夠要到 token 做 ws 操作 ix 文檔
                 // https://testdocs.ixmiddle.com/ixmiddle/http-interface-doc/account/appProperties/getAccountProperties.html
                 gotourl() {
                     let vm = this
-                    axios(vm.Http_config, vm.ax_data)
+                    axios(vm.Http_config)
                         .then(function (response) {
                             // 進行 ws 操作
-                            // 應該為動態 url
-                            // 從 HTTP 所取得的 response 帶入 ws head
+                            // 從 HTTP 所取得的 response 帶入 websocket head
                             vm.Ws_config.head.Authorization = response.headers.authorization
                             vm.Ws_config.head.msgType = 'login'
                             vm.Ws_config.content.appKey = response.data.data.transBaseConfigVo.appKey
@@ -103,7 +207,6 @@
                         });
                 },
                 initWebSocket(Ws_config) { //初始化weosocket
-                    console.log(Ws_config.url)
                     this.websock = new WebSocket(WS_BASE_URL);
                     this.websock.onmessage = this.websocketonmessage;
                     this.websock.onopen = this.websocketonopen;
@@ -116,21 +219,23 @@
                     if (this.websock.readyState === 1) {
                         this.websocketsend(JSON.stringify(vm.Ws_config));
                     } else {
-                        alert("還沒到 readyState 1")
+                        alert("還沒進入 websocket.readyState === 1")
                     }
                 },
                 websocketonerror() {//連結失敗，重新連線
+                    console.log('///連結失敗，重新連線')
                     this.initWebSocket();
                 },
                 websocketonmessage(e) { //資料接收後
                     let vm = this
+                    // 接收資料後判斷數據
                     vm.Wsevent(e.data)
                 },
                 websocketsend(Data) {//資料發送
                     this.websock.send(Data);
                 },
                 websocketclose(e) {  //關閉
-                    console.log('websocket連線中斷', e);
+                    console.log('websocket 連線已經中斷', e);
                 },
                 defineProduct(e) {
                     let newArr = JSON.parse(e)
@@ -164,6 +269,7 @@
                         product_finish.push(_new_consis)
                     }
                     vm.sortProduct = product_finish
+                    vm.changeView()
                 },
                 // 需要 token 者 ( 依照文檔目前只在判斷客戶來源使用 )
                 WsBuildup(msgType, _content) {
@@ -209,6 +315,7 @@
                 },
                 Wsevent(e) {
                     let vm = this
+                    var msg = null;
                     // 進來的字串，需要再轉字串才能使用方法
                     if (e.toString().indexOf("p(") > -1) {
                         // p( 因為非物件開頭 所以不能單純使用 json.parse 去做處理
@@ -230,13 +337,13 @@
                         //
                         vm.price = split
 
-                        // ws 登入後會還傳數據
+                        // ws 登入後會回傳數據
                         // 將數據轉換成可以比對的 msg_type 
                         // msg_type 請看 ix 文檔
                         // https://testdocs.ixmiddle.com/ixmiddle/ix-socket-proxy-doc/trade-login.html
-
+                        // 為字串且排除產品訂閱的條件後，再行轉換
                     } else if (typeof (e) === "string" && e.toString().indexOf("p(") < 0) {
-                        var msg = JSON.parse(e);
+                        msg = JSON.parse(e);
                         var msg_code = msg.msg_code;
                     }
                     // 比對什麼回傳訊息
@@ -263,9 +370,18 @@
                                 subscribeType: "reSubscribe",
                                 type: "yz"
                             }
+                            // * 產品報價 *
+                            vm.sortProduct.forEach(el => {
+                                console.log(el.title, typeof (el.title))
+                            })
                             vm.WsProductCurBuildup("productSubscription", _content_pr)
+                            // * 最後一口價 *
                             vm.WsLastpriceBuildup("lastPrice", _content_ls)
                             break;
+                        case "LastPrice":
+                            console.log(`找到最後一口報價`, msg)
+                            vm.temp = msg.content
+                            break
                         default:
                             break;
                     }
