@@ -12,16 +12,20 @@
 
 <body>
     <div id="app">
-        {{price}}
+        {{temp}}
     </div>
     <script>
+        const WS_BASE_URL = "wss://api.mircoinfolab.com/websocket";
+        const HTTP_BASE_URL = "https://api.mircoinfolab.com";
         var vm = new Vue({
             el: "#app",
             data() {
                 return {
+                    temp: [],
+                    // Http 登入獲取 token
                     Http_config: {
                         method: 'post',
-                        url: 'https://api.dragonfly8.com/account/appProperties/getAccountProperties',
+                        url: `${HTTP_BASE_URL}/account/appProperties/getAccountProperties`,
                         headers: {
                             'Content-type': 'application/json',
                             'module': 'uat-account',
@@ -37,10 +41,12 @@
                             "data": { "login_name": "Guest", "password": "" }
                         },
                     },
+                    // 建立 websocket 記憶體
                     websock: null,
+                    // 初始化 ws 格式
                     Ws_config: {
                         trace: `h5 ${this.get_current_time()}`,
-                        version_code: "1",
+                        version_code: 1,
                         device: "h5",
                         head: {
                             server: "yz",
@@ -58,8 +64,13 @@
                             user_type: 1
                         },
                     },
-                    product: [],
-                    price: ""
+                    singleProduct: [],
+                    // 所有產品 id
+                    typeId: [],
+                    // 物件化所有產品 id ( 包含產品分類 )
+                    sortProduct: [],
+                    price: "",
+
                 }
             },
             methods: {
@@ -76,8 +87,6 @@
                         .then(function (response) {
                             // 進行 ws 操作
                             // 應該為動態 url
-                            vm.Ws_config.url = 'wss://api.dragonfly8.com/websocket'
-                            vm.Ws_config.method = 'get'
                             // 從 HTTP 所取得的 response 帶入 ws head
                             vm.Ws_config.head.Authorization = response.headers.authorization
                             vm.Ws_config.head.msgType = 'login'
@@ -95,7 +104,7 @@
                 },
                 initWebSocket(Ws_config) { //初始化weosocket
                     console.log(Ws_config.url)
-                    this.websock = new WebSocket(Ws_config.url);
+                    this.websock = new WebSocket(WS_BASE_URL);
                     this.websock.onmessage = this.websocketonmessage;
                     this.websock.onopen = this.websocketonopen;
                     this.websock.onerror = this.websocketonerror;
@@ -123,40 +132,104 @@
                 websocketclose(e) {  //關閉
                     console.log('websocket連線中斷', e);
                 },
+                defineProduct(e) {
+                    let newArr = JSON.parse(e)
+                    // 分類 id
+                    let idTypeArr = []
+                    // 分類類型
+                    let productType = []
+                    // 無分類所有 id
+                    let allProductId = []
+                    let typeArr = newArr.content.product_category
+                    // 組裝推送 id 與前置分類
+                    typeArr.forEach(element => {
+                        idTypeArr.push(element.code_ids)
+                        allProductId = allProductId.concat(element.code_ids)
+                        productType = productType.concat(element.title)
+                    });
+                    // 所有 id 推入
+                    vm.typeId = allProductId
+                    // 組分類物件
+                    let _consis = {
+                        id: [],
+                        title: ""
+                    }
+                    let product_finish = []
+                    for (let index = 0; index < idTypeArr.length; index++) {
+                        let id = idTypeArr[index];
+                        let type = productType[index]
+                        _consis.id = id
+                        _consis.title = type
+                        let _new_consis = JSON.parse(JSON.stringify(_consis))
+                        product_finish.push(_new_consis)
+                    }
+                    vm.sortProduct = product_finish
+                },
+                // 需要 token 者 ( 依照文檔目前只在判斷客戶來源使用 )
                 WsBuildup(msgType, _content) {
                     let vm = this
                     vm.Ws_config.head.msgType = msgType
                     vm.Ws_config.content = _content
+                    // 登入後正式進入 Wsevent 判斷
                     vm.websocketsend(JSON.stringify(vm.Ws_config));
                 },
+                // 共通 head
+                Ws_Head(msgType) {
+                    let vm = this
+                    let _head = {
+                        "server": "yz",
+                        "msgType": msgType,
+                        "sendTime": vm.get_current_time()
+                    }
+                    return _head
+                },
+                // 訂閱所有行情最後一口價 ( 可直接訂閱 )
+                WsLastpriceBuildup(msgType, _content) {
+                    let vm = this
+                    let Ws_LsConfig = {
+                        "head": vm.Ws_Head(msgType),
+                        "content": _content,
+                        "trace": vm.get_current_time(),
+                        "device": "h5",
+                        "version_code": 1
+                    }
+                    vm.websocketsend(JSON.stringify(Ws_LsConfig));
+                },
+                // 訂閱產品實時報價
+                WsProductCurBuildup(msgType, _content) {
+                    let vm = this
+                    let ws_PrCurConfig = {
+                        "head": vm.Ws_Head(msgType),
+                        "content": _content,
+                        "device": "h5",
+                        "trace": vm.get_current_time(),
+                        "version_code": 1
+                    }
+                    vm.websocketsend(JSON.stringify(ws_PrCurConfig));
+                },
                 Wsevent(e) {
-                    // 使用 switch 去判斷 msgType 
-                    // 再決定發送什麼 Ws 格式
                     let vm = this
                     // 進來的字串，需要再轉字串才能使用方法
                     if (e.toString().indexOf("p(") > -1) {
-                        // console.log(e)
                         // p( 因為非物件開頭 所以不能單純使用 json.parse 去做處理
-                        // p(產品ID,賣價,買價,當前價,時間,最高價格,最低價格)
+                        // p( 產品ID,賣價,買價,當前價,時間,最高價格,最低價格 )
 
                         // 字串處理
                         let newData = e.slice(2, e.length - 1);
                         let split = newData.split(",");
                         if (split.length < 7) {
-                            console.log("報價有錯  " + e);
+                            console.log("報價有錯 " + e);
                         }
                         var numSplit = split[0] * 1
-                        if (vm.product.indexOf(numSplit) < 0) {
+                        if (vm.singleProduct.indexOf(numSplit) < 0) {
                             console.log('推入ID')
-                            vm.product.push(numSplit)
+                            vm.singleProduct.push(numSplit)
                         }
                         // 
                         //取得 websocket 的資料
                         //
                         vm.price = split
 
-
-                        // 初始化格式
                         // ws 登入後會還傳數據
                         // 將數據轉換成可以比對的 msg_type 
                         // msg_type 請看 ix 文檔
@@ -166,26 +239,32 @@
                         var msg = JSON.parse(e);
                         var msg_code = msg.msg_code;
                     }
-                    // 做法是比對到什麼樣的回傳訊息
-                    // 做什麼樣的事情
+                    // 比對什麼回傳訊息
+                    // 再做什麼樣的事
                     switch (msg_code) {
                         // 比對到使用者登入
                         case "UserLoginInfoRet":
-                            // 重新組 content 去做下一次發送訊息
                             // 現在要做的事訂閱產品時實數據 參考 ix 文檔
                             // https://testdocs.ixmiddle.com/ixmiddle/ix-socket-proxy-doc/product_subscription.html
-                            _content = {
-                                // 注入產品 ID 陣列 
-                                // e.g 573004 = 黃金價格
-                                code_ids: [573005],
-                                subscribeType: "reSubscribe",
-                                type: "yz"
-                            }
-                            vm.WsBuildup("productSubscription", _content)
+
                             break;
                         case "HeartBeatConf":
                             break;
                         case "InitProductInfo":
+                            // 初始化所有產品 與 產品分類
+                            vm.defineProduct(e)
+                            // 訂閱所有產品最後一口價
+                            _content_ls = {
+                                code_ids: vm.typeId,
+                            }
+                            // 訂閱實時報價
+                            _content_pr = {
+                                code_ids: [573005],
+                                subscribeType: "reSubscribe",
+                                type: "yz"
+                            }
+                            vm.WsProductCurBuildup("productSubscription", _content_pr)
+                            vm.WsLastpriceBuildup("lastPrice", _content_ls)
                             break;
                         default:
                             break;
