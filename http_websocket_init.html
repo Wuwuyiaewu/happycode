@@ -24,39 +24,50 @@
             max-width: 7.5rem;
             width: 100%;
         }
-        .productList_left{
+
+        .productList_left {
             flex: 1 1 50%;
         }
-        .productList_left span{
+
+        .productList_left span {
             line-height: 0.48rem;
             font-size: 0.32rem;
         }
-        .productList_right{
+
+        .productList_right {
             flex: 1 1 50%;
         }
-        .productList_right span{
+
+        .productList_right span {
             font-size: 0.26rem;
             text-align: center;
         }
-        .productList_right span:nth-child(1){
+
+        .productList_right span:nth-child(1) {
             flex: 1 1 100%;
         }
-        .productList_right span:nth-child(2){
+
+        .productList_right span:nth-child(2) {
             flex: 1 1 50%;
         }
-        .productList_right span:nth-child(3){
+
+        .productList_right span:nth-child(3) {
             flex: 1 1 50%;
         }
+
         .u-flex {
             display: flex;
         }
-        .u-fw{
+
+        .u-fw {
             flex-wrap: wrap;
         }
-        .jcc{
+
+        .jcc {
             justify-content: center;
         }
-        .aic{
+
+        .aic {
             align-items: center;
         }
     </style>
@@ -64,14 +75,14 @@
 
 <body>
     <div id="app">
-        <button @click="selectProduct = '贵金属'">贵金属</button>
-        <button @click="selectProduct = '能源'">能源</button>
-        <button @click="selectProduct = '外汇'">外汇</button>
-        <button @click="selectProduct = '指数'">指数</button>
-        <button @click="selectProduct = '农产品'">农产品</button>
-        <button @click="selectProduct = '美股'">美股</button>
-        <button @click="selectProduct = '港股'">港股</button>
-        <button @click="selectProduct = '参考'">参考</button>
+        <button @click="selectProduct = '贵金属';changeView()">贵金属</button>
+        <button @click="selectProduct = '能源';changeView()">能源</button>
+        <button @click="selectProduct = '外汇';changeView()">外汇</button>
+        <button @click="selectProduct = '指数';changeView()">指数</button>
+        <button @click="selectProduct = '农产品';changeView()">农产品</button>
+        <button @click="selectProduct = '美股';changeView()">美股</button>
+        <button @click="selectProduct = '港股';changeView()">港股</button>
+        <button @click="selectProduct = '参考';changeView()">参考</button>
         {{selectProduct}}
 
         <!-- buy_price: 2322.01
@@ -85,10 +96,11 @@
         time: 1599556295
         yesterday_price: 2299.97 -->
         <ul>
-            <li v-for="(item,key) in temps" class="list_wrap">
+            <li v-for="(item,key) in temp" class="list_wrap">
                 <a href="javascript:;" class="u-flex productList_alink aic">
                     <div class="productList_left u-flex aic">
                         <span>{{item.code_id}}</span>
+                        <span>{{item.title}}</span>
                     </div>
                     <div class="productList_right u-flex jcc u-fw">
                         <span>{{item.cur_price}}</span>
@@ -122,9 +134,9 @@
                             'method': '/account/appProperties/getAccountProperties',
                             'httpMethod': 'post',
                             'trace': 'h5_' + this.get_current_time(),
+                            // 發送後才可以取 token
                             'Authorization': ''
                         },
-
                         data: {
                             "head": { "appKey": "yz352001" },
                             "data": { "login_name": "Guest", "password": "" }
@@ -163,8 +175,8 @@
 
                 }
             },
-            computed:{
-                temps(){
+            computed: {
+                temps() {
                     let vm = this
                     return vm.temp
                 }
@@ -175,14 +187,15 @@
                     var d = new Date();
                     return d.getTime();
                 },
-                changeView(){
+                changeView() {
                     let vm = this
-                    vm.sortProduct.forEach(el=>{
-                        if(el.title === vm.selectProduct){
-                            vm.temp = el.id
-                            console.log(vm.temp)
+                    let newone = []
+                    vm.sortProduct.forEach(el => {
+                        if (el.title === vm.selectProduct) {
+                            newone = el.id
                         }
                     })
+                    console.log(newone)
                 },
                 // 要做 ws 以前都要先做 http 發送登入，才能夠要到 token 做 ws 操作 ix 文檔
                 // https://testdocs.ixmiddle.com/ixmiddle/http-interface-doc/account/appProperties/getAccountProperties.html
@@ -206,14 +219,14 @@
                             console.log(error, 'axios 發送的 Http 、 Ws 出現錯誤');
                         });
                 },
-                initWebSocket(Ws_config) { //初始化weosocket
+                initWebSocket(Ws_config) { //初始化 websocket
                     this.websock = new WebSocket(WS_BASE_URL);
                     this.websock.onmessage = this.websocketonmessage;
                     this.websock.onopen = this.websocketonopen;
                     this.websock.onerror = this.websocketonerror;
                     this.websock.onclose = this.websocketclose;
                 },
-                websocketonopen() { //連接建立後執行send發送數據
+                websocketonopen() { //連接建立後執行 send 發送數據
                     let vm = this
                     console.log('open connect', vm.Ws_config)
                     if (this.websock.readyState === 1) {
@@ -237,6 +250,7 @@
                 websocketclose(e) {  //關閉
                     console.log('websocket 連線已經中斷', e);
                 },
+                // *初始化所有產品 與 產品分類
                 defineProduct(e) {
                     let newArr = JSON.parse(e)
                     // 分類 id
@@ -269,7 +283,6 @@
                         product_finish.push(_new_consis)
                     }
                     vm.sortProduct = product_finish
-                    vm.changeView()
                 },
                 // 需要 token 者 ( 依照文檔目前只在判斷客戶來源使用 )
                 WsBuildup(msgType, _content) {
@@ -290,6 +303,7 @@
                     return _head
                 },
                 // 訂閱所有行情最後一口價 ( 可直接訂閱 )
+                // * 最後一口價 *
                 WsLastpriceBuildup(msgType, _content) {
                     let vm = this
                     let Ws_LsConfig = {
@@ -301,7 +315,13 @@
                     }
                     vm.websocketsend(JSON.stringify(Ws_LsConfig));
                 },
+                // *最後一口行情初始化打印
+                printLastprice(){
+                    let vm = this
+                    console.log(vm.temp)
+                },
                 // 訂閱產品實時報價
+                // * 產品報價 *
                 WsProductCurBuildup(msgType, _content) {
                     let vm = this
                     let ws_PrCurConfig = {
@@ -320,7 +340,6 @@
                     if (e.toString().indexOf("p(") > -1) {
                         // p( 因為非物件開頭 所以不能單純使用 json.parse 去做處理
                         // p( 產品ID,賣價,買價,當前價,時間,最高價格,最低價格 )
-
                         // 字串處理
                         let newData = e.slice(2, e.length - 1);
                         let split = newData.split(",");
@@ -336,7 +355,6 @@
                         //取得 websocket 的資料
                         //
                         vm.price = split
-
                         // ws 登入後會回傳數據
                         // 將數據轉換成可以比對的 msg_type 
                         // msg_type 請看 ix 文檔
@@ -351,14 +369,14 @@
                     switch (msg_code) {
                         // 比對到使用者登入
                         case "UserLoginInfoRet":
-                            // 現在要做的事訂閱產品時實數據 參考 ix 文檔
-                            // https://testdocs.ixmiddle.com/ixmiddle/ix-socket-proxy-doc/product_subscription.html
+                            // 已經有用戶帳戶資料 參考 ix 文檔
+                            // https://testdocs.ixmiddle.com/ixmiddle/ix-socket-proxy-doc/trade-login/tui-song-deng-lu-jie-guo.html
 
                             break;
                         case "HeartBeatConf":
                             break;
                         case "InitProductInfo":
-                            // 初始化所有產品 與 產品分類
+                            // *初始化所有產品 與 產品分類
                             vm.defineProduct(e)
                             // 訂閱所有產品最後一口價
                             _content_ls = {
@@ -380,7 +398,31 @@
                             break;
                         case "LastPrice":
                             console.log(`找到最後一口報價`, msg)
+                            let newarr = []
+                            let tempType = ''
                             vm.temp = msg.content
+                            vm.sortProduct.forEach(el => {
+                                el.id.forEach(innerid => {
+                                    vm.temp.filter(tempGroup => {
+                                        if (innerid !== tempGroup.code_id) {
+                                            return
+                                        } else if (innerid === tempGroup.code_id && tempType === '' && tempGroup.title === undefined) {
+                                            console.log(`id 相等 tempType 尚未賦予 //`)
+                                            tempGroup.title = el.title
+                                            tempType = el.title
+                                        } else if (innerid === tempGroup.code_id && tempType === el.title && tempGroup.title === undefined) {
+                                            console.log(`id 相等 tempType 已經有了，title 還沒定義`)
+                                            tempGroup.title = el.title
+                                        } else if (innerid === tempGroup.code_id && tempType !== el.title && tempGroup.title === undefined) {
+                                            console.log(`id 相等 tempType 已經有了，title 還沒定義`)
+                                            tempGroup.title = el.title
+                                            tempType = el.title
+                                        }
+                                    })
+                                })
+                            })
+                            // *最後一口行情初始化打印
+                            vm.printLastprice()
                             break
                         default:
                             break;
