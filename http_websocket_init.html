@@ -6,87 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.7/vue.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.js'></script>
-
+    <link rel="stylesheet" href="./css/h5_tade.css">
     <title>websocket_發送_推入573005示範</title>
-    <style>
-        ul,
-        li {
-            margin: 0;
-            padding: 0;
-            list-style: none;
-        }
-
-        .list_wrap {
-            width: 7.5rem;
-        }
-
-        .productList_alink {
-            max-width: 7.5rem;
-            width: 100%;
-        }
-
-        .productList_left {
-            flex: 1 1 33.33333%;
-        }
-
-        .productList_left span {
-            line-height: 0.48rem;
-            font-size: 0.32rem;
-        }
-
-        .productList_center {
-            flex: 1 1 33.33333%;
-        }
-
-        .productList_center span {
-            line-height: 0.48rem;
-            font-size: 0.32rem;
-        }
-
-        .productList_right {
-            flex: 1 1 33.33333%;
-        }
-
-        .productList_right span {
-            font-size: 0.26rem;
-            text-align: center;
-        }
-
-        .productList_right span:nth-child(1) {
-            flex: 1 1 100%;
-        }
-
-        .productList_right span:nth-child(2) {
-            flex: 1 1 50%;
-        }
-
-        .productList_right span:nth-child(3) {
-            flex: 1 1 50%;
-        }
-
-        .u-flex {
-            display: flex;
-        }
-
-        .u-fw {
-            flex-wrap: wrap;
-        }
-
-        .jcc {
-            justify-content: center;
-        }
-
-        .aic {
-            align-items: center;
-        }
-    </style>
 </head>
 
 <body>
-    <div id="app">
-        <div id="selection_bar">
+    <div id="app" class="trading_wrap">
+        <div id="selection_bar" class="navbar">
+            <a href="javascript:;" v-for="(item,key) in subscrition" class="btn_bar"
+                @click="selectProduct = item;showtar(key)" :class='{active:item === selectProduct}'>{{item}}</a>
         </div>
-        {{selectProduct}}
 
         <!-- 
         buy_price: 2322.01
@@ -100,19 +29,28 @@
         time: 1599556295
         title:item.title
         yesterday_price: 2299.97 -->
+        <ul class="head_classification">
+            <li class="u-flex">
+                <span class="title_left f-3 ">名称代码</span>
+                <span class="title_center f-3">卖出价</span>
+                <span class="title_right f-3">买入价</span>
+            </li>
+        </ul>
         <ul>
-            <li v-for="(item,key) in temp" class="list_wrap">
+            <li v-for="(item,key) in temp" class="list_wrap" :id="item.code_id">
                 <a href="javascript:;" class="u-flex productList_alink aic" v-if="item.title === selectProduct">
                     <div class="productList_left u-flex jcc aic">
-                        <span>{{item.ProductName}}</span>
+                        <span class="prn">{{item.ProductName}}</span>
+                        <span class="en">{{item.enName}}</span>
                     </div>
                     <div class="productList_center u-flex jcc aic">
-                        <span>{{item.sell_price}}</span>
+                        <span class="sell">{{item.sell_price}}</span>
                     </div>
                     <div class="productList_right u-flex jcc u-fw">
-                        <span>{{item.buy_price}}</span>
-                        <span>{{(item.cur_price - item.yesterday_price).toFixed(2)}}</span>
-                        <span>{{((item.cur_price - item.yesterday_price) / item.yesterday_price).toFixed(2)}}%</span>
+                        <span class="buy">{{item.buy_price}}</span>
+                        <span class="wave">{{(item.cur_price - item.yesterday_price).toFixed(2)}}</span>
+                        <span
+                            class="wave_percent">{{((item.cur_price - item.yesterday_price) / item.yesterday_price).toFixed(2)}}%</span>
                     </div>
                 </a>
             </li>
@@ -175,7 +113,7 @@
                     },
                     selectProduct: '贵金属',
                     // 訂閱產品
-                    subscrition: ['贵金属', '能源', '外汇', '指数', '农产品', '美股', '港股','参考'],
+                    subscrition: ['贵金属', '能源', '外汇', '指数', '农产品', '美股', '港股'],
                     // JSON 總產品
                     jsonDate: null,
                     // 最後一口總產品
@@ -186,20 +124,27 @@
                     typeId: [],
                     // 物件化所有產品 id ( 包含產品分類 )
                     sortProduct: [],
-
+                    // 紅漲綠跌判斷
+                    tempLastA: [],
+                    tempLastB: []
                 }
             },
             computed: {
             },
             methods: {
-                // 產品切換器
-                setChangeView() {
+                // scroll 位置調整
+                showtar(e) {
                     let vm = this
-                    let template = document.getElementById('selection_bar')
-                    vm.subscrition.forEach(el => {
-                        template.innerHTML += `<button @click="selectProduct = '${el}';">${el}</button>`
-                    })
-                    console.log(vm.myJson)
+                    let productBar_All = [...document.querySelectorAll('.btn_bar')]
+                    let parentBar = productBar_All[e].parentElement
+                    let productScrollWidth = productBar_All[e].parentElement.scrollWidth
+                    if (productScrollWidth >= 612) {
+                        return
+                    } else if (e === vm.subscrition.length - 1 || 0) {
+                        parentBar.scrollLeft = productBar_All[e].offsetLeft
+                    } else {
+                        parentBar.scrollLeft = productBar_All[e].offsetLeft / 3
+                    }
                 },
                 // 時間具有唯一性
                 get_current_time() {
@@ -340,15 +285,40 @@
                     }
                     vm.websocketsend(JSON.stringify(ws_PrCurConfig));
                 },
+                // lastPrice format
+                // buy_price code_id cur_price high_price low_price open_price sell_price seq time title yesterday_price
                 // --更新時實數據
                 WsUpdateReal(data) {
                     let vm = this
+
+                    vm.tempLastA = JSON.parse(JSON.stringify(vm.temp))
                     vm.temp.filter(el => {
+                        // 時實數據更新
                         if (el.code_id === (data[0] * 1)) {
                             el.cur_price = data[3]
                             el.sell_price = data[1]
                             el.buy_price = data[2]
+
                         }
+                        // 綠漲紅跌比較
+                        vm.tempLastA.filter(elA => {
+                            if (elA.code_id === el.code_id) {
+                                // console.log(elA.code_id,el.code_id)
+                                if (document.getElementById(`${el.code_id}`) == null) {
+                                    return
+                                }
+                                let site = document.getElementById(`${el.code_id}`)
+                                if ((site.querySelector('.sell') == null)) {
+                                    return
+                                } else if ((elA.sell_price * 1) < (el.sell_price * 1)) {
+                                    site.querySelector('.sell').setAttribute('class', 'fall')
+                                    console.log('跌')
+                                } else if ((elA.sell_price * 1) > (el.sell_price * 1)) {
+                                    site.querySelector('.sell').setAttribute('class', 'rise')
+                                    console.log('漲')
+                                }
+                            }
+                        })
                     })
                 },
                 Wsevent(e) {
@@ -409,11 +379,12 @@
                             let newarr = []
                             let tempType = ''
                             vm.temp = msg.content
-                            // 比對 id 填入產品名稱
+                            // 比對 id 填入產品名稱、英文代碼
                             vm.temp.filter(tempGroup => {
                                 vm.jsonDate.forEach(jsonEl => {
                                     if (tempGroup.code_id === (jsonEl.id * 1)) {
                                         tempGroup.ProductName = jsonEl.name
+                                        tempGroup.enName = jsonEl.en
                                     }
                                 })
                             })
@@ -450,14 +421,11 @@
                         default:
                             break;
                     }
-
-
                 }
             },
             mounted() {
             },
             created() {
-                this.setChangeView()
                 this.gotourl()
             },
             destroyed() {
