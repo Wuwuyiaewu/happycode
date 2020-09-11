@@ -6,13 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.7/vue.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.js'></script>
+    <script src="./js/jquery.min.js"></script>
     <link rel="stylesheet" href="./css/h5_tade.css">
     <title>websocket_發送_推入573005示範</title>
 </head>
 
 <body>
     <div id="app" class="trading_wrap">
-        <div id="selection_bar" class="navbar">
+        <div id="selection_bar" class="navbar u-flex jcs">
             <a href="javascript:;" v-for="(item,key) in subscrition" class="btn_bar"
                 @click="selectProduct = item;showtar(key)" :class='{active:item === selectProduct}'>{{item}}</a>
         </div>
@@ -31,26 +32,33 @@
         yesterday_price: 2299.97 -->
         <ul class="head_classification">
             <li class="u-flex">
-                <span class="title_left f-3 ">名称代码</span>
-                <span class="title_center f-3">卖出价</span>
-                <span class="title_right f-3">买入价</span>
+                <span class="title_left f-2 ">名称代码</span>
+                <span class="title_center f-4">卖出价</span>
+                <span class="title_right f-4">买入价</span>
             </li>
         </ul>
         <ul>
-            <li v-for="(item,key) in temp" class="list_wrap" :id="item.code_id">
-                <a href="javascript:;" class="u-flex productList_alink aic" v-if="item.title === selectProduct">
-                    <div class="productList_left u-flex jcc aic">
+            <li v-for="(item,key) in temps" class="list_wrap" :id="item.code_id">
+                <a :href="item.alink" class="u-flex productList_alink aib" v-if="item.title === selectProduct">
+                    <div class="productList_left u-flex jcs aib">
                         <span class="prn">{{item.ProductName}}</span>
                         <span class="en">{{item.enName}}</span>
                     </div>
-                    <div class="productList_center u-flex jcc aic">
+                    <div class="productList_center u-flex jce aib">
                         <span class="sell">{{item.sell_price}}</span>
                     </div>
-                    <div class="productList_right u-flex jcc u-fw">
+                    <div class="productList_right u-flex jcs u-fw">
                         <span class="buy">{{item.buy_price}}</span>
-                        <span class="wave">{{(item.cur_price - item.yesterday_price).toFixed(2)}}</span>
-                        <span
-                            class="wave_percent">{{((item.cur_price - item.yesterday_price) / item.yesterday_price).toFixed(2)}}%</span>
+                        <div class="cell u-flex jce">
+                            <span style="color:#53CC9A;" class="wave"
+                                v-if="((item.cur_price - item.yesterday_price)) >= 0">{{(item.cur_price - item.yesterday_price).toFixed(3)}}</span>
+                            <span style="color:#E3525C;" class="wave"
+                                v-else>{{(item.cur_price - item.yesterday_price).toFixed(3)}}</span>
+                            <span style="color:#53CC9A;" class="wave_percent"
+                                v-if="(((item.cur_price - item.yesterday_price) / item.yesterday_price)) >= 0">{{((((item.cur_price - item.yesterday_price) / item.yesterday_price))*100).toFixed(3)}}%</span>
+                            <span style="color:#E3525C;" class="wave_percent"
+                                v-else>{{((((item.cur_price - item.yesterday_price) / item.yesterday_price))*100).toFixed(3)}}%</span>
+                        </div>
                     </div>
                 </a>
             </li>
@@ -113,7 +121,7 @@
                     },
                     selectProduct: '贵金属',
                     // 訂閱產品
-                    subscrition: ['贵金属', '能源', '外汇', '指数', '农产品', '美股', '港股'],
+                    subscrition: [],
                     // JSON 總產品
                     jsonDate: null,
                     // 最後一口總產品
@@ -130,8 +138,48 @@
                 }
             },
             computed: {
+                temps() {
+                    return this.temp
+                }
             },
             methods: {
+                // 接收產品類別參數
+                getValue(varname) {
+                    let vm = this
+                    let url = new URL(document.location).searchParams;
+                    let type = url.get('link')
+                    console.log(type)
+                    if (type !== null) {
+                        let arrType = type.split(' ')
+                        arrType.forEach(el => {
+                            switch (el) {
+                                case 'met':
+                                    vm.subscrition.push('贵金属')
+                                    break;
+                                case 'eng':
+                                    vm.subscrition.push('能源')
+                                    break;
+                                case 'exc':
+                                    vm.subscrition.push('外汇')
+                                    break;
+                                case 'ind':
+                                    vm.subscrition.push('指数')
+                                    break;
+                                case 'agr':
+                                    vm.subscrition.push('农产品')
+                                    break;
+                                case 'us':
+                                    vm.subscrition.push('美股')
+                                    break;
+                                case 'hk':
+                                    vm.subscrition.push('港股')
+                                    break;
+                            }
+                        })
+                    } else {
+                        vm.subscrition = ['贵金属', '能源', '外汇', '指数', '农产品', '美股', '港股']
+                    }
+                },
                 // scroll 位置調整
                 showtar(e) {
                     let vm = this
@@ -290,35 +338,82 @@
                 // --更新時實數據
                 WsUpdateReal(data) {
                     let vm = this
-
-                    vm.tempLastA = JSON.parse(JSON.stringify(vm.temp))
-                    vm.temp.filter(el => {
-                        // 時實數據更新
-                        if (el.code_id === (data[0] * 1)) {
-                            el.cur_price = data[3]
-                            el.sell_price = data[1]
-                            el.buy_price = data[2]
-
+                    vm.temp.filter(elO => {
+                        if ((data[0] * 1) === elO.code_id) {
+                            elO.cur_price = data[3]
                         }
-                        // 綠漲紅跌比較
-                        vm.tempLastA.filter(elA => {
-                            if (elA.code_id === el.code_id) {
-                                // console.log(elA.code_id,el.code_id)
-                                if (document.getElementById(`${el.code_id}`) == null) {
-                                    return
-                                }
-                                let site = document.getElementById(`${el.code_id}`)
-                                if ((site.querySelector('.sell') == null)) {
-                                    return
-                                } else if ((elA.sell_price * 1) < (el.sell_price * 1)) {
-                                    site.querySelector('.sell').setAttribute('class', 'fall')
-                                    console.log('跌')
-                                } else if ((elA.sell_price * 1) > (el.sell_price * 1)) {
-                                    site.querySelector('.sell').setAttribute('class', 'rise')
-                                    console.log('漲')
-                                }
+                    })
+                    vm.tempLastA = JSON.parse(JSON.stringify(vm.temp))
+                    vm.tempLastA.forEach(elA => {
+                        if ((elA.code_id * 1) === (data[0] * 1)) {
+
+
+                            //sellPrice 漲跌判斷
+                            if (data[1] >= elA.sell_price) {
+                                vm.temp.filter(elO => {
+                                    if ((elO.code_id * 1) === (elA.code_id * 1)) {
+                                        if (document.getElementById(`${elO.code_id}`) == null) {
+                                            return
+                                        }
+                                        let site = document.getElementById(`${elO.code_id}`)
+                                        if (site.querySelector('.sell') == null) {
+                                            return
+                                        }
+                                        site.querySelector('.sell').classList.remove('fall')
+                                        site.querySelector('.sell').classList.add('rise')
+                                        elO.sell_price = data[1]
+                                    }
+                                })
+                            } else {
+                                vm.temp.filter(elO => {
+                                    if ((elO.code_id * 1) === (elA.code_id * 1)) {
+                                        if (document.getElementById(`${elO.code_id}`) == null) {
+                                            return
+                                        }
+                                        let site = document.getElementById(`${elO.code_id}`)
+                                        if (site.querySelector('.sell') == null) {
+                                            return
+                                        }
+                                        site.querySelector('.sell').classList.remove('rise')
+                                        site.querySelector('.sell').classList.add('fall')
+                                        elO.sell_price = data[1]
+                                    }
+                                })
                             }
-                        })
+
+                            // buyPrice 漲跌判斷
+                            if (data[2] >= elA.sell_price) {
+                                vm.temp.filter(elO => {
+                                    if ((elO.code_id * 1) === (elA.code_id * 1)) {
+                                        if (document.getElementById(`${elO.code_id}`) == null) {
+                                            return
+                                        }
+                                        let site = document.getElementById(`${elO.code_id}`)
+                                        if (site.querySelector('.buy') == null) {
+                                            return
+                                        }
+                                        site.querySelector('.buy').classList.remove('fall')
+                                        site.querySelector('.buy').classList.add('rise')
+                                        elO.buy_price = data[2]
+                                    }
+                                })
+                            } else {
+                                vm.temp.filter(elO => {
+                                    if ((elO.code_id * 1) === (elA.code_id * 1)) {
+                                        if (document.getElementById(`${elO.code_id}`) == null) {
+                                            return
+                                        }
+                                        let site = document.getElementById(`${elO.code_id}`)
+                                        if (site.querySelector('.buy') == null) {
+                                            return
+                                        }
+                                        site.querySelector('.buy').classList.remove('rise')
+                                        site.querySelector('.buy').classList.add('fall')
+                                        elO.buy_price = data[2]
+                                    }
+                                })
+                            }
+                        }
                     })
                 },
                 Wsevent(e) {
@@ -385,6 +480,7 @@
                                     if (tempGroup.code_id === (jsonEl.id * 1)) {
                                         tempGroup.ProductName = jsonEl.name
                                         tempGroup.enName = jsonEl.en
+                                        tempGroup.alink = `https://h5.smart-elite.com/yz352001/productDetail/${jsonEl.id}`
                                     }
                                 })
                             })
@@ -426,6 +522,7 @@
             mounted() {
             },
             created() {
+                this.getValue("link")
                 this.gotourl()
             },
             destroyed() {
@@ -433,11 +530,6 @@
         })
 
     </script>
-
-    <script>
-
-    </script>
-
 </body>
 
 </html>
