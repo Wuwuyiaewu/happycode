@@ -39,7 +39,7 @@
         </ul>
         <ul>
             <li v-for="(item,key) in temps" class="list_wrap" :id="item.code_id">
-                <a :href="item.alink" class="u-flex productList_alink aib" v-if="item.title === selectProduct">
+                <a :href="item.alink" class="u-flex productList_alink aib" v-if="item.title === selectProduct" @click="recordHis">
                     <div class="productList_left u-flex jcs aib">
                         <span class="prn">{{item.ProductName}}</span>
                         <span class="en">{{item.enName}}</span>
@@ -51,11 +51,11 @@
                         <span class="buy">{{item.buy_price}}</span>
                         <div class="cell u-flex jce">
                             <span style="color:#53CC9A;" class="wave"
-                                v-if="((item.cur_price - item.yesterday_price)) >= 0">{{(item.cur_price - item.yesterday_price).toFixed(3)}}</span>
+                                v-if="((item.cur_price - item.yesterday_price)) >= 0">+{{(item.cur_price - item.yesterday_price).toFixed(3)}}</span>
                             <span style="color:#E3525C;" class="wave"
                                 v-else>{{(item.cur_price - item.yesterday_price).toFixed(3)}}</span>
                             <span style="color:#53CC9A;" class="wave_percent"
-                                v-if="(((item.cur_price - item.yesterday_price) / item.yesterday_price)) >= 0">{{((((item.cur_price - item.yesterday_price) / item.yesterday_price))*100).toFixed(3)}}%</span>
+                                v-if="(((item.cur_price - item.yesterday_price) / item.yesterday_price)) >= 0">+{{((((item.cur_price - item.yesterday_price) / item.yesterday_price))*100).toFixed(3)}}%</span>
                             <span style="color:#E3525C;" class="wave_percent"
                                 v-else>{{((((item.cur_price - item.yesterday_price) / item.yesterday_price))*100).toFixed(3)}}%</span>
                         </div>
@@ -143,6 +143,13 @@
                 }
             },
             methods: {
+                // 紀錄分頁
+                recordHis() {
+                    let vm = this
+                    let url_path = window.location.href
+                    console.log(url_path)
+                    let routeFomr = sessionStorage.setItem('routerForm',url_path)
+                },
                 // 接收產品類別參數
                 getValue(varname) {
                     let vm = this
@@ -349,7 +356,7 @@
 
 
                             //sellPrice 漲跌判斷
-                            if (data[1] >= elA.sell_price) {
+                            if (data[1] > elA.sell_price) {
                                 vm.temp.filter(elO => {
                                     if ((elO.code_id * 1) === (elA.code_id * 1)) {
                                         if (document.getElementById(`${elO.code_id}`) == null) {
@@ -364,7 +371,7 @@
                                         elO.sell_price = data[1]
                                     }
                                 })
-                            } else {
+                            } else if (data[1] < elA.sell_price) {
                                 vm.temp.filter(elO => {
                                     if ((elO.code_id * 1) === (elA.code_id * 1)) {
                                         if (document.getElementById(`${elO.code_id}`) == null) {
@@ -379,10 +386,12 @@
                                         elO.sell_price = data[1]
                                     }
                                 })
+                            } else {
+                                return
                             }
 
                             // buyPrice 漲跌判斷
-                            if (data[2] >= elA.sell_price) {
+                            if (data[2] > elA.buy_price) {
                                 vm.temp.filter(elO => {
                                     if ((elO.code_id * 1) === (elA.code_id * 1)) {
                                         if (document.getElementById(`${elO.code_id}`) == null) {
@@ -397,7 +406,7 @@
                                         elO.buy_price = data[2]
                                     }
                                 })
-                            } else {
+                            } else if (data[2] < elA.buy_price) {
                                 vm.temp.filter(elO => {
                                     if ((elO.code_id * 1) === (elA.code_id * 1)) {
                                         if (document.getElementById(`${elO.code_id}`) == null) {
@@ -412,6 +421,8 @@
                                         elO.buy_price = data[2]
                                     }
                                 })
+                            } else {
+                                return
                             }
                         }
                     })
