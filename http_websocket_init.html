@@ -186,6 +186,8 @@
                     } else {
                         vm.subscrition = ['贵金属', '能源', '外汇', '指数', '农产品', '美股', '港股']
                     }
+
+                    
                 },
                 // scroll 位置調整
                 showtar(e) {
@@ -491,7 +493,7 @@
                                     if (tempGroup.code_id === (jsonEl.id * 1)) {
                                         tempGroup.ProductName = jsonEl.name
                                         tempGroup.enName = jsonEl.en
-                                        tempGroup.alink = `https://h5.smart-elite.com/yz352001/productDetail/${jsonEl.id}`
+                                        tempGroup.alink = `https://h5.smart-elite.com/yz352001/productDetail/${jsonEl.id}${location.search}`
                                     }
                                 })
                             })

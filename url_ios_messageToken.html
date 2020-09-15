@@ -44,7 +44,7 @@
                     },
                     config: {
                         method: 'post',
-                        url: 'https://api.dragonfly8.com/account/appProperties/getAccountProperties',
+                        url: 'https://api.mircoinfolab.com/account/appProperties/getAccountProperties',
                         headers: {
                             'Content-type': 'application/json',
                             'module': 'uat-account',
@@ -77,27 +77,31 @@
                 },
                 gotourl() {
                     let vm = this
-                    console.log(vm.config);
+                    console.log(vm.config.url, 'url 初始設定');
                     axios(vm.config)
                         .then(function (response) {
                             vm.config.headers.Authorization = response.headers.authorization
                             vm.config.data = vm.ax_data
                             vm.config.headers.method = "/account/uac/auth/token"
-                            console.log(response)
+                            console.log(response.headers.authorization,'http token 賦予')
+                            console.log(vm.config.url, '二次 url 設定');
+                            console.log(vm.config.headers.method, '二次 method 設定');
                             return axios(vm.config)
                         }).
                         then(function (res) {
+                            console.log(res.data.data.token, '訊息流 token 取得')
                             vm.config.url = "https://api.chongontrading.com/fcc/fcc_user/list?pageIndex=1&pageSize=10"
                             vm.config.method = "get"
                             vm.config.headers = {
                                 "Content-type": "application/json;charset=utf-8",
-                                "authorization":'Bearer '+ res.data.data.token
+                                "authorization": 'Bearer ' + res.data.data.token
                             }
+                            console.log(vm.config.url, '三次 url 設定');
                             return axios(vm.config)
 
-                        }).then((res)=>{
+                        }).then((res) => {
                             /// 訊息流東西在這
-                            console.log(res.data)
+                            console.log(res.data, '訊息流')
                         })
                         .catch(function (error) {
                             console.log(error, '第二次錯誤');
