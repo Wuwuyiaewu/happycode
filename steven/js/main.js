@@ -95,8 +95,8 @@ function getTechnicalData(time) {
 	$.ajax({
 		type: "POST",
 		url: 'https://api.bingxuegirl.com/inv/currencies',
-		data: { pid: productTechId, peid: time },
-		dataType: "html",
+		// data: { pid: productTechId, peid: time },
+		// dataType: "html",
 		success: function (msg) {
 			//console.log(msg);
 			//	var lastPos=msg.indexOf("<!-- Tables --> ");
@@ -108,7 +108,7 @@ function getTechnicalData(time) {
 			//	htmlObject=$($.parseHTML(msg));   
 			//$("#part3_subContent").html(res);
 
-			//	console.log(msg);
+				console.log(msg);
 			htmlObject = $($.parseHTML(msg));
 
 			let htmlStr1 = '';

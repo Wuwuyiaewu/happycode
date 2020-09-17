@@ -1,267 +1,539 @@
 <!doctype html>
 <html>
 
-	<head>
-		<meta charset="utf-8">
-		<title>智选大平台，微信交易超便捷</title>
-		<meta name="keywords" content="" />
-		<meta name="description" content="" />
-		<meta content="telephone=no" name="format-detection">
-		<meta http-equiv="Cache-Control" content="no-siteapp">
-		<meta name="screen-orientation" content="portrait">
-		<meta name="x5-orientation" content="portrait">
-		<meta name="browsermode" content="application">
-		<meta name="x5-page-mode" content="app">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-		<meta name="renderer" content="webkit">
-		<meta name="viewport"
-			  content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-		<meta name="author">
-		<link href="<!--#echo var='gwfx_m_cdn'-->/promote/lp294B/css/animate.css" rel="stylesheet" type="text/css">
-		<link href="<!--#echo var='gwfx_m_cdn'-->/promote/lp294B/css/swiper-4.2.2.min.css" type="text/css" rel="stylesheet" />
-		<link href="<!--#echo var='gwfx_m_cdn'-->/promote/lp294B/css/lp294B.css" rel="stylesheet" type="text/css">
-	</head>
+<head>
+	<meta charset="utf-8">
+	<title>智选大平台，微信交易超便捷</title>
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<meta content="telephone=no" name="format-detection">
+	<meta http-equiv="Cache-Control" content="no-siteapp">
+	<meta name="screen-orientation" content="portrait">
+	<meta name="x5-orientation" content="portrait">
+	<meta name="browsermode" content="application">
+	<meta name="x5-page-mode" content="app">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="renderer" content="webkit">
+	<meta name="viewport"
+		content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<meta name="author">
+	<link href="<!--#echo var='gwfx_m_cdn'-->/promote/lp294B/css/animate.css" rel="stylesheet" type="text/css">
+	<link href="<!--#echo var='gwfx_m_cdn'-->/promote/lp294B/css/swiper-4.2.2.min.css" type="text/css"
+		rel="stylesheet" />
+	<link href="<!--#echo var='gwfx_m_cdn'-->/promote/lp294B/css/lp294B.css" rel="stylesheet" type="text/css">
+</head>
 
-	<body>
-		<script src="<!--#echo var='gwfx_m_cdn'-->/promote/lp294B/js/rem.js" charset="utf-8"></script>
-		<script type="text/javascript">
-			remCompute(750, true);
-		</script>
-		<!--#if expr="$QUERY_STRING=/app=ix_app_orig/"-->
-		<!--#set var="wx_url" value="?wx=ix_app_orig"-->
-		<!--#set var="app_url" value="?app=ix_app_orig"-->
-		<!--#set var="app_urld" value="noTopBlank"-->
-		<!--#else-->
-		<!--#set var="app_url" value=""-->
-		<!--#set var="wx_url" value=""-->
-		<!--#set var="app_urld" value=""-->
-		<!--#endif-->
-
-		<!--#if expr="$QUERY_STRING=/utm_source/"-->
-		<!--#set var="wx_url" value="?$QUERY_STRING"-->
-		<!--#set var="wx_url2" value="&$QUERY_STRING"-->
-		<!--#set var="wx_url3" value="$QUERY_STRING"-->
-		<!--#else-->
-		<!--#set var="wx_url" value=""-->
-		<!--#set var="wx_url2" value=""-->
-		<!--#set var="wx_url3" value=""-->
-		<!--#endif-->
-
-
-		<div class="wrapper">
-			<dl class="tab-main">
-				<dd class="index-con">
-					<div class="banner fadeIn wow">
-						<div class="logo"></div>
-						<a href="javascript:;" class="custom_btn"  onclick="toCustomerService();_gaq.push(['_trackEvent',$GA_NAME,'customer_service', 'content_top', 1,true]);"></a>
-						<div class="main-con">
-							<div class="main-title bounceIn wow"></div>
-							<div class="sub-title wow bounceInLeft"></div>
-						</div>
-						<div class="ban-txt wow bounceInUp"></div>
-					</div>
-					<!--part1 start-->
-					<div class="part1">
-						<div class="main-con clearfix">
-							<div class="sbtn-group">
-								<a class="btn btn1"
-								   onclick="gotoLogin();_gaq.push(['_trackEvent',$GA_NAME,'login', 'content_first', 1,true]);"></a>
-								<a class="btn btn2"  href="javascript:;" onclick="gotoRegister();_gaq.push(['_trackEvent',$GA_NAME,'register', 'content_first', 1,true]);"></a>
-							</div>
-							<div class="alltitle wow fadeInDown">
-								<h3 class="title1"></h3>
-							</div>
-							<div class="indexPic">
-								<div class="index1"><span class="finger finger1"></span></div>
-								<div class="index2"><span class="finger finger2"></span></div>
-								<div class="index3"><span class="finger finger3"></span></div>
-								<div class="index4"><span class="finger finger4"></span></div>
-								<div class="index5"><span class="finger finger5"></span></div>
-								<div class="index6"></div>
-							</div>
-							<div class="alltitle wow fadeInDown">
-								<h3 class="title4"></h3>
-							</div>
-							<div class="marquee-con clearfix">
-								<div class="inner">
-									<ul class="">
-										<li>
-											<div class="user1 user"></div>
-										</li>
-										<li>
-											<div class="user2 user"></div>
-										</li>
-										<li>
-											<div class="user3 user"></div>
-										</li>
-										<li>
-											<div class="user4 user"></div>
-										</li>
-										<li>
-											<div class="user5 user"></div>
-										</li>
-										<li>
-											<div class="user6 user"></div>
-										</li>
-										<li>
-											<div class="user7 user"></div>
-										</li>
-										<li>
-											<div class="user8 user"></div>
-										</li>
-										<li>
-											<div class="user9 user"></div>
-										</li>
-										<li>
-											<div class="user10 user"></div>
-										</li>
-									</ul>
-								</div>
-							</div>
-							<div class="alltitle wow fadeInDown">
-								<h3 class="title2"></h3>
-								<span class="stitle"><s></s>成本比同行低500%<s></s></span>
-							</div>
-							<div class="swiper-container">
-								<ul class="mo-advan-list swiper-wrapper">
-									<li class="swiper-slide">
-										<span class="pic5"></span>
-									</li>
-									<li class="swiper-slide">
-										<span class="pic2"></span>
-									</li>
-									<li class="swiper-slide">
-										<span class="pic3"></span>
-									</li>
-								</ul>
-							</div>
-						</div>
-						<div class="coin1"></div>
-						<div class="coin2"></div>
-						<div class="coin3"></div>
-					</div>
-					<!--part2 start-->
-					<div class="part2">
-						<div class="main-con">
-							<div class="alltitle wow fadeInDown">
-								<h3 class="title3"></h3>
-							</div>
-							<div class="pic4 wow bounceInRight"></div>
-							<div class="sbtn-group">
-								<a class="btn btn1"
-								   onclick="gotoLogin();_gaq.push(['_trackEvent',$GA_NAME,'login', 'content_bottom', 1,true]);"></a>
-								<a class="btn btn2"  href="javascript:;" onclick="gotoRegister();_gaq.push(['_trackEvent',$GA_NAME,'register', 'content_bottom', 1,true]);"></a>
-							</div>
-						</div>
-					</div>
-					<!--part2 end-->
-				</dd>
-			</dl>
-		</div>
-		<div class="floatwrapper">
-			<div class="nav-list">
-				<a data-num="0" href="javascript:;"  class="on" onclick="lp_home();_gaq.push(['_trackEvent',$GA_NAME,'lp_home', 'footer', 1,true]);">
-					<s class="icons icons5"></s>
-					<b class="txt">首页</b>
-				</a>
-				<a data-num="1" href="javascript:;" onclick="gotoh5Trade();_gaq.push(['_trackEvent',$GA_NAME,'lp_trade', 'footer', 1,true]);">
-					<s class="icons icons6"></s>
-					<b class="txt">行情</b>
-				</a>
-				<a href="javascript:;" onclick="gotoRegister();_gaq.push(['_trackEvent',$GA_NAME,'regiester', 'footer', 3,true]);">
-					<s class="icons icons7"></s>
-					<b class="txt">开户领$2000</b>
-				</a>
-				<a href="https://m.se6868x.com/common/03-app-e11-0.html" onclick=";_gaq.push(['_trackEvent',$GA_NAME,'download', 'footer', 1,true]);">
-					<s class="icons icons8"></s>
-					<b class="txt">下载App</b>
-				</a>
+<body>
+	<div class="sections-wrapper"><span>
+			<div class="score-section">
+				<!-- react-text: 366 -->
+				<!-- /react-text -->
+				<!-- react-text: 367 -->
+				<!-- /react-text -->
+				<div>
+					<pre class="viewChordNoBar chord-row">A      Amaj7     A      Amaj7</pre>
+					<pre class="viewLyric">前奏</pre>
+				</div>
 			</div>
-		</div>
-		<script src="<!--#echo var='gwfx_m_cdn'-->/promote/lp294B/js/jquery.min.js"></script>
-		<script type="text/javascript" src="<!--#echo var='gwfx_m_cdn'-->/promote/lp294B/js/wow.min.js"></script>
-		<script type="text/javascript" src="<!--#echo var='gwfx_m_cdn'-->/promote/lp294B/js/swiper.min.js"></script>
-		<script type="text/javascript" src="<!--#echo var='gwfx_m_cdn'-->/promote/lp294B/js/jquery.SuperSlide.2.1.2.js"></script>
-		<script type="text/javascript">
-			var $GA_NAME = "lp294B";
-			var $UA;
-			$(function () {
-				// 动画加载
-				if (!(/msie [6|7|8|9]/i.test(navigator.userAgent))) {
-					new WOW().init();
-				}
-				else {
-					$(".wow").css({ "visibility": "visible" })
-				}
-				//产品切换
-				$(".prolist-tab span").click(function () {
-					var proindex = $(this).attr("data-num")
-					$(this).addClass("on").siblings().removeClass("on");
-					$(".prolisttype li").eq(proindex).show().siblings().hide();
-				})
-				//底部切换
-				$(".nav-list a").click(function () {
-					var indexatt = $(this).attr("data-num");
-					$(this).addClass("on").siblings().removeClass("on");
-					if (indexatt == 0 || indexatt == 1) {
-						$(".tab-main dd").eq(indexatt).show().siblings().hide();
-					}
-				})
-				/*跑马灯轮播*/
-				$(".marquee-con").slide({
-					mainCell: ".inner ul",
-					effect: "topLoop",
-					mouseOverStop: false,
-					vis: 2,
-					autoPlay: true,
-					interTime: 2000
-				});
-				/*移动端part1轮播*/
-				var mySwiper = new Swiper('.swiper-container', {
-					autoplay: {
-						delay: 3000,
-						stopOnLastSlide: false,
-						disableOnInteraction: false,
-					},//可选选项，自动滑动
-					autoplay: true,
-					loop: true
-				});
-				var index = 0;
-				var len = $(".indexPic div").length;
-				function AutoPlay() {
-					if (index < len) {
-						index++;
-					}
-					if (index >= len) {
-						index = 0;
-					}
-					$(".indexPic div").eq(index).fadeIn(1000).siblings().fadeOut(500);
-				}
-				setInterval(AutoPlay, 1500);
-				// console.log(index)
-				setInterval(function () {
-					$('.finger').toggleClass('on');
-				}, 1000);
-			});
+			<div class="clear"></div>
+		</span><span>
+			<div class="score-section">
+				<!-- react-text: 374 -->
+				<!-- /react-text --><br><!-- react-text: 376 -->
+				<!-- /react-text -->
+			</div>
+			<div class="clear"></div>
+		</span><span>
+			<div class="score-section">
+				<!-- react-text: 380 -->
+				<!-- /react-text -->
+				<!-- react-text: 381 -->
+				<!-- /react-text -->
+				<div>
+					<pre class="viewChordNoBar chord-row">A                                   F#m</pre>
+					<pre class="viewLyric">三番故里 窗外雨滴打破細碎的玻璃</pre>
+				</div>
+			</div>
+			<div class="clear"></div>
+		</span><span>
+			<div class="score-section">
+				<!-- react-text: 388 -->
+				<!-- /react-text -->
+				<!-- react-text: 389 -->
+				<!-- /react-text -->
+				<div>
+					<pre class="viewChordNoBar chord-row"> A                                  F#m</pre>
+					<pre class="viewLyric">與你相遇 是在一個單純美好的世界</pre>
+				</div>
+			</div>
+			<div class="clear"></div>
+		</span><span>
+			<div class="score-section">
+				<!-- react-text: 396 -->
+				<!-- /react-text -->
+				<!-- react-text: 397 -->
+				<!-- /react-text -->
+				<div>
+					<pre class="viewChordNoBar chord-row">       C#m        D             A</pre>
+					<pre class="viewLyric">而在變質那天 你淚流誇張情節</pre>
+				</div>
+			</div>
+			<div class="clear"></div>
+		</span><span>
+			<div class="score-section">
+				<!-- react-text: 404 -->
+				<!-- /react-text -->
+				<!-- react-text: 405 -->
+				<!-- /react-text -->
+				<div>
+					<pre class="viewChordNoBar chord-row">        Dmaj7                E7          A </pre>
+					<pre class="viewLyric">足以 向全世界討回 你付出的一切</pre>
+				</div>
+			</div>
+			<div class="clear"></div>
+		</span><span>
+			<div class="score-section">
+				<!-- react-text: 412 -->
+				<!-- /react-text --><br><!-- react-text: 414 -->
+				<!-- /react-text -->
+			</div>
+			<div class="clear"></div>
+		</span><span>
+			<div class="score-section">
+				<!-- react-text: 418 -->
+				<!-- /react-text -->
+				<!-- react-text: 419 -->
+				<!-- /react-text -->
+				<div>
+					<pre class="viewChordNoBar chord-row"> A                                  F#m</pre>
+					<pre class="viewLyric">妳的故事 存在一個需要密碼的盒子</pre>
+				</div>
+			</div>
+			<div class="clear"></div>
+		</span><span>
+			<div class="score-section">
+				<!-- react-text: 426 -->
+				<!-- /react-text -->
+				<!-- react-text: 427 -->
+				<!-- /react-text -->
+				<div>
+					<pre class="viewChordNoBar chord-row"> A                                  F#m</pre>
+					<pre class="viewLyric">紀念時刻 打開卻會冒出一陣陣白煙</pre>
+				</div>
+			</div>
+			<div class="clear"></div>
+		</span><span>
+			<div class="score-section">
+				<!-- react-text: 434 -->
+				<!-- /react-text --><br><!-- react-text: 436 -->
+				<!-- /react-text -->
+			</div>
+			<div class="clear"></div>
+		</span><span>
+			<div class="score-section">
+				<!-- react-text: 440 -->
+				<!-- /react-text -->
+				<!-- react-text: 441 -->
+				<!-- /react-text -->
+				<div>
+					<pre class="viewChordNoBar chord-row">       C#m       D                 A</pre>
+					<pre class="viewLyric">像是警告自己 不能屈服嚮往從前</pre>
+				</div>
+			</div>
+			<div class="clear"></div>
+		</span><span>
+			<div class="score-section">
+				<!-- react-text: 448 -->
+				<!-- /react-text -->
+				<!-- react-text: 449 -->
+				<!-- /react-text -->
+				<div>
+					<pre class="viewChordNoBar chord-row">Dmaj7    E7               A</pre>
+					<pre class="viewLyric">天變地變 我們的愛也變</pre>
+				</div>
+			</div>
+			<div class="clear"></div>
+		</span><span>
+			<div class="score-section">
+				<!-- react-text: 456 -->
+				<!-- /react-text --><br><!-- react-text: 458 -->
+				<!-- /react-text -->
+			</div>
+			<div class="clear"></div>
+		</span><span>
+			<div class="score-section">
+				<!-- react-text: 462 -->
+				<!-- /react-text -->
+				<!-- react-text: 463 -->
+				<!-- /react-text -->
+				<div>
+					<pre class="viewChordNoBar chord-row">    A                     F#m</pre>
+					<pre class="viewLyric">而我 在這座城市 遺失了你</pre>
+				</div>
+			</div>
+			<div class="clear"></div>
+		</span><span>
+			<div class="score-section">
+				<!-- react-text: 470 -->
+				<!-- /react-text -->
+				<!-- react-text: 471 -->
+				<!-- /react-text -->
+				<div>
+					<pre class="viewChordNoBar chord-row">                  Dmaj7</pre>
+					<pre class="viewLyric">順便遺失了自己</pre>
+				</div>
+			</div>
+			<div class="clear"></div>
+		</span><span>
+			<div class="score-section">
+				<!-- react-text: 478 -->
+				<!-- /react-text -->
+				<!-- react-text: 479 -->
+				<!-- /react-text -->
+				<div>
+					<pre class="viewChordNoBar chord-row">                  E7          E</pre>
+					<pre class="viewLyric">以為荒唐到底會有捷徑</pre>
+				</div>
+			</div>
+			<div class="clear"></div>
+		</span><span>
+			<div class="score-section">
+				<!-- react-text: 486 -->
+				<!-- /react-text --><br><!-- react-text: 488 -->
+				<!-- /react-text -->
+			</div>
+			<div class="clear"></div>
+		</span><span>
+			<div class="score-section">
+				<!-- react-text: 492 -->
+				<!-- /react-text -->
+				<!-- react-text: 493 -->
+				<!-- /react-text -->
+				<div>
+					<pre class="viewChordNoBar chord-row">    A                    F#m</pre>
+					<pre class="viewLyric">而我在這座城市 失去了你</pre>
+				</div>
+			</div>
+			<div class="clear"></div>
+		</span><span>
+			<div class="score-section">
+				<!-- react-text: 500 -->
+				<!-- /react-text -->
+				<!-- react-text: 501 -->
+				<!-- /react-text -->
+				<div>
+					<pre class="viewChordNoBar chord-row">                  Dmaj7</pre>
+					<pre class="viewLyric">輸給欲望高漲的自己</pre>
+				</div>
+			</div>
+			<div class="clear"></div>
+		</span><span>
+			<div class="score-section">
+				<!-- react-text: 508 -->
+				<!-- /react-text -->
+				<!-- react-text: 509 -->
+				<!-- /react-text -->
+				<div>
+					<pre class="viewChordNoBar chord-row">            E7          E</pre>
+					<pre class="viewLyric">不是妳 過分的感情</pre>
+				</div>
+			</div>
+			<div class="clear"></div>
+		</span><span>
+			<div class="score-section">
+				<!-- react-text: 516 -->
+				<!-- /react-text -->
+				<!-- react-text: 517 -->
+				<!-- /react-text -->
+				<div>
+					<pre class="viewChordNoBar chord-row">           D     A</pre>
+					<pre class="viewLyric">而我愛你</pre>
+				</div>
+			</div>
+			<div class="clear"></div>
+		</span><span>
+			<div class="score-section">
+				<!-- react-text: 524 -->
+				<!-- /react-text -->
+				<!-- react-text: 525 -->
+				<!-- /react-text -->
+				<div>
+					<pre class="viewChordNoBar chord-row">           D     A</pre>
+					<pre class="viewLyric">而愛無法撐起</pre>
+				</div>
+			</div>
+			<div class="clear"></div>
+		</span><span>
+			<div class="score-section">
+				<!-- react-text: 532 -->
+				<!-- /react-text -->
+				<!-- react-text: 533 -->
+				<!-- /react-text -->
+				<div>
+					<pre class="viewChordNoBar chord-row">           D     A</pre>
+					<pre class="viewLyric">想擁有的</pre>
+				</div>
+			</div>
+			<div class="clear"></div>
+		</span><span>
+			<div class="score-section">
+				<!-- react-text: 540 -->
+				<!-- /react-text -->
+				<!-- react-text: 541 -->
+				<!-- /react-text -->
+				<div>
+					<pre class="viewChordNoBar chord-row">           D     A</pre>
+					<pre class="viewLyric">想擁抱的</pre>
+				</div>
+			</div>
+			<div class="clear"></div>
+		</span><span>
+			<div class="score-section">
+				<!-- react-text: 548 -->
+				<!-- /react-text -->
+				<!-- react-text: 549 -->
+				<!-- /react-text -->
+				<div>
+					<pre class="viewChordNoBar chord-row">       G     G               A</pre>
+					<pre class="viewLyric">以為能通向領悟的結局</pre>
+				</div>
+			</div>
+			<div class="clear"></div>
+		</span><span>
+			<div class="score-section">
+				<!-- react-text: 556 -->
+				<!-- /react-text --><br><!-- react-text: 558 -->
+				<!-- /react-text -->
+			</div>
+			<div class="clear"></div>
+		</span><span>
+			<div class="score-section">
+				<pre>間奏
+                                                 </pre><!-- react-text: 563 -->
+				<!-- /react-text -->
+				<!-- react-text: 564 -->
+				<!-- /react-text -->
+			</div>
+			<div class="clear"></div>
+		</span><span>
+			<div class="score-section">
+				<!-- react-text: 568 -->
+				<!-- /react-text -->
+				<!-- react-text: 569 -->
+				<!-- /react-text -->
+				<div>
+					<pre class="viewChordNoBar chord-row">A                                  F#m</pre>
+					<pre class="viewLyric">妳的故事 存在一個需要密碼的盒子</pre>
+				</div>
+			</div>
+			<div class="clear"></div>
+		</span><span>
+			<div class="score-section">
+				<!-- react-text: 576 -->
+				<!-- /react-text -->
+				<!-- react-text: 577 -->
+				<!-- /react-text -->
+				<div>
+					<pre class="viewChordNoBar chord-row"> A                                  F#m</pre>
+					<pre class="viewLyric">紀念時刻 打開卻會冒出一陣陣白煙</pre>
+				</div>
+			</div>
+			<div class="clear"></div>
+		</span><span>
+			<div class="score-section">
+				<!-- react-text: 584 -->
+				<!-- /react-text --><br><!-- react-text: 586 -->
+				<!-- /react-text -->
+			</div>
+			<div class="clear"></div>
+		</span><span>
+			<div class="score-section">
+				<!-- react-text: 590 -->
+				<!-- /react-text -->
+				<!-- react-text: 591 -->
+				<!-- /react-text -->
+				<div>
+					<pre class="viewChordNoBar chord-row">       C#m       D                 A</pre>
+					<pre class="viewLyric">像是警告自己 不能屈服嚮往從前</pre>
+				</div>
+			</div>
+			<div class="clear"></div>
+		</span><span>
+			<div class="score-section">
+				<!-- react-text: 598 -->
+				<!-- /react-text -->
+				<!-- react-text: 599 -->
+				<!-- /react-text -->
+				<div>
+					<pre class="viewChordNoBar chord-row">Dmaj7    E7               A</pre>
+					<pre class="viewLyric">天變地變 我們的愛也變</pre>
+				</div>
+			</div>
+			<div class="clear"></div>
+		</span><span>
+			<div class="score-section">
+				<!-- react-text: 606 -->
+				<!-- /react-text --><br><!-- react-text: 608 -->
+				<!-- /react-text -->
+			</div>
+			<div class="clear"></div>
+		</span><span>
+			<div class="score-section">
+				<!-- react-text: 612 -->
+				<!-- /react-text -->
+				<!-- react-text: 613 -->
+				<!-- /react-text -->
+				<div>
+					<pre class="viewChordNoBar chord-row">    A                     F#m</pre>
+					<pre class="viewLyric">而我 在這座城市 遺失了你</pre>
+				</div>
+			</div>
+			<div class="clear"></div>
+		</span><span>
+			<div class="score-section">
+				<!-- react-text: 620 -->
+				<!-- /react-text -->
+				<!-- react-text: 621 -->
+				<!-- /react-text -->
+				<div>
+					<pre class="viewChordNoBar chord-row">                  Dmaj7</pre>
+					<pre class="viewLyric">順便遺失了自己</pre>
+				</div>
+			</div>
+			<div class="clear"></div>
+		</span><span>
+			<div class="score-section">
+				<!-- react-text: 628 -->
+				<!-- /react-text -->
+				<!-- react-text: 629 -->
+				<!-- /react-text -->
+				<div>
+					<pre class="viewChordNoBar chord-row">                  E7          E</pre>
+					<pre class="viewLyric">以為荒唐到底會有捷徑</pre>
+				</div>
+			</div>
+			<div class="clear"></div>
+		</span><span>
+			<div class="score-section">
+				<!-- react-text: 636 -->
+				<!-- /react-text --><br><!-- react-text: 638 -->
+				<!-- /react-text -->
+			</div>
+			<div class="clear"></div>
+		</span><span>
+			<div class="score-section">
+				<!-- react-text: 642 -->
+				<!-- /react-text -->
+				<!-- react-text: 643 -->
+				<!-- /react-text -->
+				<div>
+					<pre class="viewChordNoBar chord-row">    A                    F#m</pre>
+					<pre class="viewLyric">而我在這座城市 失去了你</pre>
+				</div>
+			</div>
+			<div class="clear"></div>
+		</span><span>
+			<div class="score-section">
+				<!-- react-text: 650 -->
+				<!-- /react-text -->
+				<!-- react-text: 651 -->
+				<!-- /react-text -->
+				<div>
+					<pre class="viewChordNoBar chord-row">                  Dmaj7</pre>
+					<pre class="viewLyric">輸給欲望高漲的自己</pre>
+				</div>
+			</div>
+			<div class="clear"></div>
+		</span><span>
+			<div class="score-section">
+				<!-- react-text: 658 -->
+				<!-- /react-text -->
+				<!-- react-text: 659 -->
+				<!-- /react-text -->
+				<div>
+					<pre class="viewChordNoBar chord-row">            E7          E</pre>
+					<pre class="viewLyric">不是妳 過分的感情</pre>
+				</div>
+			</div>
+			<div class="clear"></div>
+		</span><span>
+			<div class="score-section">
+				<!-- react-text: 666 -->
+				<!-- /react-text --><br><!-- react-text: 668 -->
+				<!-- /react-text -->
+			</div>
+			<div class="clear"></div>
+		</span><span>
+			<div class="score-section">
+				<pre>間奏
 
-			function toh5_trade(){
-				let url="h5_IX_trade_.html"+window.location.search;
-				window.location.href=url;
-				console.log(url)
-			}
-			function lp_home(){
-				if (isApp()){
-					IX_postMessage.toPage('/trade');
-				}
-				else {
-					let url="https://m.se6868x.com/lp294B.html" + window.location.search;
-					window.location.href=url;
-				}
-			}
-		</script>
-		<@_includePlace path="/common/google_optimize.html"/> 
-		<@_includePlace path="/toH5Page.html"/> <#-- toH5Page -->	
-		<@_includePlace path="/common/template/lp/lp_common.html"/> <#-- lp_common -->
-		<@_includePlace path="/common/template/lp/lp_analytics_container.html"/> <#-- lp_analytics_container -->
-	</body>
+</pre><!-- react-text: 673 -->
+				<!-- /react-text -->
+				<!-- react-text: 674 -->
+				<!-- /react-text -->
+			</div>
+			<div class="clear"></div>
+		</span><span>
+			<div class="score-section">
+				<!-- react-text: 678 -->
+				<!-- /react-text -->
+				<!-- react-text: 679 -->
+				<!-- /react-text -->
+				<div>
+					<pre class="viewChordNoBar chord-row">           D     A</pre>
+					<pre class="viewLyric">而我愛你</pre>
+				</div>
+			</div>
+			<div class="clear"></div>
+		</span><span>
+			<div class="score-section">
+				<!-- react-text: 686 -->
+				<!-- /react-text -->
+				<!-- react-text: 687 -->
+				<!-- /react-text -->
+				<div>
+					<pre class="viewChordNoBar chord-row">           D     A</pre>
+					<pre class="viewLyric">而愛無法撐起</pre>
+				</div>
+			</div>
+			<div class="clear"></div>
+		</span><span>
+			<div class="score-section">
+				<!-- react-text: 694 -->
+				<!-- /react-text -->
+				<!-- react-text: 695 -->
+				<!-- /react-text -->
+				<div>
+					<pre class="viewChordNoBar chord-row">           D     A</pre>
+					<pre class="viewLyric">想擁有的</pre>
+				</div>
+			</div>
+			<div class="clear"></div>
+		</span><span>
+			<div class="score-section">
+				<!-- react-text: 702 -->
+				<!-- /react-text -->
+				<!-- react-text: 703 -->
+				<!-- /react-text -->
+				<div>
+					<pre class="viewChordNoBar chord-row">           D     A</pre>
+					<pre class="viewLyric">想擁抱的</pre>
+				</div>
+			</div>
+			<div class="clear"></div>
+		</span><span>
+			<div class="score-section">
+				<!-- react-text: 710 -->
+				<!-- /react-text -->
+				<!-- react-text: 711 -->
+				<!-- /react-text -->
+				<div>
+					<pre class="viewChordNoBar chord-row">       G     G               A</pre>
+					<pre class="viewLyric">以為能通向領悟的結局</pre>
+				</div>
+			</div>
+			<div class="clear"></div>
+		</span></div>
+</body>
+
 </html>
