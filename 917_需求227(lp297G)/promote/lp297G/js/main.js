@@ -31,9 +31,13 @@ var vm = new Vue({
                     let list = document.getElementById('app')
                     let elhold = document.createElement('html')
                     elhold.innerHTML = response.data
-                    let DIV = elhold.getElementsByTagName('TABLE')
-                    console.log(elhold,DIV)
-                    list.appendChild(DIV[1])
+                    let h3 = elhold.getElementsByTagName('H3')
+                    let DIV_1 = elhold.getElementsByClassName('float_lang_base_1')
+                    let DIV_2 = elhold.getElementsByClassName('float_lang_base_2')
+                    let el = document.createElement('div')
+                    el.appendChild(DIV_1[0])
+                    console.log(el)
+                    list.appendChild(el)
                 })
                 .catch(function (error) {
                     console.log(error, 'axios 發送的 Http 、 Ws 出現錯誤');
