@@ -16,13 +16,14 @@ var vm = new Vue({
     data() {
         return {
             pid: 69,
-            peid: 60,
+            peid: 86400,
             one_block: [],
             one_css: [],
             two_block: [],
             three_block: [],
             four_block: [],
-            five_block: []
+            five_block: [],
+            isActive:true
         }
     },
     computed: {
@@ -50,8 +51,10 @@ var vm = new Vue({
                         if (table_one_collect[i].classList.length > 1) {
                             vm.one_css.push(table_one_collect[i].classList)
                         }
+                        
                         vm.one_block.push(table_one_collect[i].innerText)
                     }
+                    console.log(vm.one_css)
                     table_one.innerHTML = `<table>
                     <tbody><tr>
                         <th colspan="4">总结：<strong class="${vm.one_css[0]}">${vm.one_block[0]}</strong></th>
@@ -64,12 +67,13 @@ var vm = new Vue({
                     </tr>
                     <tr>
                         <td>${vm.one_block[5]}</td>
-                        <td class="${vm.one_css[2]}">${vm.one_block[6]}</td>
+                        <td class="${vm.one_css[2]} enforce">${vm.one_block[6]}</td>
                         <td>${vm.one_block[7]}</td>
                         <td>${vm.one_block[8]}</td>
                 </tr></tbody></table>`
-                    console.log(vm.one_css)
-                    console.log(vm.one_block)
+                    if(vm.one_block[6] === '强力卖出'){
+                        $('.enforce').addClass('redFont');
+                    }
                     el_all.appendChild(table_one)
                     // el.appendChild(h3xyz[0])
                     // el.appendChild(tableCross[0])

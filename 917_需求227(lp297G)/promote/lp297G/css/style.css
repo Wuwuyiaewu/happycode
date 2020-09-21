@@ -259,10 +259,9 @@ body {
 	background-size:100% auto;
 }
 .part_03 h3 {
-	background-image:url(../images/bg_01.jpg);
 	background-position:top center;
 	background-size:100% auto;
-	padding:0.4rem 0 0.38rem 0;
+	padding:0.4rem 0.1rem 0rem 0.1rem;
 	background-repeat:no-repeat;
 }
 .part_03 h3 img {

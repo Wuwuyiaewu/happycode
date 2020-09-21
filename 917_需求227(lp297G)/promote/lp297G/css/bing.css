@@ -9,11 +9,11 @@
   margin-bottom: 0.46rem;
 }
 
-.greenFont {
+.greenFont, .buy.uppercaseText {
   color: #009b4c;
 }
 
-.redFont {
+.redFont, .sell.uppercaseText {
   color: #ff0000;
 }
 
@@ -21,10 +21,16 @@
   display: inline-block;
 }
 
+.part_03_img1 {
+  display: block;
+  margin: 0 auto;
+  width: 90%;
+  padding: 0.3rem;
+}
+
 h3 {
   font-size: 0.18rem;
   padding: 0.5rem 0.1rem 0.12rem 0.15rem;
-  color: #000;
 }
 
 h3 .float_lang_base_2.arial_11.bold.lighterGrayFont.h3TitleDate {
@@ -42,6 +48,7 @@ table {
   width: 98%;
   margin: 0 auto;
   border: 1px solid #111;
+  font-size: 0.18rem;
 }
 
 table:nth-child(1) td {
