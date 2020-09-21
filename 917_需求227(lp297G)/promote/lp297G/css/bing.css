@@ -1,0 +1,82 @@
+.part_03_trading {
+  width: 92%;
+  margin: 0 auto;
+  border-radius: 0.15rem;
+  background-color: #fff;
+  color: #000;
+  padding-top: 0.5rem;
+  padding-bottom: 0.2rem;
+  margin-bottom: 0.46rem;
+}
+
+.greenFont {
+  color: #009b4c;
+}
+
+.redFont {
+  color: #ff0000;
+}
+
+.inlineblock {
+  display: inline-block;
+}
+
+h3 {
+  font-size: 0.18rem;
+  padding: 0.5rem 0.1rem 0.12rem 0.15rem;
+  color: #000;
+}
+
+h3 .float_lang_base_2.arial_11.bold.lighterGrayFont.h3TitleDate {
+  float: right;
+  display: inline-block;
+  color: #a0a0a0;
+  font-weight: normal;
+}
+
+table.one_tech td {
+  border: 1px solid #111;
+}
+
+table {
+  width: 98%;
+  margin: 0 auto;
+  border: 1px solid #111;
+}
+
+table:nth-child(1) td {
+  border: 1px solid #111;
+}
+
+table th {
+  text-align: center;
+}
+
+table .first.left {
+  text-align: left;
+}
+
+table td,
+table th {
+  padding: 0.12rem;
+  padding-left: 0.3rem;
+}
+
+table tr {
+  text-align: left;
+  border: 1px solid #111;
+}
+
+table tr td:nth-child(2), table tr td:nth-child(3) {
+  text-align: center;
+}
+
+.summary,
+.summaryTableLine,
+.float_lang_base_1 {
+  background: #fff;
+  color: #000;
+  line-height: 1.5;
+  font-size: 0.21rem;
+}
+/*# sourceMappingURL=bing.css.map */
