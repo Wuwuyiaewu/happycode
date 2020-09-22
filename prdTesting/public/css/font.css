@@ -1,0 +1,122 @@
+@font-face {
+    font-family: 'icomoon';
+    src:url('/public/fonts/icomoon.eot');
+    src:url('/public/fonts/icomoon.eot?#iefix') format('embedded-opentype'),
+    url('/public/fonts/icomoon.ttf') format('truetype'),
+    url('/public/fonts/icomoon.woff') format('woff'),
+    url('/public/fonts/icomoon.svg#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+.icon{
+    font-family: 'icomoon';
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.icon-check-circle:before {
+  content: "\e607";
+}
+.icon-desktop:before {
+  content: "\e600";
+}
+.icon-user:before {
+  content: "\e601";
+}
+.icon-arrow-right:before {
+  content: "\e602";
+}
+.icon-phone:before {
+  content: "\e942";
+}
+.icon-close:before {
+  content: "\f00d";
+}
+.icon-comment:before {
+  content: "\f075";
+}
+.icon-question:before {
+  content: "\f128";
+}
+.icon-qq:before {
+  content: "\f1d6";
+}
+.icon-weixin:before {
+  content: "\f1d7";
+}
+.icon-minus:before {
+  content: "\e604";
+}
+.icon-plus:before {
+  content: "\e603";
+}
+.icon-download:before {
+  content: "\e605";
+}
+.icon-images:before {
+  content: "\e90e";
+}
+.icon-volume:before {
+  content: "\ea27";
+}
+.icon-mobile:before {
+  content: "\e958";
+}
+.icon-arrow-right2:before {
+  content: "\e609";
+}
+.icon-email {
+	*zoom: ~"expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe606;')";
+}
+.icon-download {
+	*zoom: ~"expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe605;')";
+}
+.icon-desktop {
+	*zoom: ~"expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe600;')";
+}
+.icon-user {
+	*zoom: ~"expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe601;')";
+}
+.icon-arrow-right {
+	*zoom: ~"expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe602;')";
+}
+.icon-phone {
+	*zoom: ~"expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe942;')";
+}
+.icon-close {
+	*zoom: ~"expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf00d;')";
+}
+.icon-comment {
+	*zoom: ~"expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf075;')";
+}
+.icon-question {
+	*zoom: ~"expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf128;')";
+}
+.icon-qq {
+	*zoom: ~"expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf1d6;')";
+}
+.icon-weixin {
+	*zoom: ~"expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf1d7;')";
+}
+.icon-minus {
+	*zoom: ~"expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe604;')";
+}
+.icon-plus {
+	*zoom: ~"expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe603;')";
+}
+.icon-mobile {
+  *zoom: ~"expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe958;')";
+}
+.icon-check-circle {
+  *zoom: ~"expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe607;')";
+}
+.icon-arrow-right2 {
+  *zoom:~"expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe609;')";
+}
