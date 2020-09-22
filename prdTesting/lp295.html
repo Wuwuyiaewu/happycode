@@ -34,8 +34,7 @@
     </style>
     <div class="technical_analysis_main_content" id="technical_analysis_content" v-cloak>
 
-        <div class="technical_analysis_text_title">行情推荐</div>
-
+        
         <div class="technical_analysis_suggest_data_group">
             <div class="technical_analysis_suggest_data_menu">
                 <div @click="gotoSelectCatagory();">
@@ -95,7 +94,6 @@
 
         <br>
 
-        <div class="technical_analysis_text_title" v-if="rankedIds.length>0 && isShowTechnicalAnalysisHtml">技术分析</div>
 
         <div class="tech_analysis_group" v-if="isShowTechnicalAnalysisHtml">
 
