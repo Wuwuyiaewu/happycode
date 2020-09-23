@@ -28,13 +28,13 @@ var technicalAnalysisVue = new Vue({
 		},
 		techAnalyInfo:{},
 		rankedImgPath: [
-			'/promote/lp295/images/ranking_icon1.png',
-			'/promote/lp295/images/ranking_icon2.png',
-			'/promote/lp295/images/ranking_icon3.png',
-			'/promote/lp295/images/ranking_icon4.png',
-			'/promote/lp295/images/ranking_icon5.png'
+			'/promote/lp295/_v2_js_css/images/ranking_icon1.png',
+			'/promote/lp295/_v2_js_css/images/ranking_icon2.png',
+			'/promote/lp295/_v2_js_css/images/ranking_icon3.png',
+			'/promote/lp295/_v2_js_css/images/ranking_icon4.png',
+			'/promote/lp295/_v2_js_css/images/ranking_icon5.png'
 		],
-		rankedButtonPath:  '/promote/lp295/images/r_btn.png',
+		rankedButtonPath:  '/promote/lp295/_v2_js_css/images/r_btn.png',
 		techDetailTimingIndex:2,
 		techDetailTiming:[
 			{timeString:"5分钟", peid:"300"},
@@ -46,7 +46,21 @@ var technicalAnalysisVue = new Vue({
 			{timeString:"1分钟", peid:"60"},
 			{timeString:"30分钟", peid:"1800"},
 			{timeString:"5小时", peid:"18000"},		
-		],	
+		],
+		techDetailTimingSort:[
+			{timeString:"5分钟", peid:"300"},
+			{timeString:"15分钟", peid:"900"},
+			{timeString:"每小时", peid:"3600"},
+			{timeString:"每日", peid:"86400"},
+		],
+		techDetailTimingMenu:[
+			{timeString:"每月", peid:"month"},
+			{timeString:"每周", peid:"week"},
+			{timeString:"每日", peid:"86400"},
+			{timeString:"5小时", peid:"18000"},
+			{timeString:"30分钟", peid:"1800"},
+			{timeString:"1分钟", peid:"60"},	
+		],
 		catagory: [
 			{type:"外汇", toggle: true},
 			{type:"指数", toggle: true},
@@ -100,6 +114,7 @@ var technicalAnalysisVue = new Vue({
 		},		
 		selectedProductIds:[],
 		rankedIds:[],
+		exRates:{ 573139: 1.16823, 573039: 1.27218, 573024: 0.71334, 573028: 0.66224, 573035: 0.92125, 573033: 1.07610, 573034: 1.17177, 573036: 0.91818, 573041: 1.63763, 573037: 1.78335, 573030: 1.07705, 573069: 1.36637, 573090: 1.55562, 573091: 1.76441, 573031: 1.33174, 573088: 1.69363, 573089: 1.92091, 573032: 105.108, 573040: 122.775, 573038: 133.673, 573026: 74.95, 573029: 69.572, 573027: 78.923, 573043: 6.79531, 573042: 0.87675, 573087: 114.07,},
 		product: {
 		573139:{ type: "外汇", name: "欧元美元", profit: 0, high: 0, low: 0, mulpiple: "100000" ,pid: 1 ,isShow:false},
 			573039:{ type: "外汇", name: "英镑美元", profit: 0, high: 0, low: 0, mulpiple: "100000" ,pid: 2 ,isShow:false},
@@ -128,8 +143,8 @@ var technicalAnalysisVue = new Vue({
 			573042:{ type: "外汇", name: "港元离岸人民币", profit: 0, high: 0, low: 0, mulpiple: "1000" ,pid: 1817 ,isShow:false},
 			573087:{ type: "外汇", name: "瑞郎日元", profit: 0, high: 0, low: 0, mulpiple: "1000" ,pid: 13 ,isShow:false},
 			573023:{ type: "指数", name: "英国UK100", profit: 0, high: 0, low: 0, mulpiple: "10" ,pid: 8838 ,isShow:false},
-			573021:{ type: "指数", name: "法国FRA40", profit: 0, high: 0, low: 0, mulpiple: "20" ,pid: 8853 ,isShow:false},
-			573022:{ type: "指数", name: "德国GER30", profit: 0, high: 0, low: 0, mulpiple: "10" ,pid: 8826 ,isShow:false},
+			573021:{ type: "指数", name: "法国FRA40", profit: 0, high: 0, low: 0, mulpiple: "10" ,pid: 8853 ,isShow:false},
+			573022:{ type: "指数", name: "德国GER30", profit: 0, high: 0, low: 0, mulpiple: "5" ,pid: 8826 ,isShow:false},
 			573019:{ type: "指数", name: "美汇指数", profit: 0, high: 0, low: 0, mulpiple: "1000" ,pid: 8827 ,isShow:false},
 			573020:{ type: "指数", name: "恐慌指数", profit: 0, high: 0, low: 0, mulpiple: "1000" ,pid: 8884 ,isShow:false},
 			573016:{ type: "指数", name: "香港50", profit: 0, high: 0, low: 0, mulpiple: "2" ,pid: 8984 ,isShow:false},
@@ -139,8 +154,8 @@ var technicalAnalysisVue = new Vue({
 			573013:{ type: "指数", name: "美国SP500", profit: 0, high: 0, low: 0, mulpiple: "50" ,pid: 8839 ,isShow:false},
 			573014:{ type: "指数", name: "美国TECH100", profit: 0, high: 0, low: 0, mulpiple: "20" ,pid: 8874 ,isShow:false},
 			573012:{ type: "能源", name: "天然气", profit: 0, high: 0, low: 0, mulpiple: "10000" ,pid: 8862 ,isShow:false},
-			573011:{ type: "能源", name: "英国原油", profit: 0, high: 0, low: 0, mulpiple: "100" ,pid: 8833 ,isShow:false},
-			573010:{ type: "能源", name: "美国原油", profit: 0, high: 0, low: 0, mulpiple: "100" ,pid: 8849 ,isShow:false},
+			573011:{ type: "能源", name: "英国原油", profit: 0, high: 0, low: 0, mulpiple: "1000" ,pid: 8833 ,isShow:false},
+			573010:{ type: "能源", name: "美国原油", profit: 0, high: 0, low: 0, mulpiple: "1000" ,pid: 8849 ,isShow:false},
 			573005:{ type: "贵金属", name: "现货白银", profit: 0, high: 0, low: 0, mulpiple: "5000" ,pid: 69 ,isShow:false},
 			573004:{ type: "贵金属", name: "现货黄金", profit: 0, high: 0, low: 0, mulpiple: "100" ,pid: 68 ,isShow:false},
 			573003:{ type: "贵金属", name: "钯金", profit: 0, high: 0, low: 0, mulpiple: "100" ,pid: 1043108 ,isShow:false},
@@ -205,7 +220,7 @@ var technicalAnalysisVue = new Vue({
 				if (this.searchTechLock){
 					setTimeout(function(){
 						technicalAnalysisVue.updateSelectedProductIds();
-					}, 1250); 
+					}, 0); 
 				}
 				else {
 					this.updateSelectedProductIds();
@@ -322,10 +337,16 @@ var technicalAnalysisVue = new Vue({
 		this.ws.send(JSON.stringify(this.wsConfig));
 	},
 	wsResponseHandling(res){
+		let vm = this;
 		try {
 			if (res.data.indexOf('p(')==0){//ProductSubscription
 				//console.log(res.data);
 				let resSplitData=res.data.split(",");
+				prdCode = parseInt(resSplitData[0].split('p(')[1]);
+				//console.log(prdCode);
+				if (prdCode in vm.exRates) {
+					vm.exRates[prdCode] = parseFloat(resSplitData[3])
+				};
 				let target=this.product[parseInt(resSplitData[0].split('p(')[1])];
 				target.high=parseFloat(resSplitData[5]);
 				target.current=resSplitData[3];
@@ -338,8 +359,11 @@ var technicalAnalysisVue = new Vue({
 				let responseData=JSON.parse(res.data);
 				let msgCode=responseData.msg_code;
 				if (msgCode==='LastPrice'){
-				//	console.log(responseData.content);
-
+				responseData.content.find(prdt=>{
+					if (prdt.code_id in vm.exRates) {
+						vm.exRates[prdt.code_id] = prdt.cur_price;
+					}
+				});
 					//更新所有產品營利
 					for (let i=0;i<responseData.content.length;i++){
 						
@@ -353,6 +377,33 @@ var technicalAnalysisVue = new Vue({
 						target.current=responseData.content[i].cur_price.toString();
 						target.high=Math.max(this.product[responseData.content[i].code_id].current,parseFloat(responseData.content[i].high_price));
 						target.low=Math.min(this.product[responseData.content[i].code_id].current,parseFloat(responseData.content[i].low_price));;
+						if (target.pid=="8838") {
+							target.mulpiple = target.mulpiple*vm.exRates[573039];
+						} else if (target.pid=="8853" || target.pid=="8826"){
+							target.mulpiple = target.mulpiple*vm.exRates[573139];
+						} else if (target.pid=="8984"){
+							target.mulpiple = 50/(vm.exRates[573043]/vm.exRates[573042]);
+						} else if (target.pid=="941616"){
+							target.mulpiple = 100/vm.exRates[573043];
+						} else if (target.pid=="8859"){
+							target.mulpiple = 500/vm.exRates[573032];
+						} else if (target.pid=="10"||target.pid=="12"||target.pid=="4"){
+							target.mulpiple = target.mulpiple/vm.exRates[573035];
+						} else if (target.pid=="6"){
+							target.mulpiple = target.mulpiple*vm.exRates[573039];
+						} else if (target.pid=="15"||target.pid=="53"){
+							target.mulpiple = target.mulpiple*vm.exRates[573024];
+						} else if (target.pid=="50"||target.pid=="52"||target.pid=="55"){
+							target.mulpiple = target.mulpiple*vm.exRates[573028];
+						} else if (target.pid=="42"){
+							target.mulpiple = target.mulpiple/vm.exRates[593069];
+						} else if (target.pid=="16"||target.pid=="7"||target.pid=="54"){
+							target.mulpiple = target.mulpiple/vm.exRates[573031];
+						} else if (target.pid=="3"||target.pid=="9"||target.pid=="11"||target.pid=="13"||target.pid=="49"||target.pid=="51"||target.pid=="58"){
+							target.mulpiple = target.mulpiple/vm.exRates[573032];
+						} else if (target.pid=="961728"||target.pid=="1817"){
+							target.mulpiple = target.mulpiple/vm.exRates[573043];
+						}
 						target.profit=(target.high-target.low)*target.mulpiple;
 						Vue.set(this.product, responseData.content[i].code_id, JSON.parse(JSON.stringify(target)));
 					}
@@ -404,8 +455,8 @@ var technicalAnalysisVue = new Vue({
 		setTimeout(function(){
 			let peid=_this.techDetailTiming[_this.techDetailTimingIndex].peid;
 			let pid=_this.product[_this.rankedIds[_this.techAnalyIndex]].pid;
-			//console.log(peid);
-			//console.log(pid);
+			console.log(peid);
+			console.log(pid);
 			$.ajax({
 				method: 'post',
 				url: TECH_ANA_URL,
@@ -460,8 +511,6 @@ var technicalAnalysisVue = new Vue({
 				htmlObject2[3].querySelector('tbody tr:nth-child(13) p:nth-child(3) span:nth-child(1)').innerHTML+
 				htmlObject2[3].querySelector('tbody tr:nth-child(13) p:nth-child(3) span:nth-child(2)').innerHTML+'</span>';
 				newTechAnalyInfo.tiConclude=htmlObject2[3].querySelector('tbody tr:nth-child(13) p:nth-child(5) span').innerHTML;
-				
-				
 				_this.techAnalyInfo=newTechAnalyInfo;
 				_this.searchTechLock=false;
 			},
@@ -469,21 +518,27 @@ var technicalAnalysisVue = new Vue({
 				_this.searchTechLock=false;
 				console.log(errorThrown);
 			}});
-			
-			
-		}, 1250); 
+		}, 0); 
 
     },
 	switchTiming(index){
 		if (!this.searchTechLock){
-			let tempTechDedeil={timeString:this.techDetailTiming[index].timeString,peid:this.techDetailTiming[index].peid};
+			let tempTechDedeil={timeString:this.techDetailTimingMenu[index].timeString,peid:this.techDetailTimingMenu[index].peid};
 			this.techDetailTiming[index]={timeString:this.techDetailTiming[3].timeString,peid:this.techDetailTiming[3].peid};
-			this.techDetailTiming[3]=tempTechDedeil;
-			this.techDetailTimingIndex=3;
+			this.techDetailTimingSort[3]=tempTechDedeil;
 			this.isShowTimeMenu=false;
 			this.isShowInnerTimeMenu=false;
 			this.getTechnicalAnalysisInfo();
 		}
+		// if (!this.searchTechLock){
+		// 	let tempTechDedeil={timeString:this.techDetailTiming[index].timeString,peid:this.techDetailTiming[index].peid};
+		// 	this.techDetailTiming[index]={timeString:this.techDetailTiming[3].timeString,peid:this.techDetailTiming[3].peid};
+		// 	this.techDetailTiming[3]=tempTechDedeil;
+		// 	this.techDetailTimingIndex=3;
+		// 	this.isShowTimeMenu=false;
+		// 	this.isShowInnerTimeMenu=false;
+		// 	this.getTechnicalAnalysisInfo();
+		// }
 	},
 	setTechAnalyIndex(index){
 		if (!this.searchTechLock){

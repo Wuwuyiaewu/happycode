@@ -10,13 +10,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta name="author" content="[2020.09] Designed by Kim;Coded by Pong">
     <meta name="format-detection" content="telephone=no">
-    <link rel="shortcut icon" type="image/x-icon" href="/promote/lp295/images/favicon.ico" />
+    <link rel="shortcut icon" type="image/x-icon" href="/promote/lp295/_v2_js_css/images/favicon.ico" />
 
 
-    <script src="/promote/lp295/js/jquery.min.js" type="text/javascript"></script>
-    <script src="/promote/lp295/js/rem.js" charset="utf-8"></script>
-    <script src="/promote/lp295/js/wow.min.js" type="text/javascript"></script>
-    <!--<script src="/promote/lp295/js/lp295A.js" charset="utf-8"></script>-->
+    <script src="/promote/lp295/_v2_js_css/js/jquery.min.js" type="text/javascript"></script>
+    <script src="/promote/lp295/_v2_js_css/js/rem.js" charset="utf-8"></script>
+    <script src="/promote/lp295/_v2_js_css/js/wow.min.js" type="text/javascript"></script>
+    <!--<script src="/promote/lp295/_v2_js_css/js/lp295A.js" charset="utf-8"></script>-->
 
 </head>
 
@@ -26,15 +26,16 @@
     <script src="/public/js/ws-index-url.js" charset="utf-8"></script>
     <script src="/public/js/axios.js" type="text/javascript"></script>
     <script src="/public/js/vue.js" charset="utf-8"></script>
-    <link href="/promote/lp295/css/lp295A.css" type="text/css" rel="stylesheet" />
+    <link href="/promote/lp295/_v2_js_css/css/lp295A.css" type="text/css" rel="stylesheet" />
     <style>
         [v-cloak] {
             display: none;
         }
     </style>
     <div class="technical_analysis_main_content" id="technical_analysis_content" v-cloak>
-
-        
+        <div class="title_1">
+            <p>行情推荐</p>
+        </div>
         <div class="technical_analysis_suggest_data_group">
             <div class="technical_analysis_suggest_data_menu">
                 <div @click="gotoSelectCatagory();">
@@ -52,7 +53,6 @@
                             <th>现价</th>
                             <th colspan="2">单手盈利(美元)</th>
                         </tr>
-
                         <template v-for="(id, index) in rankedIds">
                             <tr>
                                 <td><img :src="rankedImgPath[index]" class="icon" :class="'rank'+(index+1)"></td>
@@ -92,9 +92,13 @@
             </div><!-- /suggest_popup_content-->
         </div><!-- /technical_analysis_suggest_popup_group-->
 
-        <br>
+
+        <!-- 技術分析 -->
 
 
+        <div class="title_2">
+            <p>技术分析</p>
+        </div>
         <div class="tech_analysis_group" v-if="isShowTechnicalAnalysisHtml">
 
             <ul class="tech_analysis_menu">
@@ -112,15 +116,19 @@
                     <p class="more_btn" @click="isShowTimeMenu=false;isShowTechDetailMenu=true;">了解更多</p>
                     <h1 v-if="product[rankedIds[techAnalyIndex]]">{{product[rankedIds[techAnalyIndex]].name}}</h1>
                     <div class="tech_analysis_time_menu">
-                        <template v-for="(e,index) in 4">
-                            <span v-bind:class="{selected:index===techDetailTimingIndex}"
-                                @click="setTechDetailTimingIndex(index)">{{techDetailTiming[index].timeString}}</span>
+                        <template v-for="(e,index) in techDetailTimingSort">
+                            <span v-bind:class="{selected:index===techDetailTimingIndex}" @click="setTechDetailTimingIndex(index)">{{e.timeString}}</span>
+                            <!-- <span v-bind:class="{selected:index===techDetailTimingIndex}"
+                                @click="setTechDetailTimingIndex(index)">{{techDetailTiming[index].timeString}}</span> -->
                         </template>
                         <div v-bind:class="{show:isShowTimeMenu}" class="other_menu" id="tech_analysis_other_menu">
                             <i @click="isShowTimeMenu=!isShowTimeMenu"></i>
                             <p>
-                                <template v-for="(e,index) in 5">
+                                <!-- <template v-for="(e,index) in 5">
                                     <span @click="switchTiming(index+4)">{{techDetailTiming[index+4].timeString}}</span>
+                                </template> -->
+                                <template v-for="(e,index) in techDetailTimingMenu">
+                                    <span @click="switchTiming(index)">{{e.timeString}}</span>
                                 </template>
                             </p>
                         </div>
@@ -375,7 +383,7 @@
     </div>
     <!--technical_analysis_main_content-->
 
-    <script src="/promote/lp295/js/main.js" charset="utf-8"></script>
+    <script src="/promote/lp295/_v2_js_css/js/main.js" charset="utf-8"></script>
 
 
 
@@ -391,11 +399,6 @@
 
 
 </body>
-<@_includePlace path="/toH5Page.html" />
-<#-- toH5Page -->
-    <@_includePlace path="/common/template/lp/lp_common.html" />
-    <#-- lp_common -->
-        <@_includePlace path="/common/template/lp/lp_analytics_container.html" />
-        <#-- lp_analytics_container -->
+
 
 </html>
