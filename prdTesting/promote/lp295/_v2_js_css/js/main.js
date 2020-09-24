@@ -445,90 +445,109 @@ var technicalAnalysisVue = new Vue({
 		
 		_gaq.push(['_trackEvent',$GA_NAME,urlPath, 'content_ti', 1,true]);
 	},
-	getTechnicalAnalysisInfo(){
+	getTechnicalAnalysisInfo(index){
 		if (!this.isShowTechnicalAnalysisHtml){
 			return;
 		}
 		this.techAnalyInfo=this.defaultTechAnalyInfo;
 		let _this=this;
 		this.searchTechLock=true;
-		setTimeout(function(){
-			let peid=_this.techDetailTiming[_this.techDetailTimingIndex].peid;
-			let pid=_this.product[_this.rankedIds[_this.techAnalyIndex]].pid;
-			console.log(peid);
-			console.log(pid);
-			$.ajax({
-				method: 'post',
-				url: TECH_ANA_URL,
-				data: {pid:pid,peid:peid},
-			success: function(msg){
-				let htmlObject=_this.parseHTML(msg);
-				let htmlObject2=_this.parseHTML(msg.substring(msg.indexOf('<h3'),msg.length));
-				let newTechAnalyInfo={};
 
-				//conclusion
-				newTechAnalyInfo.conclusion=htmlObject[0].querySelector('div:nth-child(1) span').innerHTML;
-				newTechAnalyInfo.conclusionBg=_this.setTechConclusionBgColor(newTechAnalyInfo.conclusion);
-				newTechAnalyInfo.conclusionMAText=htmlObject[0].querySelector('div:nth-child(2) span:nth-child(2)').innerHTML;
-				newTechAnalyInfo.conclusionMATextColor=_this.setTechConclusionTextColor(newTechAnalyInfo.conclusionMAText);
-				newTechAnalyInfo.conclusionMABuyText=htmlObject[0].querySelector('div:nth-child(2) span:nth-child(3)').innerHTML;
-				newTechAnalyInfo.conclusionMASellText=htmlObject[0].querySelector('div:nth-child(2) span:nth-child(4)').innerHTML;
-				newTechAnalyInfo.conclusionTechIndiText=htmlObject[0].querySelector('div:nth-child(3) span:nth-child(2)').innerHTML;
-				newTechAnalyInfo.conclusionTechIndiTextColor=_this.setTechConclusionTextColor(newTechAnalyInfo.conclusionTechIndiText);
-				newTechAnalyInfo.conclusionTechIndiBuyText=htmlObject[0].querySelector('div:nth-child(3) span:nth-child(3)').innerHTML;
-				newTechAnalyInfo.conclusionTechIndiSellText=htmlObject[0].querySelector('div:nth-child(3) span:nth-child(4)').innerHTML;
-				//MA
-				newTechAnalyInfo.standardMA5HTML=htmlObject2[4].querySelector('tbody tr:nth-child(1) td:nth-child(2)').innerHTML;
-				newTechAnalyInfo.moveMA5HTML=htmlObject2[4].querySelector('tbody tr:nth-child(1) td:nth-child(3)').innerHTML;
-				newTechAnalyInfo.standardMA10HTML=htmlObject2[4].querySelector('tbody tr:nth-child(2) td:nth-child(2)').innerHTML;
-				newTechAnalyInfo.moveMA10HTML=htmlObject2[4].querySelector('tbody tr:nth-child(2) td:nth-child(3)').innerHTML;
-				newTechAnalyInfo.standardMA20HTML=htmlObject2[4].querySelector('tbody tr:nth-child(3) td:nth-child(2)').innerHTML;
-				newTechAnalyInfo.moveMA20HTML=htmlObject2[4].querySelector('tbody tr:nth-child(3) td:nth-child(3)').innerHTML;
-				newTechAnalyInfo.standardMA50HTML=htmlObject2[4].querySelector('tbody tr:nth-child(4) td:nth-child(2)').innerHTML;
-				newTechAnalyInfo.moveMA50HTML=htmlObject2[4].querySelector('tbody tr:nth-child(4) td:nth-child(3)').innerHTML;
-				newTechAnalyInfo.standardMA100HTML=htmlObject2[4].querySelector('tbody tr:nth-child(5) td:nth-child(2)').innerHTML;
-				newTechAnalyInfo.moveMA100HTML=htmlObject2[4].querySelector('tbody tr:nth-child(5) td:nth-child(3)').innerHTML;
-				newTechAnalyInfo.standardMA200HTML=htmlObject2[4].querySelector('tbody tr:nth-child(6) td:nth-child(2)').innerHTML;
-				newTechAnalyInfo.moveMA200HTML=htmlObject2[4].querySelector('tbody tr:nth-child(6) td:nth-child(3)').innerHTML;
-				newTechAnalyInfo.maConcludeText='&nbsp;'+htmlObject2[4].querySelector('tbody tr:nth-child(7) p:nth-child(1) span:nth-child(1)').innerHTML+
-				htmlObject2[4].querySelector('tbody tr:nth-child(7) p:nth-child(1) span:nth-child(2)').innerHTML+'<br>'+'&nbsp;'+
-				htmlObject2[4].querySelector('tbody tr:nth-child(7) p:nth-child(2) span:nth-child(1)').innerHTML+
-				htmlObject2[4].querySelector('tbody tr:nth-child(7) p:nth-child(2) span:nth-child(2)').innerHTML;
-				newTechAnalyInfo.maConclude=htmlObject2[4].querySelector('tbody tr:nth-child(7) td p:nth-child(4) span').innerHTML;
-				//Technical Indicators
-				let ti=[];
-				for (let i=1;i<13;i++){
-					let name=htmlObject2[3].querySelector('tbody tr:nth-child('+i+') td:nth-child(1)').innerHTML;
-					let info=htmlObject2[3].querySelector('tbody tr:nth-child('+i+') td:nth-child(2)').innerHTML;
-					let conclude=htmlObject2[3].querySelector('tbody tr:nth-child('+i+') td:nth-child(3) span').innerHTML;
-					ti.push({name:name,info:info,conclude:conclude});
-				}
-				newTechAnalyInfo.ti=ti;
-				newTechAnalyInfo.tiConcludeInfo='<span>'+htmlObject2[3].querySelector('tbody tr:nth-child(13) p:nth-child(1) span:nth-child(1)').innerHTML+
-				htmlObject2[3].querySelector('tbody tr:nth-child(13) p:nth-child(1) span:nth-child(2)').innerHTML+'<br>'+
-				htmlObject2[3].querySelector('tbody tr:nth-child(13) p:nth-child(2) span:nth-child(1)').innerHTML+
-				htmlObject2[3].querySelector('tbody tr:nth-child(13) p:nth-child(2) span:nth-child(2)').innerHTML+'<br>'+
-				htmlObject2[3].querySelector('tbody tr:nth-child(13) p:nth-child(3) span:nth-child(1)').innerHTML+
-				htmlObject2[3].querySelector('tbody tr:nth-child(13) p:nth-child(3) span:nth-child(2)').innerHTML+'</span>';
-				newTechAnalyInfo.tiConclude=htmlObject2[3].querySelector('tbody tr:nth-child(13) p:nth-child(5) span').innerHTML;
-				_this.techAnalyInfo=newTechAnalyInfo;
-				_this.searchTechLock=false;
-			},
-			error: function(XMLHttpRequest, textStatus, errorThrown) {
-				_this.searchTechLock=false;
-				console.log(errorThrown);
-			}});
-		}, 0); 
+		if(index === undefined){
+			console.log('未傳入 index')
+			setTimeout(function(){
+				let peid=_this.techDetailTiming[_this.techDetailTimingIndex].peid;
+				let pid=_this.product[_this.rankedIds[_this.techAnalyIndex]].pid;
+				console.log(peid);
+				console.log(pid);
+				_this.ajaxTech_Url(peid,pid)
+			}, 0); 
+		}else{
+			console.log('有傳入 index 為' + index)
+			setTimeout(function(){
+				let peid=_this.techDetailTimingMenu[index].peid;
+				let pid=_this.product[_this.rankedIds[_this.techAnalyIndex]].pid;
+				console.log(peid);
+				console.log(pid);
+				_this.ajaxTech_Url(peid,pid)
+			}, 0); 
+		}
+	},
+	// 傳入產品技術分析所需 peid、pid
+	ajaxTech_Url(peid,pid){
+		let _this = this
+		$.ajax({
+			method: 'post',
+			url: TECH_ANA_URL,
+			data: {pid:pid,peid:peid},
+		success: function(msg){
+			let htmlObject=_this.parseHTML(msg);
+			let htmlObject2=_this.parseHTML(msg.substring(msg.indexOf('<h3'),msg.length));
+			let newTechAnalyInfo={};
 
-    },
+			//conclusion
+			newTechAnalyInfo.conclusion=htmlObject[0].querySelector('div:nth-child(1) span').innerHTML;
+			newTechAnalyInfo.conclusionBg=_this.setTechConclusionBgColor(newTechAnalyInfo.conclusion);
+			newTechAnalyInfo.conclusionMAText=htmlObject[0].querySelector('div:nth-child(2) span:nth-child(2)').innerHTML;
+			newTechAnalyInfo.conclusionMATextColor=_this.setTechConclusionTextColor(newTechAnalyInfo.conclusionMAText);
+			newTechAnalyInfo.conclusionMABuyText=htmlObject[0].querySelector('div:nth-child(2) span:nth-child(3)').innerHTML;
+			newTechAnalyInfo.conclusionMASellText=htmlObject[0].querySelector('div:nth-child(2) span:nth-child(4)').innerHTML;
+			newTechAnalyInfo.conclusionTechIndiText=htmlObject[0].querySelector('div:nth-child(3) span:nth-child(2)').innerHTML;
+			newTechAnalyInfo.conclusionTechIndiTextColor=_this.setTechConclusionTextColor(newTechAnalyInfo.conclusionTechIndiText);
+			newTechAnalyInfo.conclusionTechIndiBuyText=htmlObject[0].querySelector('div:nth-child(3) span:nth-child(3)').innerHTML;
+			newTechAnalyInfo.conclusionTechIndiSellText=htmlObject[0].querySelector('div:nth-child(3) span:nth-child(4)').innerHTML;
+			//MA
+			newTechAnalyInfo.standardMA5HTML=htmlObject2[4].querySelector('tbody tr:nth-child(1) td:nth-child(2)').innerHTML;
+			newTechAnalyInfo.moveMA5HTML=htmlObject2[4].querySelector('tbody tr:nth-child(1) td:nth-child(3)').innerHTML;
+			newTechAnalyInfo.standardMA10HTML=htmlObject2[4].querySelector('tbody tr:nth-child(2) td:nth-child(2)').innerHTML;
+			newTechAnalyInfo.moveMA10HTML=htmlObject2[4].querySelector('tbody tr:nth-child(2) td:nth-child(3)').innerHTML;
+			newTechAnalyInfo.standardMA20HTML=htmlObject2[4].querySelector('tbody tr:nth-child(3) td:nth-child(2)').innerHTML;
+			newTechAnalyInfo.moveMA20HTML=htmlObject2[4].querySelector('tbody tr:nth-child(3) td:nth-child(3)').innerHTML;
+			newTechAnalyInfo.standardMA50HTML=htmlObject2[4].querySelector('tbody tr:nth-child(4) td:nth-child(2)').innerHTML;
+			newTechAnalyInfo.moveMA50HTML=htmlObject2[4].querySelector('tbody tr:nth-child(4) td:nth-child(3)').innerHTML;
+			newTechAnalyInfo.standardMA100HTML=htmlObject2[4].querySelector('tbody tr:nth-child(5) td:nth-child(2)').innerHTML;
+			newTechAnalyInfo.moveMA100HTML=htmlObject2[4].querySelector('tbody tr:nth-child(5) td:nth-child(3)').innerHTML;
+			newTechAnalyInfo.standardMA200HTML=htmlObject2[4].querySelector('tbody tr:nth-child(6) td:nth-child(2)').innerHTML;
+			newTechAnalyInfo.moveMA200HTML=htmlObject2[4].querySelector('tbody tr:nth-child(6) td:nth-child(3)').innerHTML;
+			newTechAnalyInfo.maConcludeText='&nbsp;'+htmlObject2[4].querySelector('tbody tr:nth-child(7) p:nth-child(1) span:nth-child(1)').innerHTML+
+			htmlObject2[4].querySelector('tbody tr:nth-child(7) p:nth-child(1) span:nth-child(2)').innerHTML+'<br>'+'&nbsp;'+
+			htmlObject2[4].querySelector('tbody tr:nth-child(7) p:nth-child(2) span:nth-child(1)').innerHTML+
+			htmlObject2[4].querySelector('tbody tr:nth-child(7) p:nth-child(2) span:nth-child(2)').innerHTML;
+			newTechAnalyInfo.maConclude=htmlObject2[4].querySelector('tbody tr:nth-child(7) td p:nth-child(4) span').innerHTML;
+			//Technical Indicators
+			let ti=[];
+			for (let i=1;i<13;i++){
+				let name=htmlObject2[3].querySelector('tbody tr:nth-child('+i+') td:nth-child(1)').innerHTML;
+				let info=htmlObject2[3].querySelector('tbody tr:nth-child('+i+') td:nth-child(2)').innerHTML;
+				let conclude=htmlObject2[3].querySelector('tbody tr:nth-child('+i+') td:nth-child(3) span').innerHTML;
+				ti.push({name:name,info:info,conclude:conclude});
+			}
+			newTechAnalyInfo.ti=ti;
+			newTechAnalyInfo.tiConcludeInfo='<span>'+htmlObject2[3].querySelector('tbody tr:nth-child(13) p:nth-child(1) span:nth-child(1)').innerHTML+
+			htmlObject2[3].querySelector('tbody tr:nth-child(13) p:nth-child(1) span:nth-child(2)').innerHTML+'<br>'+
+			htmlObject2[3].querySelector('tbody tr:nth-child(13) p:nth-child(2) span:nth-child(1)').innerHTML+
+			htmlObject2[3].querySelector('tbody tr:nth-child(13) p:nth-child(2) span:nth-child(2)').innerHTML+'<br>'+
+			htmlObject2[3].querySelector('tbody tr:nth-child(13) p:nth-child(3) span:nth-child(1)').innerHTML+
+			htmlObject2[3].querySelector('tbody tr:nth-child(13) p:nth-child(3) span:nth-child(2)').innerHTML+'</span>';
+			newTechAnalyInfo.tiConclude=htmlObject2[3].querySelector('tbody tr:nth-child(13) p:nth-child(5) span').innerHTML;
+			_this.techAnalyInfo=newTechAnalyInfo;
+			_this.searchTechLock=false;
+		},
+		error: function(XMLHttpRequest, textStatus, errorThrown) {
+			_this.searchTechLock=false;
+			console.log(errorThrown);
+		}});
+	},
 	switchTiming(index){
 		if (!this.searchTechLock){
 			let tempTechDedeil={timeString:this.techDetailTimingMenu[index].timeString,peid:this.techDetailTimingMenu[index].peid};
-			this.techDetailTiming[index]={timeString:this.techDetailTiming[3].timeString,peid:this.techDetailTiming[3].peid};
+			// this.techDetailTiming[3]={timeString:this.techDetailTiming[3].timeString,peid:this.techDetailTiming[3].peid};
+			// console.log(this.techDetailTiming)
+
 			this.techDetailTimingSort[3]=tempTechDedeil;
 			this.isShowTimeMenu=false;
 			this.isShowInnerTimeMenu=false;
-			this.getTechnicalAnalysisInfo();
+			this.getTechnicalAnalysisInfo(index);
 		}
 		// if (!this.searchTechLock){
 		// 	let tempTechDedeil={timeString:this.techDetailTiming[index].timeString,peid:this.techDetailTiming[index].peid};
