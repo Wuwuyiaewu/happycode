@@ -17,9 +17,7 @@ body {
 	overflow-x: hidden;
 }
 
-a {
-
-}
+a {}
 
 input,
 button,
@@ -72,29 +70,85 @@ img {
 }
 
 /* pc */
+
+/* pivot start*/
+.curr_table_title{
+	font-size: 0.35rem;
+    color: #666666;
+    display: block;
+    padding: 0.05rem 0;
+}
+.curr_table {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.curr_table thead {
+	flex: 1 1 100%;
+}
+
+.curr_table thead tr {
+	flex: 1 1 100%;
+	display: flex;
+	border: 1px solid #cbcbcb;
+	justify-content: space-between;
+	line-height: 2;
+
+}
+.curr_table thead tr th {
+	flex: 1 1;
+	color: #cbcbcb;
+}
+.curr_table thead tr th:nth-child(1) {
+	padding-left: 0.1rem;
+}
+
+.curr_table tbody {
+	flex: 1 1 100%;
+}
+
+.curr_table tbody tr {
+	flex: 1 1 100%;
+	display: flex;
+	border: 1px solid #cbcbcb;
+	justify-content: space-between;
+	line-height: 2;
+}
+
+.curr_table tbody tr td {
+	flex: 1 1;
+}
+.curr_table tbody tr td:nth-child(1) {
+	padding-left: 0.1rem;
+}
+
+
+/* pivot end */
 .title_1 {
 	display: flex;
-	flex: 1 1 50%;
+	width: 5.4rem;
 	justify-content: center;
 	align-items: center;
-	font-size: 0.5rem;
+	font-size: 0.50rem;
 	font-weight: 900;
 	height: 1rem;
 }
 
 .title_2 {
 	display: flex;
-	flex: 1 1 50%;
+	width: 5.4rem;
 	justify-content: center;
 	align-items: center;
-	font-size: 0.5rem;
+	font-size: 0.50rem;
 	font-weight: 900;
 	height: 1rem;
 }
 
 .technical_analysis_main_content {
 	display: flex;
+	width: 12rem;
 	flex-wrap: wrap;
+	justify-content: center;
 	margin: auto;
 	background: #fff;
 	padding: 0.7rem 0.3rem 1.5rem 0.3rem;
@@ -105,13 +159,10 @@ img {
 
 .technical_analysis_suggest_data_group {
 	display: block;
-	width: 100%;
-	margin: 0.2rem auto 0.2rem auto;
+	width: 5.4rem;
+	margin-right: 0.14rem;
 	position: relative;
-	padding: 0 16px;
-
 	order: 1;
-	flex: 1 1 50%;
 }
 
 .technical_analysis_suggest_data_list {
@@ -134,7 +185,7 @@ img {
 
 .technical_analysis_suggest_data_list .w_bg {
 	display: block;
-	padding: 0.15rem 0.1rem 0.25rem 0.1rem;
+	padding: 0.16rem;
 	background: #fff;
 	border-radius: 0 0 0.03rem 0.03rem;
 }
@@ -142,14 +193,14 @@ img {
 .technical_analysis_suggest_data_list table {
 	border-collapse: collapse;
 	border-spacing: 0;
-	font-size: 0.32rem;
+	font-size: 0.18rem;
 	text-align: left;
 	width: 100%;
 }
 
 .technical_analysis_suggest_data_list table tr th {
 	text-align: left;
-	font-size: 0.28rem;
+	font-size: 0.18rem;
 	color: #cbcbcb;
 	padding: 0.1rem 0.05rem;
 	font-weight: normal;
@@ -158,7 +209,12 @@ img {
 .technical_analysis_suggest_data_list table tr td {
 	padding: 0.1rem 0.05rem;
 	color: #333333;
-	font-size: 0.26rem;
+	font-size: 0.2rem;
+	font-weight: 600;
+	font-weight: normal;
+	font-stretch: normal;
+	letter-spacing: 1px;
+	color: #333333;
 }
 
 .technical_analysis_suggest_data_list table tr td:first-child {
@@ -171,7 +227,7 @@ img {
 
 .technical_analysis_suggest_data_list table .icon {
 	display: block;
-	width: 0.55rem;
+	width: 0.39rem;
 }
 
 .technical_analysis_suggest_data_list table tr td:last-child {
@@ -180,7 +236,7 @@ img {
 
 .technical_analysis_suggest_data_list table .r_btn {
 	display: block;
-	width: 1.1rem;
+	width: 0.9rem;
 }
 
 .technical_analysis_suggest_data_list table .r_btn img {
@@ -219,7 +275,7 @@ img {
 }
 
 .technical_analysis_suggest_popup_group .suggest_popup_content .popup_title {
-	font-size: 0.5rem;
+	font-size: 0.28rem;
 	margin: 0;
 	padding: 0.1rem 0 0.1rem;
 	background: #1d87cc;
@@ -241,7 +297,7 @@ img {
 
 .technical_analysis_suggest_popup_group .suggest_popup_content ul li .suggest_data_all {
 	display: block;
-	font-size: 0.40rem;
+	font-size: 0.28rem;
 	line-height: 0.65rem;
 	text-align: left;
 	padding: 0 0 0 0.6rem;
@@ -270,7 +326,7 @@ img {
 
 .technical_analysis_suggest_popup_group .suggest_popup_content ul li label {
 	display: block;
-	font-size: 0.40rem;
+	font-size: 0.22rem;
 	line-height: 0.65rem;
 	text-align: left;
 	padding: 0 0 0 0.6rem;
@@ -312,7 +368,7 @@ img {
 
 .suggest_popup_btn a {
 	display: inline-block;
-	font-size: 0.35rem;
+	font-size: 0.18rem;
 	width: 2.2rem;
 	height: 0.6rem;
 	line-height: 0.6rem;
@@ -333,6 +389,7 @@ img {
 .technical_analysis_suggest_data_menu {
 	display: block;
 	position: relative;
+	height: 0.8rem;
 	width: 100%;
 	text-align: center;
 	box-sizing: border-box;
@@ -344,7 +401,7 @@ img {
 .technical_analysis_suggest_data_menu div {
 	display: block;
 	height: 100%;
-	font-size: 0.30rem;
+	font-size: 0.18rem;
 	color: #6fb7e7;
 	padding: 0 0.5rem;
 	border-radius: 80px;
@@ -354,7 +411,7 @@ img {
 }
 
 .technical_analysis_suggest_data_menu div p {
-	font-size: 0.36rem;
+	font-size: 0.18rem;
 	color: #fff;
 	background-image: url(../images/data_menu_icon.png);
 	background-size: 0.25rem 0.25rem;
@@ -381,8 +438,7 @@ img {
 
 .tech_analysis_group {
 	display: block;
-	flex: 1 1 50%;
-	margin: 0.2rem auto;
+	width: 5.4rem;
 	padding-bottom: 0.02rem;
 	border-radius: 0.1rem 0.1rem 0.05rem 0.05rem;
 	border: 1px solid #6cb1de;
@@ -410,7 +466,7 @@ img {
 	background: #e3f4ff;
 	text-align: center;
 	color: #6fb7e7;
-	font-size: 0.30rem;
+	font-size: 0.18rem;
 	line-height: 1.2;
 	cursor: pointer;
 }
@@ -436,6 +492,7 @@ img {
 	width: 90%;
 	vertical-align: middle;
 	word-break: break-all;
+	
 }
 
 .tech_analysis_data {
@@ -449,7 +506,7 @@ img {
 
 .tech_analysis_data li {
 	display: block;
-	padding: 0.2rem 0.25rem 0.25rem 0.25rem;
+	padding: 0.17rem;
 	box-sizing: border-box;
 	opacity: 0;
 	position: absolute;
@@ -466,17 +523,17 @@ img {
 
 .tech_analysis_data li h1 {
 	color: #666666;
-	font-size: 0.48rem;
+	font-size: 0.28rem;
 	display: block;
 }
 
 .tech_analysis_data li .more_btn {
 	display: block;
 	float: right;
-	font-size: 0.32rem;
+	font-size: 0.16rem;
 	color: #fff;
-	width: 1.5rem;
-	line-height: 0.45rem;
+	width: 0.9rem;
+	line-height: 0.40rem;
 	text-align: center;
 	background: #1d87cc;
 	color: #fff;
@@ -488,6 +545,7 @@ img {
 	display: block;
 	background: #efefef;
 	padding: 0.1rem;
+	height: 0.6rem;
 	margin: 0.1rem auto;
 	position: relative;
 	text-align: left;
@@ -495,17 +553,28 @@ img {
 
 .tech_analysis_time_menu>span {
 	display: inline-block;
-	height: 0.4rem;
-	line-height: 0.4rem;
+	position: absolute;
+	top: 30%;
 	text-align: center;
 	color: #999999;
-	font-size: 0.32rem;
+	font-size: 0.18rem;
 	text-align: center;
-	width: 1.3rem;
+	width: 0.8rem;
 	border-radius: 0.1rem;
 	cursor: pointer;
 }
-
+.tech_analysis_time_menu>span:nth-child(1) {
+	left: 0;
+}
+.tech_analysis_time_menu>span:nth-child(2) {
+	left: 20%;
+}
+.tech_analysis_time_menu>span:nth-child(3) {
+	left: 40%;
+}
+.tech_analysis_time_menu>span:nth-child(4) {
+	left: 60%;
+}
 .tech_analysis_time_menu>span.selected {
 	background: #1d87cc;
 	color: #fff;
@@ -549,7 +618,7 @@ img {
 .tech_analysis_time_menu .other_menu p span {
 	display: block;
 	border-bottom: 1px solid #d5d5d5;
-	font-size: 0.32rem;
+	font-size: 0.18rem;
 	color: #333333;
 	line-height: 0.7rem;
 	padding-left: 0.3rem;
@@ -572,7 +641,7 @@ img {
 .tech_analysis_table td {
 	border-bottom: 1px solid #d5d5d5;
 	color: #333333;
-	font-size: 0.32rem;
+	font-size: 0.18rem;
 	padding: 0.05rem;
 	box-sizing: border-box;
 }
@@ -621,7 +690,7 @@ img {
 	color: #333;
 	min-height: 0.6rem;
 	align-items: center;
-	font-size: 0.30rem;
+	font-size: 0.18rem;
 	line-height: 1.2;
 	padding: 0.04rem 0;
 	box-sizing: border-box;
@@ -697,7 +766,7 @@ img {
 	border-collapse: collapse;
 	border-spacing: 0;
 	color: #cbcbcb;
-	font-size: 0.30rem;
+	font-size: 0.18rem;
 }
 
 .tech_analysis_table_top td {
@@ -718,6 +787,7 @@ img {
 .tech_analysis_btn {
 	display: flex;
 	flex: 1 1 100%;
+	margin-top: 0.3rem;
 	text-align: center;
 	justify-content: center;
 	align-items: center;
@@ -727,7 +797,7 @@ img {
 .tech_analysis_btn a {
 	display: block;
 	margin: auto;
-	font-size: 0.40rem;
+	font-size: 0.18rem;
 	width: 3.5rem;
 	height: 0.7rem;
 	line-height: 0.7rem;
@@ -763,14 +833,18 @@ img {
 	vertical-align: middle;
 }
 
+.genTbl.closedTbl.crossRatesTbl {
+	display: block;
+}
+
 .tech_analysis_popup_content {
 	display: inline-block;
 	vertical-align: middle;
 	width: 96%;
-	max-width: 6.6rem;
+	max-width: 12rem;
 	box-sizing: border-box;
 	background: #fff;
-	font-size: 0.32rem;
+	font-size: 0.18rem;
 	padding: 0.15rem;
 	position: relative;
 	border-radius: 0.15rem;
@@ -779,7 +853,7 @@ img {
 
 .tech_analysis_popup_content h1 {
 	display: block;
-	font-size: 0.48rem;
+	font-size: 0.18rem;
 	color: #666666;
 	text-align: center;
 	line-height: 0.7rem;
@@ -788,7 +862,7 @@ img {
 }
 
 .tech_analysis_popup_content h4 {
-	font-size: 0.35rem;
+	font-size: 0.18rem;
 	color: #666666;
 	display: block;
 	padding: 0.05rem 0;
@@ -870,19 +944,21 @@ img {
 
 
 
-
-html {
-	font-size: 66px;
-}
-
 .tech_analysis_over {
-	height: 5.6rem;
+	height: 2.6rem;
 }
 
 
 /* msite */
 
 @media(max-width:750px) {
+	.curr_table {
+		display: none;
+	}
+
+	.genTbl.closedTbl.crossRatesTbl {
+		display: none;
+	}
 
 	.technical_analysis_main_content {
 		display: block;
@@ -1182,7 +1258,7 @@ html {
 		margin: 0.2rem auto;
 		padding-bottom: 0.02rem;
 		border-radius: 0.1rem 0.1rem 0.05rem 0.05rem;
-		border:1px solid #6cb1de;
+		border: 1px solid #6cb1de;
 		filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#6cb1de', endColorstr='#69cfbf', GradientType=1);
 
 	}

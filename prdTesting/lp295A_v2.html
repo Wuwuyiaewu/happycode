@@ -113,11 +113,12 @@
 
             <ul class="tech_analysis_data">
                 <li class="selected">
-                    <p class="more_btn" @click="isShowTimeMenu=false;isShowTechDetailMenu=true;">了解更多</p>
+                    <p class="more_btn" @click="isShowTimeMenu=false;isShowTechDetailMenu=true;getPivotpoint()">了解更多</p>
                     <h1 v-if="product[rankedIds[techAnalyIndex]]">{{product[rankedIds[techAnalyIndex]].name}}</h1>
                     <div class="tech_analysis_time_menu">
                         <template v-for="(e,index) in techDetailTimingSort">
-                            <span v-bind:class="{selected:index===techDetailTimingIndex}" @click="setTechDetailTimingIndex(index)">{{e.timeString}}</span>
+                            <span v-bind:class="{selected:index===techDetailTimingIndex}"
+                                @click="setTechDetailTimingIndex(index)">{{e.timeString}}</span>
                             <!-- <span v-bind:class="{selected:index===techDetailTimingIndex}"
                                 @click="setTechDetailTimingIndex(index)">{{techDetailTiming[index].timeString}}</span> -->
                         </template>
@@ -176,22 +177,20 @@
 
         <div class="tech_analysis_btn" v-if="isShowTechnicalAnalysisHtml"><a href="javascript:void(0)"
                 @click="lpToH5PageChecking('/productDetail/'+rankedIds[techAnalyIndex])">立 即 交 易</a></div>
-
-
         <div class="tech_analysis_popup" v-if="isShowTechDetailMenu && start">
             <div class="tech_analysis_popup_content">
                 <p class="tech_analysis_popup_close" @click="isShowTechDetailMenu=false;isShowInnerTimeMenu=false"></p>
                 <h1 v-if="product[rankedIds[techAnalyIndex]]">{{product[rankedIds[techAnalyIndex]].name}}</h1>
                 <div class="tech_analysis_time_menu" id="tech_analysis_time_menu">
-                    <template v-for="(e,index) in 4">
-                        <span v-bind:class="{selected:index===techDetailTimingIndex,tech_analysis_other_text:index===3}"
-                            @click="setTechDetailTimingIndex(index)">{{techDetailTiming[index].timeString}}</span>
+                    <template v-for="(e,index) in techDetailTimingSort">
+                        <span v-bind:class="{selected:index===techDetailTimingIndex}"
+                            @click="setTechDetailTimingIndex(index);getPivotpoint()">{{e.timeString}}</span>
                     </template>
                     <div v-bind:class="{show:isShowInnerTimeMenu}" class="other_menu" id="tech_analysis_other_menu">
                         <i @click="isShowInnerTimeMenu=!isShowInnerTimeMenu"></i>
                         <p>
-                            <template v-for="(e,index) in 5">
-                                <span @click="switchTiming(index+4)">{{techDetailTiming[index+4].timeString}}</span>
+                            <template v-for="(e,index) in techDetailTimingMenu">
+                                <span @click="switchTiming(index);getPivotpoint()">{{e.timeString}}</span>
                             </template>
                         </p>
                     </div>
@@ -203,39 +202,12 @@
                             <p :class="techAnalyInfo.conclusionBg"><span>{{techAnalyInfo.conclusion}}</span></p>
                         </th>
                     </tr>
-                    <tr>
-                        <td>
-                            <p>移动平均指数</p>
-                        </td>
-                        <td>
-                            <p :class="techAnalyInfo.conclusionMATextColor">{{techAnalyInfo.conclusionMAText}}</p>
-                        </td>
-                        <td>
-                            <p v-html="techAnalyInfo.conclusionMABuyText"></p>
-                        </td>
-                        <td>
-                            <p v-html="techAnalyInfo.conclusionMASellText"></p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <p>技术指标</p>
-                        </td>
-                        <td>
-                            <p :class="techAnalyInfo.conclusionTechIndiTextColor">
-                                {{techAnalyInfo.conclusionTechIndiText}}</p>
-                        </td>
-                        <td>
-                            <p v-html="techAnalyInfo.conclusionTechIndiBuyText"></p>
-                        </td>
-                        <td>
-                            <p v-html="techAnalyInfo.conclusionTechIndiSellText"></p>
-                        </td>
-                    </tr>
                 </table>
 
-                <div class="tech_analysis_over">
+                <h4 class="curr_table_title">枢轴点</h4>
+                <table class="curr_table"></table>
 
+                <div class="tech_analysis_over">
                     <h4>移动平均指数</h4>
                     <table class="tech_analysis_table_top">
                         <tr>
