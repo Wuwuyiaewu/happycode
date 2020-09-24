@@ -1,4 +1,5 @@
 const usExchangeRate = 7.77;
+console.log('17:21')
 var technicalAnalysisVue = new Vue({
 	el: '#technical_analysis_content',
 	data() {
@@ -271,7 +272,7 @@ var technicalAnalysisVue = new Vue({
 						this.selectedCatagoryText = this.catagory[i].type;
 					}
 					else {
-						this.selectedCatagoryText += " / " + this.catagory[i].type;
+						this.selectedCatagoryText += " /" + this.catagory[i].type;
 					}
 				}
 			}
@@ -341,19 +342,38 @@ var technicalAnalysisVue = new Vue({
 		wsResponseHandling(res) {
 			let vm = this;
 			try {
-				if (res.data.indexOf('p(') == 0) {//ProductSubscription
+				// if (res.data.indexOf('p(') == 0) {//ProductSubscription
+				// 	//console.log(res.data);
+				// 	let resSplitData = res.data.split(",");
+				// 	prdCode = parseInt(resSplitData[0].split('p(')[1]);
+				// 	//console.log(prdCode);
+				// 	if (prdCode in vm.exRates) {
+				// 		vm.exRates[prdCode] = parseFloat(resSplitData[3])
+				// 	};
+				// 	let target = this.product[parseInt(resSplitData[0].split('p(')[1])];
+					
+				// 	target.high = parseFloat(resSplitData[5]);
+				// 	target.current = resSplitData[3];
+				// 	target.low = parseFloat(resSplitData[6]);
+				// 	target.profit = (target.high - target.low) * target.mulpiple;
+				// 	Vue.set(this.product, parseInt(resSplitData[0].split('p(')[1]), JSON.parse(JSON.stringify(target)));
+				// }
+				if (res.data.indexOf('p(')==0){//ProductSubscription
 					//console.log(res.data);
-					let resSplitData = res.data.split(",");
+					let resSplitData=res.data.split(",");
 					prdCode = parseInt(resSplitData[0].split('p(')[1]);
 					//console.log(prdCode);
 					if (prdCode in vm.exRates) {
 						vm.exRates[prdCode] = parseFloat(resSplitData[3])
 					};
-					let target = this.product[parseInt(resSplitData[0].split('p(')[1])];
-					target.high = parseFloat(resSplitData[5]);
-					target.current = resSplitData[3];
-					target.low = parseFloat(resSplitData[6]);
-					target.profit = (target.high - target.low) * target.mulpiple;
+					let target=this.product[parseInt(resSplitData[0].split('p(')[1])];
+					target.current=resSplitData[3];
+					target.high=Math.max(parseFloat(resSplitData[3]),target.high);
+					target.low=Math.min(parseFloat(resSplitData[3]),target.low);
+					
+					//target.high=parseFloat(resSplitData[5]);
+					//target.low=parseFloat(resSplitData[6]);
+					target.profit=(target.high-target.low)*target.mulpiple;
 					Vue.set(this.product, parseInt(resSplitData[0].split('p(')[1]), JSON.parse(JSON.stringify(target)));
 				}
 				else {

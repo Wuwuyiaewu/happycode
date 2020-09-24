@@ -133,6 +133,17 @@
                                 </template>
                             </p>
                         </div>
+                        <div v-bind:class="{show:isShowTimeMenu}" class="other_menu m_site" id="tech_analysis_other_menu">
+                            <i @click="isShowTimeMenu=!isShowTimeMenu"></i>
+                            <p>
+                                <!-- <template v-for="(e,index) in 5">
+                                    <span @click="switchTiming(index+4)">{{techDetailTiming[index+4].timeString}}</span>
+                                </template> -->
+                                <template v-for="(e,index) in techDetailTimingMenu">
+                                    <span @click="switchTiming(index)">{{e.timeString}}</span>
+                                </template>
+                            </p>
+                        </div>
                     </div>
                     <table class="tech_analysis_table">
                         <tr>
@@ -201,6 +212,35 @@
                         <th colspan="3">
                             <p :class="techAnalyInfo.conclusionBg"><span>{{techAnalyInfo.conclusion}}</span></p>
                         </th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>移动平均指数</p>
+                        </td>
+                        <td>
+                            <p :class="techAnalyInfo.conclusionMATextColor">{{techAnalyInfo.conclusionMAText}}</p>
+                        </td>
+                        <td>
+                            <p v-html="techAnalyInfo.conclusionMABuyText"></p>
+                        </td>
+                        <td>
+                            <p v-html="techAnalyInfo.conclusionMASellText"></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>技术指标</p>
+                        </td>
+                        <td>
+                            <p :class="techAnalyInfo.conclusionTechIndiTextColor">
+                                {{techAnalyInfo.conclusionTechIndiText}}</p>
+                        </td>
+                        <td>
+                            <p v-html="techAnalyInfo.conclusionTechIndiBuyText"></p>
+                        </td>
+                        <td>
+                            <p v-html="techAnalyInfo.conclusionTechIndiSellText"></p>
+                        </td>
                     </tr>
                 </table>
 
