@@ -364,20 +364,19 @@ body {
 	width:30%;
 }
 .part_02 .main .i2 .i2_2 li .i2_2_1 div p:nth-child(1) {
-	width:37.8%;
-}
-.part_02 .main .i2 .i2_2 li .i2_2_1 div p:nth-child(1) {
+	display: inline-block;
 	width:37.8%;
 }
 .part_02 .main .i2 .i2_2 li .i2_2_1 div p:nth-child(2) {
-	width:62.2%;
+	display: inline-block;
+	width:60.2%;
 }
 
 .part_02 .main .i2 .i2_2 li .i2_2_1 input {
+	background: #fff;
 	display:block;
 	height: 0.4rem;
 	line-height: 0.4rem;
-	color: #cccbcc;
 	font-size: 0.24rem;
 	text-align: center;
 	border-radius: 0.2rem;

@@ -3,7 +3,7 @@
 
 	<head>
 		<meta charset="utf-8">
-		<title>10月份老客戶优惠活动页面</title>
+		<title>10月不設限不封頂</title>
 		<meta name="keywords" content="" />
 		<meta name="description" content="" />
 		<meta content="telephone=no" name="format-detection">
@@ -31,16 +31,35 @@
 		<script type="text/javascript">
 			remCompute(750, true);	
 		</script>
+		<!--#if expr="$QUERY_STRING=/app=ix_app_orig/"-->
+		<!--#set var="wx_url" value="?wx=ix_app_orig"-->
+		<!--#set var="app_url" value="?app=ix_app_orig"-->
+		<!--#set var="app_urld" value="noTopBlank"-->
+		<!--#else-->
+		<!--#set var="app_url" value=""-->
+		<!--#set var="wx_url" value=""-->
+		<!--#set var="app_urld" value=""-->
+		<!--#endif-->
+
+		<!--#if expr="$QUERY_STRING=/utm_source/"-->
+		<!--#set var="wx_url" value="?$QUERY_STRING"-->
+		<!--#set var="wx_url2" value="&$QUERY_STRING"-->
+		<!--#set var="wx_url3" value="$QUERY_STRING"-->
+		<!--#else-->
+		<!--#set var="wx_url" value=""-->
+		<!--#set var="wx_url2" value=""-->
+		<!--#set var="wx_url3" value=""-->
+		<!--#endif-->
+
 		<div class="fixed-top">
 			<div class="header fl">
 				<div class="header-inner">
 					<!--头部右边客服-->
 					<div class="h-right fr">
 						<span>
-							<a href="https://m.se6868x.com/common/01-app-qr.html" class="app_down_btn"
+							<a href="<!--#echo var='gwfx_m'-->/common/01-app-qr.html" class="app_down_btn"
 							   onclick="_gaq.push(['_trackEvent', $GA_NAME, 'app_download','content_first', 1,true]);">APP下载<span></span></a>
-							<a href="https://cs.se6868x.com:8188/?company_id=14&amp;utm_source=gw01&amp;utm_medium=banner3&amp;utm_campaign=laoke"
-							   class="online_btn" target="popup"
+							<a href="https://cs.se6868x.com:8188/?company_id=14<!--#echo var='wx_url2'-->" class="online_btn" target="popup"
 							   onclick="customer_service();_gaq.push(['_trackEvent',$GA_NAME,'chat_live800', 'content_top', 1,true]); return false;"
 							   title="在线客服">
 								在线客服</a>
@@ -48,16 +67,13 @@
 					</div>
 					<!--  logo-->
 					<h1>
-						<a href="https://www.se6868x.com?utm_source=gw01&amp;utm_medium=banner3&amp;utm_campaign=laoke"
-						   onclick="_gaq.push(['_trackEvent',$GA_NAME,'index', 'content_first', 1,true]);"
-						   class="logo logo-pclink" target="_blank"></a>
-						<a href="https://m.se6868x.com?utm_source=gw01&amp;utm_medium=banner3&amp;utm_campaign=laoke"
-						   onclick="_gaq.push(['_trackEvent',$GA_NAME,'mobile_index', 'content_first', 1,true]);"
-						   class="logo logo-mlink" target="_blank"></a>
+						<a href="<!--#echo var='gwfx_pc'--><!--#echo var='wx_url'-->" onclick="_gaq.push(['_trackEvent',$GA_NAME,'index', 'content_first', 1,true]);" class="logo logo-pclink" target="_blank"></a>
+						<a href="<!--#echo var='gwfx_m'--><!--#echo var='wx_url'-->" onclick="_gaq.push(['_trackEvent',$GA_NAME,'mobile_index', 'content_first', 1,true]);" class="logo logo-mlink" target="_blank"></a>
 					</h1>
 				</div>
 			</div>
 		</div>
+
 		<div class="wrapper">
 			<div class="part_01">
 				<div class="main">
@@ -77,7 +93,7 @@
 					</picture>
 				</div>
 				<div class="bt">
-					<a href="" class="wow fadeInLeft"><span>咨询客服</span></a>
+					<a href="https://cs.se6868x.com:8188/?company_id=14<!--#echo var='wx_url2'-->" class="wow fadeInLeft" onclick="customer_service();_gaq.push(['_trackEvent',$GA_NAME,'chat_live800', 'content_center', 1,true]);"><span>咨询客服</span></a>
 					<a href="javascript:void(0)" onclick="popup_show('login');"
 					   class="wow fadeInRight"><span>立即登记</span></a>
 				</div>
@@ -113,16 +129,16 @@
 							<li>
 								<div class="i2_2_1">
 									<div>
-										<p>输入<br>交易手数</p>
-										<p><input placeholder="2684" type="text"></p>
+										<p>输入交易手数</p>
+										<p><input placeholder="2684" type="text" id="handInput"></p>
 									</div>
-									<div><img src="promote/lp310C/images/bt_01.png"></div>
+									<div id="countBtn"><img src="promote/lp310C/images/bt_01.png"></div>
 								</div>
 							</li>
 							<li>
 								<div class="i2_2_1">
 									<p>返利赠金<br>(美元)</p>
-									<p><input placeholder="16888" type="text"></p>
+									<p><input placeholder="16888" type="text" id="ansInput" disabled></p>
 								</div>
 							</li>
 						</uL>
@@ -164,8 +180,10 @@
 						</div>
 					</li>
 				</ul>
-				<div class="bt wow fadeInUp"><a href="javascript:void(0)"
-												onclick="popup_show('login');"><span>立即登记</span></a></div>
+				<div class="bt wow fadeInUp"><a href="https://www.se6868x.com/lp306_glpl_038906890789_2020
+					08ch.html?utm_source=gw01&utm_medium=lp310C&ut
+					m_campaign=tuijian" target="_blank"
+												><span>了解更多</span></a></div>
 			</div>
 			<div class="part_04">
 				<h3>
@@ -217,23 +235,26 @@
 					</section>
 				</div>
 			</div>
-			<div class="footerINfo">
+			<div class="footerINfo numRun">
 				<h3 class="wow fadeInDown"><img src="promote/lp310C/images/aboutTitle.png" alt="关于智选"></h3>
-				<p class="i1 wow fadeInUp">覆盖外汇、贵金属、指数、原油等90+种交易产品，随时随地把握投资先机。<a href="">更多></a></p>
+				<p class="i1 wow fadeInUp">覆盖外汇、贵金属、指数、原油等90+种交易产品，随时随地把握投资先机。<a href="<!--#echo var='gwfx_pc'-->/03-App-lp/H5TradeInfo.html">更多></a></p>
 				<div class="i2">
-					<a href=""><img src="promote/lp310C/images/115_101.png" class="wow fadeInLeft" alt="关于我们"></a><a
-																													 href=""><img src="promote/lp310C/images/115_102.png" class="wow fadeInDown" alt="资金安全"></a><a
-                    href=""><img src="promote/lp310C/images/115_103.png" class="wow fadeInRight" alt="联系我们"></a>
+					<a href="<!--#echo var='gwfx_pc'-->/03-App-lp/H5TradeInfo.html?page=1<!--#echo var='wx_url2'-->"
+					   onclick="_gaq.push(['_trackEvent',$GA_NAME,'aboutus', 'content_first', 1,true]);"><img src="promote/lp310C/images/115_101.png" class="wow fadeInLeft" alt="关于我们" ></a>
+					<a  href="<!--#echo var='gwfx_pc'-->/03-App-lp/H5TradeInfo.html?page=2<!--#echo var='wx_url2'-->"
+					   onclick="_gaq.push(['_trackEvent',$GA_NAME,'aboutus', 'content_first', 1,true]);"><img src="promote/lp310C/images/115_102.png" class="wow fadeInDown" alt="资金安全"></a>
+					<a href="<!--#echo var='gwfx_pc'-->/03-App-lp/H5TradeInfo.html?page=3<!--#echo var='wx_url2'-->"
+					   onclick="_gaq.push(['_trackEvent',$GA_NAME,'aboutus', 'content_first', 1,true]);"><img src="promote/lp310C/images/115_103.png" class="wow fadeInRight" alt="联系我们"></a>
 					<div class="clearFix"></div>
 				</div>
 				<ul class="i3">
 					<li class="wow fadeInLeft">
 						<h4>累计成交手数</h4>
-						<p>15,470,467<strong>手</strong></p>
+						<p id="total_count_1">12,470,467<strong>手</strong></p>
 					</li>
 					<li class="wow fadeInRight">
 						<h4>累计服务人数</h4>
-						<p>1,670,298<strong>人</strong></p>
+						<p id="total_count_2">1,170,298<strong>人</strong></p>
 					</li>
 				</ul>
 				<div class="clearFix"></div>
@@ -260,6 +281,65 @@
 					<!--popup_inside-->
 				</div>
 			</div>
+
+			<div class="popup_div small_div" id="done1">
+				<div class="popup_div_content">
+					<p class="popup_close" onClick="popup_close('done1')"><img src="promote/lp308/img/close2.png"></p>
+					<h1>您已成功登记活动！</h1>
+					<div class="popup_inside">
+						<div class="popup_inside_over">
+							<div class="login_form">
+								<h2>交易同时赚取盈利跟赠金，<br>无上限返赠在等您!</h2>
+								<button	onClick="javascript:location.href='https://h5.smart-elite.com/yz352001/trade'; _gaq.push(['_trackEvent',$GA_NAME,'goToTrade', 'content_first', 1,true]); popup_close('done1')">马上交易</button>
+							</div>
+						</div>
+						<!--popup_inside_over-->
+					</div>
+					<!--popup_inside-->
+				</div>
+			</div>
+
+
+
+			<div class="popup_div small_div" id="done2">
+				<div class="popup_div_content">
+					<p class="popup_close" onClick="popup_close('done2')"><img src="promote/lp308/img/close2.png"></p>
+					<h1>您已登记过活动了！</h1>
+					<div class="popup_inside">
+						<div class="popup_inside_over">
+							<div class="login_form">
+								<h2>交易同时赚取盈利跟赠金，<br>无上限返赠在等您!</h2>
+								<button
+										onClick="javascript:location.href='https://h5.smart-elite.com/yz352001/trade'; _gaq.push(['_trackEvent',$GA_NAME,'goToTrade', 'content_first', 1,true]); popup_close('done2')">马上交易</button>
+							</div>
+						</div>
+						<!--popup_inside_over-->
+					</div>
+					<!--popup_inside-->
+				</div>
+			</div>
+
+			<div class="popup_div small_div" id="done3">
+				<div class="popup_div_content">
+					<p class="popup_close" onClick="popup_close('done3')"><img src="promote/lp308/img/close2.png"></p>
+					<h1>您不符合此次活动资格</h1>
+					<div class="popup_inside">
+						<div class="popup_inside_over">
+							<div class="login_form">
+								<h2>请联系客服了解更多优惠信息！</h2>
+								<button
+										onClick="customer_service();_gaq.push(['_trackEvent',$GA_NAME,'chat_live800', 'content_third', 1,true]); popup_close('done3'); ">联系客服</button>
+							</div>
+						</div>
+						<!--popup_inside_over-->
+					</div>
+					<!--popup_inside-->
+				</div>
+			</div>
+
+
+
+
 			<div class="popup_div" id="tnc">
 				<div class="popup_div_content">
 					<p class="popup_close" onClick="popup_close('tnc')"><img src="promote/lp310C/images/close.png"></p>
@@ -393,13 +473,14 @@
 
 			<div class="bBt">
 				<div class="bt">
-					<a href="https://cs.se6868x.com:8188/?company_id=14&utm_source=1&utm_medium=1&utm_campaign=1&utm_term=1&utm_content=1&chat_type=1&lang=zh-CN&uagent=Mozilla%2F5.0%20(Windows%20NT%206.1%3B%20Win64%3B%20x64)%20AppleWebKit%2F537.36%20(KHTML%2C%20like%20Gecko)%20Chrome%2F83.0.4103.116%20Safari%2F537.36&reffer=https%3A%2F%2Fwww.se6868x.com%2F&lastPageDesc=%E6%99%BA%E9%80%89%E5%A4%A9%E4%B8%8B%20-%20%E6%9B%B4%E4%B8%93%E4%B8%9A%E7%9A%84%E9%87%91%E8%9E%8D%E6%8A%95%E8%B5%84%E5%B9%B3%E5%8F%B0%EF%BC%8C%E6%8F%90%E4%BE%9B%E5%A4%96%E6%B1%87%E3%80%81%E5%95%86%E5%93%81%E5%8F%8A%E8%82%A1%E6%8C%87%E7%AD%89%E5%A4%9A%E5%85%83%E5%8C%96%E9%87%91%E8%"
+					<a href="https://cs.se6868x.com:8188/?company_id=14<!--#echo var='wx_url2'-->"
 					   target="_blank"><span>咨询客服</span></a>
 					<a href="javascript:void(0)" onclick="popup_show('login');"><span>立即登记</span></a>
 				</div>
 			</div>
 			<link rel="stylesheet" href="public/css/swiper3.1.0.min.css" media="screen and (max-width:750px)" />
 			<script type="text/javascript">
+				var $GA_NAME = "lp310C";
 				if ($(window).width() < 751) {
 					document.write('<script type="text/javascript" src="public/js/swiper.min_2017.js"><\/script>');
 				}
@@ -410,9 +491,9 @@
 					$("#" + div_name).fadeOut();
 					return false;
 				}
-				$(window).resize(function () {
-					location.reload();
-				});
+				//$(window).resize(function () {
+				// 	location.reload();
+				// });
 				jQuery(document).ready(function () {
 					//animate
 					new WOW().init();
@@ -451,8 +532,40 @@
 					});
 				});
 			</script>
+			<script src="https://img-pc.bbyou.net/common/js/count.js" type="text/javascript" ></script>
+			<script>
+				var baseDate=new Date(2020, 7, 10);
+				var todayDate=new Date();
+				var diffDays = parseInt((todayDate - baseDate) / (1000 * 60 * 60 * 24), 10); 
+				var count1=15470467+ 1950*(1+diffDays);
+				var count2= 1670298 + (1+diffDays)*98;
+
+
+				function countAnimCheck(){
+					let a = $(window).height();
+					let group = $(".numRun");
+					let b = $(this).scrollTop();
+					let c = group.offset().top;
+					if (a + b > c+100 ) {
+						$("#total_count_1").animateNumbers(count1, true, 500);
+						$("#total_count_2").animateNumbers(count2, true, 500);
+					}	
+				}
+
+				$(document).ready(function(){
+					countAnimCheck();
+				});	
+
+
+				$(window).scroll(function () {
+					countAnimCheck();
+				});
+			</script> 
 			<script src="promote/lp310C/js/compute.js" charset="utf-8"></script>
 			<script src="promote/lp310C/js/main.js" charset="utf-8"></script>
+			<!--#include file="/common/template/lp/back-top.html"-->
+			<!--#include file="/common/template/lp/lp_analytics_container.html"-->
+			<!--#include file="/common/template/lp/lp_common.html"-->
+			<@_includePlace path="/app/tags/about_se.html"/> <#-- about_se -->
 			</body>
-
 		</html>

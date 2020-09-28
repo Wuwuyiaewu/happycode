@@ -633,13 +633,25 @@ var technicalAnalysisVue = new Vue({
 			else {
 				return 'text_normal';
 			}
+		},
+		// 關閉技術分析顯示
+		closeTechTimeMenu(){
+			let vm = this
+			let techBtn = document.getElementById('technical_analysis_content')
+			techBtn.addEventListener('click',function(){
+				vm.isShowTimeMenu = false
+			},true)
 		}
+	},
+	watch:{
+
 	},
 	created() {
 		this.start = true;
 		//this.initCookies();
 		//this.getCookies();  
 		this.updateAllCatagoryButtonStatus();
+		this.closeTechTimeMenu();
 		this.initWs();
 		this.techAnalyInfo = this.defaultTechAnalyInfo;
 

@@ -334,11 +334,11 @@ html{
 	display:none;
 }
 .part_02 .main .i2 .i2_2 li .i2_2_1 input {
+	background: #fff;
 	display:block;
 	margin-top:10px;
 	height: 40px;
 	line-height: 40px;
-	color: #cccbcc;
 	font-size: 24px;
 	text-align: center;
 	border-radius: 20px;
