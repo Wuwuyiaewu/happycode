@@ -1,0 +1,109 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after {
+  content: "";
+  content: none;
+}
+
+q:before, q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  background-color: #ffad77;
+}
+
+body {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.cup-top {
+  position: relative;
+  width: 120px;
+  border-right: 15px solid transparent;
+  border-left: 15px solid transparent;
+  border-bottom: 40px solid #3a3a3a;
+  cursor: pointer;
+  transform-origin: left bottom;
+  transition: 0.5s;
+}
+
+.cup-top:hover {
+  transform: rotate(-20deg);
+}
+
+.cup-top::after {
+  content: "";
+  position: absolute;
+  bottom: -40px;
+  left: -30px;
+  width: 180px;
+  height: 15px;
+  background-color: #000;
+  border-radius: 5px;
+}
+
+.cup-body {
+  position: relative;
+  width: 120px;
+  border-right: 15px solid transparent;
+  border-left: 15px solid transparent;
+  border-top: 200px solid #fff;
+  z-index: -1;
+}
+
+.cup-body::before {
+  content: "";
+  position: absolute;
+  bottom: 60px;
+  left: -16px;
+  width: 136px;
+  border-right: 8px solid transparent;
+  border-left: 8px solid transparent;
+  border-top: 70px solid #936200;
+}
