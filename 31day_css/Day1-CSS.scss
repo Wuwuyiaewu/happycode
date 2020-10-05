@@ -1,0 +1,59 @@
+@import '_reset.scss';
+* {
+  margin: 0;
+  padding: 0;
+  background-color: #ffad77;
+}
+body {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.cup-top {
+  position: relative;
+  width: 120px;
+  border-right: 15px solid transparent;
+  border-left: 15px solid transparent;
+  border-bottom: 40px solid #3a3a3a;
+  cursor: pointer;
+  transform-origin: left bottom;
+  transition: .5s;
+}
+
+.cup-top:hover {
+  transform: rotate(-20deg);
+}
+
+.cup-top::after {
+  content: '';
+  position: absolute;
+  bottom: -40px;
+  left: -30px;
+  width: 180px;
+  height: 15px;
+  background-color: #000;
+  border-radius: 5px;
+}
+
+
+.cup-body {
+  position: relative;
+  width: 120px;
+  border-right: 15px solid transparent;
+  border-left: 15px solid transparent;
+  border-top: 200px solid #fff;
+  z-index: -1;
+}
+
+
+.cup-body::before {
+  content: '';
+  position: absolute;
+  bottom: 60px;
+  left: -16px;
+  width: 136px;
+  border-right: 8px solid transparent;
+  border-left: 8px solid transparent;
+  border-top: 70px solid #936200;
+}
