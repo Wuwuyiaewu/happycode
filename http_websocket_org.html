@@ -293,7 +293,6 @@
                 WsUpdateReal(data) {
                     let vm = this
                     // 實時數據資料
-                    vm.realtimeData = JSON.parse(JSON.stringify(vm.allLastProduct))
                     vm.realtimeData.forEach(el => {
                         if (el.code_id == data[0]) {
                             el.sell_price = data[1]
@@ -369,6 +368,7 @@
                             newarr.content.forEach(el => {
                                 vm.allLastProduct = vm.allLastProduct.concat(el)
                             })
+                            vm.realtimeData = JSON.parse(JSON.stringify(vm.allLastProduct))
                             _content_pr = {
                                 code_ids: vm.typeId,
                                 subscribeType: "reSubscribe",
