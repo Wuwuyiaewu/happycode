@@ -16,8 +16,66 @@
             {{item}}
         </span>
         <p>methods: defineProduct , data: typeId</p>
+        <h1>所有產品最後一口價資料</h1>
+        <table>
+            <tr>
+                <th>code_id</th>
+                <th>cur_price</th>
+                <th>buy_price</th>
+                <th>sell_price</th>
+                <th>high_price</th>
+                <th>low_price</th>
+                <th>open_price</th>
+                <th>yesterday_price</th>
+                <th>seq</th>
+                <th>time</th>
+            </tr>
+            <tr v-for="item in allLastProduct">
+                <td>{{item.code_id}}</td>
+                <td>{{item.cur_price}}</td>
+                <td>{{item.buy_price}}</td>
+                <td>{{item.sell_price}}</td>
+                <td>{{item.high_price}}</td>
+                <td>{{item.low_price}}</td>
+                <td>{{item.open_price}}</td>
+                <td>{{item.yesterday_price}}</td>
+                <td>{{item.seq}}</td>
+                <td>{{item.time}}</td>
+            </tr>
+        </table>
+
         <h1>實時數據</h1>
-        <span>{{realtimeData}} <br> methods: WsUpdateReal , data: realtimeData</span>
+        <table>
+            <tr>
+                <th>code_id</th>
+                <th>cur_price</th>
+                <th>buy_price</th>
+                <th>sell_price</th>
+                <th>high_price</th>
+                <th>low_price</th>
+                <th>open_price</th>
+                <th>yesterday_price</th>
+                <th>seq</th>
+                <th>time</th>
+            </tr>
+            <tr v-for="item in realtimeData">
+                <td>{{item.code_id}}</td>
+                <td>{{item.cur_price}}</td>
+                <td>{{item.buy_price}}</td>
+                <td>{{item.sell_price}}</td>
+                <td>{{item.high_price}}</td>
+                <td>{{item.low_price}}</td>
+                <td>{{item.open_price}}</td>
+                <td>{{item.yesterday_price}}</td>
+                <td>{{item.seq}}</td>
+                <td>{{item.time}}</td>
+            </tr>
+        </table>
+        <br>
+        <p>methods: WsUpdateReal , data: realtimeData</p>
+        <h1>技術分析 HTML</h1>
+        <p>methods: getCurrenc , data: currenctTemp</p>
+        <span>{{currenctTemp}}</span>
     </div>
     <script>
         const WS_BASE_URL = "wss://api.mircoinfolab.com/websocket";
@@ -26,6 +84,7 @@
             el: "#app",
             data() {
                 return {
+                    currencies: 'https://api.bingxuegirl.com/inv/currencies',
                     // 03 總產品清單 json url
                     jsonUrl: './json/code_03_ix.json',
                     // Http 登入獲取 token
@@ -72,10 +131,14 @@
                     },
                     // 所有產品 id
                     typeId: [],
+                    // 總產品_最後一口價
+                    allLastProduct: [],
                     // 時實數據
-                    realtimeData: '',
+                    realtimeData: [],
                     // 心跳間隔(單位:毫秒)
                     beatTime: 30000,
+                    // 行情技術分析
+                    currenctTemp: "",
                 }
             },
             computed: {
@@ -93,6 +156,15 @@
                 get_current_time() {
                     var d = new Date();
                     return d.getTime();
+                },
+                // 取得技術分析
+                getCurrenc() {
+                    let vm = this
+                    axios(vm.currencies).then(res => {
+                        vm.currenctTemp = res.data
+                    }).catch(error => {
+                        console.log(error, '技術分析錯誤')
+                    })
                 },
                 // 要做 ws 以前都要先做 http 發送登入，才能夠要到 token 做 ws 操作 ix 文檔
                 // https://testdocs.ixmiddle.com/ixmiddle/http-interface-doc/account/appProperties/getAccountProperties.html
@@ -221,7 +293,16 @@
                 WsUpdateReal(data) {
                     let vm = this
                     // 實時數據資料
-                    vm.realtimeData = data
+                    vm.realtimeData = JSON.parse(JSON.stringify(vm.allLastProduct))
+                    vm.realtimeData.forEach(el => {
+                        if (el.code_id == data[0]) {
+                            el.sell_price = data[1]
+                            el.buy_price = data[2]
+                            el.cur_price = data[3]
+                            el.high_price = data[5]
+                            el.low_price = data[6]
+                        }
+                    })
                 },
                 Wsevent(e) {
                     let vm = this
@@ -284,10 +365,10 @@
                             vm.WsLastpriceBuildup("lastPrice", _content_ls)
                             break;
                         case "LastPrice":
-                            // console.log(`找到最後一口報價`, msg)
-                            let newarr = []
-                            let tempType = ''
-
+                            let newarr = JSON.parse(e)
+                            newarr.content.forEach(el => {
+                                vm.allLastProduct = vm.allLastProduct.concat(el)
+                            })
                             _content_pr = {
                                 code_ids: vm.typeId,
                                 subscribeType: "reSubscribe",
@@ -305,6 +386,7 @@
             },
             created() {
                 this.gotourl()
+                this.getCurrenc()
             },
             destroyed() {
             }
