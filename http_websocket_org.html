@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.7/vue.js'></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.js'></script>
+    <script src='./json/vue.js'></script>
+    <script src='./json/axios.js'></script>
     <title>websocket_資料無修正_步兵手刻</title>
 </head>
 
@@ -44,7 +44,7 @@
             </tr>
         </table>
 
-        <h1>實時數據</h1>
+        <h1>實時數據(含最後一口價資料)</h1>
         <table>
             <tr>
                 <th>code_id</th>
@@ -298,6 +298,7 @@
                             el.sell_price = data[1]
                             el.buy_price = data[2]
                             el.cur_price = data[3]
+                            el.time = data[4]
                             el.high_price = data[5]
                             el.low_price = data[6]
                         }
