@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sliding Texts Animation</title>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.css' />
+    <style>
+        .fade-enter-active {
+            animation: fadeInUp;
+            animation-duration: 1s;
+        }
+
+        .fade-leave-active {
+            animation: fadeOutUp;
+            animation-duration: 1s;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- https://www.youtube.com/watch?v=ixodBbIC2dQ&ab_channel=DarkCode -->
+    <!-- Sliding Texts Animation Using Only HTML & CSS -->
+    <div id="demo">
+        <button v-on:click="show = !show">
+            Toggle
+        </button>
+        <transition name="fade" mode="out-in">
+            <!-- <div v-if="show">
+                <h1>Hello~</h1>
+            </div>
+            <p v-else>
+                哈囉~
+            </p> -->
+            <div ref="change">666</div>
+        </transition>
+    </div>
+    <script src="./js/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#demo',
+            data: {
+                show: true,
+                arrshow:[0,1,2,3,4,5]
+            },
+            methods: {
+                dataroll(){
+                    let vm = this
+                    console.log(vm.$refs.change);
+                },
+            },
+            created(){
+                this.dataroll()
+            },
+            mounted() {
+            },
+        })
+    </script>
+</body>
+
+</html>
