@@ -6,11 +6,85 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src='./json/vue.js'></script>
     <script src='./json/axios.js'></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #eee;
+        }
+
+        .container {
+            width: 83.5%;
+            margin: 20px auto;
+            height: 40px;
+        }
+
+        .carousel {
+            width: 100%;
+            height: 100%;
+            border: 2px solid orange;
+            border-radius: 3px;
+            display: flex;
+            justify-content: center;
+            background: #fff;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .slider {
+            display: flex;
+            height: 500%;
+            width: 100%;
+            flex-direction: column;
+            flex-shrink: 0;
+            transition: all 0.5s;
+        }
+
+        .slider section {
+            flex-basis: 20%;
+            width: 100%;
+            flex-shrink: 0;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 25px;
+        }
+
+        .arrow {
+            position: absolute;
+            top: 10px;
+            cursor: pointer;
+        }
+
+        .arrow.prev {
+            left: 10px;
+        }
+
+        .arrow.next {
+            right: 10px;
+        }
+    </style>
     <title>websocket_資料無修正_步兵手刻</title>
 </head>
 
 <body>
     <div id="app" class="trading_wrap">
+        <h1>買賣產品隨機生成</h1>
+        <p>{{carouselData}}</p>
+        <button @click="generate">生成</button>
+        <h1>輪播買賣</h1>
+        <div class="container">
+            <div class="carousel">
+                <div class="slider" ref="slider">
+                    <section v-for="item in arrshow">{{item}}</section>
+                </div>
+                <div class="controls">
+                    <div class="arrow prev">prev</div>
+                    <div class="arrow next">next</div>
+                </div>
+            </div>
+        </div>
         <h1>所有產品id</h1>
         <span v-for="(item,key) in typeId">
             {{item}}
@@ -78,13 +152,21 @@
         <span>{{currenctTemp}}</span>
     </div>
     <script>
-        const WS_BASE_URL = "wss://api.mircoinfolab.com/websocket";
-        const HTTP_BASE_URL = "https://api.mircoinfolab.com";
+        const WS_BASE_URL = "wss://api.mircoinfolab.com:1315/websocket";
+        const HTTP_BASE_URL = "https://api.mircoinfolab.com:1315";
+        const TECH_ANA_URL = "https://api.bingxuegirl.com/inv/currencies";
         var vm = new Vue({
             el: "#app",
             data() {
                 return {
-                    currencies: 'https://api.bingxuegirl.com/inv/currencies',
+                    // 技術分析
+                    currencies: `${TECH_ANA_URL}`,
+                    // 輪播買賣
+                    arrshow: [],
+                    // 輪播產品選擇
+                    carouselId: [],
+                    // 輪播產品文字
+                    carouselData: '',
                     // 03 總產品清單 json url
                     jsonUrl: './json/code_03_ix.json',
                     // Http 登入獲取 token
@@ -166,6 +248,60 @@
                         console.log(error, '技術分析錯誤')
                     })
                 },
+                // 生成買賣
+                generate() {
+                    let vm = this
+                    _content_ls = {
+                        code_ids: vm.typeId,
+                    }
+                    // --最後一口價
+                    vm.WsLastpriceBuildup("lastPrice", _content_ls)
+                    console.log(`${vm.allLastProduct}`);
+                    vm.allLastProduct.forEach(el => {
+                        console.log(el.code_id, el.cur_price);
+                    })
+                    let account = `68****${Math.floor(Math.random() * 90) + 10}以`
+
+                    vm.carouselData = account
+                },
+                // 輪播買賣 carousel
+                looping() {
+                    const slider = document.querySelector('.slider')
+                    const carousel = document.querySelector('.carousel')
+                    const prev = document.querySelector('.prev')
+                    const next = document.querySelector('.next')
+                    var direction;
+                    prev.addEventListener('click', function () {
+                        carousel.style.justifyContent = 'flex-end'
+                        // if (direction === -1) {
+                        // slider.appendChild(slider.firstElementChild);
+                        direction = 1
+                        // }
+                        slider.style.transform = 'translateY(20%)'
+                    })
+                    next.addEventListener('click', function () {
+                        carousel.style.justifyContent = 'flex-start'
+                        direction = -1
+                        slider.style.transform = 'translateY(-20%)'
+
+                    })
+                    slider.addEventListener('transitionend', function () {
+                        if (direction === -1) {
+                            slider.appendChild(slider.firstElementChild);
+                        } else if (direction === 1) {
+                            slider.prepend(slider.lastElementChild);
+                        }
+                        slider.style.transition = 'none'
+                        slider.style.transform = 'translate(0)'
+                        setTimeout(function () {
+                            slider.style.transition = 'all 0.5s'
+                        })
+                    })
+                    setInterval(() => {
+                        direction = -1
+                        slider.style.transform = 'translateY(-20%)'
+                    }, 2000);
+                },
                 // 要做 ws 以前都要先做 http 發送登入，才能夠要到 token 做 ws 操作 ix 文檔
                 // https://testdocs.ixmiddle.com/ixmiddle/http-interface-doc/account/appProperties/getAccountProperties.html
                 gotourl() {
@@ -229,6 +365,7 @@
                     newArr.content.product_category.forEach(element => {
                         vm.typeId = vm.typeId.concat(element.code_ids)
                     });
+                    vm.typeId = ['573005', '573004']
                     console.log(vm.typeId, 'Id 產生')
                 },
                 // 需要 token 者 ( 依照文檔目前只在判斷客戶來源使用 )
@@ -272,6 +409,7 @@
                         "device": "h5",
                         "version_code": 1
                     }
+                    console.log(`進入最後一口`);
                     vm.websocketsend(JSON.stringify(Ws_LsConfig));
                 },
                 // 訂閱產品實時報價
@@ -366,6 +504,7 @@
                             break;
                         case "LastPrice":
                             let newarr = JSON.parse(e)
+                            vm.allLastProduct = []
                             newarr.content.forEach(el => {
                                 vm.allLastProduct = vm.allLastProduct.concat(el)
                             })
@@ -384,15 +523,16 @@
                 }
             },
             mounted() {
+                this.looping()
             },
             created() {
                 this.gotourl()
-                this.getCurrenc()
+                //this.getCurrenc()
             },
             destroyed() {
             }
         })
-
+        vm.arrshow = ['用户6800*****以198.66卖出0.55手白銀', '用户6801*****以1999.22卖出0.15手黄金', '用户6802*****以200.66卖出0.35手大豆', '用户6803*****以3050.6卖出0.25手肉豆', '用户6804*****以950.66卖出0.95手番茄']
     </script>
 </body>
 
