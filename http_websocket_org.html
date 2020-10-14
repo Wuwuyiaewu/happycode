@@ -24,7 +24,11 @@
             height: 100%;
             border: 2px solid orange;
             border-radius: 3px;
+            display: -webkit-box;
+            display: -ms-flexbox;
             display: flex;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
             justify-content: center;
             background: #fff;
             overflow: hidden;
@@ -32,21 +36,38 @@
         }
 
         .slider {
+            display: -webkit-box;
+            display: -ms-flexbox;
             display: flex;
-            height: 500%;
+            height: 5000%;
             width: 100%;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -ms-flex-direction: column;
             flex-direction: column;
+            -ms-flex-negative: 0;
             flex-shrink: 0;
+            -webkit-transition: all 0.5s;
             transition: all 0.5s;
         }
 
         .slider section {
+            -ms-flex-preferred-size: 20%;
             flex-basis: 20%;
             width: 100%;
+            -ms-flex-negative: 0;
             flex-shrink: 0;
+            -webkit-box-flex: 1;
+            -ms-flex: 1;
             flex: 1;
+            display: -webkit-box;
+            display: -ms-flexbox;
             display: flex;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
             align-items: center;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
             justify-content: center;
             font-size: 25px;
         }
@@ -71,8 +92,6 @@
 <body>
     <div id="app" class="trading_wrap">
         <h1>買賣產品隨機生成</h1>
-        <p>{{carouselData}}</p>
-        <button @click="generate">生成</button>
         <h1>輪播買賣</h1>
         <div class="container">
             <div class="carousel">
@@ -155,6 +174,7 @@
         const WS_BASE_URL = "wss://api.mircoinfolab.com:1315/websocket";
         const HTTP_BASE_URL = "https://api.mircoinfolab.com:1315";
         const TECH_ANA_URL = "https://api.bingxuegirl.com/inv/currencies";
+        const LOOPING_PRODUCT_ID = ['573004', '573005']
         var vm = new Vue({
             el: "#app",
             data() {
@@ -164,11 +184,15 @@
                     // 輪播買賣
                     arrshow: [],
                     // 輪播產品選擇
-                    carouselId: [],
+                    carouselId: LOOPING_PRODUCT_ID,
                     // 輪播產品文字
-                    carouselData: '',
+                    carouseName: [],
+                    carouseCur: [],
+                    carouselData: [],
                     // 03 總產品清單 json url
                     jsonUrl: './json/code_03_ix.json',
+                    // json資料存放陣列
+                    allJson: [],
                     // Http 登入獲取 token
                     Http_config: {
                         method: 'post',
@@ -248,24 +272,83 @@
                         console.log(error, '技術分析錯誤')
                     })
                 },
+                // 取得 json 格式文件
+                getJson() {
+                    let vm = this
+                    axios(vm.jsonUrl).then(res => {
+                        vm.allJson = JSON.parse(JSON.stringify(res.data))
+                    }).catch(error => {
+                        console.log(error, '取得json錯誤')
+                    })
+                },
                 // 生成買賣
                 generate() {
+                    let vm = this
+                    const slider = document.querySelector('.slider')
+                    slider.style.height = `${(100 * (vm.carouselId.length * 10))}%`
+                    _content_ls = {
+                        code_ids: vm.typeId,
+                    }
+                    // --最後一口價 + 推入輪播
+                    setTimeout(() => {
+                        vm.WsLastpriceBuildup("lastPrice", _content_ls)
+                        vm.allLastProduct.forEach(el => {
+                            vm.allJson.forEach(el_2 => {
+                                if (el.code_id == el_2.id) {
+                                    vm.carouseName.push(el_2.name)
+                                    vm.carouseCur.push(el.cur_price)
+                                }
+                            })
+                        })
+                    }, 1000);
+                    // 因應 Ws 網路延時
+                    vm.arrshow = []
+                    setTimeout(() => {
+                        vm.arrshow.push(vm.randomTrading())
+                        // 輪播 start
+                        // 輪播 end
+                    }, 1000);
+                },
+                // 更新買賣
+                updataGenerate() {
                     let vm = this
                     _content_ls = {
                         code_ids: vm.typeId,
                     }
-                    // --最後一口價
-                    vm.WsLastpriceBuildup("lastPrice", _content_ls)
-                    console.log(`${vm.allLastProduct}`);
-                    vm.allLastProduct.forEach(el => {
-                        console.log(el.code_id, el.cur_price);
-                    })
-                    let account = `68****${Math.floor(Math.random() * 90) + 10}以`
-
-                    vm.carouselData = account
+                    // --最後一口價 + 推入輪播
+                    setTimeout(() => {
+                        vm.WsLastpriceBuildup("lastPrice", _content_ls)
+                        vm.allLastProduct.forEach(el => {
+                            vm.allJson.forEach(el_2 => {
+                                if (el.code_id == el_2.id) {
+                                    vm.carouseName.push(el_2.name)
+                                    vm.carouseCur.push(el.cur_price)
+                                }
+                            })
+                        })
+                    }, 1000);
+                    // 因應 Ws 網路延時
+                    vm.arrshow = []
+                    setTimeout(() => {
+                        vm.arrshow.push(vm.randomTrading())
+                        // 輪播 start
+                        // 輪播 end
+                    }, 1000);
+                },
+                // 亂數生成
+                randomTrading() {
+                    let vm = this
+                    let nn = Number(Math.random().toFixed(2))
+                    let randomCal = (Math.floor(Math.random() * vm.carouselId.length))
+                    let xxx = `${(vm.carouseCur[`${randomCal}`] + nn).toFixed(2)}`
+                    console.log(xxx);
+                    let account = `68****${Math.floor(Math.random() * 90) + 10}以${(vm.carouseCur[`${randomCal}`] + nn).toFixed(2)}賣出${(Math.floor(Math.random() * 37) * 0.05 + 0.5).toFixed(2)}手${vm.carouseName[`${randomCal}`]}`
+                    return account
                 },
                 // 輪播買賣 carousel
                 looping() {
+                    let vm = this
+                    let updataCount = 0
                     const slider = document.querySelector('.slider')
                     const carousel = document.querySelector('.carousel')
                     const prev = document.querySelector('.prev')
@@ -273,17 +356,16 @@
                     var direction;
                     prev.addEventListener('click', function () {
                         carousel.style.justifyContent = 'flex-end'
-                        // if (direction === -1) {
-                        // slider.appendChild(slider.firstElementChild);
-                        direction = 1
-                        // }
-                        slider.style.transform = 'translateY(20%)'
+                        if (direction === -1) {
+                            slider.appendChild(slider.firstElementChild);
+                            direction = 1
+                        }
+                        slider.style.transform = `translateY(${100 / (vm.carouselId.length * 10)}%)`
                     })
                     next.addEventListener('click', function () {
                         carousel.style.justifyContent = 'flex-start'
                         direction = -1
-                        slider.style.transform = 'translateY(-20%)'
-
+                        slider.style.transform = `translateY(-${100 / (vm.carouselId.length * 10)}%)`
                     })
                     slider.addEventListener('transitionend', function () {
                         if (direction === -1) {
@@ -299,7 +381,7 @@
                     })
                     setInterval(() => {
                         direction = -1
-                        slider.style.transform = 'translateY(-20%)'
+                        slider.style.transform = `translateY(-${100 / (vm.carouselId.length * 10)}%)`
                     }, 2000);
                 },
                 // 要做 ws 以前都要先做 http 發送登入，才能夠要到 token 做 ws 操作 ix 文檔
@@ -409,7 +491,6 @@
                         "device": "h5",
                         "version_code": 1
                     }
-                    console.log(`進入最後一口`);
                     vm.websocketsend(JSON.stringify(Ws_LsConfig));
                 },
                 // 訂閱產品實時報價
@@ -501,6 +582,9 @@
                             }
                             // --最後一口價
                             vm.WsLastpriceBuildup("lastPrice", _content_ls)
+                            for (let v = 0; v < (vm.carouselId.length * 10); v++) {
+                                let newcarouselData = vm.generate()
+                            }
                             break;
                         case "LastPrice":
                             let newarr = JSON.parse(e)
@@ -514,6 +598,7 @@
                                 subscribeType: "reSubscribe",
                                 type: "yz"
                             }
+
                             // --產品報價
                             vm.WsProductCurBuildup("productSubscription", _content_pr)
                             break
@@ -523,10 +608,13 @@
                 }
             },
             mounted() {
-                this.looping()
+                setTimeout(() => {
+                    this.looping()
+                }, 3000);
             },
             created() {
                 this.gotourl()
+                this.getJson()
                 //this.getCurrenc()
             },
             destroyed() {
