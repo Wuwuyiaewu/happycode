@@ -40,7 +40,8 @@
             display: -webkit-box;
             display: -ms-flexbox;
             display: flex;
-            height: 5000%;
+            position: relative;
+            height: 100%;
             width: 100%;
             -webkit-box-orient: vertical;
             -webkit-box-direction: normal;
@@ -54,6 +55,7 @@
         }
 
         .slider section {
+            position: absolute;
             -ms-flex-preferred-size: 20%;
             flex-basis: 20%;
             width: 100%;
@@ -176,7 +178,7 @@
         const HTTP_BASE_URL = "https://api.mircoinfolab.com:1315";
         const TECH_ANA_URL = "https://api.bingxuegirl.com/inv/currencies";
         // 輪播 ID
-        const LOOPING_PRODUCT_ID = ['573004']
+        const LOOPING_PRODUCT_ID = ['573117']
         var vm = new Vue({
             el: "#getPriceTemplate",
             data() {
@@ -377,27 +379,18 @@
                     //     slider.style.transform = `translateY(-${100 / (vm.carouselId.length)}%)`
                     // })
                     slider.addEventListener('transitionend', function () {
-                        if (direction === -1) {
-                            slider.appendChild(slider.firstElementChild);
-                        } else if (direction === 1) {
-                            slider.prepend(slider.lastElementChild);
-                        }
+                        // if (direction === -1) {
+                        //     slider.appendChild(slider.firstElementChild);
+                        // } else if (direction === 1) {
+                        //     slider.prepend(slider.lastElementChild);
+                        // }
                         // vm.setVendorCss(slider, 'transform', 'translate(0)')
                         slider.style.WebkitTransition = 'none'
-                        slider.style.MozTransition = 'none'
-                        slider.style.MsTransition = 'none'
-                        slider.style.OTransition = 'none'
-                        slider.style.WebkitTransform = 'translate(0)'
-                        slider.style.MozTransform = 'translate(0)'
-                        slider.style.MsTransform = 'translate(0)'
-                        slider.style.OTransform = 'translate(0)'
+                        slider.style.WebkitTransform = '-webkit-translate(0)'
                         // slider.style.transition = 'none'
                         // slider.style.transform = 'translate(0)'
                         setTimeout(function () {
                             slider.style.WebkitTransition = 'all 0.5s'
-                            slider.style.MozTransition = 'all 0.5s'
-                            slider.style.MsTransition = 'all 0.5s'
-                            slider.style.OTransition = 'all 0.5s'
                         })
                     })
                     let clearCount = 0
@@ -405,15 +398,12 @@
                         clearCount++
                         direction = -1
                         // vm.setVendorCss(slider,'transform',`translateY(-${100 / (vm.carouselId.length)}%)`)
-                        slider.style.WebkitTransform = `translateY(-${100 / (vm.carouselId.length)}%)`
-                        slider.style.MozTransform = `translateY(-${100 / (vm.carouselId.length)}%)`
-                        slider.style.MsTransform = `translateY(-${100 / (vm.carouselId.length)}%)`
-                        slider.style.oTransform = `translateY(-${100 / (vm.carouselId.length)}%)`
+                        slider.style.WebkitTransform = `-webkit-translateY(-${100 / (vm.carouselId.length)}%)`
                         if (clearCount === vm.carouselId.length) {
                             clearCount = 0
                             vm.updataGenerate()
                         }
-                    }, 1500);
+                    }, 1000);
                     // setInterval(() => {
                     //     vm.updataGenerate(v)
                     // }, 2000);
@@ -651,11 +641,11 @@
                     // let timeCount = 0
                     setTimeout(() => {
                         // timeCount ++
-                        this.looping()
+                        // this.looping()
                         // if(timeCount === this.carouselId.length){
                         //     clearInterval(loopingTime)
                         // }
-                    }, this.carouselId.length * 1000);
+                    }, );
                 }
             },
             mounted() {
