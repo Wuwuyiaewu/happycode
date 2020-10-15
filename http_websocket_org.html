@@ -7,6 +7,7 @@
     <script src='./json/vue.js'></script>
     <script src='./json/axios.js'></script>
     <script src="./json/rem.js"></script>
+    <link rel="stylesheet" href="./css/h5cssreset.css">
     <style>
         body {
             margin: 0;
@@ -15,16 +16,15 @@
         }
 
         .container {
-            width: 83.5%;
+            width: 90%;
             margin: .20rem auto;
-            height: .40rem;
+            height: .30rem;
         }
 
         .carousel {
             width: 100%;
             height: 100%;
-            border: .02rem solid orange;
-            border-radius: .03rem;
+            border-radius: .05rem;
             display: -webkit-box;
             display: -ms-flexbox;
             display: flex;
@@ -50,6 +50,7 @@
             flex-shrink: 0;
             -webkit-transition: all 0.5s;
             transition: all 0.5s;
+            color: #000;
         }
 
         .slider section {
@@ -70,43 +71,10 @@
             -webkit-box-pack: center;
             -ms-flex-pack: center;
             justify-content: center;
-            font-size: .25rem;
+            font-size: .28rem;
+            padding-top: 0.01rem;
         }
-        .slider-cover{
-            position: absolute;
-            display: -webkit-box;
-            display: -ms-flexbox;
-            display: flex;
-            height: 200%;
-            width: 100%;
-            -webkit-box-orient: vertical;
-            -webkit-box-direction: normal;
-            -ms-flex-direction: column;
-            flex-direction: column;
-            -ms-flex-negative: 0;
-            flex-shrink: 0;
-        }
-        .slider-cover section{
-            -ms-flex-preferred-size: 20%;
-            top: 0.05rem;
-            flex-basis: 20%;
-            width: 100%;
-            -ms-flex-negative: 0;
-            flex-shrink: 0;
-            -webkit-box-flex: 1;
-            -ms-flex: 1;
-            flex: 1;
-            display: -webkit-box;
-            display: -ms-flexbox;
-            display: flex;
-            -webkit-box-align: center;
-            -ms-flex-align: center;
-            align-items: center;
-            -webkit-box-pack: center;
-            -ms-flex-pack: center;
-            justify-content: flex-start;
-            font-size: .25rem;
-        }
+
         .arrow {
             position: absolute;
             top: .10rem;
@@ -125,7 +93,7 @@
 </head>
 
 <body>
-    <div id="app" class="trading_wrap">
+    <div id="getPriceTemplate" class="trading_wrap">
         <h1>買賣產品隨機生成</h1>
         <h1>輪播買賣</h1>
         <div class="container">
@@ -207,9 +175,10 @@
         const WS_BASE_URL = "wss://api.mircoinfolab.com:1315/websocket";
         const HTTP_BASE_URL = "https://api.mircoinfolab.com:1315";
         const TECH_ANA_URL = "https://api.bingxuegirl.com/inv/currencies";
-        const LOOPING_PRODUCT_ID = ['573004', '573005']
+        // 輪播 ID
+        const LOOPING_PRODUCT_ID = ['573004']
         var vm = new Vue({
-            el: "#app",
+            el: "#getPriceTemplate",
             data() {
                 return {
                     // 技術分析
@@ -338,6 +307,7 @@
                     vm.arrshow = []
                     setTimeout(() => {
                         vm.arrshow.push(vm.randomTrading(v))
+                        vm.arrshow.push(vm.randomTrading(v))
                         // 輪播 start
                         // 輪播 end
                     }, 1000);
@@ -352,31 +322,32 @@
                     vm.carouseName = []
                     vm.carouseCur = []
                     // setTimeout(() => {
-                        vm.WsLastpriceBuildup("lastPrice", _content_ls)
-                        vm.allLastProduct.forEach(el => {
-                            vm.allJson.forEach(el_2 => {
-                                if (el.code_id == el_2.id) {
-                                    vm.carouseName.push(el_2.name)
-                                    vm.carouseCur.push(el.cur_price)
-                                }
-                            })
+                    vm.WsLastpriceBuildup("lastPrice", _content_ls)
+                    vm.allLastProduct.forEach(el => {
+                        vm.allJson.forEach(el_2 => {
+                            if (el.code_id == el_2.id) {
+                                vm.carouseName.push(el_2.name)
+                                vm.carouseCur.push(el.cur_price)
+                            }
                         })
+                    })
+
                     // }, 1000);
                     // 因應 Ws 網路延時
-                    vm.arrshow = []
                     setTimeout(() => {
-                        for(let x = 0 ; x < vm.carouselId.length -1 ; x++){
+                        for (let x = 0; x < vm.carouselId.length; x++) {
                             vm.arrshow.push(vm.randomTrading(x))
-                            vm.$refs.slider.innerHTML = ``
                         }
                         // 輪播 start
                         // 輪播 end
                     }, 1000);
+
                 },
                 // 亂數生成
                 randomTrading(v) {
                     let vm = this
                     let randomCal = (Math.floor(Math.random() * vm.carouselId.length))
+
                     let account = {
                         data: `68****${Math.floor(Math.random() * 90) + 10}以 ${(vm.carouseCur[`${randomCal}`])} 买入/卖出 ${(Math.floor(Math.random() * 37) * 0.05 + 0.5).toFixed(2)}手 ${vm.carouseName[`${randomCal}`]}`,
                         id: `random${v}`
@@ -411,30 +382,48 @@
                         } else if (direction === 1) {
                             slider.prepend(slider.lastElementChild);
                         }
-                        slider.style.transition = 'none'
-                        slider.style.transform = 'translate(0)'
+                        // vm.setVendorCss(slider, 'transform', 'translate(0)')
+                        slider.style.WebkitTransition = 'none'
+                        slider.style.MozTransition = 'none'
+                        slider.style.MsTransition = 'none'
+                        slider.style.OTransition = 'none'
+                        slider.style.WebkitTransform = 'translate(0)'
+                        slider.style.MozTransform = 'translate(0)'
+                        slider.style.MsTransform = 'translate(0)'
+                        slider.style.OTransform = 'translate(0)'
+                        // slider.style.transition = 'none'
+                        // slider.style.transform = 'translate(0)'
                         setTimeout(function () {
-                            slider.style.transition = 'all 0.5s'
+                            slider.style.WebkitTransition = 'all 0.5s'
+                            slider.style.MozTransition = 'all 0.5s'
+                            slider.style.MsTransition = 'all 0.5s'
+                            slider.style.OTransition = 'all 0.5s'
                         })
                     })
                     let clearCount = 0
                     let goInterval = setInterval(() => {
                         clearCount++
                         direction = -1
-                        slider.style.transform = `translateY(-${100 / (vm.carouselId.length)}%)`
-                        if (clearCount === vm.carouselId.length-1) {
-                            clearInterval(goInterval)
-                            setTimeout(() => {
-                                vm.$refs.slider.innerHTML = `<section class="slider-cover">${vm.arrshow[vm.carouselId.length-1].data}</section>`
-                            }, 1000);
-                            setTimeout(() => {
-                                vm.updataGenerate()
-                            }, 1300);
+                        // vm.setVendorCss(slider,'transform',`translateY(-${100 / (vm.carouselId.length)}%)`)
+                        slider.style.WebkitTransform = `translateY(-${100 / (vm.carouselId.length)}%)`
+                        slider.style.MozTransform = `translateY(-${100 / (vm.carouselId.length)}%)`
+                        slider.style.MsTransform = `translateY(-${100 / (vm.carouselId.length)}%)`
+                        slider.style.oTransform = `translateY(-${100 / (vm.carouselId.length)}%)`
+                        if (clearCount === vm.carouselId.length) {
+                            clearCount = 0
+                            vm.updataGenerate()
                         }
-                    }, 2000);
+                    }, 1500);
                     // setInterval(() => {
                     //     vm.updataGenerate(v)
                     // }, 2000);
+                },
+                //css prfix
+                setVendorCss(element, property, value) {
+                    element.style["webkit" + property] = value;
+                    element.style["moz" + property] = value;
+                    element.style["ms" + property] = value;
+                    element.style["o" + property] = value;
                 },
                 // 要做 ws 以前都要先做 http 發送登入，才能夠要到 token 做 ws 操作 ix 文檔
                 // https://testdocs.ixmiddle.com/ixmiddle/http-interface-doc/account/appProperties/getAccountProperties.html
@@ -499,7 +488,7 @@
                     newArr.content.product_category.forEach(element => {
                         vm.typeId = vm.typeId.concat(element.code_ids)
                     });
-                    vm.typeId = ['573005', '573004']
+                    vm.typeId = LOOPING_PRODUCT_ID
                     console.log(vm.typeId, 'Id 產生')
                 },
                 // 需要 token 者 ( 依照文檔目前只在判斷客戶來源使用 )
@@ -636,7 +625,6 @@
                             vm.WsLastpriceBuildup("lastPrice", _content_ls)
                             for (let v = 0; v < (vm.carouselId.length); v++) {
                                 let newcarouselData = vm.generate(v)
-                                // -1-2-3-4-4-1-2-3-4-4
                             }
                             break;
                         case "LastPrice":
@@ -681,7 +669,6 @@
             destroyed() {
             }
         })
-        vm.arrshow = ['用户6800*****以198.66卖出0.55手白銀', '用户6801*****以1999.22卖出0.15手黄金', '用户6802*****以200.66卖出0.35手大豆', '用户6803*****以3050.6卖出0.25手肉豆', '用户6804*****以950.66卖出0.95手番茄']
     </script>
     <script type="text/javascript">
         remCompute(750, true);
