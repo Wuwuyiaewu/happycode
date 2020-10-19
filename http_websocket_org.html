@@ -25,54 +25,27 @@
             width: 100%;
             height: 100%;
             border-radius: .05rem;
-            display: -webkit-box;
-            display: -ms-flexbox;
-            display: flex;
-            -webkit-box-pack: center;
-            -ms-flex-pack: center;
-            justify-content: center;
+            border: 2px solid #fff;
             background: #fff;
             overflow: hidden;
             position: relative;
         }
 
         .slider {
-            display: -webkit-box;
-            display: -ms-flexbox;
-            display: flex;
-            height: 5000%;
+            position: absolute;
+            line-height: 0.3rem;
+            height: 100%;
             width: 100%;
-            -webkit-box-orient: vertical;
-            -webkit-box-direction: normal;
-            -ms-flex-direction: column;
-            flex-direction: column;
-            -ms-flex-negative: 0;
-            flex-shrink: 0;
             -webkit-transition: all 0.5s;
             transition: all 0.5s;
             color: #000;
         }
 
         .slider section {
-            -ms-flex-preferred-size: 20%;
-            flex-basis: 20%;
+            text-align: center;
             width: 100%;
-            -ms-flex-negative: 0;
-            flex-shrink: 0;
-            -webkit-box-flex: 1;
-            -ms-flex: 1;
-            flex: 1;
-            display: -webkit-box;
-            display: -ms-flexbox;
-            display: flex;
-            -webkit-box-align: center;
-            -ms-flex-align: center;
-            align-items: center;
-            -webkit-box-pack: center;
-            -ms-flex-pack: center;
-            justify-content: center;
+            height: 100%;
             font-size: .28rem;
-            padding-top: 0.01rem;
         }
 
         .arrow {
@@ -100,6 +73,7 @@
             <div class="carousel">
                 <div class="slider">
                     <section v-for="item in arrshow" :class="item.id">{{item.data}}</section>
+                    <section v-for="item in arrshow2" :class="item.id">{{item.data}}</section>
                 </div>
                 <div class="slider-cover" ref="slider">
                 </div>
@@ -185,6 +159,7 @@
                     currencies: `${TECH_ANA_URL}`,
                     // 輪播買賣
                     arrshow: [],
+                    arrshow2: [],
                     // 輪播產品選擇
                     carouselId: LOOPING_PRODUCT_ID,
                     // 輪播產品文字
@@ -306,8 +281,8 @@
                     // 因應 Ws 網路延時
                     vm.arrshow = []
                     setTimeout(() => {
-                        vm.arrshow.push(vm.randomTrading(v))
-                        vm.arrshow.push(vm.randomTrading(v))
+                        vm.arrshow2.push(vm.randomTrading(v))
+                        vm.arrshow2.push(vm.randomTrading(v))
                         // 輪播 start
                         // 輪播 end
                     }, 1000);
@@ -336,7 +311,8 @@
                     // 因應 Ws 網路延時
                     setTimeout(() => {
                         for (let x = 0; x < vm.carouselId.length; x++) {
-                            vm.arrshow.push(vm.randomTrading(x))
+                            vm.arrshow2.push(vm.randomTrading(x))
+                            vm.arrshow2.push(vm.randomTrading(x))
                         }
                         // 輪播 start
                         // 輪播 end
@@ -344,79 +320,36 @@
 
                 },
                 // 亂數生成
-                randomTrading(v) {
+                randomTrading() {
                     let vm = this
+                    let random_boolean = Math.random() >= 0.5;
+                    let buyOrsell
+                    if (random_boolean) {
+                        buyOrsell = '买入'
+                    } else {
+                        buyOrsell = '卖出'
+                    }
                     let randomCal = (Math.floor(Math.random() * vm.carouselId.length))
-
                     let account = {
-                        data: `68****${Math.floor(Math.random() * 90) + 10}以 ${(vm.carouseCur[`${randomCal}`])} 买入/卖出 ${(Math.floor(Math.random() * 37) * 0.05 + 0.5).toFixed(2)}手 ${vm.carouseName[`${randomCal}`]}`,
-                        id: `random${v}`
+                        data: `68****${Math.floor(Math.random() * 90) + 10}以 ${(vm.carouseCur[`${randomCal}`])} ${buyOrsell} ${(Math.floor(Math.random() * 37) * 0.05 + 0.5).toFixed(2)}手 ${vm.carouseName[`${randomCal}`]}`,
+                        id: `random`
                     }
                     return account
                 },
                 // 輪播買賣 carousel
                 looping(v) {
                     let vm = this
-                    let updataCount = 0
                     const slider = document.querySelector('.slider')
-                    const carousel = document.querySelector('.carousel')
-                    // const prev = document.querySelector('.prev')
-                    // const next = document.querySelector('.next')
-                    var direction;
-                    // prev.addEventListener('click', function () {
-                    //     carousel.style.justifyContent = 'flex-end'
-                    //     if (direction === -1) {
-                    //         slider.appendChild(slider.firstElementChild);
-                    //         direction = 1
-                    //     }
-                    //     slider.style.transform = `translateY(${100 / (vm.carouselId.length)}%)`
-                    // })
-                    // next.addEventListener('click', function () {
-                    //     carousel.style.justifyContent = 'flex-start'
-                    //     direction = -1
-                    //     slider.style.transform = `translateY(-${100 / (vm.carouselId.length)}%)`
-                    // })
-                    slider.addEventListener('transitionend', function () {
-                        if (direction === -1) {
-                            slider.appendChild(slider.firstElementChild);
-                        } else if (direction === 1) {
-                            slider.prepend(slider.lastElementChild);
-                        }
-                        // vm.setVendorCss(slider, 'transform', 'translate(0)')
-                        slider.style.WebkitTransition = 'none'
-                        slider.style.MozTransition = 'none'
-                        slider.style.MsTransition = 'none'
-                        slider.style.OTransition = 'none'
-                        slider.style.WebkitTransform = 'translate(0)'
-                        slider.style.MozTransform = 'translate(0)'
-                        slider.style.MsTransform = 'translate(0)'
-                        slider.style.OTransform = 'translate(0)'
-                        // slider.style.transition = 'none'
-                        // slider.style.transform = 'translate(0)'
-                        setTimeout(function () {
-                            slider.style.WebkitTransition = 'all 0.5s'
-                            slider.style.MozTransition = 'all 0.5s'
-                            slider.style.MsTransition = 'all 0.5s'
-                            slider.style.OTransition = 'all 0.5s'
-                        })
-                    })
-                    let clearCount = 0
-                    let goInterval = setInterval(() => {
-                        clearCount++
-                        direction = -1
-                        // vm.setVendorCss(slider,'transform',`translateY(-${100 / (vm.carouselId.length)}%)`)
-                        slider.style.WebkitTransform = `translateY(-${100 / (vm.carouselId.length)}%)`
-                        slider.style.MozTransform = `translateY(-${100 / (vm.carouselId.length)}%)`
-                        slider.style.MsTransform = `translateY(-${100 / (vm.carouselId.length)}%)`
-                        slider.style.oTransform = `translateY(-${100 / (vm.carouselId.length)}%)`
-                        if (clearCount === vm.carouselId.length) {
-                            clearCount = 0
+                    let top = 0
+                    setInterval(() => {
+                        top = (top - 0.3).toFixed(1)
+                        let allLengthUnit = (((vm.carouselId.length) * 2) * 0.3).toFixed(1)
+                        slider.setAttribute('style', `top:${top}rem`)
+                        console.log(-(top % (((vm.carouselId.length) * 2) * 0.3).toFixed(1)).toFixed(2))
+                        if (-(top % allLengthUnit).toFixed(2) === 0.3) {
                             vm.updataGenerate()
                         }
-                    }, 1500);
-                    // setInterval(() => {
-                    //     vm.updataGenerate(v)
-                    // }, 2000);
+                    }, 3000);
                 },
                 //css prfix
                 setVendorCss(element, property, value) {
@@ -624,7 +557,7 @@
                             // --最後一口價
                             vm.WsLastpriceBuildup("lastPrice", _content_ls)
                             for (let v = 0; v < (vm.carouselId.length); v++) {
-                                let newcarouselData = vm.generate(v)
+                                vm.generate(v)
                             }
                             break;
                         case "LastPrice":
@@ -639,7 +572,6 @@
                                 subscribeType: "reSubscribe",
                                 type: "yz"
                             }
-
                             // --產品報價
                             vm.WsProductCurBuildup("productSubscription", _content_pr)
                             break
@@ -655,7 +587,7 @@
                         // if(timeCount === this.carouselId.length){
                         //     clearInterval(loopingTime)
                         // }
-                    }, this.carouselId.length * 1000);
+                    }, 1000);
                 }
             },
             mounted() {
