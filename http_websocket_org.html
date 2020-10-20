@@ -67,7 +67,6 @@
 
 <body>
     <div id="getPriceTemplate" class="trading_wrap">
-        <h1>買賣產品隨機生成</h1>
         <h1>輪播買賣</h1>
         <div class="container">
             <div class="carousel">
@@ -157,7 +156,7 @@
                 return {
                     // 技術分析
                     currencies: `${TECH_ANA_URL}`,
-                    // 輪播買賣
+                    // 輪播起始與切換資料
                     arrshow: [],
                     arrshow2: [],
                     // 輪播產品選擇
@@ -527,18 +526,21 @@
                     }
                     // 比對什麼回傳訊息
                     // 再做什麼樣的事
+                    // -- 事件 msg_code 判斷
                     switch (msg_code) {
                         // 比對到使用者登入
                         case "UserLoginInfoRet":
                             // 已經有用戶帳戶資料 參考 ix 文檔
                             // https://testdocs.ixmiddle.com/ixmiddle/ix-socket-proxy-doc/trade-login/tui-song-deng-lu-jie-guo.html
                             break;
+                        // 比對到心跳設定
                         case "HeartBeatConf":
                             _content_ht = {
                                 beat: 1,
                             }
                             vm.Ws_heartBeat("ping", _content_ht)
                             break;
+                        // 比對到心跳回傳
                         case "pong":
                             setTimeout(() => {
                                 _content_ht = {
@@ -547,8 +549,8 @@
                                 vm.Ws_heartBeat("ping", _content_ht)
                             }, vm.beatTime);
                             break;
+                        // --初始化 所有產品 與 產品分類
                         case "InitProductInfo":
-                            // --初始化所有產品 與 產品分類
                             vm.defineProduct(e)
                             // 訂閱所有產品最後一口價
                             _content_ls = {
@@ -560,6 +562,7 @@
                                 vm.generate(v)
                             }
                             break;
+                        // 比對到最後一口價傳入
                         case "LastPrice":
                             let newarr = JSON.parse(e)
                             vm.allLastProduct = []
@@ -579,14 +582,10 @@
                             break;
                     }
                 },
+                // 輪播非同步應對
                 loopingTime() {
-                    // let timeCount = 0
                     setTimeout(() => {
-                        // timeCount ++
                         this.looping()
-                        // if(timeCount === this.carouselId.length){
-                        //     clearInterval(loopingTime)
-                        // }
                     }, 1000);
                 }
             },
