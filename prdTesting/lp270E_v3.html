@@ -1,0 +1,833 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>投票送50美元，盈利全归你-智选</title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="author" content="[2020.09] Designed by Gray;Coded by Pong">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="shortcut icon" type="image/x-icon" href="promote/lp270E_v3/images/favicon.ico" />
+    <!--#include file="/common/template/lp/lp_css.html"-->
+
+    <link href="promote/lp270E_v3/css/animate.css" type="text/css" rel="stylesheet" />
+    <link href="promote/lp270E_v3/css/lp270E.css" type="text/css" rel="stylesheet" />
+
+    <script src="promote/lp270E_v3/js/jquery.min.js" type="text/javascript"></script>
+    <script src="promote/lp270E_v3/js/rem.js" charset="utf-8"></script>
+    <script src="promote/lp270E_v3/js/wow.min.js" type="text/javascript"></script>
+    <script src="promote/lp270E_v3/js/lp270E.js" charset="utf-8"></script>
+
+</head>
+
+<body>
+    <div class="main_content">
+
+        <div class="news_header">
+            <div>
+                <span class="logo"><img src="promote/lp270E_v3/images/top_logo.png"></span>
+                <a href="#" class="cs_btn"><img src="promote/lp270E_v3/images/cs_icon.png">在线客服</a>
+            </div>
+        </div>
+
+        <div class="main_banner">
+
+            <h2 class="wow fadeInDown">投行再喊黄金2300你信吗？</h2>
+            <h4 class="wow fadeInUp">投票白领$50 无本套利 盈利可提</h4>
+
+            <div class="vs_box_group wow fadeInUp">
+                <div class="vs_bar" id="vs_bar">
+                    <div><span></span></div>
+                    <p class="left_text"><b id="left_val">5</b>票</p>
+                    <p class="right_text"><b id="right_val">5</b>票</p>
+                </div>
+
+                <div class="vs_btn">
+                    <p onClick="change_vs(1,0)">
+                        <span><img src="promote/lp270E_v3/images/vs_btn_icon1.png">信 !</span> 黄金涨不停
+                    </p>
+                    <p onClick="change_vs(0,1)">
+                        <span><img src="promote/lp270E_v3/images/vs_btn_icon2.png">不信 !</span> 还是自己分析靠谱
+                    </p>
+                </div>
+
+                <div class="vs_bottom">
+                    <span class="icon"><img src="promote/lp270E_v3/images/profile_pic1.png"></span>
+                    <span class="icon"><img src="promote/lp270E_v3/images/profile_pic2.png"></span>
+                    <span class="icon"><img src="promote/lp270E_v3/images/profile_pic3.png"></span>
+                    <span class="icon"><img src="promote/lp270E_v3/images/profile_pic4.png"></span> 1761人正在参与讨论
+                </div>
+
+            </div>
+            <!-- /vs_box_group-->
+
+        </div>
+        <!-- /main_banner-->
+
+
+        <div class="content1">
+
+            <div class="big_title wow fadeInDown"><span>热门</span>评论</div>
+
+            <ul class="content1_list" id="content1_list">
+                <li class="list1" page="1">
+                    <span class="icon"><img src="promote/lp270E_v3/images/profile_pic1.png"></span>
+                    <p>上涨的趋势没有改变，避险情绪还是有的</p>
+                </li>
+                <li class="list2" page="1">
+                    <span class="icon"><img src="promote/lp270E_v3/images/profile_pic2.png"></span>
+                    <p>不说了，我先做个多</p>
+                </li>
+                <li class="list3" page="1">
+                    <span class="icon"><img src="promote/lp270E_v3/images/profile_pic3.png"></span>
+                    <p>需要时间再观察看看</p>
+                </li>
+                <li class="list4" page="1">
+                    <span class="icon"><img src="promote/lp270E_v3/images/profile_pic4.png"></span>
+                    <p>难说，2200有可能</p>
+                </li>
+
+
+                <li class="list5" page="2">
+                    <span class="icon"><img src="promote/lp270E_v3/images/profile_pic5.png"></span>
+                    <p>越来越多投行跟风，可信度就越来越低</p>
+                </li>
+                <li class="list6" page="2">
+                    <span class="icon"><img src="promote/lp270E_v3/images/profile_pic6.png"></span>
+                    <p>现在这个年代什么事情都有可能发生。。。</p>
+                </li>
+                <li class="list7" page="2">
+                    <span class="icon"><img src="promote/lp270E_v3/images/profile_pic7.png"></span>
+                    <p>希望大家都能赚到钱</p>
+                </li>
+                <li class="list8" page="2">
+                    <span class="icon"><img src="promote/lp270E_v3/images/profile_pic8.png"></span>
+                    <p>2300分分钟的事感觉</p>
+                </li>
+            </ul>
+
+
+        </div>
+        <!-- /content1-->
+
+
+        <div class="content5">
+            <div class="big_title wow fadeInDown">交易到底该怎么做 <span>看这里！</span></div>
+
+            <div class="tech_analysis_group">
+
+                <ul class="tech_analysis_menu" id="tech_analysis_menu">
+                    <li class="selected" onClick="tech_analysis_change(1)" page="1"><span>现货黄金</span></li>
+                    <li onClick="tech_analysis_change(2)" page="2"><span>美国TECH100</span></li>
+                    <li onClick="tech_analysis_change(3)" page="3"><span>美国原油</span></li>
+                </ul>
+
+                <ul class="tech_analysis_data" id="tech_analysis_data">
+                    <li class="selected" page="1">
+                        <!--<a class="more_btn" href="https://www.se6868w.com/common/e11-lp327a.html" target="_blank" >下载APP了解更多</a>-->
+                        <p class="more_btn" onClick="$('#tech_analysis_popup').fadeIn()">了解更多</p>
+                        <h1>现货黄金</h1>
+                        <div class="tech_analysis_time_menu" id="tech_analysis_time_menu">
+                            <span>5 分钟</span>
+                            <span>15 分钟</span>
+                            <span class="selected">每小时</span>
+                            <span class="tech_analysis_other_text">每日</span>
+                            <div class="other_menu" id="tech_analysis_other_menu">
+                                <i onClick="tech_analysis_other_menu($(this))"></i>
+                                <p>
+                                    <span>1分钟</span>
+                                    <span>30分钟</span>
+                                    <span>5小时</span>
+                                    <span>每周</span>
+                                    <span>每月</span>
+                                </p>
+                            </div>
+                        </div>
+                        <table class="tech_analysis_table">
+                            <tr>
+                                <th>总结</th>
+                                <th colspan="3">
+                                    <p class="bg_green"><span>强力卖出</span></p>
+                                </th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>移动平均指数</p>
+                                </td>
+                                <td>
+                                    <p class="text_normal">中性</p>
+                                </td>
+                                <td>
+                                    <p>购买 (02)</p>
+                                </td>
+                                <td>
+                                    <p>卖出 (05)</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>技术指标</p>
+                                </td>
+                                <td>
+                                    <p class="text_green">强力卖出</p>
+                                </td>
+                                <td>
+                                    <p>购买 (19)</p>
+                                </td>
+                                <td>
+                                    <p>卖出 (04)</p>
+                                </td>
+                            </tr>
+                        </table>
+                    </li>
+
+                    <li page="2">
+                        <p class="more_btn" onClick="$('#tech_analysis_popup').fadeIn()">了解更多</p>
+                        <h1>美国TECH100</h1>
+                        <div class="tech_analysis_time_menu" id="tech_analysis_time_menu">
+                            <span>5 分钟</span>
+                            <span>15 分钟</span>
+                            <span class="selected">每小时</span>
+                            <span class="tech_analysis_other_text">每日</span>
+                            <div class="other_menu" id="tech_analysis_other_menu">
+                                <i onClick="tech_analysis_other_menu($(this))"></i>
+                                <p>
+                                    <span>1分钟</span>
+                                    <span>30分钟</span>
+                                    <span>5小时</span>
+                                    <span>每周</span>
+                                    <span>每月</span>
+                                </p>
+                            </div>
+                        </div>
+                        <table class="tech_analysis_table">
+                            <tr>
+                                <th>总结</th>
+                                <th colspan="3">
+                                    <p class="bg_red"><span>强力买入</span></p>
+                                </th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>移动平均指数</p>
+                                </td>
+                                <td>
+                                    <p class="text_red">强力买入</p>
+                                </td>
+                                <td>
+                                    <p>购买 (02)</p>
+                                </td>
+                                <td>
+                                    <p>卖出 (05)</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>技术指标</p>
+                                </td>
+                                <td>
+                                    <p class="text_green">强力卖出</p>
+                                </td>
+                                <td>
+                                    <p>购买 (19)</p>
+                                </td>
+                                <td>
+                                    <p>卖出 (04)</p>
+                                </td>
+                            </tr>
+                        </table>
+                    </li>
+
+                    <li page="3">
+                        <p class="more_btn" onClick="$('#tech_analysis_popup').fadeIn()">了解更多</p>
+                        <h1>美国原油</h1>
+                        <div class="tech_analysis_time_menu" id="tech_analysis_time_menu">
+                            <span>5 分钟</span>
+                            <span>15 分钟</span>
+                            <span class="selected">每小时</span>
+                            <span class="tech_analysis_other_text">每日</span>
+                            <div class="other_menu" id="tech_analysis_other_menu">
+                                <i onClick="tech_analysis_other_menu($(this))"></i>
+                                <p>
+                                    <span>1分钟</span>
+                                    <span>30分钟</span>
+                                    <span>5小时</span>
+                                    <span>每周</span>
+                                    <span>每月</span>
+                                </p>
+                            </div>
+                        </div>
+                        <table class="tech_analysis_table">
+                            <tr>
+                                <th>总结</th>
+                                <th colspan="3">
+                                    <p class="bg_normal"><span>中性</span></p>
+                                </th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>移动平均指数</p>
+                                </td>
+                                <td>
+                                    <p class="text_normal">中性</p>
+                                </td>
+                                <td>
+                                    <p>购买 (02)</p>
+                                </td>
+                                <td>
+                                    <p>卖出 (05)</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>技术指标</p>
+                                </td>
+                                <td>
+                                    <p class="text_normal">中性</p>
+                                </td>
+                                <td>
+                                    <p>购买 (19)</p>
+                                </td>
+                                <td>
+                                    <p>卖出 (04)</p>
+                                </td>
+                            </tr>
+                        </table>
+                    </li>
+
+                </ul>
+            </div>
+            <!-- /tech_analysis_group-->
+
+            <a href="https://h5.smart-elite.com/yz352001/home" target="_blank" class="content5_btn wow fadeInUp">立即交易</a>
+
+        </div>
+        <!-- /content5-->
+
+
+        <div class="content2">
+
+            <div class="big_title wow fadeInDown"><span>开户$50直接到账</span></div>
+            <div class="big_title2">100%赠送 无需入金</div>
+
+            <div class="content1_list2">
+                <img src="promote/lp270E_v3/images/content1_list2_pic1.png">
+                <p><img src="promote/lp270E_v3/images/content1_list2_pic2.png" class="wow"></p>
+                <span><img src="promote/lp270E_v3/images/content1_list2_pic3.png"></span>
+            </div>
+
+        </div>
+        <!-- /content2-->
+
+
+        <div class="content4">
+
+            <div class="big_title wow fadeInDown"><span>微信交易90+投资品种</span></div>
+            <div class="big_title2" style="width:90%">一账交易能源、外汇、贵金属、指数、港美股</div>
+
+            <div class="mobile_sreen">
+                <ul class="mobile_ball">
+                    <li class="ball1">
+                        <p><span>微信浮窗<br>交易</span></p>
+                    </li>
+                    <li class="ball1_w"></li>
+                    <li class="ball2">
+                        <p><span>无需<br>下载</span></p>
+                    </li>
+                    <li class="ball2_w"></li>
+                    <li class="ball3">
+                        <p><span>随开随关<br>随赚随取</span></p>
+                    </li>
+                    <li class="ball3_w"></li>
+                    <li class="ball4">
+                        <p><span>社交行情<br>两不误</span></p>
+                    </li>
+                    <li class="ball4_w"></li>
+                </ul>
+
+                <div class="mobile_group"><img src="promote/lp270E_v3/images/wechat_trade.gif"></div>
+
+            </div>
+            <!-- /mobile_sreen-->
+            <p class="video_btn" onClick="popup_video()"><span>操作视频详解</span><img src="promote/lp270E_v3/images/video_btn_icon.png"></p>
+
+        </div>
+        <!-- /content4-->
+
+
+
+        <div class="content3">
+            <!-- <a href="#" class="more_btn">更多<i></i></a>-->
+
+            <div class="big_title wow fadeInDown">关于<span>智选</span></div>
+
+            覆盖外汇、贵金属、指数、原油等90+种交易产品，随时随地把握投资先机。
+            <a href="#" class="more_btn2">更多 ></a>
+            <ul class="blue_icon">
+                <li class="wow fadeInLeft">
+                    <a href="#"></a>
+                    <img src="promote/lp270E_v3/images/3icon_1.png">
+                    <b>多元化产品</b>
+                </li>
+                <li class="wow fadeInDown">
+                    <a href="#"></a>
+                    <img src="promote/lp270E_v3/images/3icon_2.png">
+                    <b>独创网页交易</b>
+                </li>
+                <li class="wow fadeInRight">
+                    <a href="#"></a>
+                    <img src="promote/lp270E_v3/images/3icon_3.png">
+                    <b>快速出入金</b>
+                </li>
+            </ul>
+
+            <ul class="price_list">
+                <li class="list1 wow fadeInLeft">
+                    <span>累计成交手数</span>
+                    <p><b>15,470,467</b>手</p>
+                </li>
+                <li class="list2 wow fadeInRight">
+                    <span>累计服务人数</span>
+                    <p><b>1,670,298</b>人</p>
+                </li>
+            </ul>
+
+        </div>
+        <!-- /content3-->
+
+
+        <div class="bottom_btn">
+            <a href="#" class="btn1">立 即 体 验</a>
+            <a href="#" class="btn2">免 费 开 户</a>
+
+        </div>
+
+    </div>
+    <!-- /main_content-->
+
+    <div class="popup" id="popup">
+
+        <div class="popup_content">
+            <p class="popup_close" onClick="$('#popup').fadeOut()"></p>
+            <h1>投票成功 感谢参与！</h1>
+            <img src="promote/lp270E_v3/images/popup_v3_img.jpg">
+            <span>无需入金 盈利全归你</span>
+            <a href="#" class="popup_btn">开户领取</a>
+        </div>
+
+    </div>
+
+
+    <div class="popup_video" id="popup_video">
+        <div class="popup_video_content">
+            <div class="video_close">
+                <p onclick="popup_video_close()"></p>
+            </div>
+            <video width="auto" height="90%" controls="" playsinline="" id="video1" controlsList="nodownload">
+	  <source src="promote/lp270E_v3/images/popup_video.mp4" type="video/mp4">
+	  Your browser does not support the video tag.
+</video>
+        </div>
+    </div>
+
+
+
+    <div class="tech_analysis_popup" id="tech_analysis_popup">
+        <div class="tech_analysis_popup_content">
+            <p class="tech_analysis_popup_close" onClick="$('#tech_analysis_popup').fadeOut()"></p>
+            <h1>美国TECH100</h1>
+            <div class="tech_analysis_time_menu" id="tech_analysis_time_menu">
+                <span class="mobile_hide">1 分钟</span>
+                <span>5 分钟</span>
+                <span>15 分钟</span>
+                <span class="mobile_hide">30 分钟</span>
+                <span class="selected">每小时</span>
+                <span class="mobile_hide">5 小时</span>
+                <span class="tech_analysis_other_text">每日</span>
+                <span class="mobile_hide">每周</span>
+                <span class="mobile_hide">每月</span>
+                <div class="other_menu" id="tech_analysis_other_menu">
+                    <i onClick="tech_analysis_other_menu($(this))"></i>
+                    <p>
+                        <span>1分钟</span>
+                        <span>30分钟</span>
+                        <span>5小时</span>
+                        <span>每周</span>
+                        <span>每月</span>
+                    </p>
+                </div>
+            </div>
+            <table class="tech_analysis_table">
+                <tr>
+                    <th>总结</th>
+                    <th colspan="3">
+                        <p class="bg_green"><span>强力卖出</span></p>
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                        <p>移动平均指数</p>
+                    </td>
+                    <td>
+                        <p class="text_normal">中性</p>
+                    </td>
+                    <td>
+                        <p>购买 (02)</p>
+                    </td>
+                    <td>
+                        <p>卖出 (05)</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>技术指标</p>
+                    </td>
+                    <td>
+                        <p class="text_green">强力卖出</p>
+                    </td>
+                    <td>
+                        <p>购买 (19)</p>
+                    </td>
+                    <td>
+                        <p>卖出 (04)</p>
+                    </td>
+                </tr>
+            </table>
+
+            <div class="tech_analysis_over">
+
+                <div class="pivot_point_table">
+                    <p class="date_text">2020年9月17日 04:03 GMT</p>
+                    <h4>枢轴点</h4>
+                    <table>
+                        <tr>
+                            <th>名称</th>
+                            <th>S3</th>
+                            <th>S2</th>
+                            <th>S1</th>
+                            <th><strong>轴点</strong></th>
+                            <th>R1</th>
+                            <th>R2</th>
+                            <th>R3</th>
+                        </tr>
+                        <tr>
+                            <td>经典</td>
+                            <td>1932.40</td>
+                            <td>1938.25</td>
+                            <td>1942.20</td>
+                            <td><strong>1948.05</strong></td>
+                            <td>1952.00</td>
+                            <td>1957.85</td>
+                            <td>1961.80</td>
+                        </tr>
+                        <tr>
+                            <td>斐波纳契</td>
+                            <td>1938.25</td>
+                            <td>1941.99</td>
+                            <td>1944.31</td>
+                            <td><strong>1948.05</strong></td>
+                            <td>1951.79</td>
+                            <td>1954.11</td>
+                            <td>1957.85</td>
+                        </tr>
+                        <tr>
+                            <td>卡玛利拉</td>
+                            <td>1943.46</td>
+                            <td>1944.35</td>
+                            <td>1945.25</td>
+                            <td><strong>1948.05</strong></td>
+                            <td>1947.05</td>
+                            <td>1947.95</td>
+                            <td>1948.85</td>
+                        </tr>
+                        <tr>
+                            <td>Woodie's</td>
+                            <td>1931.46</td>
+                            <td>1937.78</td>
+                            <td>1941.26</td>
+                            <td><strong>1947.58</strong></td>
+                            <td>1951.06</td>
+                            <td>1957.38</td>
+                            <td>1960.86</td>
+                        </tr>
+                        <tr>
+                            <td>DeMark's</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>1940.22</td>
+                            <td><strong>1947.06</strong></td>
+                            <td>1950.03</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                    </table>
+                </div>
+                <!-- /pivot_point_table-->
+
+
+
+
+                <ul class="tech_analysis_table_group">
+                    <li>
+                        <p class="date_text">2020年9月17日 04:03 GMT</p>
+                        <h4>移动平均指数</h4>
+                        <table class="tech_analysis_table_top">
+                            <tr>
+                                <td>名称</td>
+                                <td>标准</td>
+                                <td>移动</td>
+                            </tr>
+                        </table>
+                        <table class="tech_analysis_table table2">
+                            <tr>
+                                <td>
+                                    <p>MA5</p>
+                                </td>
+                                <td>
+                                    <p class="bg_green"><span>1954.49<br>卖出</span></p>
+                                </td>
+                                <td>
+                                    <p class="bg_green"><span>1954.47<br>卖出</span></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>MA10</p>
+                                </td>
+                                <td>
+                                    <p class="bg_green"><span>1955.32<br>卖出</span></p>
+                                </td>
+                                <td>
+                                    <p class="bg_green"><span>1952.93<br>卖出</span></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>MA20</p>
+                                </td>
+                                <td>
+                                    <p class="bg_red"><span>1948.36<br>买入</span></p>
+                                </td>
+                                <td>
+                                    <p class="bg_red"><span>1949.60<br>买入</span></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>MA50</p>
+                                </td>
+                                <td>
+                                    <p class="bg_red"><span>1939.61<br>买入</span></p>
+                                </td>
+                                <td>
+                                    <p class="bg_red"><span>1943.59<br>买入</span></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>MA100</p>
+                                </td>
+                                <td>
+                                    <p class="bg_red"><span>1939.09<br>买入</span></p>
+                                </td>
+                                <td>
+                                    <p class="bg_red"><span>1944.52<br>买入</span></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>MA200</p>
+                                </td>
+                                <td>
+                                    <p class="bg_green"><span>1955.18<br>卖出</span></p>
+                                </td>
+                                <td>
+                                    <p class="bg_green"><span>1947.05<br>卖出</span></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p><b>总结</b></p>
+                                </td>
+                                <td>
+                                    <p><span>购买 (19)<br>卖出 (07)</span></p>
+                                </td>
+                                <td>
+                                    <p class="bg_green"><span>强力卖出</span></p>
+                                </td>
+                            </tr>
+                        </table>
+                    </li>
+                    <li>
+                        <p class="date_text">2020年9月17日 04:03 GMT</p>
+                        <h4>技术指标</h4>
+                        <table class="tech_analysis_table_top">
+                            <tr>
+                                <td>代码</td>
+                                <td>价值</td>
+                                <td>操作</td>
+                            </tr>
+                        </table>
+                        <table class="tech_analysis_table table2 table3">
+                            <tr>
+                                <td>
+                                    <p>RSI(14)</p>
+                                </td>
+                                <td>
+                                    <p class="text_green"><span>58.096</span></p>
+                                </td>
+                                <td>
+                                    <p class="bg_red"><span>买入</span></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>STOCH(9.6)</p>
+                                </td>
+                                <td>
+                                    <p class=""><span>52.821</span></p>
+                                </td>
+                                <td>
+                                    <p class="bg_normal"><span>中性</span></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>STOCHRSI(14)</p>
+                                </td>
+                                <td>
+                                    <p class=""><span>0.000</span></p>
+                                </td>
+                                <td>
+                                    <p class="bg_normal"><span>超卖</span></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>MACD(12,26)</p>
+                                </td>
+                                <td>
+                                    <p class="text_green"><span>58.096</span></p>
+                                </td>
+                                <td>
+                                    <p class="bg_red"><span>买入</span></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>ATR(14)</p>
+                                </td>
+                                <td>
+                                    <p class=""><span>5.4143</span></p>
+                                </td>
+                                <td>
+                                    <p class="bg_normal"><span>少波动</span></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>ADX(14)</p>
+                                </td>
+                                <td>
+                                    <p class="text_red"><span>20.759</span></p>
+                                </td>
+                                <td>
+                                    <p class="bg_green"><span>卖出</span></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>CCI(14)</p>
+                                </td>
+                                <td>
+                                    <p class=""><span>20.8232</span></p>
+                                </td>
+                                <td>
+                                    <p class="bg_normal"><span>中性</span></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>Highs/Lows(14)</p>
+                                </td>
+                                <td>
+                                    <p class=""><span>0.0000</span></p>
+                                </td>
+                                <td>
+                                    <p class="bg_normal"><span>中性</span></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>UO</p>
+                                </td>
+                                <td>
+                                    <p class="text_red"><span>45.624</span></p>
+                                </td>
+                                <td>
+                                    <p class="bg_green"><span>卖出</span></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>ROC</p>
+                                </td>
+                                <td>
+                                    <p class="text_green"><span>1.061</span></p>
+                                </td>
+                                <td>
+                                    <p class="bg_red"><span>买入</span></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>WilliamsR</p>
+                                </td>
+                                <td>
+                                    <p class="text_green"><span>-22.898</span></p>
+                                </td>
+                                <td>
+                                    <p class="bg_red"><span>买入</span></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>BullBear(13)</p>
+                                </td>
+                                <td>
+                                    <p class="text_green"><span>1.7841</span></p>
+                                </td>
+                                <td>
+                                    <p class="bg_red"><span>买入</span></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p><b>总结</b></p>
+                                </td>
+                                <td>
+                                    <p class=""><span>购买 (13)<br>卖出 (06)<br>中性 (07)</span></p>
+                                </td>
+                                <td>
+                                    <p class="bg_red"><span>&nbsp;<br>买入<br>&nbsp;</span></p>
+                                </td>
+                            </tr>
+                        </table>
+                    </li>
+                </ul>
+
+            </div>
+
+        </div>
+        <!-- /tech_analysis_popup_content-->
+    </div>
+    <!-- /tech_analysis_popup-->
+
+
+
+</body>
+
+</html>

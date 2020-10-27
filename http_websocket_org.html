@@ -166,10 +166,25 @@
         const WS_BASE_URL = "wss://api.mircoinfolab.com:1315/websocket";
         const HTTP_BASE_URL = "https://api.mircoinfolab.com:1315";
         const TECH_ANA_URL = "https://api.bingxuegirl.com/inv/currencies";
-        // 輪播 ID
+        // 實時報價開關
+        const PRODUCT_SUB_ON_OFF = false
+            // 最後一口價開關
+        const LASTPRICE_ON_OFF = false
+            // 輪播 開關
+        const LOOPING_ON_OFF = false
+            // 輪播 ID
         const LOOPING_PRODUCT_ID = ['573004']
+            // K 線開關
+        const KLINE_ON_OFF = true;
+        // K 線日期起算
+        const KLINE_DATE_START = "2020-10-25 08:00:00"
+            // k 線數據日期單位 (1min、5min、15min、30min、1hour、2hour、4hour、day、week、month)
+        const KLINE_DATE_INTERVAL = "day"
+            // 技術分析 開關
+        const TECH_ANA = false;
         const uvjs = "'jsonUrl: '/public/js/code_03_ix.json'"
         var vm = new Vue({
+
                     el: "#getPriceTemplate",
                     data() {
                         return {
@@ -237,20 +252,30 @@
                             },
                             // 所有產品 id
                             typeId: [],
+                            // 最後一口價 開關
+                            lastPriceOn_Off: LASTPRICE_ON_OFF,
                             // 總產品_最後一口價
                             allLastProduct: [],
+                            // 時實數據 開關
+                            productOn_Off: PRODUCT_SUB_ON_OFF,
                             // 時實數據
                             realtimeData: [],
                             // 心跳間隔(單位:毫秒)
                             beatTime: 30000,
+                            // k 線數據開關
+                            klineOn_Off: KLINE_ON_OFF,
                             // k 線日期單位
-                            ktypeDay: 'month',
+                            ktypeDay: KLINE_DATE_INTERVAL,
                             // k 線數據
                             klineHistoryData: [],
                             // k 線開始時間
-                            klinestartTime: "2008-1-1 07:00:00",
+                            klinestartTime: KLINE_DATE_START,
                             // k 線資料時間走向( 1:往未來 0:向過去)
                             klineflag: 1,
+                            // 輪播廣播 開關
+                            loopOn_Off: LOOPING_ON_OFF,
+                            // 行情技術分析 開關
+                            techOn_off: TECH_ANA,
                             // 行情技術分析
                             currenctTemp: "",
                         }
@@ -295,7 +320,7 @@
                             const slider = document.querySelector('.slider')
                             slider.style.height = `${(100 * (vm.carouselId.length))}%`
                             _content_ls = {
-                                    code_ids: vm.typeId,
+                                    code_ids: LOOPING_PRODUCT_ID,
                                 }
                                 // --最後一口價 + 推入輪播
                             setTimeout(() => {
@@ -376,7 +401,6 @@
                         top = (top - 0.3).toFixed(1)
                         let allLengthUnit = (((vm.carouselId.length) * 2) * 0.3).toFixed(1)
                         slider.setAttribute('style', `top:${top}rem`)
-                        console.log(-(top % (((vm.carouselId.length) * 2) * 0.3).toFixed(1)).toFixed(2))
                         if (-(top % allLengthUnit).toFixed(2) === 0.3) {
                             vm.updataGenerate()
                         }
@@ -452,7 +476,7 @@
                     newArr.content.product_category.forEach(element => {
                         vm.typeId = vm.typeId.concat(element.code_ids)
                     });
-                    vm.typeId = LOOPING_PRODUCT_ID
+
                     console.log(vm.typeId, 'Id 產生')
                 },
                 // 需要 token 者 ( 依照文檔目前只在判斷客戶來源使用 )
@@ -572,16 +596,13 @@
                             let base64 = pako.inflate(reader.result, { to: "string" });
                             // base64 在使用 decodeURI 轉碼成物件
                             let newarr = JSON.parse(decodeURI(base64));
-                            console.log(newarr)
                             // 解碼後取物件 msg_code
                             let msg_code = newarr.msg_code
                             // -- 事件 msg_code 判斷 (blob 資料型態) 
                             switch (msg_code) {
                                 case "GroupSymbolListRet":
-                                    console.log('GroupSymbolListRet','讀取到GroupSymbolListRet');
                                     break
                                 case "KlineHistoryData":
-                                    console.log('KlineHistoryData','讀取到klineHistoryData');
                                     vm.klineHistoryData = JSON.parse(JSON.stringify(newarr.content.kline_data_list))
                                     break
                             }
@@ -614,25 +635,34 @@
                         // --初始化 所有產品 與 產品分類
                         case "InitProductInfo":
                             // 抓取所有 ID 或自定義 ID
-                            vm.defineProduct(e)
-                            // 訂閱所有產品最後一口價
-                            _content_ls = {
-                                code_ids: vm.typeId,
+                            if (vm.lastPriceOn_Off) {
+                                vm.defineProduct(e)
+                                // 訂閱所有產品最後一口價
+                                _content_ls = {
+                                    code_ids: vm.typeId,
+                                }
+                                // --最後一口價
+                                vm.WsLastpriceBuildup("lastPrice", _content_ls)
+                            } else {
+                                console.log('最後一口價開關狀態: OFF');
                             }
-                            // --最後一口價
-                            vm.WsLastpriceBuildup("lastPrice", _content_ls)
-                            for (let v = 0; v < (vm.carouselId.length); v++) {
-                                vm.generate(v)
-                            }
-                            _content_kline = {
-                                code_id: 573004,
-                                startTime: vm.klinestartTime,
-                                ktype: vm.ktypeDay,
-                                num: 500,
-                                flag: vm.klineflag
-                            }
-                            // --發送 k線ID
-                            vm.WsKlineBuildup('klineHistoryData', _content_kline)
+                            // 輪播 ID 訂閱
+                            if (vm.loopOn_Off) {
+                                for (let v = 0; v < (vm.carouselId.length); v++) {
+                                    vm.generate(v)
+                                }
+                            }else{console.log('輪播開關狀態: OFF');}
+                            if (vm.klineOn_Off) {
+                                _content_kline = {
+                                    code_id: 573004,
+                                    startTime: vm.klinestartTime,
+                                    ktype: vm.ktypeDay,
+                                    num: 500,
+                                    flag: vm.klineflag
+                                }
+                                // --發送 k線ID
+                                vm.WsKlineBuildup('klineHistoryData', _content_kline)
+                            } else { console.log('K 線開關狀態: OFF'); }
                             break;
                         // 比對到最後一口價傳入
                         case "LastPrice":
@@ -648,7 +678,9 @@
                                 type: "yz"
                             }
                             // --產品報價
-                            vm.WsProductCurBuildup("productSubscription", _content_pr)
+                            if (vm.productOn_Off) {
+                                vm.WsProductCurBuildup("productSubscription", _content_pr)
+                            } else { console.log('實時報價開關狀態: OFF'); }
                             break
                         // 比對到 K 線發送
                         case "klineHistoryData":
@@ -670,7 +702,9 @@
             created() {
                 this.gotourl()
                 this.getJson()
-                //this.getCurrenc()
+                if (this.techOn_off) {
+                    this.getCurrenc()
+                } else { console.log('技術分析開關狀態 : OFF'); }
             },
             destroyed() {
             }
