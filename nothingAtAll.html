@@ -2,21 +2,46 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>nothingAtAll</title>
-  <style>
-    
-  </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>nothingAtAll</title>
+    <style>
+
+    </style>
 </head>
 
 <body>
 
 
 
-  <script>
+    <script>
+        setTimeout(() => {
+            console.log('A');
+        }, 1);
+        setTimeout(() => {
+            console.log('B');
+        }, 1);
+        setTimeout(() => {
+            console.log('C');
+        }, 1);
+        setTimeout(() => {
+            console.log('D');
+        }, 1);
 
-  </script>
+        let xd = 666
+        let ss = 777
+        const a = new Promise((xd, ss) => {
+            xd('success')
+        })
+
+        a.then(res => {
+            console.log(res);
+        }).catch(fall => {
+            console.log(fall);
+        })
+
+        console.log(a);
+    </script>
 </body>
 
 </html>

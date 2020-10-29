@@ -16,12 +16,23 @@
     <meta name="renderer" content="webkit">
     <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <link href="promote/lp329C/public/css/animate.css" rel="stylesheet" type="text/css">
-    <link href="https://img-pc.bbyou.net/common/css/lp_public.css" rel="stylesheet" />
+    <link href="https://www.se6868w.com/common/css/lp_public.css" rel="stylesheet" />
     <script type="text/javascript" src="promote/lp329C/public/js/jquery.min.js"></script>
     <script type="text/javascript" src="promote/lp329C/public/js/wow.min.js"></script>
     <link rel="stylesheet" type="text/css" href="promote/lp329C/css/popup.css">
     <link rel="stylesheet" type="text/css" href="promote/lp329C/css/style_pc.css" media="screen and (min-width:751px)">
     <link rel="stylesheet" type="text/css" href="promote/lp329C/css/style.css" media="screen and (max-width:750px)">
+    <style>
+        button {
+            border: none;
+            background: transparent;
+            display: block;
+        }
+        
+        .header {
+            position: absolute;
+        }
+    </style>
 </head>
 
 <body>
@@ -85,7 +96,7 @@
                 <div class="i1">
                     <div class="i1_1 cur wow fadeInLeft">
                         <h4>第一重</h4>
-                        <p><span class="gift">150</span><b>美元</b></p>
+                        <p><span class="gift">500</span><b>美元</b></p>
                         <div><span>首次存款赠金</span></div>
                     </div>
                     <div class="i1_1 wow fadeInRight">
@@ -96,24 +107,24 @@
                 </div>
                 <div class="swiper-container wow fadeInUp">
                     <div class="swiper-wrapper i2">
-                        <div class="swiper-slide i2_1 wow fadeInLeft">
+                        <button class="swiper-slide i2_1 wow fadeInLeft">
                             <div>
                                 <h4>首存</h4>
                                 <p><span>1,000</span><b>美元</b></p>
                             </div>
-                        </div>
-                        <div class="swiper-slide i2_1 wow fadeInUp">
+                        </button>
+                        <button class="swiper-slide i2_1 wow fadeInUp d-focus">
                             <div>
                                 <h4>首存</h4>
-                                <p><span>2,000</span><b>美元</b></p>
+                                <p class="d-focus"><span>2,000</span><b>美元</b></p>
                             </div>
-                        </div>
-                        <div class="swiper-slide i2_1 wow fadeInRight">
+                        </button>
+                        <button class="swiper-slide i2_1 wow fadeInRight">
                             <div>
                                 <h4>首存</h4>
                                 <p><span>500</span><b>美元</b></p>
                             </div>
-                        </div>
+                        </button>
                     </div>
                     <div class="swiper-button-next"></div>
                     <div class="swiper-button-prev"></div>
@@ -396,9 +407,11 @@
             $("#" + div_name).fadeOut();
             return false;
         }
-        $(window).resize(function() {
-            // location.reload();
-        });
+        if ($(window).width() < 751) {
+            $(window).resize(function() {
+                location.reload();
+            });
+        }
 
         jQuery(document).ready(function() {
             //animate
@@ -414,6 +427,7 @@
                     autoplayDisableOnInteraction: false,
                     autoplay: 3000,
                     spaceBetween: 30,
+                    runCallbacksOnInit: true,
                     //effect: 'fade',
                     onSlideChangeStart: function(swiper) {
                         var index2 = swiper.activeIndex;
@@ -423,22 +437,51 @@
                             index2 = index2
                         }
                         $('.tabs li').removeClass('cur').eq(index2 - 1).addClass('cur');
-
-                    },
-                    onTransitionStart: function(swiper) {
+                        console.log('onSlideChangeStart');
                         let Sact = document.querySelector('.i2_1.swiper-slide-active')
                         if (Sact) {
                             let Sact = document.querySelector('.i2_1.swiper-slide-active').childNodes[1].childNodes[3].childNodes[0].innerText
                             if (Sact === '500') {
                                 document.querySelector('.gift').innerText = '150'
-                                console.log(Sact);
                             } else if (Sact === '1,000') {
                                 document.querySelector('.gift').innerText = '200'
                             } else if (Sact === '2,000') {
                                 document.querySelector('.gift').innerText = '500'
                             }
                         }
-                    }
+                    },
+                    onTransitionEnd: function(swiper) {
+                        let Sact = document.querySelector('.i2_1.swiper-slide-active')
+                        if (Sact) {
+                            let Sact = document.querySelector('.i2_1.swiper-slide-active').childNodes[1].childNodes[3].childNodes[0].innerText
+                            if (Sact === '500') {
+                                document.querySelector('.gift').innerText = '150'
+                            } else if (Sact === '1,000') {
+                                document.querySelector('.gift').innerText = '200'
+                            } else if (Sact === '2,000') {
+                                document.querySelector('.gift').innerText = '500'
+                            }
+                        }
+                        console.log('onTransitionEnd');
+                    },
+                    onTransitionStart() {
+                        let Sact = document.querySelector('.i2_1.swiper-slide-active')
+                        if (Sact) {
+                            let Sact = document.querySelector('.i2_1.swiper-slide-active').childNodes[1].childNodes[3].childNodes[0].innerText
+                            if (Sact === '500') {
+                                document.querySelector('.gift').innerText = '150'
+                            } else if (Sact === '1,000') {
+                                document.querySelector('.gift').innerText = '200'
+                            } else if (Sact === '2,000') {
+                                document.querySelector('.gift').innerText = '500'
+                            }
+                        }
+                        console.log('onTransitionStart');
+                    },
+                    onSetTransition() {
+                        console.log('onSetTransition');
+
+                    },
                 });
             } else {
                 var mySwiper = new Swiper('.part_03 .swiper-container', {
@@ -448,7 +491,6 @@
                     observer: true,
                     observeParents: true,
                     autoplayDisableOnInteraction: false,
-                    autoplay: 3000,
                     spaceBetween: 30,
                     effect: 'fade',
                     onSlideChangeStart: function(swiper) {
@@ -461,6 +503,50 @@
                         $('.tabs li').removeClass('cur').eq(index2 - 1).addClass('cur');
                     }
                 });
+                let i2_1 = [...document.querySelectorAll('.i2_1')]
+                console.dir(i2_1);
+                i2_1.forEach(el => {
+                    // el.addEventListener('mouseenter', function() {
+                    //     let elVal = el.childNodes[1].childNodes[3].childNodes[0].innerText
+                    //     switch (elVal) {
+                    //         case '500':
+                    //             document.querySelector('.gift').innerText = '150'
+                    //             break;
+                    //         case '1,000':
+                    //             document.querySelector('.gift').innerText = '200'
+                    //             break;
+                    //         case '2,000':
+                    //             document.querySelector('.gift').innerText = '500'
+                    //             break;
+                    //         default:
+                    //             break;
+                    //     }
+                    // }, false)
+                    el.addEventListener('click', function() {
+                        let elVal = el.childNodes[1].childNodes[3].childNodes[0].innerText
+                        let elSelFocus = document.querySelectorAll('.d-focus');
+                        [].forEach.call(elSelFocus, function(el) {
+                            el.classList.remove("d-focus");
+                        });
+                        // let elDom = el
+                        // elDom.style.background = 'url(promote/lp329C/images/208_2.png) center no-repeat'
+                        // elDom.style.backgroundSize = '100%'
+                        // console.log(elDom.style.background);
+                        switch (elVal) {
+                            case '500':
+                                document.querySelector('.gift').innerText = '150'
+                                break;
+                            case '1,000':
+                                document.querySelector('.gift').innerText = '200'
+                                break;
+                            case '2,000':
+                                document.querySelector('.gift').innerText = '500'
+                                break;
+                            default:
+                                break;
+                        }
+                    }, false)
+                })
             }
             $(".tabs").on("hover", "li", function(e) {
                 var index = $(this).index() + 1;
@@ -471,13 +557,14 @@
             setTimeout(() => {
                 if ($(window).width() < 751) {
                     var swiper = new Swiper('.part_02 .swiper-container', {
+                        initialSlide: 1,
                         pagination: '.part_11_1_pagination',
                         paginationClickable: true,
                         nextButton: '.swiper-button-next',
                         prevButton: '.swiper-button-prev',
                         parallax: true,
                         autoplay: 3000,
-                        speed: 600,
+                        speed: 1000,
                         loop: true
                     });
                 }
