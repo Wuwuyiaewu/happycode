@@ -1,40 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Mouse Shadow</title>
+    <meta charset="UTF-8">
+    <title>Mouse Shadow</title>
 </head>
+
 <body>
 
-  <div class="hero">
-    <h1 contenteditable>🔥WOAH!</h1>
-  </div>
+    <div class="hero">
+        <h1 contenteditable>🔥WOAH!</h1>
+    </div>
+    <div class="alicer"></div>
+    <style>
+        html {
+            color: black;
+            font-family: sans-serif;
+        }
+        
+        body {
+            margin: 0;
+        }
+        
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: black;
+        }
+        
+        .alicer {
+            margin-left: 20%;
+            width: 500px;
+            height: 500px;
+            background: rgba(123, 222, 112, 0.5);
+        }
+        
+        h1 {
+            text-shadow: 10px 10px 0 rgba(0, 0, 0, 1);
+            font-size: 100px;
+        }
+    </style>
 
-  <style>
-  html {
-    color: black;
-    font-family: sans-serif;
-  }
-
-  body {
-    margin: 0;
-  }
-
-  .hero {
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: black;
-  }
-
-  h1 {
-    text-shadow: 10px 10px 0 rgba(0,0,0,1);
-    font-size: 100px;
-  }
-  </style>
-
-<script>
-</script>
+    <script>
+        ;
+        (function() {
+            document.querySelector('.hero').addEventListener('mousemove', function(e) {
+                let {
+                    offsetX,
+                    offsetY
+                } = e
+                console.log(
+                    this.offsetWidth,
+                    this.offsetHeight
+                );
+            })
+        })()
+    </script>
 </body>
+
 </html>
