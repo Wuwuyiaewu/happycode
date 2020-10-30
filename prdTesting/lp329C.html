@@ -107,19 +107,19 @@
                 </div>
                 <div class="swiper-container wow fadeInUp">
                     <div class="swiper-wrapper i2">
-                        <button class="swiper-slide i2_1 wow fadeInLeft">
+                        <button class="swiper-slide i2_1 wow fadeInLeft stop-swiping">
                             <div>
                                 <h4>首存</h4>
                                 <p><span>1,000</span><b>美元</b></p>
                             </div>
                         </button>
-                        <button class="swiper-slide i2_1 wow fadeInUp d-focus">
+                        <button class="swiper-slide i2_1 wow fadeInUp d-focus stop-swiping">
                             <div>
                                 <h4>首存</h4>
                                 <p class="d-focus"><span>2,000</span><b>美元</b></p>
                             </div>
                         </button>
-                        <button class="swiper-slide i2_1 wow fadeInRight">
+                        <button class="swiper-slide i2_1 wow fadeInRight stop-swiping">
                             <div>
                                 <h4>首存</h4>
                                 <p><span>500</span><b>美元</b></p>
@@ -399,6 +399,39 @@
     <link rel="stylesheet" media="screen" href="promote/lp329C/public/css/swiper3.1.0.min.css" />
     <script type="text/javascript" src="promote/lp329C/public/js/swiper.min.3.4.2.js"></script>
     <script type="text/javascript">
+        function looping() {
+            let active = 0
+            let x = 0
+            let data = ['500', '150', '200']
+            clickevent(active, x, data)
+        }
+
+        function clickevent(active, x, data) {
+            let next = document.querySelector('.swiper-button-next')
+            let prev = document.querySelector('.swiper-button-prev')
+            let gg = document.querySelector('.gift')
+            next.addEventListener("click", function() {
+                x = x + 1
+                if (x > 2) {
+                    x = 0
+                }
+                console.log(x);
+                let index = (x + data.length) % data.length
+                gg.innerText = data[index]
+            })
+            prev.addEventListener("click", function() {
+                if (x) {
+                    x = x + -1
+                } else {
+                    x = 2
+                }
+                console.log(x);
+                let index = (x + data.length) % data.length
+                gg.innerText = data[index]
+            })
+        }
+        looping()
+
         function popup_show(div_name) {
             $("#" + div_name).fadeIn();
         }
@@ -425,7 +458,6 @@
                     observer: true,
                     observeParents: true,
                     autoplayDisableOnInteraction: false,
-                    autoplay: 3000,
                     spaceBetween: 30,
                     runCallbacksOnInit: true,
                     //effect: 'fade',
@@ -437,51 +469,7 @@
                             index2 = index2
                         }
                         $('.tabs li').removeClass('cur').eq(index2 - 1).addClass('cur');
-                        console.log('onSlideChangeStart');
-                        let Sact = document.querySelector('.i2_1.swiper-slide-active')
-                        if (Sact) {
-                            let Sact = document.querySelector('.i2_1.swiper-slide-active').childNodes[1].childNodes[3].childNodes[0].innerText
-                            if (Sact === '500') {
-                                document.querySelector('.gift').innerText = '150'
-                            } else if (Sact === '1,000') {
-                                document.querySelector('.gift').innerText = '200'
-                            } else if (Sact === '2,000') {
-                                document.querySelector('.gift').innerText = '500'
-                            }
-                        }
-                    },
-                    onTransitionEnd: function(swiper) {
-                        let Sact = document.querySelector('.i2_1.swiper-slide-active')
-                        if (Sact) {
-                            let Sact = document.querySelector('.i2_1.swiper-slide-active').childNodes[1].childNodes[3].childNodes[0].innerText
-                            if (Sact === '500') {
-                                document.querySelector('.gift').innerText = '150'
-                            } else if (Sact === '1,000') {
-                                document.querySelector('.gift').innerText = '200'
-                            } else if (Sact === '2,000') {
-                                document.querySelector('.gift').innerText = '500'
-                            }
-                        }
-                        console.log('onTransitionEnd');
-                    },
-                    onTransitionStart() {
-                        let Sact = document.querySelector('.i2_1.swiper-slide-active')
-                        if (Sact) {
-                            let Sact = document.querySelector('.i2_1.swiper-slide-active').childNodes[1].childNodes[3].childNodes[0].innerText
-                            if (Sact === '500') {
-                                document.querySelector('.gift').innerText = '150'
-                            } else if (Sact === '1,000') {
-                                document.querySelector('.gift').innerText = '200'
-                            } else if (Sact === '2,000') {
-                                document.querySelector('.gift').innerText = '500'
-                            }
-                        }
-                        console.log('onTransitionStart');
-                    },
-                    onSetTransition() {
-                        console.log('onSetTransition');
-
-                    },
+                    }
                 });
             } else {
                 var mySwiper = new Swiper('.part_03 .swiper-container', {
@@ -528,10 +516,7 @@
                         [].forEach.call(elSelFocus, function(el) {
                             el.classList.remove("d-focus");
                         });
-                        // let elDom = el
-                        // elDom.style.background = 'url(promote/lp329C/images/208_2.png) center no-repeat'
-                        // elDom.style.backgroundSize = '100%'
-                        // console.log(elDom.style.background);
+
                         switch (elVal) {
                             case '500':
                                 document.querySelector('.gift').innerText = '150'
@@ -563,9 +548,25 @@
                         nextButton: '.swiper-button-next',
                         prevButton: '.swiper-button-prev',
                         parallax: true,
-                        autoplay: 3000,
-                        speed: 1000,
-                        loop: true
+                        speed: 100,
+                        loop: true,
+                        onSlideChangeStart: function(swiper) {
+                            let active = swiper.activeIndex - 2
+                            let data = ['500', '150', '200']
+                            let gg = document.querySelector('.gift')
+                            let index = (active + data.length) % data.length
+                            gg.innerText = data[index]
+
+                            // prev.addEventListener("click", function () {
+                            //     if (x) {
+                            //         x = x + -1
+                            //     } else {
+                            //         x = 2
+                            //     }
+                            //     console.log(x);
+                            //     let index = (x + data.length) % data.length
+                            // })
+                        },
                     });
                 }
 
