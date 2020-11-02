@@ -72,7 +72,7 @@ chartOption = {
                 color: '#4a657a',
                 fontSize: 10
             },
-            formatter (value, index) {
+            formatter(value, index) {
                 if (value === 0) {
                     return ''
                 }
@@ -126,14 +126,21 @@ chartOption = {
 };
 
 // 基于准备好的dom，初始化echarts实例
-var chartPanel = document.getElementById('chart-panel')
+var chartPanel = document.getElementById('chart-panel');
+setTimeout(() => {
+    chartPanel.childNodes[0].style.width = `100%`
+    chartPanel.childNodes[0].style.height = `100%`
+    chartPanel.childNodes[0].childNodes[0].style.width = `100%`
+    chartPanel.childNodes[0].childNodes[0].style.height = `100%`
+    console.log(chartPanel.childNodes[0].childNodes[0].style.width);
+}, 0);
 var myChart = echarts.init(document.getElementById('chart-panel'));
 // 使用刚指定的配置项和数据显示图表。
 // myChart.setOption(chartOption);
 
 var chartTimer = 0
 
-chartPanel.addEventListener('touchend', function (params) {
+chartPanel.addEventListener('touchend', function(params) {
     console.log('touchend')
     clearTimeout(chartTimer)
     chartTimer = setTimeout(function() {
@@ -143,7 +150,7 @@ chartPanel.addEventListener('touchend', function (params) {
     }, 1000);
 });
 
-chartPanel.addEventListener('touchstart', function (params) {
+chartPanel.addEventListener('touchstart', function(params) {
     console.log('touchstart')
     clearTimeout(chartTimer)
 });
