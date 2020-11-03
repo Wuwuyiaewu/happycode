@@ -17,36 +17,15 @@
 
 
     <script>
-        function promiseDom(loop, time = 1000) {
-            setTimeout(() => {
-                return new Promise((resolve, reject) => {
-                    if (loop) {
-                        document.getElementById('domdomdom').innerHTML = `<h1 class='ddd'>DOOMDOOMDOOM</h1>`
-                        resolve('success')
-                    } else {
-                        reject('fail')
-                    }
-                })
-            }, time);
-        }
+        let xx = 666
 
-        function promiseSetcolor(loop, time = 2000) {
-            setTimeout(() => {
-                return new Promise((resolve, reject) => {
-                    if (loop) {
-                        document.querySelector('.ddd').style.color = `red`
-                        resolve('success')
-                    } else {
-                        reject('fail')
-                    }
-                })
-            }, time);
+        let person = {
+            xx: '777',
+            calll: function() {
+                console.log(this.xx);
+            }
         }
-        Promise.all([promiseDom(1)]).then(res => {
-            promiseSetcolor(1)
-        }).catch(res => {
-            console.log(res);
-        })
+        person.calll();
     </script>
 </body>
 

@@ -51,7 +51,7 @@
         ws.reset()
         ws.subscribe({
             event: 'close'
-        }, function () {
+        }, function() {
             ws = new WS({
                 url: wsUrl,
                 heartData: {
@@ -125,8 +125,8 @@
             //         klineDataList.times.push(...newData.times)
             //     }
 
-        //     resetChart()
-        // }
+            //     resetChart()
+            // }
         })
 
         myChart.setOption(chartOption);
@@ -136,14 +136,14 @@
             text: ''
         })
         myChart.dispatchAction({ type: 'restore' })
-        // 获取历史k线
+            // 获取历史k线
         getKline(function(list) {
             myChart.hideLoading()
             klineDataList = splitData(list.content.kline_data_list.reverse().map(function(item) {
                 return [getTimeStr(item.time * 1000), item.open_price, item.close_price, item.low_price, item.high_price, 10000, item.time]
             }))
             console.log('getKline: ', klineDataList)
-            // localStorage.setItem('a', JSON.stringify(klineDataList))
+                // localStorage.setItem('a', JSON.stringify(klineDataList))
             resetChart()
         })
 
@@ -169,7 +169,7 @@
                 }],
                 yAxis: [{
                     axisLabel: {
-                        formatter (value, index) {
+                        formatter(value, index) {
                             if (value === 0) {
                                 return ''
                             }
@@ -304,18 +304,21 @@
         $('.upDownAmount').text(((upDownAmount && upDownAmount > 0) ? '+' : '') + (upDownAmount || '- -')).css('color', color)
         $('.upDownWidth').text(((upDownWidth && upDownWidth > 0) ? '+' : '') + (upDownWidth || '- -') + '%').css('color', color)
 
+        var url = new URL(window.location.href)
+        var utm_source = url.searchParams.get("utm_source") == null ? '' : url.searchParams.get("utm_source");
+
         $('.sellBtn')
             .css({
                 background: sellColor,
             })
-            .attr('href', origin + '/yz352001/order/' + productId + '?direction=sell&utm_source=xxss&openbrowser=true&experience=true')
+            .attr('href', origin + '/yz352001/order/' + productId + '?direction=sell&utm_source=' + utm_source + '&openbrowser=true&experience=true')
             .find('.sellPrice').text(sellPrice ? (sellPrice * 1).toFixed(digits) : '- -')
 
         $('.buyBtn')
             .css({
                 background: buyColor,
             })
-            .attr('href', origin + '/yz352001/order/' + productId + '?direction=buy&utm_source=xxss&openbrowser=true&experience=true')
+            .attr('href', origin + '/yz352001/order/' + productId + '?direction=sell&utm_source=' + utm_source + '&openbrowser=true&experience=true')
             .find('.buyPrice').text(buyPrice ? (buyPrice * 1).toFixed(digits) : '- -')
     }
 })()

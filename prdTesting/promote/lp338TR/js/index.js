@@ -51,7 +51,7 @@
         ws.reset()
         ws.subscribe({
             event: 'close'
-        }, function () {
+        }, function() {
             ws = new WS({
                 url: wsUrl,
                 heartData: {
@@ -85,8 +85,8 @@
         // 实时报价
         getProductSubscription(function(data) {
             curColor = cur === data[3] * 1 ? curColor : (cur > data[3] * 1 ? fallColor : riseColor)
-            buyColor = buyPrice * 1 !== data[2] * 1 ? (buyPrice < data[2] ? riseColor : fallColor) : buyColor
-            sellColor = sellPrice * 1 !== data[1] * 1 ? (sellPrice < data[1] ? riseColor : fallColor) : sellColor
+                // buyColor = buyPrice * 1 !== data[2] * 1 ? (buyPrice < data[2] ? riseColor : fallColor) : buyColor
+                // sellColor = sellPrice * 1 !== data[1] * 1 ? (sellPrice < data[1] ? riseColor : fallColor) : sellColor
 
             cur = data[3] * 1
             buyPrice = data[2]
@@ -125,8 +125,8 @@
             //         klineDataList.times.push(...newData.times)
             //     }
 
-        //     resetChart()
-        // }
+            //     resetChart()
+            // }
         })
 
         myChart.setOption(chartOption);
@@ -136,14 +136,14 @@
             text: ''
         })
         myChart.dispatchAction({ type: 'restore' })
-        // 获取历史k线
+            // 获取历史k线
         getKline(function(list) {
             myChart.hideLoading()
             klineDataList = splitData(list.content.kline_data_list.reverse().map(function(item) {
                 return [getTimeStr(item.time * 1000), item.open_price, item.close_price, item.low_price, item.high_price, 10000, item.time]
             }))
             console.log('getKline: ', klineDataList)
-            // localStorage.setItem('a', JSON.stringify(klineDataList))
+                // localStorage.setItem('a', JSON.stringify(klineDataList))
             resetChart()
         })
 
@@ -169,7 +169,7 @@
                 }],
                 yAxis: [{
                     axisLabel: {
-                        formatter (value, index) {
+                        formatter(value, index) {
                             if (value === 0) {
                                 return ''
                             }
