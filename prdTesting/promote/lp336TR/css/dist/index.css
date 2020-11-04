@@ -1,0 +1,81 @@
+.content2_chart {
+  height: 3.7rem;
+  width: 4.1rem;
+  color: #000;
+}
+.content2_chart .content {
+  width: 100%;
+  height: 100%;
+}
+.content2_chart .content .products {
+  height: 10%;
+  display: flex;
+}
+.content2_chart .content .products button {
+  font-size: 0.37rem;
+  flex: 0 0 33.33333%;
+  background: white;
+  padding: 0;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  border: 1px solid #797979;
+  box-shadow: #797979 1px 3px 3px;
+}
+.content2_chart .content .products button:hover {
+  background: #d8d8d8;
+  border-bottom: 4px solid green;
+  box-shadow: #4e4e4e 1px 2px 3px;
+}
+.content2_chart .content .products button:focus {
+  background: #d8d8d8;
+  border-bottom: 2px solid green;
+  box-shadow: #2e2e2e 1px 1px 2px;
+  color: green;
+}
+.content2_chart .content .products button:active {
+  background: #d8d8d8;
+}
+.content2_chart .content .main {
+  height: 90%;
+}
+.content2_chart .content .main .info {
+  display: flex;
+  flex-wrap: wrap;
+  height: 20%;
+  padding-bottom: 0.1rem;
+  padding-top: 0.1rem;
+  padding-left: 0.1rem;
+}
+.content2_chart .content .main .info .nameAndCode {
+  box-sizing: border-box;
+  display: flex;
+  flex: 0 0 100%;
+  justify-content: start;
+}
+.content2_chart .content .main .info .nameAndCode span {
+  font-size: 0.24rem;
+}
+.content2_chart .content .main .info .data-wrap {
+  display: flex;
+}
+.content2_chart .content .main .info .data-wrap .cur {
+  line-height: 0.5rem;
+  font-size: 0.3rem;
+}
+.content2_chart .content .main .info .data-wrap .col {
+  display: flex;
+  padding-left: 0.1rem;
+  font-size: 0.2rem;
+  text-align: left;
+  flex-wrap: wrap;
+}
+.content2_chart .content .main .info .data-wrap .col span {
+  flex: 0 0 100%;
+}
+.content2_chart .content .main #chart-panel {
+  height: 60% !important;
+}
+.content2_chart .content .main .bt.btns {
+  height: 20%;
+}

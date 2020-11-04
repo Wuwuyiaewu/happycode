@@ -84,11 +84,12 @@
 
         // 实时报价
         getProductSubscription(function(data) {
-            console.log('in');
             curColor = cur === data[3] * 1 ? curColor : (cur > data[3] * 1 ? fallColor : riseColor)
             buyColor = buyPrice * 1 !== data[2] * 1 ? (buyPrice < data[2] ? riseColor : fallColor) : buyColor
             sellColor = sellPrice * 1 !== data[1] * 1 ? (sellPrice < data[1] ? riseColor : fallColor) : sellColor
             cur = data[3] * 1
+
+            // console.log(ttt, (((data[5] * 1) - (data[6] * 1)) / (cur * 0.2)).toFixed(5), );
             buyPrice = data[2]
             sellPrice = data[1]
             upDownAmount = (cur - lastPrice.yesterday_price).toFixed(digits) // 涨跌额
@@ -299,7 +300,6 @@
     }
 
     function mountedData() {
-        console.log('inm');
         var curPrice = cur * 1 || lastPrice.cur_price
         $('.cur').text(curPrice ? curPrice.toFixed(digits) : '- -').css('color', curColor)
         $('.upDownAmount').text(((upDownAmount && upDownAmount > 0) ? '+' : '') + (upDownAmount || '- -')).css('color', color)

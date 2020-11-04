@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>白送$100，追当日热门行情</title>
+    <title>送你$100追当日大行情</title>
     <meta name="keywords" content="" />
     <meta name="description" content="" />
     <meta content="telephone=no" name="format-detection">
@@ -18,8 +18,9 @@
     <link href="promote/lp336TR/public/css/animate.css" rel="stylesheet" type="text/css">
     <script type="text/javascript" src="promote/lp336TR/public/js/jquery.min.js"></script>
     <script type="text/javascript" src="promote/lp336TR/public/js/wow.min.js"></script>
-
+    <link href="promote/lp336TR/css/reset.css" rel="stylesheet" type="text/css">
     <link href="promote/lp336TR/css/style.css" rel="stylesheet" type="text/css">
+    <link href="promote/lp336TR/css/index.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
@@ -37,15 +38,51 @@
     </header>
     <div class="wrapper">
         <div class="part_01">
-            <div class="i1 wow fadeInDown">想盈利? <strong>10月23日</strong> 必追大事件</div>
+            <div class="i1 wow fadeInDown" id="anchor">想盈利? <strong id="dayEvent">10月23日</strong> 必追大事件</div>
             <h2><img src="promote/lp336TR/images/103.png" class="wow flipInX"></h2>
-            <p class="i2 wow fadeInUp">重点关联产品:<strong>美日</strong> 投入500美元 可赚<strong>99999</strong>美元</p>
+            <p class="i2 wow fadeInUp">重点关联产品:<strong id="productName">573032</strong> 投入500美元 可赚<strong id="profitGet">---</strong>美元</p>
         </div>
         <div class="part_02">
             <h3><img src="promote/lp336TR/images/201.png" class="wow flipInX"></h3>
-            <div class="i1 wow fadeInUp"></div>
+            <div class="i1 wow fadeInUp">
+                <!-- 插入 chart 的點 -->
+                <div id="app" class="content2_chart wow fadeInLeft">
+                    <div class="content">
+                        <div class="products">
+                            <button class="btnProduct active" data-id="573004" data-code=" NZDUSD" data-digits="2">黃金</button>
+                            <button class="btnProduct" data-id="573139" data-code="EURUSD" data-digits="3">欧美</button>
+                            <button class="btnProduct" data-id="573032" data-code="USDJPY" data-digits="2">美日</button>
+                        </div>
+
+                        <div class="main">
+                            <div class="info">
+                                <div class="nameAndCode">
+                                    <span class="info-name">- -</span>
+                                    <span class="info-code">- -</span>
+                                </div>
+                                <div class="data-wrap">
+                                    <span class="cur">- -</span>
+                                    <div class="col">
+                                        <span class="upDownAmount">- -</span>
+                                        <span class="upDownWidth">- -</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="chart-panel" style="width: 100%;height:3.3rem;">
+
+                            </div>
+                            <div class="bt btns">
+                                <a href="javascript:void" class="btn sellBtn">卖出<span class="sellPrice">- -</span></a>
+                                <a href="javascript:void" class="btn buyBtn">买入<span class="buyPrice">- -</span></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /content2_chart-->
+            </div>
             <div class="clearFix"></div>
-            <img src="promote/lp336TR/images/202.png" class="i2 wow fadeInUp">
+            <img src="promote/lp336TR/images/202.png" class="i2 wow fadeInUp point_none">
         </div>
         <div class="part_03">
             <h3><img src="promote/lp336TR/images/301.png" class="wow flipInX"></h3>
@@ -81,9 +118,26 @@
             <div class="clearFix"></div>
         </div>
     </div>
-    <a href="" class="quickMenu wow fadeInUp"><img src="promote/lp336TR/images/101.png"></a>
+    <a href="javascript:scroll('anchor');" class="quickMenu wow fadeInUp"><img src="promote/lp336TR/images/101.png"></a>
     <link rel="stylesheet" media="screen" href="promote/lp336TR/public/css/swiper3.1.0.min.css" />
     <script type="text/javascript" src="promote/lp336TR/public/js/swiper.min_2017.js"></script>
+    <script>
+        var productId = 0
+        var productCode = ''
+        var productName = ''
+        var digits = 0
+        var origin = 'https://h5.smart-elite.com'
+        var fallColor = '#11B873'
+        var riseColor = '#E3525C'
+    </script>
+    <script src="promote/lp336TR/js/polyfill.min.js"></script>
+    <script src="promote/lp336TR/js/echarts.min.js"></script>
+    <script src="promote/lp336TR/js/pako.min.js"></script>
+    <script src="promote/lp336TR/js/ws.js"></script>
+    <script src="promote/lp336TR/js/utils.js"></script>
+    <script src="promote/lp336TR/js/data.js"></script>
+    <script src="promote/lp336TR/js/initChart.js"></script>
+    <script src="promote/lp336TR/js/index.js"></script>
     <script type="text/javascript">
         jQuery(document).ready(function() {
             //animate
@@ -128,15 +182,53 @@
                 }, 0);
             });
 
-            function scroll(h) {
-                console.log(h)
-                document.getElementById(h).scrollIntoView({
-                    block: "start",
-                    inline: "nearest"
-                });
-            }
+
 
         });
+
+        function scroll(h) {
+            console.log(h)
+            document.getElementById(h).scrollIntoView({
+                block: "start",
+                inline: "nearest"
+            });
+        }
+
+        function todayWatch() {
+            let tt = new Date()
+            return `${tt.getMonth() + 1}月${tt.getDate()}日`
+        }
+        document.getElementById('dayEvent').textContent = todayWatch()
+    </script>
+    <script>
+        // var data = "";
+
+        // var xhr = new XMLHttpRequest();
+        // xhr.withCredentials = true;
+
+        // xhr.addEventListener("readystatechange", function() {
+        //     if (this.readyState === 4) {
+        //         let arr = this.responseText
+        //         let pasteArr = JSON.parse(arr)
+        //         let today_rcmd = document.querySelector('.t1_title')
+        //         let content_rcmd = document.querySelector('.i1_1')
+        //         let direct = document.querySelector('.i1_2_direct')
+        //         let goin = document.querySelector('.i1_2_into')
+        //         let purpose = document.querySelector('.i1_2_purpose')
+        //         let profit = document.querySelector('.i1_2_profit')
+        //         today_rcmd.textContent = pasteArr[0].today_rcmd
+        //         content_rcmd.textContent = pasteArr[0].content_rcmd
+        //         direct.textContent = pasteArr[0].direct
+        //         goin.textContent = pasteArr[0].goin
+        //         purpose.textContent = pasteArr[0].purpose
+        //         profit.textContent = pasteArr[0].profit
+        //         console.log(pasteArr, today_rcmd.textContent)
+        //     }
+        // });
+
+        // xhr.open("GET", "<!--#echo var='gwfx_m'-->/fApi/lp328F");
+        // xhr.setRequestHeader("method", "post");
+        // xhr.send(data);
     </script>
 </body>
 
