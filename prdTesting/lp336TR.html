@@ -21,6 +21,19 @@
     <link href="promote/lp336TR/css/reset.css" rel="stylesheet" type="text/css">
     <link href="promote/lp336TR/css/style.css" rel="stylesheet" type="text/css">
     <link href="promote/lp336TR/css/index.css" rel="stylesheet" type="text/css">
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+        
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+    </style>
 </head>
 
 <body>
@@ -37,10 +50,10 @@
         </div>
     </header>
     <div class="wrapper">
-        <div class="part_01">
+        <div class="part_01" id="getPriceTemplate" class="trading_wrap" v-cloak>
             <div class="i1 wow fadeInDown" id="anchor">想盈利? <strong id="dayEvent">10月23日</strong> 必追大事件</div>
             <h2><img src="promote/lp336TR/images/103.png" class="wow flipInX"></h2>
-            <p class="i2 wow fadeInUp">重点关联产品:<strong id="productName">573032</strong> 投入500美元 可赚<strong id="profitGet">---</strong>美元</p>
+            <p class="i2 wow fadeInUp">重点关联产品:<strong id="productName">欧美</strong> 投入500美元 可赚<strong id="profitGet">---</strong>美元</p>
         </div>
         <div class="part_02">
             <h3><img src="promote/lp336TR/images/201.png" class="wow flipInX"></h3>
@@ -49,9 +62,9 @@
                 <div id="app" class="content2_chart wow fadeInLeft">
                     <div class="content">
                         <div class="products">
-                            <button class="btnProduct active" data-id="573004" data-code=" NZDUSD" data-digits="2">黃金</button>
-                            <button class="btnProduct" data-id="573139" data-code="EURUSD" data-digits="3">欧美</button>
-                            <button class="btnProduct" data-id="573032" data-code="USDJPY" data-digits="2">美日</button>
+                            <button class="btnProduct active" data-id="573004" data-code=" XAUUSD" data-digits="2">现货黃金</button>
+                            <button class="btnProduct" data-id="573139" data-code="EURUSD" data-digits="5">欧元美元</button>
+                            <button class="btnProduct" data-id="573032" data-code="USDJPY" data-digits="3">美元日元</button>
                         </div>
 
                         <div class="main">
@@ -82,8 +95,9 @@
                 <!-- /content2_chart-->
             </div>
             <div class="clearFix"></div>
-            <img src="promote/lp336TR/images/202.png" class="i2 wow fadeInUp point_none">
+            <img src="promote/lp336TR/images/202.png" class="i2 wow fadeInUp point_none i2_img">
         </div>
+        <!-- <div class="part_02_inter"></div> -->
         <div class="part_03">
             <h3><img src="promote/lp336TR/images/301.png" class="wow flipInX"></h3>
             <div class="i1 wow fadeInUp">
@@ -138,6 +152,9 @@
     <script src="promote/lp336TR/js/data.js"></script>
     <script src="promote/lp336TR/js/initChart.js"></script>
     <script src="promote/lp336TR/js/index.js"></script>
+    <script src="promote/lp336TR/js/axios.js"></script>
+    <script src="promote/lp336TR/js/vue.js"></script>
+    <script src="promote/lp336TR/js/important_pd.js"></script>
     <script type="text/javascript">
         jQuery(document).ready(function() {
             //animate
@@ -201,34 +218,68 @@
         document.getElementById('dayEvent').textContent = todayWatch()
     </script>
     <script>
-        // var data = "";
+        // ix 中間層 api 用
+        const WS_BASE_URL = "wss://api.mircoinfolab.com:1315/websocket";
+        const HTTP_BASE_URL = "https://api.mircoinfolab.com:1315";
+        // 技術分析用
+        const TECH_ANA_URL = "https://api.bingxuegirl.com/inv/currencies";
+        const H5_BASE_URL = "https://www.se6868w.com";
+        // register.js 用
+        const baseUrl = 'https://api.mircoinfolab.com'
+        const PRODUCT_SUB_ON_OFF = true
+            // 訂閱所有實時報價產品 開關
+        const PRODUCT_ALL_SEL = false
+            // 指定實時報價產品
+        let PRODUCT_SEL_ID = []
+        var data = "";
 
-        // var xhr = new XMLHttpRequest();
-        // xhr.withCredentials = true;
+        var xhr = new XMLHttpRequest();
+        xhr.withCredentials = true;
+        xhr.addEventListener("readystatechange", function() {
+            if (this.readyState === 4) {
+                let arr = this.responseText
+                let pasteArr = JSON.parse(arr)
+                console.log(pasteArr);
+                let today_rcmd_sel = document.getElementById('productName')
+                let ttt = today_rcmd_sel.textContent
+                switch (ttt) {
+                    case '黃金':
+                        PRODUCT_SEL_ID = ['573004']
+                        break;
+                    case '欧美':
+                        PRODUCT_SEL_ID = ['573139']
+                        break;
+                    case '美日':
+                        PRODUCT_SEL_ID = ['573032']
+                        break;
+                    default:
+                        console.log('沒進入判斷', PRODUCT_SEL_ID);
+                        break;
+                }
+                important_Pd()
+                console.log(PRODUCT_SEL_ID);
+            }
+        });
+        xhr.open("GET", "promote/lp336TR/js/codeFapi.json");
+        xhr.setRequestHeader("method", "post");
+        xhr.send(data);
 
-        // xhr.addEventListener("readystatechange", function() {
-        //     if (this.readyState === 4) {
-        //         let arr = this.responseText
-        //         let pasteArr = JSON.parse(arr)
-        //         let today_rcmd = document.querySelector('.t1_title')
-        //         let content_rcmd = document.querySelector('.i1_1')
-        //         let direct = document.querySelector('.i1_2_direct')
-        //         let goin = document.querySelector('.i1_2_into')
-        //         let purpose = document.querySelector('.i1_2_purpose')
-        //         let profit = document.querySelector('.i1_2_profit')
-        //         today_rcmd.textContent = pasteArr[0].today_rcmd
-        //         content_rcmd.textContent = pasteArr[0].content_rcmd
-        //         direct.textContent = pasteArr[0].direct
-        //         goin.textContent = pasteArr[0].goin
-        //         purpose.textContent = pasteArr[0].purpose
-        //         profit.textContent = pasteArr[0].profit
-        //         console.log(pasteArr, today_rcmd.textContent)
-        //     }
-        // });
 
-        // xhr.open("GET", "<!--#echo var='gwfx_m'-->/fApi/lp328F");
-        // xhr.setRequestHeader("method", "post");
-        // xhr.send(data);
+
+        // 最後一口價開關 (若不打開則實時報價也會關閉)
+        const LASTPRICE_ON_OFF = true
+            // 輪播 開關
+        const LOOPING_ON_OFF = false
+            // 輪播 ID
+        const LOOPING_PRODUCT_ID = ['573004']
+            // K 線開關
+        const KLINE_ON_OFF = false;
+        // K 線日期起算
+        const KLINE_DATE_START = "2020-10-25 08:00:00"
+            // k 線數據日期單位 (1min、5min、15min、30min、1hour、2hour、4hour、day、week、month)
+        const KLINE_DATE_INTERVAL = "day"
+            // 技術分析 開關
+        const TECH_ANA = false;
     </script>
 </body>
 

@@ -167,9 +167,13 @@
         const HTTP_BASE_URL = "https://api.mircoinfolab.com:1315";
         const TECH_ANA_URL = "https://api.bingxuegirl.com/inv/currencies";
         // 實時報價開關
-        const PRODUCT_SUB_ON_OFF = false
-            // 最後一口價開關
-        const LASTPRICE_ON_OFF = false
+        const PRODUCT_SUB_ON_OFF = true
+            // 訂閱所有實時報價產品 開關
+        const PRODUCT_ALL_SEL = false
+            // 指定實時報價產品
+        const PRODUCT_SEL_ID = ['573004', '573139', '573032']
+            // 最後一口價開關 (若不打開則實時報價也會關閉)
+        const LASTPRICE_ON_OFF = true
             // 輪播 開關
         const LOOPING_ON_OFF = false
             // 輪播 ID
@@ -256,9 +260,13 @@
                             lastPriceOn_Off: LASTPRICE_ON_OFF,
                             // 總產品_最後一口價
                             allLastProduct: [],
-                            // 時實數據 開關
+                            // 實時報價 開關
                             productOn_Off: PRODUCT_SUB_ON_OFF,
-                            // 時實數據
+                            // 實時報價訂閱全部 開關
+                            productAllOn_Off: PRODUCT_ALL_SEL,
+                            // 實時報價訂閱指定 ID
+                            productSelIdOn_Off: PRODUCT_SEL_ID,
+                            // 實時報價
                             realtimeData: [],
                             // 心跳間隔(單位:毫秒)
                             beatTime: 30000,
@@ -476,7 +484,6 @@
                     newArr.content.product_category.forEach(element => {
                         vm.typeId = vm.typeId.concat(element.code_ids)
                     });
-
                     console.log(vm.typeId, 'Id 產生')
                 },
                 // 需要 token 者 ( 依照文檔目前只在判斷客戶來源使用 )
@@ -548,7 +555,7 @@
                 },
                 // lastPrice format
                 // buy_price code_id cur_price high_price low_price open_price sell_price seq time title yesterday_price
-                // --更新時實數據
+                // --更新實時報價
                 WsUpdateReal(data) {
                     let vm = this
                     // 實時數據資料
@@ -635,8 +642,8 @@
                         // --初始化 所有產品 與 產品分類
                         case "InitProductInfo":
                             // 抓取所有 ID 或自定義 ID
+                            vm.defineProduct(e)
                             if (vm.lastPriceOn_Off) {
-                                vm.defineProduct(e)
                                 // 訂閱所有產品最後一口價
                                 _content_ls = {
                                     code_ids: vm.typeId,
@@ -651,7 +658,7 @@
                                 for (let v = 0; v < (vm.carouselId.length); v++) {
                                     vm.generate(v)
                                 }
-                            }else{console.log('輪播開關狀態: OFF');}
+                            } else { console.log('輪播開關狀態: OFF'); }
                             if (vm.klineOn_Off) {
                                 _content_kline = {
                                     code_id: 573004,
@@ -672,11 +679,20 @@
                                 vm.allLastProduct = vm.allLastProduct.concat(el)
                             })
                             vm.realtimeData = JSON.parse(JSON.stringify(vm.allLastProduct))
-                            _content_pr = {
-                                code_ids: vm.typeId,
-                                subscribeType: "reSubscribe",
-                                type: "yz"
+                            if (vm.productAllOn_Off) {
+                                _content_pr = {
+                                    code_ids: vm.typeId,
+                                    subscribeType: "reSubscribe",
+                                    type: "yz"
+                                }
+                            } else {
+                                _content_pr = {
+                                    code_ids: PRODUCT_SEL_ID,
+                                    subscribeType: "reSubscribe",
+                                    type: "yz"
+                                }
                             }
+
                             // --產品報價
                             if (vm.productOn_Off) {
                                 vm.WsProductCurBuildup("productSubscription", _content_pr)
@@ -697,7 +713,9 @@
                 }
             },
             mounted() {
-                this.loopingTime()
+                if (this.loopOn_Off) {
+                    this.loopingTime()
+                }
             },
             created() {
                 this.gotourl()

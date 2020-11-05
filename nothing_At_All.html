@@ -17,15 +17,20 @@
 
 
     <script>
-        let xx = 666
-
-        let person = {
-            xx: '777',
-            calll: function() {
-                console.log(this.xx);
-            }
+        function fnfn(nnn) {
+            return new Promise((resolve, rejcet) => {
+                if (nnn) {
+                    resolve(nnn)
+                } else {
+                    rejcet('fail')
+                }
+            })
         }
-        person.calll();
+        Promise.all([fnfn(xxx)]).then(res => {
+            console.log(res);
+        }).catch(res => {
+            console.log(res);
+        })
     </script>
 </body>
 

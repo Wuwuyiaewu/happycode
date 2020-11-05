@@ -4,7 +4,7 @@
 
 .content2_chart {
   height: 3.7rem;
-  width: 4.1rem;
+  width: 4.2rem;
   color: #000;
   background: #fff;
 }
@@ -15,18 +15,21 @@
 }
 
 .content2_chart .content .products {
+  margin-top: 0.1rem;
   height: 10%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
 }
 
 .content2_chart .content .products button {
   font-size: 0.2rem;
   font-weight: bold;
   -webkit-box-flex: 0;
-      -ms-flex: 0 0 33.33333%;
-          flex: 0 0 33.33333%;
+      -ms-flex: 0 0 30%;
+          flex: 0 0 30%;
   background: white;
   border-radius: 0.05rem;
   padding: 0;
@@ -40,14 +43,14 @@
 
 .content2_chart .content .products button:hover {
   background: whitesmoke;
-  border-bottom: 4px solid green;
+  border-bottom: 0.03rem solid green;
   -webkit-box-shadow: #575757 1px 2px 3px;
           box-shadow: #575757 1px 2px 3px;
 }
 
 .content2_chart .content .products button:focus {
   background: #e4e4e4;
-  border-bottom: 2px solid green;
+  border-bottom: 0.02rem solid green;
   -webkit-box-shadow: #2e2e2e 1px 1px 2px;
           box-shadow: #2e2e2e 1px 1px 2px;
   color: green;
