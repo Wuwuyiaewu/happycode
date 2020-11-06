@@ -1,0 +1,200 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+#app {
+    width: 100%;
+    height: 100%;
+    /* background: #ccc; */
+    box-sizing: border-box;
+}
+
+#app .content {
+    /* width: 9.47rem; */
+    margin: 0 auto;
+    border-radius: 0.2rem;
+    background: #fff;
+    overflow: hidden;
+}
+
+.chart-panel {
+    width: 100%;
+    height: 2.3rem;
+}
+
+.products {
+    height: .5rem;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    background: #F6F6F6;
+    user-select: none;
+}
+
+.products>span {
+    flex: 0 0 33.33%;
+    height: 100%;
+    line-height: .5rem;
+    font-size: 0.2rem;
+    text-align: center;
+    box-sizing: border-box;
+    border-bottom: 0.05rem solid transparent;
+}
+
+.products>span.active {
+    color: #11B873;
+    border-bottom: 0.05rem solid #11B873;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    margin-top: 0.1rem;
+    padding: 0 0.45rem;
+    box-sizing: border-box;
+}
+
+.main .info {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    font-size: 14px;
+    /* margin-bottom: 0.25rem; */
+}
+
+.main .info .nameAndCode {
+    display: flex;
+    flex-direction: row;
+    white-space: nowrap;
+    align-items: flex-end;
+}
+
+.main .info .nameAndCode .info-code {
+    line-height: 0.14rem;
+    font-size: 0.14rem;
+    color: #A0A0A0;
+}
+
+.main .info .nameAndCode .info-name {
+    line-height: 0.18rem;
+    font-size: 0.18rem;
+    color: #333;
+    margin-right: 0.2rem;
+}
+
+.main .info .data-wrap {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+    margin-top: 0.1rem;
+}
+
+.main .info .data-wrap .cur {
+    flex: 0 0 2rem;
+    font-size: 0.3rem;
+    font-weight: 400;
+}
+
+.main .info .data-wrap .col {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.main .info .data-wrap .upDownWidth {
+    font-size: 0.15rem;
+}
+
+.main .info .data-wrap .upDownAmount {
+    font-size: 0.15rem;
+}
+
+.btns {
+    width: 100%;
+    margin: 0.1rem auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    white-space: nowrap;
+    height: 0.6rem;
+    line-height: 0.6rem;
+}
+
+.btns .btn {
+    flex: 0 0 48%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 0.13rem;
+    font-size: 0.2rem;
+    color: #fff;
+    background: #aaa;
+    text-decoration: none;
+}
+
+@media (max-width:751px) {
+    .chart-panel {
+        width: 100%;
+        height: 5rem;
+    }
+    .products {
+        height: 1rem;
+    }
+    .products>span {
+        line-height: 1rem;
+        font-size: 0.3rem;
+        border-bottom: 0.1rem solid transparent;
+    }
+    .products>span.active {
+        border-bottom: 0.1rem solid #11B873;
+    }
+    .main {
+        margin-top: 0.15rem;
+        padding: 0 0.15rem;
+    }
+    .main .info {
+        font-size: 14px;
+    }
+    .main .info .nameAndCode .info-code {
+        line-height: 0.2rem;
+        font-size: 0.2rem;
+    }
+    .main .info .nameAndCode .info-name {
+        line-height: 0.38rem;
+        font-size: 0.38rem;
+        margin-right: 0.1rem;
+    }
+    .main .info .data-wrap {
+        margin-top: 0.2rem;
+    }
+    .main .info .data-wrap .cur {
+        font-size: 0.4rem;
+    }
+    .main .info .data-wrap .upDownWidth {
+        font-size: 0.2rem;
+    }
+    .main .info .data-wrap .upDownAmount {
+        font-size: 0.2rem;
+    }
+    .btns {
+        margin: 0.1rem auto;
+        height: 1rem;
+        line-height: 1rem;
+    }
+    .btns .btn {
+        border-radius: 0.3rem;
+        font-size: 0.4rem;
+    }
+}
