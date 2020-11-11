@@ -13,6 +13,7 @@
 
     <script>
         window.onload = createScriptDynamically();
+
         function createScriptDynamically() {
 
             // Set the url to the web service API from where  
@@ -35,8 +36,7 @@
                 /* If there is no script element then append 
                 a new element to the head. */
                 head.appendChild(scriptElement);
-            }
-            else {
+            } else {
 
                 /* If there is already a element in the head,  
                 then replace it with the new script element. */
@@ -52,21 +52,20 @@
             var para = document.getElementById("paragraphElement");
 
             for (var i = 0; i < myObj.resultCount; i++) {
-                para.innerHTML = para.innerHTML + myObj.results[i].trackName
-                    + "[" + myObj.results[i].primaryGenreName + "]" + "<br>";
+                para.innerHTML = para.innerHTML + myObj.results[i].trackName +
+                    "[" + myObj.results[i].primaryGenreName + "]" + "<br>";
             }
-        } 
+        }
     </script>
 
-
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
     <script src="./js/vue.js"></script>
     <script src="./js/axios.js"></script>
     <script>
         var vm = new Vue({
             el: "#app",
             data() {
-                return {
-                }
+                return {}
             },
             methods: {
                 gotourl() {
@@ -81,19 +80,35 @@
                         },
                         withCredentials: true,
                         credentials: 'same-origin',
-                    }).then(response => {
-                    })
+                    }).then(response => {})
+                },
+                getList() {
+                    let vm = this;
+                    if (vm.nowPage > vm.totalPage) {
+                        return;
+                    }
+                    let _url = `https://www.se6868w.com/fApi/newsList-jsonp?categoryId=1489&containChild=true&pageIndex=${vm.nowPage}&count=14`;
+                    $.ajax({
+                        type: "get",
+                        async: true,
+                        url: _url,
+                        dataType: `jsonp`,
+                        success: function(res) {
+                            console.log(res);
+                        },
+                        error: function() {
+                            console.log("fail");
+                        },
+                    });
                 },
             },
-            mounted() {
-            },
+            mounted() {},
             created() {
-                this.gotourl()
+                // this.gotourl()
+                this.getList()
             },
-            destroyed() {
-            }
+            destroyed() {}
         })
-
     </script>
 </body>
 

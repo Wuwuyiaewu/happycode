@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>财经日历.</title>
+    <title>财经日历</title>
     <meta name="keywords" content="" />
     <meta name="description" content="" />
     <meta content="telephone=no" name="format-detection">
@@ -16,85 +16,84 @@
     <link href="mobile/css/calendar/jquery-ui.css" type="text/css" rel="stylesheet" />
     <link rel="stylesheet" href="mobile/css/chart2.css">
     <link rel="stylesheet" href="mobile/css/top.css">
-    <@_includePlace path="/sins.html" />
-    <#-- 神策埋点 -->
-        <style>
-            .data-rh-icon {
-                display: none !important;
-                opacity: 0 !important;
-            }
-            
-            .bottom_menu {
-                display: block;
-                position: fixed;
-                width: 7.5rem;
-                margin-left: -3.75rem;
-                bottom: 0;
-                left: 50%;
-                height: 1.14rem;
-                box-sizing: border-box;
-                border-top: 0.06rem solid #f1f1f1;
-                background: #fff;
-                z-index: 100;
-                font-size: 0px;
-                text-align: center;
-            }
-            
-            .bottom_menu li {
-                width: 1.45rem;
-                display: inline-block;
-                padding: 0.15rem 0 0 0;
-                position: relative;
-                height: 100%;
-            }
-            
-            .bottom_menu li a {
-                display: block;
-                position: absolute;
-                width: 100%;
-                height: 100%;
-                top: 0;
-                left: 0;
-                z-index: 10;
-            }
-            
-            .bottom_menu li p {
-                width: 0.5rem;
-                position: relative;
-                display: block;
-                margin: auto;
-            }
-            
-            .bottom_menu li p img {
-                display: block;
-                width: 100%;
-            }
-            
-            .bottom_menu li p img+img {
-                top: 0;
-                left: 0;
-                position: absolute;
-                opacity: 0;
-            }
-            
-            .bottom_menu li.selected p img {
-                opacity: 0;
-            }
-            
-            .bottom_menu li.selected p img+img {
-                opacity: 1;
-            }
-            
-            .bottom_menu li b {
-                font-size: 0.22rem;
-                display: block;
-                color: #bababa;
-            }
-            
-            .bottom_menu li.selected b {
-                color: #bc1d24;
-            }
-        </style>
+    <script src="public/js/sensors.js" async></script>
+    <style>
+        .data-rh-icon {
+            display: none !important;
+            opacity: 0 !important;
+        }
+        
+        .bottom_menu {
+            display: block;
+            position: fixed;
+            width: 7.5rem;
+            margin-left: -3.75rem;
+            bottom: 0;
+            left: 50%;
+            height: 1.14rem;
+            box-sizing: border-box;
+            border-top: 0.06rem solid #f1f1f1;
+            background: #fff;
+            z-index: 100;
+            font-size: 0px;
+            text-align: center;
+        }
+        
+        .bottom_menu li {
+            width: 1.45rem;
+            display: inline-block;
+            padding: 0.15rem 0 0 0;
+            position: relative;
+            height: 100%;
+        }
+        
+        .bottom_menu li a {
+            display: block;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 10;
+        }
+        
+        .bottom_menu li p {
+            width: 0.5rem;
+            position: relative;
+            display: block;
+            margin: auto;
+        }
+        
+        .bottom_menu li p img {
+            display: block;
+            width: 100%;
+        }
+        
+        .bottom_menu li p img+img {
+            top: 0;
+            left: 0;
+            position: absolute;
+            opacity: 0;
+        }
+        
+        .bottom_menu li.selected p img {
+            opacity: 0;
+        }
+        
+        .bottom_menu li.selected p img+img {
+            opacity: 1;
+        }
+        
+        .bottom_menu li b {
+            font-size: 0.22rem;
+            display: block;
+            color: #bababa;
+        }
+        
+        .bottom_menu li.selected b {
+            color: #bc1d24;
+        }
+    </style>
 </head>
 
 <body class="bg-body">
@@ -170,15 +169,15 @@
                             <dd id="currencyTypeQuery">
 
                                 <span class="sp-on" id="selectCon2" livalue="ALL">全部</span>
-                                <span id="USD" livalue="美国"><img src="mobile/images/country/usa.png" alt="美元" />美元</span>
-                                <span id="EUR" livalue="欧元区"><img src="mobile/images/country/ouy.png" alt="欧元" />欧元</span>
-                                <span id="JPY" livalue="日本"><img src="mobile/images/country/riy.png" alt="日元" />日元</span>
-                                <span id="GBP" livalue="英国"><img src="mobile/images/country/yingb.png" alt="英镑" />英镑</span>
-                                <span id="CNH" livalue="中国"><img src="mobile/images/country/china.png" alt="人民币" />人民币</span>
-                                <span id="AUD" livalue="澳大利亚"><img src="mobile/images/country/aoy.png" alt="澳元" />澳元</span>
-                                <span id="NZD" livalue="新西兰"><img src="mobile/images/country/niuy.png" alt="纽元" />纽元</span>
-                                <span id="CHF" livalue="瑞士"><img src="mobile/images/country/ruil.png" alt="瑞郎" />瑞郎</span>
-                                <span id="CAD" livalue="加拿大"><img src="mobile/images/country/jiay.png" alt="加元" />加元</span>
+                                <span id="USD" livalue="美国"><img src="<!--#echo var='gwfx_m'-->/mobile/images/country/usa.png" alt="美元" />美元</span>
+                                <span id="EUR" livalue="欧元区"><img src="<!--#echo var='gwfx_m'-->/mobile/images/country/ouy.png" alt="欧元" />欧元</span>
+                                <span id="JPY" livalue="日本"><img src="<!--#echo var='gwfx_m'-->/mobile/images/country/riy.png" alt="日元" />日元</span>
+                                <span id="GBP" livalue="英国"><img src="<!--#echo var='gwfx_m'-->/mobile/images/country/yingb.png" alt="英镑" />英镑</span>
+                                <span id="CNH" livalue="中国"><img src="<!--#echo var='gwfx_m'-->/mobile/images/country/china.png" alt="人民币" />人民币</span>
+                                <span id="AUD" livalue="澳大利亚"><img src="<!--#echo var='gwfx_m'-->/mobile/images/country/aoy.png" alt="澳元" />澳元</span>
+                                <span id="NZD" livalue="新西兰"><img src="<!--#echo var='gwfx_m'-->/mobile/images/country/niuy.png" alt="纽元" />纽元</span>
+                                <span id="CHF" livalue="瑞士"><img src="<!--#echo var='gwfx_m'-->/mobile/images/country/ruil.png" alt="瑞郎" />瑞郎</span>
+                                <span id="CAD" livalue="加拿大"><img src="<!--#echo var='gwfx_m'-->/mobile/images/country/jiay.png" alt="加元" />加元</span>
                             </dd>
                         </dl>
                         <dl>
@@ -211,7 +210,7 @@
 
                 <div class="cat_menu">
                     <div class="cat_menu_icon">
-                        <!-- <span class="r_icon" onclick="show_filter('datepicker_div', $(this) )"></span> -->
+                        <span class="r_icon" onclick="show_filter('datepicker_div', $(this) )"></span>
                         <!-- <span class="l_icon" onclick="show_filter('filter_list', $(this) )"></span> -->
                         <span class="l_icon" style="display:none" id="shuanxId"></span>
                     </div>
@@ -280,7 +279,7 @@
                 <section class="cen-item-pub m10 shuj-done-fon">
                     <!-- <p class="get-bot-info get-top-info">到顶了！</p>  -->
                     <div id="PullDown" class="scroller-pullDown">
-                        <img style="width: 20px; height: 20px;" src="mobile/images/calendar/looding.png" />
+                        <img style="width: 20px; height: 20px;" src="/mobile/images/calendar/looding.png" />
                         <span id="pullUp-msg" class="pull-up-msg">上拉刷新</span>
                     </div>
                     <div class="data-shuj-box" id="dataListYi">
@@ -463,6 +462,7 @@
         <input type="hidden" name="id" id="ip" value='175.100.206.222' />
         <!-- 自己的跟踪代码  end-->
     </div>
+    <!-- import lp track common code end -->
 
     <ul class="bottom_menu">
         <li>
@@ -507,12 +507,11 @@
         </li>
     </ul>
 
-    <!-- import lp track common code end -->
-    <script type="text/javascript" src="common/js/gwanalysis.js"></script>
-    <script type="text/javascript" src="common/js/common.js"></script>
+    <script type="text/javascript" src="<!--#echo var='gwfx_m'-->/common/js/gwanalysis.js"></script>
+    <script type="text/javascript" src="<!--#echo var='gwfx_m'-->/common/js/common.js"></script>
 
-    <script type="text/javascript" src="common/js/bottom_js_trace.js"></script>
-    <script type="text/javascript" src="common/js/gwcookie.js"></script>
+    <script type="text/javascript" src="<!--#echo var='gwfx_m'-->/common/js/bottom_js_trace.js"></script>
+    <script type="text/javascript" src="<!--#echo var='gwfx_m'-->/common/js/gwcookie.js"></script>
 
 
 
@@ -579,27 +578,27 @@
                 $(".app-tips-box").fadeOut();
             });
             /*
-			$.get("/cmsDataPort/calendarData?dateStr=2019-03-06&lang=zh").done(function(res){
-				   var $newsList = $("#calendar-list");
-					var htmlArr = [];
-					$.each(res.data.finaanceDataListGongbu,function(index,item){
-						var timeArr = item.releaseTime.match(/(\w+\s\d+,\s\d{4}\s)(\d+:\d+)(:\d+\s\w+)/)
-					var timeStr = "";
-					var detailHref = '/zh/calendar/cont_'+item.id+'.html';
-					var iconSrc="https://www.se6868.com/public/images/Calenda/country/"+item.countryCode+".png";
-						if(timeArr){
-							  timeStr = timeArr[2]
-						   }
+            	$.get("/cmsDataPort/calendarData?dateStr=2019-03-06&lang=zh").done(function(res){
+            		   var $newsList = $("#calendar-list");
+            			var htmlArr = [];
+            			$.each(res.data.finaanceDataListGongbu,function(index,item){
+            				var timeArr = item.releaseTime.match(/(\w+\s\d+,\s\d{4}\s)(\d+:\d+)(:\d+\s\w+)/)
+            			var timeStr = "";
+            			var detailHref = '/zh/calendar/cont_'+item.id+'.html';
+            			var iconSrc="https://www.se6868.com/public/images/Calenda/country/"+item.countryCode+".png";
+            				if(timeArr){
+            					  timeStr = timeArr[2]
+            				   }
+            				
+            				htmlArr.push('<li><div class="data-rh-icon"> <div class="data-time-ic mtip" onclick="mtick()"><s><i></i>');
+            				htmlArr.push(timeStr+'</s></div><a href="'+detailHref+'" class="data-cont-link"> </a></div><div class="data-sj-item"><div class="data-time"><a href="'+detailHref+'" class="data-cont-link"><span><img class="gq-pfon" src="'+iconSrc+'" alt="" width="100%"></span><span>20:30</span></a></div><div class="data-miaos"><div class="xin-box"><p><a href="'+detailHref+'" class="data-cont-link"><span></span><span></span><span></span><span class="qian"></span><span class="qian"></span></a></p>');
+            				htmlArr.push('<a href="'+detailHref+'" class="data-cont-link"><i class="announce-stadus announce-ac2">未公布</i></a></div><h3 class="data-sj-tt"><a href="'+detailHref+'" class="data-cont-link">美国 2月 PPI月率(%)</a></h3><p><a href="'+detailHref+'" class="data-cont-link">前值: <span>'+item.currentValue+'</span> 　预测值: <span>'+item.predictedValue+'</span> &nbsp;&nbsp; 公布值: <span>'+item.actualValue+'</span></a></p><a href="'+detailHref+'" class="data-cont-link">利多<p class="data-sj-yuq">预期<span class="sp-ld">利多<s>|</s>美元</span></p></a></div></div></li>')
 
-						htmlArr.push('<li><div class="data-rh-icon"> <div class="data-time-ic mtip" onclick="mtick()"><s><i></i>');
-						htmlArr.push(timeStr+'</s></div><a href="'+detailHref+'" class="data-cont-link"> </a></div><div class="data-sj-item"><div class="data-time"><a href="'+detailHref+'" class="data-cont-link"><span><img class="gq-pfon" src="'+iconSrc+'" alt="" width="100%"></span><span>20:30</span></a></div><div class="data-miaos"><div class="xin-box"><p><a href="'+detailHref+'" class="data-cont-link"><span></span><span></span><span></span><span class="qian"></span><span class="qian"></span></a></p>');
-						htmlArr.push('<a href="'+detailHref+'" class="data-cont-link"><i class="announce-stadus announce-ac2">未公布</i></a></div><h3 class="data-sj-tt"><a href="'+detailHref+'" class="data-cont-link">美国 2月 PPI月率(%)</a></h3><p><a href="'+detailHref+'" class="data-cont-link">前值: <span>'+item.currentValue+'</span> 　预测值: <span>'+item.predictedValue+'</span> &nbsp;&nbsp; 公布值: <span>'+item.actualValue+'</span></a></p><a href="'+detailHref+'" class="data-cont-link">利多<p class="data-sj-yuq">预期<span class="sp-ld">利多<s>|</s>美元</span></p></a></div></div></li>')
+            			})
+            		  $newsList.html(htmlArr.join(""))	
 
-					})
-				  $newsList.html(htmlArr.join(""))	
-
-			}).fail(function(){})		
-		*/
+            	}).fail(function(){})		
+            */
         });
         //涮选下拉 
         $(".l_icon").click(function(event) {
@@ -773,11 +772,11 @@
 
             //设置设备缓存
             /*    var deviceId =  getQueryString("deviceId");
-    var  getdeviceId = getCookie("deviceId") || "";
-       if(getdeviceId=="" || getdeviceId==null){
-    	   setCookie_index("deviceId",deviceId);
-    	   console.log(3333);
-       } */
+               var  getdeviceId = getCookie("deviceId") || "";
+                  if(getdeviceId=="" || getdeviceId==null){
+               	   setCookie_index("deviceId",deviceId);
+               	   console.log(3333);
+                  } */
 
 
 
