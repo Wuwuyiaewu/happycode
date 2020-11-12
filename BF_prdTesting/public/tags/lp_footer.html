@@ -1,0 +1,74 @@
+<!--# include file="/public/tags/activity-clauses-text.html" -->
+<script type="text/javascript">
+function loadScript(url, callback) {
+  let script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src = url;
+  script.onreadystatechange = callback;
+  script.onload = callback;
+  document.head.appendChild(script);
+}
+function loadScripts(urls, callback) {
+  var loadedCount = 0;
+  var multiCallback = function(){
+    loadedCount++;
+    if (loadedCount >= urls.length) {
+      callback.call(this, arguments);
+    }
+  }.bind(this);
+  for (let url of urls) {
+    loadScript(url, multiCallback);
+  }
+}
+function loadCss(url, callback) {
+  let css = document.createElement('link');
+  css.type = 'text/css';
+  css.rel = 'stylesheet';
+  css.href = url;
+  css.onreadystatechange = callback;
+  css.onload = callback;
+  document.head.appendChild(css);
+}
+function loadMultipleCss(urls, callback) {
+  var loadedCssCount = 0;
+  var multiCallback = function(){
+    loadedCssCount++;
+    if (loadedCssCount >= urls.length) {
+      callback.call(this, arguments);
+    }
+  }.bind(this);
+  for (let url of urls) {
+    loadCss(url, multiCallback);
+  }
+}
+
+loadScripts([
+	'https://h5.tianruisecurities.com/lp/register/js/jquery.min.js',
+	'https://h5.tianruisecurities.com/lp/register/js/app-fn.js',
+	'https://h5.tianruisecurities.com/lp/register/js/util.js',
+	'https://h5.tianruisecurities.com/lp/register/js/mobile-detect.min.js',
+	'https://h5.tianruisecurities.com/lp/register/js/md5.js',
+	'https://h5.tianruisecurities.com/lp/register/js/layer.js',
+	'https://h5.tianruisecurities.com/lp/register/js/jquery.validate.min.js',
+	'https://h5.tianruisecurities.com/lp/register/js/utm-source.js',
+	'https://h5.tianruisecurities.com/lp/register/js/lp_register.js',
+	'https://h5.tianruisecurities.com/lp/register/js/mCustomScrollbar.js'
+],function(){
+    //滚动条
+    $.mCustomScrollbar.defaults.scrollButtons.enable = true;
+    $(".mCustomScrollbarId").mCustomScrollbar({
+      theme: "dark-thick"
+    });
+    $(".rulebtn").click(function () {
+      $(".common-layout-shadow").show();
+      $("#commonLayoutBox").slideDown();
+    })
+    $("#commonLayoutDel").click(function () {
+      $("#commonLayoutBox").slideUp();
+      $(".common-layout-shadow").hide();
+    })
+})
+loadMultipleCss(['https://h5.tianruisecurities.com/lp/public/css/customer-service.css','https://h5.tianruisecurities.com/lp/public/css/lp_common.css','https://h5.tianruisecurities.com/lp/register/css/register-layer.css'],function(){})	
+</script>  
+<script type="text/javascript" src="../public/js/customer-service.js" async></script>
+<!--#include file="/public/tags/analytics.html"-->

@@ -1,0 +1,13 @@
+<script type="text/javascript">
+function browserRedirect() {
+	var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    var href = location.href;
+    var host = location.host;
+	if(isMobile && host==="www.ty889.com"){
+       	location.assign(href.replace(host,'m.ty889.com'));
+    }else if(!isMobile && host==="m.ty889.com"){
+		location.assign(href.replace(host,'www.ty889.com'));
+	}
+}
+browserRedirect();
+</script>

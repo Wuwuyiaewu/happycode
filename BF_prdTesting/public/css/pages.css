@@ -1,0 +1,50 @@
+		.page-wrap{
+
+		}
+		.page-wrap .page{
+    text-align: center;
+    border-top: 1px solid #EBF1FD;
+    padding: 20px 0 40px;
+    width: 1200px;
+    margin: 0 auto;
+		}
+		.page-wrap span,.page-wrap a{
+				    padding: 0 4px;
+    background: #fff;
+    vertical-align: top;
+    display: inline-block;
+    font-size: 13px;
+    min-width: 35.5px;
+    height: 28px;
+    line-height: 28px;
+    cursor: pointer;
+    box-sizing: border-box;
+    text-align: center;
+    margin: 0 5px;
+    background-color: #f4f4f5;
+    color: #606266;
+    min-width: 30px;
+    border-radius: 2px;
+		}
+		.page-wrap span{}
+		.page-wrap a{
+
+		}
+				.page-wrap a.selected{
+    background-color: #409eff;
+    color: #fff;
+		}
+@media(max-width:751px) {
+	.page-wrap .page{
+	width: 100%;
+    padding: 0.2rem 0 0.4rem;
+	}
+	.page-wrap span, .page-wrap a{
+	    font-size: 0.24rem;
+    margin: 0 0.05rem;
+    height: 0.36rem;
+    line-height: 0.36rem;
+    padding: 0 0.08rem;
+    min-width: 0.36rem;
+	}
+}
