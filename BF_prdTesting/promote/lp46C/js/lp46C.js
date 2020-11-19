@@ -148,11 +148,14 @@ var lock=false;
 function getOAByActivity(){
 	var h=window.location.host;
 	if(h.indexOf("localhost")>=0 || h.indexOf("172.29.")>=0 ){
+		console.log('1');
 		h = "https://testgwactivity.gwfx.hk/unify-activity";
 	}else if(h.indexOf("testweb")>=0 || h.indexOf("testm")>=0){
+		console.log('2');
 		h = "https://testgwactivity.gwfx.hk/unify-activity";
 	}
 	else{
+		console.log('3');
 		h="https://imsapi.mircoinfolab.com:1315/unify-activity";
 	}
 	return h;
@@ -185,21 +188,21 @@ function recommend_checking(){
 	if (lock){
 		return;
 	}
-	
-	if(typeof(key)!='undefined' && key!=null && key!="" && key!="cd8b68f5b88f9eb660d38d6c12732a31" && key!="@encrypName@"){
-		//has key (app)
-		lock=true;
-		recommend_ajax({activityPeriods:activityPeriods,key:key,companyId:companyId},false);
-	}
-	else {
-		if (saveLogin=='' && savePhone==''){
-			popup_show('login');
-		}
-		else {
+	// if(typeof(key)!='undefined' && key!=null && key!="" && key!="cd8b68f5b88f9eb660d38d6c12732a31" && key!="@encrypName@"){
+	// 	//has key (app)
+	// 	lock=true;
+	// 	recommend_ajax({activityPeriods:activityPeriods,key:key,companyId:companyId},false);
+	// 	console.log(key);
+	// }
+	// else {
+	// 	if (saveLogin=='' && savePhone==''){
+	// 		console.log('login');
+	// 		popup_show('login');
+	// 	}
+		// else {
 			recommend_ajax({activityPeriods:activityPeriods,accountNo:saveLogin,phone:savePhone,companyId:companyId},true);
-		}
-	}
-	
+		// }
+	// }
 }
 
 function login_checking(){
