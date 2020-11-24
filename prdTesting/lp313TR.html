@@ -334,6 +334,36 @@
 </div>	
 -->
     <script>
+        // 判斷 TR 場決定產品類型 TR_type === '1'  選 573013、573014、573015
+        ;
+        (function() {
+            let hostVal = window.location.href
+            let urlVal = new URL(hostVal)
+            let TRDom = document.querySelectorAll('.btnProduct')
+            let TRDomArray = Array.apply(null, TRDom);
+            var c = urlVal.searchParams.get("TR_type");
+            switch (c) {
+                case '1':
+                    console.log('有字串');
+
+                    TRDomArray[0].dataset.id = 573015
+                    TRDomArray[0].dataset.code = 'DJ30'
+                    TRDomArray[0].dataset.digits = 1
+                    TRDomArray[0].textContent = '美国DJ30'
+                    TRDomArray[1].dataset.id = 573014
+                    TRDomArray[1].dataset.code = 'TECH100'
+                    TRDomArray[1].textContent = '美国TECH100'
+                    TRDomArray[2].dataset.id = 573013
+                    TRDomArray[2].dataset.code = 'SP500'
+                    TRDomArray[2].textContent = '美国SP500'
+
+                    break;
+                default:
+                    break;
+            }
+        }())
+
+
         var $GA_NAME = 'lp313TR';
 
         function scroll(h) {
