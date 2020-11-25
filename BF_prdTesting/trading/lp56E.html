@@ -202,20 +202,13 @@
                 </div>
             </div>
             <di class="row cui_second_input">
-                <div class="col-md-3  col-sm-6" align="center">
+                <div class="col-md-4  col-sm-6" align="center">
                     <input type="text" class="form-control " placeholder="姓名" id="mnname">
                 </div>
-                <div class="col-md-3 col-sm-6" align="center">
+                <div class="col-md-4 col-sm-6" align="center">
                     <input type="text" class="form-control " placeholder="手机号" id="mntel">
                 </div>
-
-                <div class="col-md-3 col-sm-6" align="center">
-                    <div class="a7a" style="margin-top: 0;">
-                        <input type="text" class="form-control lingqucode" placeholder="验证码" id="mncode">
-                        <a href="javascript:;" id="mncodebtn" class="a7b">获取验证码</a>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-6" align="center">
+                <div class="col-md-4 col-sm-12" align="center">
                     <a href="javascript:;" class="btn btn-danger btn-receive-lingquchange" id="mnbtn">点击领取$10000体验金</a>
                 </div>
                 <div style="clear: both;float: none;">
@@ -318,12 +311,6 @@
                                 <img src="lp56E/images/icon(8).png" alt="">
                             </label>
                             </div>
-                            <div class="weui-cell__bd">
-                                <input class="weui-input lqxiazaicode" placeholder="输入验证码" type="number" id="xiazai1code">
-                            </div>
-                            <div class="weui-cell__ft">
-                                <button class=" weui-btn  bg-orange" id="xiazai1codebtn">获取验证码</button>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -366,10 +353,7 @@
                     <p class="f-white f-16" align="center">注册信息将以短信形式发送</p>
                     <input type="text" class="form-control " placeholder="姓名" id="xiazainame">
                     <input type="text" class="form-control " placeholder="手机号" id="xiazaitel">
-                    <div class="a7a">
-                        <input type="text" class="form-control " placeholder="验证码" id="xiazaicode">
-                        <a href="javascript:;" class="a7b" style="top:2px;right:2px;border-radius: 4px;" id="xiazaicodebtn">获取验证码</a>
-                    </div>
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-warning f-20 btn-receive-xiazaichange" id="xiazaibtn">免费下载MT4</button>
@@ -385,327 +369,64 @@
     <script>
         var ctx = "/";
 
-        //真实
-        $(function() {
-            //设置文字
-            function setzhenshicodebtntext() {
-                var flag = 60;
-                var myVar = setInterval(test, 1000);
-
-                function test() {
-                    if (flag >= 0) {
-                        $("#zhenshicodebtn").unbind("click");
-                        $("#zhenshicodebtn").html("剩余" + flag + "秒");
-                        flag--;
-                    } else {
-                        $("#zhenshicodebtn").bind("click", getzhenshicode);
-                        $("#zhenshicodebtn").html("获取验证码");
-                        flag = 60;
-                        clearInterval(myVar); //清除定时任务
-                    }
-                }
-            }
-
-            //获取验证码
-            function getzhenshicode() {
-                var tel = $("#zhenshitel").val();
-                if (!tel) {
-                    alert("请输入手机号码");
-                    $("#zhenshitel").focus();
-                    return;
-                }
-                if (!checkTel(tel)) {
-                    alert("请输入正确的手机号码");
-                    $("#zhenshitel").focus();
-                    return;
-                }
-                $.ajax({
-                    url: ctx + "wx3/getCode?tel=" + tel,
-                    success: function(resp) {
-                        if (resp.code == 0) {
-                            alert(resp.msg);
-                            setzhenshicodebtntext();
-                        } else {
-                            alert(resp.msg);
-                        }
-                    },
-                    error: function() {
-                        alert("服务器异常");
-                    }
-                });
-            }
-
-            //获取验证码
-            $("#zhenshicodebtn").click(function() {
-                getzhenshicode();
-            });
-            //真实提交
-            $("#zhenshibtn").click(function() {
-                //=============基本数据校验===================//
-                var tel = $("#zhenshitel").val();
-                var name = $("#zhenshiname").val();
-                var code = $("#zhenshicode").val();
-                if (!tel) {
-                    alert("手机号不能为空");
-                    $("#zhenshitel").focus();
-                    return;
-                }
-                if (!name) {
-                    alert("姓名不能为空");
-                    $("#zhenshiname").focus();
-                    return;
-                }
-                if (!(/^[\u0391-\uFFE5A-Za-z]+$/).test(name)) {
-                    alert("姓名必须为汉字或字母");
-                    $("#zhenshiname").focus();
-                    return;
-                }
-                if (!code) {
-                    alert("验证码不能为空");
-                    $("#zhenshicode").focus();
-                    return;
-                }
-                if (!(/^[0-9]{4}$/g.test(code))) {
-                    alert("验证码必须为4为数字");
-                    $("#zhenshicode").focus();
-                    return;
-                }
-                saveData(name, tel, code, "真实"); //保存数据
-            });
-        });
-
         //下载
         $(function() {
-            //设置文字
-            function setxiazaicodebtntext() {
-                var flag = 60;
-                var myVar = setInterval(test, 1000);
-
-                function test() {
-                    if (flag >= 0) {
-                        $("#xiazaicodebtn").unbind("click");
-                        $("#xiazaicodebtn").html("剩余" + flag + "秒");
-                        flag--;
-                    } else {
-                        $("#xiazaicodebtn").bind("click", getxiazaicode);
-                        $("#xiazaicodebtn").html("获取验证码");
-                        flag = 60;
-                        clearInterval(myVar); //清除定时任务
-                    }
-                }
-            }
-
-            //获取验证码
-            function getxiazaicode() {
-                var tel = $("#xiazaitel").val();
-                if (!tel) {
-                    alert("请输入手机号码");
-                    $("#xiazaitel").focus();
-                    return;
-                }
-                if (!checkTel(tel)) {
-                    alert("请输入正确的手机号码");
-                    $("#xiazaitel").focus();
-                    return;
-                }
-                $.ajax({
-                    url: ctx + "wx3/getCode?tel=" + tel,
-                    success: function(resp) {
-                        if (resp.code == 0) {
-                            alert(resp.msg);
-                            setxiazaicodebtntext();
-                        } else {
-                            alert(resp.msg);
-                        }
-                    },
-                    error: function() {
-                        alert("服务器异常");
-                    }
-                });
-            }
-
-            //获取验证码
-            $("#xiazaicodebtn").click(function() {
-                getxiazaicode();
-            });
             //下载提交
             $("#xiazaibtn").click(function() {
                 //=============基本数据校验===================//
                 var tel = $("#xiazaitel").val();
                 var name = $("#xiazainame").val();
-                var code = $("#xiazaicode").val();
                 if (!tel) {
                     alert("手机号不能为空");
                     $("#xiazaitel").focus();
                     return;
                 }
-                if (!name) {
-                    alert("姓名不能为空");
-                    $("#xiazainame").focus();
-                    return;
+                var regPhone = /^(13|14|15|16|17|18|19)\d{9}$/;
+                if (!regPhone.test(tel)) {
+                    alert("请输入正确的手机号码");
+                    return false;
                 }
-                if (!(/^[\u0391-\uFFE5A-Za-z]+$/).test(name)) {
-                    alert("姓名必须为汉字或字母");
-                    $("#xaizainame").focus();
-                    return;
-                }
-                if (!code) {
-                    alert("验证码不能为空");
-                    $("#xiazaicode").focus();
-                    return;
-                }
-                if (!(/^[0-9]{4}$/g.test(code))) {
-                    alert("验证码必须为4为数字");
-                    $("#xiazaicode").focus();
-                    return;
-                }
-                saveData(name, tel, code, "下载"); //保存数据
+                var url = new URL(window.location.href);
+                var utmSource = url.searchParams.get("utm_source");
+
+                $.ajax({
+                    type: "GET",
+                    url: getUrl() + "addPromotionDataNoCode.do",
+                    dataType: 'jsonp',
+                    jsonp: "callback",
+                    data: {
+                        phone: tel
+                    },
+                    success: function(msg) {
+                        console.log(msg);
+                        if (msg.result == 0) {
+                            alert(msg.message);
+                        } else {
+                            alert(msg.message);
+                        }
+
+                    }
+                }).then(resp => {
+                    console.log(resp)
+                });
             });
         });
-
-        //下载1
+        //下载 2
         $(function() {
-            //设置文字
-            function setxiazai1codebtntext() {
-                var flag = 60;
-                var myVar = setInterval(test, 1000);
-
-                function test() {
-                    if (flag >= 0) {
-                        $("#xiazai1codebtn").unbind("click");
-                        $("#xiazai1codebtn").html("剩余" + flag + "秒");
-                        flag--;
-                    } else {
-                        $("#xiazai1codebtn").bind("click", getxiazai1code);
-                        $("#xiazai1codebtn").html("获取验证码");
-                        flag = 60;
-                        clearInterval(myVar); //清除定时任务
-                    }
-                }
-            }
-
-            //获取验证码
-            function getxiazai1code() {
-                var tel = $("#xiazai1tel").val();
-                if (!tel) {
-                    alert("请输入手机号码");
-                    $("#xiazai1tel").focus();
-                    return;
-                }
-                if (!checkTel(tel)) {
-                    alert("请输入正确的手机号码");
-                    $("#xiazai1tel").focus();
-                    return;
-                }
-                $.ajax({
-                    url: ctx + "wx3/getCode?tel=" + tel,
-                    success: function(resp) {
-                        if (resp.code == 0) {
-                            alert(resp.msg);
-                            setxiazai1codebtntext();
-                        } else {
-                            alert(resp.msg);
-                        }
-                    },
-                    error: function() {
-                        alert("服务器异常");
-                    }
-                });
-            }
-
-            //获取验证码
-            $("#xiazai1codebtn").click(function() {
-                getxiazai1code();
-            });
             //下载提交
             $("#xiazai1btn").click(function() {
                 //=============基本数据校验===================//
-                var tel = $("#xiazai1tel").val();
-                var name = $("#xiazai1name").val();
-                var code = $("#xiazai1code").val();
+                var tel = $("#xiazaitel").val();
+                var name = $("#xiazainame").val();
                 if (!tel) {
                     alert("手机号不能为空");
-                    $("#xiazai1tel").focus();
+                    $("#xiazaitel").focus();
                     return;
                 }
-                if (!name) {
-                    alert("姓名不能为空");
-                    $("#xiazai1name").focus();
-                    return;
-                }
-                if (!(/^[\u0391-\uFFE5A-Za-z]+$/).test(name)) {
-                    alert("姓名必须为汉字或字母");
-                    $("#xiazai1name").focus();
-                    return;
-                }
-                if (!code) {
-                    alert("验证码不能为空");
-                    $("#xiazai1code").focus();
-                    return;
-                }
-                if (!(/^[0-9]{4}$/g.test(code))) {
-                    alert("验证码必须为4为数字");
-                    $("#xiazai1code").focus();
-                    return;
-                }
-                saveData(name, tel, code, "下载"); //保存数据
             });
         });
-
         //模拟
         $(function() {
-            //设置文字
-            function setmncodebtntext() {
-                var flag = 60;
-                var myVar = setInterval(test, 1000);
-
-                function test() {
-                    if (flag >= 0) {
-                        $("#mncodebtn").unbind("click");
-                        $("#mncodebtn").html("剩余" + flag + "秒");
-                        flag--;
-                    } else {
-                        $("#mncodebtn").bind("click", getmncode);
-                        $("#mncodebtn").html("获取验证码");
-                        flag = 60;
-                        clearInterval(myVar); //清除定时任务
-                    }
-                }
-            }
-
-            //获取验证码
-            function getmncode() {
-                var tel = $("#mntel").val();
-                if (!tel) {
-                    alert("请输入手机号码");
-                    $("#mntel").focus();
-                    return;
-                }
-                if (!checkTel(tel)) {
-                    alert("请输入正确的手机号码");
-                    $("#mntel").focus();
-                    return;
-                }
-                $.ajax({
-                    url: ctx + "wx3/getCode?tel=" + tel,
-                    success: function(resp) {
-                        if (resp.code == 0) {
-                            alert(resp.msg);
-                            setmncodebtntext();
-                        } else {
-                            alert(resp.msg);
-                        }
-                    },
-                    error: function() {
-                        alert("服务器异常");
-                    }
-                });
-            }
-
-            //获取验证码
-            $("#mncodebtn").click(function() {
-                getmncode();
-            });
             //模拟提交
             $("#mnbtn").click(function() {
                 //=============基本数据校验===================//
@@ -717,27 +438,6 @@
                     $("#mntel").focus();
                     return;
                 }
-                if (!name) {
-                    alert("姓名不能为空");
-                    $("#mnname").focus();
-                    return;
-                }
-                if (!(/^[\u0391-\uFFE5A-Za-z]+$/).test(name)) {
-                    alert("姓名必须为汉字或字母");
-                    $("#mnname").focus();
-                    return;
-                }
-                if (!code) {
-                    alert("验证码不能为空");
-                    $("#mncode").focus();
-                    return;
-                }
-                if (!(/^[0-9]{4}$/g.test(code))) {
-                    alert("验证码必须为4为数字");
-                    $("#mncode").focus();
-                    return;
-                }
-                saveData(name, tel, code, "模拟"); //保存数据
             });
         });
         //模拟2
@@ -748,34 +448,18 @@
                 var tel = $("#xiazai1tel").val();
                 var name = $("#xiazai1name").val();
                 var code = $("#xiazai1code").val();
-                if (!name) {
-                    alert("姓名不能为空");
-                    $("#xiazai1name").focus();
-                    return;
-                }
-                if (!(/^[\u0391-\uFFE5A-Za-z]+$/).test(name)) {
-                    alert("姓名必须为汉字或字母");
-                    $("#xiazai1name").focus();
-                    return;
-                }
                 if (!tel) {
                     alert("手机号不能为空");
                     $("#xiazai1tel").focus();
                     return;
                 }
-                if (!code) {
-                    alert("验证码不能为空");
-                    $("#xiazai1code").focus();
-                    return;
-                }
-                if (!(/^[0-9]{4}$/g.test(code))) {
-                    alert("验证码必须为4为数字");
-                    $("#mn2code").focus();
-                    return;
-                }
-                saveData(name, tel, code, "模拟"); //保存数据
             });
         });
+
+
+        function getUrl() {
+            return 'http://testweb.se6868.com:9017/promotionApi/';
+        }
     </script>
 
 
