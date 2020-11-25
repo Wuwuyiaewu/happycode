@@ -12,11 +12,11 @@
     <link href="lp56E/css/weuix.css" rel="stylesheet">
     <link href="lp56E/css/bootstrap.css" rel="stylesheet">
     <link href="lp56E/css/style.css" rel="stylesheet">
-    <script src="lp56E/js/hm.js"></script>
-    <script src="lp56E/js/hm_1.js"></script>
+    <!-- <script src="lp56E/js/hm.js"></script> -->
+    <!-- <script src="lp56E/js/hm_1.js"></script> -->
     <script src="lp56E/js/jquery.min.js"></script>
     <script src="lp56E/js/bootstrap.min.js"></script>
-    <script src="lp56E/js/my3.js" type="text/javascript"></script>
+    <!-- <script src="lp56E/js/my3.js" type="text/javascript"></script> -->
     <!-- <script type="text/javascript" src="lp56E/ipquery"></script> -->
     <script>
         var _hmt = _hmt || [];
@@ -386,6 +386,7 @@
                     alert("请输入正确的手机号码");
                     return false;
                 }
+                var promotionCode = 'lp56E';
                 var url = new URL(window.location.href);
                 var utmSource = url.searchParams.get("utm_source");
 
@@ -395,14 +396,15 @@
                     dataType: 'jsonp',
                     jsonp: "callback",
                     data: {
-                        phone: tel
+                        phone: tel,
+                        promotionCode: promotionCode
                     },
                     success: function(msg) {
                         console.log(msg);
                         if (msg.result == 0) {
-                            alert(msg.message);
+                            alert("我们已收到您提交的信息，将尽快与您联系！");
                         } else {
-                            alert(msg.message);
+                            alert("您已经提交此号码成功 ！");
                         }
 
                     }
@@ -416,13 +418,43 @@
             //下载提交
             $("#xiazai1btn").click(function() {
                 //=============基本数据校验===================//
-                var tel = $("#xiazaitel").val();
+                var tel = $("#xiazai1tel").val();
                 var name = $("#xiazainame").val();
                 if (!tel) {
                     alert("手机号不能为空");
                     $("#xiazaitel").focus();
                     return;
                 }
+                var regPhone = /^(13|14|15|16|17|18|19)\d{9}$/;
+                if (!regPhone.test(tel)) {
+                    alert("请输入正确的手机号码");
+                    return false;
+                }
+                var promotionCode = 'lp56E';
+                var url = new URL(window.location.href);
+                var utmSource = url.searchParams.get("utm_source");
+
+                $.ajax({
+                    type: "GET",
+                    url: getUrl() + "addPromotionDataNoCode.do",
+                    dataType: 'jsonp',
+                    jsonp: "callback",
+                    data: {
+                        phone: tel,
+                        promotionCode: promotionCode
+                    },
+                    success: function(msg) {
+                        console.log(msg);
+                        if (msg.result == 0) {
+                            alert("我们已收到您提交的信息，将尽快与您联系！");
+                        } else {
+                            alert("您已经提交此号码成功 ！");
+                        }
+
+                    }
+                }).then(resp => {
+                    console.log(resp)
+                });
             });
         });
         //模拟
@@ -438,6 +470,36 @@
                     $("#mntel").focus();
                     return;
                 }
+                var regPhone = /^(13|14|15|16|17|18|19)\d{9}$/;
+                if (!regPhone.test(tel)) {
+                    alert("请输入正确的手机号码");
+                    return false;
+                }
+                var promotionCode = 'lp56E';
+                var url = new URL(window.location.href);
+                var utmSource = url.searchParams.get("utm_source");
+
+                $.ajax({
+                    type: "GET",
+                    url: getUrl() + "addPromotionDataNoCode.do",
+                    dataType: 'jsonp',
+                    jsonp: "callback",
+                    data: {
+                        phone: tel,
+                        promotionCode: promotionCode
+                    },
+                    success: function(msg) {
+                        console.log(msg);
+                        if (msg.result == 0) {
+                            alert("我们已收到您提交的信息，将尽快与您联系！");
+                        } else {
+                            alert("您已经提交此号码成功 ！");
+                        }
+
+                    }
+                }).then(resp => {
+                    console.log(resp)
+                });
             });
         });
         //模拟2
@@ -453,12 +515,43 @@
                     $("#xiazai1tel").focus();
                     return;
                 }
+                var regPhone = /^(13|14|15|16|17|18|19)\d{9}$/;
+                if (!regPhone.test(tel)) {
+                    alert("请输入正确的手机号码");
+                    return false;
+                }
+
+                var promotionCode = 'lp56E';
+                var url = new URL(window.location.href);
+                var utmSource = url.searchParams.get("utm_source");
+
+                $.ajax({
+                    type: "GET",
+                    url: getUrl() + "addPromotionDataNoCode.do",
+                    dataType: 'jsonp',
+                    jsonp: "callback",
+                    data: {
+                        phone: tel,
+                        promotionCode: promotionCode
+                    },
+                    success: function(msg) {
+                        console.log(msg);
+                        if (msg.result == 0) {
+                            alert("我们已收到您提交的信息，将尽快与您联系！");
+                        } else {
+                            alert("您已经提交此号码成功 ！");
+                        }
+
+                    }
+                }).then(resp => {
+                    console.log(resp)
+                });
             });
         });
 
 
         function getUrl() {
-            return 'http://testweb.se6868.com:9017/promotionApi/';
+            return 'https://misapi.bofu210.com/promotionApi/';
         }
     </script>
 
