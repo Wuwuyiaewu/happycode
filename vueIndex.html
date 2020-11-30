@@ -1,58 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="js/vue.js"></script>
     <title>Vue pratice</title>
-  </head>
-  <body>
-    <div id="app">
-      <input type="text" v-model="firstName" placeholder="firstname" />
-      <input type="text" v-model="lastName" placeholder="lastname" />
-      名字是{{fullName}}
-      <div v-if="type === '6'">
-        A
-      </div>
-      <div v-else-if="type === 'B'">
-        B
-      </div>
-      <div v-else>
-        TYPE = C
-      </div>
+</head>
+
+<body>
+    <div id="informationflowBox" ref="informationflowBox">
+        <demo :orgid='3' lang="zh-cn"></demo>
     </div>
+    <script src="js/loadjs.js"></script>
     <script>
-      const content = {
-        A: "content A",
-        B: "content B",
-        C: "content C",
-      };
-      var vm = new Vue({
-        el: "#app",
-        data: {
-          firstName: "Foo",
-          lastName: "Bar",
-          show: true,
-          type: 6,
-        },
-        computed: {
-          fullName: {
-            // getter
-            get: function () {
-              return this.firstName + " " + this.lastName;
+        loadjs(['https://zixuninfo.oss-cn-hangzhou.aliyuncs.com/js/prod/wequickNewsList.css', 'https://zixuninfo.oss-cn-hangzhou.aliyuncs.com/js/prod/vue.js', 'https://zixuninfo.oss-cn-hangzhou.aliyuncs.com/js/prod/vant.min.js', 'https://zixuninfo.oss-cn-hangzhou.aliyuncs.com/js/prod/wequickNewsList.umd.min.js'], 'infoflow', {
+            async: false,
+        });
+        loadjs.ready('infoflow', {
+            success: function() { /* foo.js & bar.js loaded */
+                new Vue({
+                    components: {
+                        demo: wequickNewsList
+                    }
+                }).$mount('#informationflowBox')
+
             },
-            // setter
-            set: function (newValue) {
-              var names = newValue.split(" ");
-              this.firstName = names[0];
-              this.lastName = names[names.length - 2];
+            error: function(depsNotFound) { /* foobar bundle load failed */
+
             },
-          },
-          content() {
-            return content[this.type];
-          },
-        },
-      });
+        });
     </script>
-  </body>
+    <script src="js/rem.js" charset="utf-8"></script>
+    <script type="text/javascript">
+        remCompute(750, true);
+    </script>
+</body>
+
 </html>

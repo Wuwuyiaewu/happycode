@@ -25,7 +25,9 @@
     <#-- analytics-head -->
 </head>
 
+
 <body>
+    <link rel="stylesheet" href="TR/css/index_tr.css">
     <@_includePlace path="/analytics-body.html" />
     <#-- analytics-body -->
         <!--#if expr="$QUERY_STRING=/app=ix_app_orig/"-->
@@ -292,7 +294,33 @@
             var riseColor = "#E3525C";
         </script>
         <script type="text/javascript" src="/js/live800Prompt.js"></script>
+        <script src="TR/lib/jquery.min.js"></script>
+        <script src="TR/lib/pako.min.js"></script>
+        <script src="TR/lib/polyfill.min.js"></script>
+        <script src="TR/lib/echarts.min.js"></script>
+        <script src="TR/js/utils.js"></script>
+        <script src="TR/lib/ws.js"></script>
+        <script src="TR/js/data.js"></script>
+        <script src="TR/js/initChart.js"></script>
+        <script src="TR/js/index.js"></script>
         <script>
+            ;
+            (function() {
+                let TRDom = document.querySelectorAll('.btnProduct')
+                let TRDomArray = Array.apply(null, TRDom);
+                TRDomArray[0].dataset.id = 573015
+                TRDomArray[0].dataset.code = 'DJ30'
+                TRDomArray[0].dataset.digits = 1
+                TRDomArray[0].textContent = '美国DJ30'
+                TRDomArray[1].dataset.id = 573014
+                TRDomArray[1].dataset.code = 'TECH100'
+                TRDomArray[1].textContent = '美国TECH100'
+                TRDomArray[2].dataset.id = 573013
+                TRDomArray[2].dataset.code = 'SP500'
+                TRDomArray[2].textContent = '美国SP500'
+            }())
+
+
             var $GA_NAME = "lp35TR";
             var $UA;
         </script>
