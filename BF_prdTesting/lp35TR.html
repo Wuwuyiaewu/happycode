@@ -73,10 +73,7 @@
                 <div class="mainInfo wow fadeInUp">
                     <div id="app">
                         <div class="content">
-                            <div class="products">
-                                <span class="btnProduct active" data-id="573004" data-code=" XAUUSD" data-digits="2">现货黄金</span>
-                                <span class="btnProduct" data-id="573010" data-code="USOil" data-digits="3">美国原油</span>
-                                <span class="btnProduct active" data-id="573014" data-code="TECH100" data-digits="3">美国TECH100</span>
+                            <div class="products" id="TR_products">
                             </div>
 
                             <div class="main">
@@ -110,6 +107,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="footerINfo">
                 <h3 class="wow fadeInDown">关于柏富</h3>
                 <p class="i1 wow fadeInUp">覆盖外汇、贵金属、指数、原油等90+种交易产品，随时随地把握投资先机。<a href="<!--#echo var='gwfx_pc'-->/H5TradeInfo.html?page=1<!--#echo var='wx_url2'-->" onclick="_gaq.push(['_trackEvent',$GA_NAME,'open_to_H5TradeInfo', 'content_first', 1,true]);">更多></a></p>
@@ -140,6 +138,7 @@
         </div>
         <link rel="stylesheet" media="screen" href="public/css/swiper3.1.0.min.css" />
         <script type="text/javascript" src="public/js/swiper.min.3.4.2.js"></script>
+
         <script type="text/javascript">
             function popup_show(div_name) {
                 $("#" + div_name).fadeIn();
@@ -293,6 +292,20 @@
             var fallColor = "#11B873";
             var riseColor = "#E3525C";
         </script>
+        <script>
+            ;
+            (function() {
+                let TRDom = document.getElementById('TR_products')
+                let product = `<span class="btnProduct active" data-id="573004" data-code=" XAUUSD" data-digits="2">现货黄金</span>
+                                <span class="btnProduct" data-id="573010" data-code="USOil" data-digits="3">美国原油</span>
+                                <span class="btnProduct active" data-id="573014" data-code="TECH100" data-digits="3">美国TECH100</span>`
+                TRDom.innerHTML = product
+            }())
+
+
+            var $GA_NAME = "lp35TR";
+            var $UA;
+        </script>
         <script type="text/javascript" src="/js/live800Prompt.js"></script>
         <script src="TR/lib/jquery.min.js"></script>
         <script src="TR/lib/pako.min.js"></script>
@@ -303,27 +316,7 @@
         <script src="TR/js/data.js"></script>
         <script src="TR/js/initChart.js"></script>
         <script src="TR/js/index.js"></script>
-        <script>
-            ;
-            (function() {
-                let TRDom = document.querySelectorAll('.btnProduct')
-                let TRDomArray = Array.apply(null, TRDom);
-                TRDomArray[0].dataset.id = 573015
-                TRDomArray[0].dataset.code = 'DJ30'
-                TRDomArray[0].dataset.digits = 1
-                TRDomArray[0].textContent = '美国DJ30'
-                TRDomArray[1].dataset.id = 573014
-                TRDomArray[1].dataset.code = 'TECH100'
-                TRDomArray[1].textContent = '美国TECH100'
-                TRDomArray[2].dataset.id = 573013
-                TRDomArray[2].dataset.code = 'SP500'
-                TRDomArray[2].textContent = '美国SP500'
-            }())
 
-
-            var $GA_NAME = "lp35TR";
-            var $UA;
-        </script>
 </body>
 
 </html>
