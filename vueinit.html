@@ -1,46 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vueinit</title>
 </head>
+
 <body>
+
+    <div id="XD">
+        <P>xdxd</P>
+    </div>
+
     <script src="js/axios.js"></script>
     <script src="js/vue.js"></script>
     <script>
-        var vm = new Vue({
-            el: "#app",
-            data() {
-                return {
-                }
-            },
-            methods: {
-                axios() {
-                    let vm = this
-                    axios()
-                        .then(function (response) {
-                          
-                        })
-                        .catch(function (error) {
-                            console.log(error, '第一次錯誤');
-                        });
-                },
-            },
-            computed:{
-
-            },
-            watch:{
-
-            },
-            mounted() {
-            },
-            created() {
-            },
-            destroyed() {
-            }
-        })
-
+        function init() {
+            let template = document.getElementById('onhover')
+            console.log(template);
+        }
     </script>
+    <iframe src="./onhoverTab.html" frameborder="0" id="onhover" onload="init()"></iframe>
 </body>
+
 </html>
