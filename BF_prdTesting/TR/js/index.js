@@ -287,18 +287,24 @@
         $('.upDownAmount').text(upDownAmount || '- -').css('color', color)
         $('.upDownWidth').text(((upDownWidth && upDownWidth > 0) ? '+' : '') + (upDownWidth || '- -') + '%').css('color', color)
 
+        var url = new URL(window.location.href);
+        var utm_source = url.searchParams.get("utm_source") == null ? '' : url.searchParams.get("utm_source");
+        var utm_medium = url.searchParams.get("utm_medium") == null ? '' : url.searchParams.get("utm_medium");
+        var utm_term = url.searchParams.get("utm_term") == null ? '' : url.searchParams.get("utm_term");
+        var utm_campaign = url.searchParams.get("utm_campaign") == null ? '' : url.searchParams.get("utm_campaign");
+        var utm_content = url.searchParams.get("utm_content") == null ? '' : url.searchParams.get("utm_content");
         $('.sellBtn')
             .css({
                 background: sellColor,
             })
-            .attr('href', origin + '/yzkey/order/' + productId + '?direction=sell&utm_source=se2&openbrowser=true&experience=true')
+            .attr('href', origin + '/yzkey/order/' + productId + '?direction=sell&utm_source=' + utm_source + '&utm_medium=' + utm_medium + '&utm_term=' + utm_term + '&utm_campaign=' + utm_campaign + '&utm_content=' + utm_content + '&openbrowser=false&experience=true')
             .find('.sellPrice').text(sellPrice ? (sellPrice * 1).toFixed(digits) : '- -')
 
         $('.buyBtn')
             .css({
                 background: buyColor,
             })
-            .attr('href', origin + '/yzkey/order/' + productId + '?direction=buy&utm_source=se2&openbrowser=true&experience=true')
+            .attr('href', origin + '/yzkey/order/' + productId + '?direction=buy&utm_source=' + utm_source + '&utm_medium=' + utm_medium + '&utm_term=' + utm_term + '&utm_campaign=' + utm_campaign + '&utm_content=' + utm_content + '&openbrowser=false&experience=true')
             .find('.buyPrice').text(buyPrice ? (buyPrice * 1).toFixed(digits) : '- -')
     }
 })()
