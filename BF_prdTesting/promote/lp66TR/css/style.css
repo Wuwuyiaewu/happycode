@@ -346,6 +346,19 @@ body {
     padding: 0.5rem 0;
 }
 
+.part_02 .mask {
+    display: block;
+    position: absolute;
+    top: -0.1rem;
+    left: -0.1rem;
+    width: 105%;
+    height: 102%;
+    background: url(../../../public/images/phone_mask.png) no-repeat;
+    background-size: 100% 100%;
+    z-index: 10;
+    pointer-events: none;
+}
+
 .part_02 .b1 {
     clear: both;
     display: inline-block;
@@ -359,13 +372,17 @@ body {
     background-color: #00a0e9;
     border-radius: 0.1rem;
     margin: auto;
+    margin-top: 0.3rem;
     letter-spacing: 0.07rem;
 }
 
 .part_02 .i1 {
-    width: 6.5rem;
+    display: block;
+    margin: auto;
+    width: 4.01rem;
     height: 8.34rem;
-    margin: 0 auto 0.5rem auto;
+    position: relative;
+    z-index: 10;
     border-radius: 0.3rem;
     background-color: #FFFFFF;
     -webkit-box-shadow: 0.05rem 0.05rem 0.05rem rgba(0, 0, 0, 0.3);

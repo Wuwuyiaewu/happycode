@@ -19,7 +19,7 @@ body {
 .tcWarp-mobile {
     width: 100%;
     height: auto;
-    margin-top: 57px;
+    margin-top: 0.57px;
     border-bottom: 1px solid #ccc;
 }
 
@@ -33,7 +33,7 @@ body {
 }
 
 .title-popup .title-img {
-    font-size: 22px;
+    font-size: 0.22px;
     height: 40px;
     line-height: 40px;
 }
@@ -48,6 +48,7 @@ body {
 
 .fanhui {
     text-align: center;
+	margin-top: 58px;
     height: 50px;
     line-height: 50px;
     background: #fff;
@@ -272,6 +273,6 @@ body {
         margin-left: 0;
     }
     .tpopup-contet ol {
-        padding-left: 0.4rem
+        /*padding-left: 0.4px*/
     }
 }

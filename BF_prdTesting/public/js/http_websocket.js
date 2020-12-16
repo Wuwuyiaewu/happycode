@@ -229,7 +229,7 @@ var vm = new Vue({
                     }
                     let randomCal = (Math.floor(Math.random() * vm.carouselId.length))
                     let account = {
-                            data: `68****${Math.floor(Math.random() * 90) + 10}以 ${(vm.carouseCur[`${randomCal}`])} ${buyOrsell} ${(Math.floor(Math.random() * 37) * 0.05 + 0.5).toFixed(2)}手 ${vm.carouseName[`${randomCal}`]}`,
+                            data: `86****${Math.floor(Math.random() * 90) + 10}以 ${(vm.carouseCur[`${randomCal}`])} ${buyOrsell} ${(Math.floor(Math.random() * 37) * 0.05 + 0.5).toFixed(2)}手 ${vm.carouseName[`${randomCal}`]}`,
                         id: `random`
                     }
                     return account

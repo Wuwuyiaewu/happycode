@@ -9,19 +9,53 @@
 
 <body>
 
-    <div id="XD">
-        <P>xdxd</P>
+    <div id="app">
+        <div v-for="item,name,key of obb">
+            {{ item }}{{name}}{{key}}
+        </div>
     </div>
 
     <script src="js/axios.js"></script>
     <script src="js/vue.js"></script>
     <script>
-        function init() {
-            let template = document.getElementById('onhover')
-            console.log(template);
-        }
+        ;
+        (function VueInit() {
+            var vm = new Vue({
+                el: "#app",
+                data() {
+                    return {
+                        obb: {
+                            name0: {
+                                xd1: {
+                                    fine1: 'fine1'
+                                },
+                                xd2: "xd2"
+                            },
+                            name1: 'david1',
+                            name2: 'david2',
+                            name3: 'david3',
+                            name4: 'david4',
+                        }
+                    }
+                },
+                methods: {
+                    axios() {
+                        let vm = this
+                        axios()
+                            .then(function(response) {})
+                            .catch(function(error) {
+                                console.log(error, '第一次錯誤');
+                            });
+                    },
+                },
+                computed: {},
+                watch: {},
+                mounted() {},
+                created() {},
+                destroyed() {}
+            })
+        })()
     </script>
-    <iframe src="./onhoverTab.html" frameborder="0" id="onhover" onload="init()"></iframe>
 </body>
 
 </html>
