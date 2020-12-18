@@ -25,6 +25,23 @@
         a {
             cursor: pointer;
         }
+        
+        .part_03 .msite {
+            display: none;
+        }
+        
+        .part_03 .pcsite {
+            display: block;
+        }
+        
+        @media (max-width: 751px) {
+            .part_03 .msite {
+                display: block;
+            }
+            .part_03 .pcsite {
+                display: none;
+            }
+        }
     </style>
     <@_includePlace path="/analytics-head.html" />
     <#-- analytics-head -->
@@ -85,7 +102,21 @@
             <div class="main">
                 <h3 class="mTitle wow fadeInUp">
                     <p><strong>79%</strong>客户盈利<span> </span><br>人均收入<strong>3</strong>万美元</p><img src="promote/lp67A/images/301.png" class=" wow rubberBand"></h3>
-                <ul class="i1 ">
+                <ul class="i1 msite">
+                    <li class="wow flipInY">
+                        <p>全年涨幅<strong>+604.80%</strong></p>
+                        <h4>美油</h4>
+                    </li>
+                    <li class="wow flipInY">
+                        <p>全年涨幅<strong>+84.74%</strong></p>
+                        <h4>TECH 100</h4>
+                    </li>
+                    <li class="wow flipInY">
+                        <p>全年涨幅<strong>+43.05%</strong></p>
+                        <h4>黄金</h4>
+                    </li>
+                </ul>
+                <ul class="i1 pcsite">
                     <li class="wow flipInY">
                         <p>全年涨幅<strong>+84.74%</strong></p>
                         <h4>TECH 100</h4>

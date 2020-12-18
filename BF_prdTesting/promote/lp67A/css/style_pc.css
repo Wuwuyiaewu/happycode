@@ -394,7 +394,7 @@ html {
 .part_03 .i1 li p strong {
     font-family: Impact, "Arial Black", sans-serif;
     display: block;
-    font-size: 55px;
+    font-size: 50px;
     color: #ca100f;
     padding-top: 8px;
     font-weight: normal;
@@ -624,13 +624,14 @@ html {
 }
 
 .bottomBt {
-    position: absolute;
+    position: fixed;
     left: 0px;
-    bottom: 80px;
+    bottom: 0;
     height: 164px;
     width: 100%;
     background-color: #84231f;
     text-align: center;
+    z-index: 99;
 }
 
 .bottomBt .bts {
