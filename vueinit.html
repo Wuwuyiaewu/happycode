@@ -10,17 +10,32 @@
 <body>
 
     <div id="app">
-        <div v-for="item,name,key of obb">
+        <div v-for="item,name,key of obb" :key="name">
             value值{{ item }} key名稱{{name}} index數值{{key}}
         </div>
         <input type="text" v-model="inputText" @keyup.13="inputHandler">
         <button @click="filHandler(2)">篩選</button>
-
+        <new-component :component-obb="obb"></new-component>
     </div>
 
     <script src="js/axios.js"></script>
     <script src="js/vue.js"></script>
     <script>
+        Vue.component('newComponent', {
+            data() {
+                return {
+                    hala: 1
+                }
+            },
+            props: ['componentObb'],
+            template: `<button>{{componentObb}}</button>`,
+            methods: {
+                addOne() {
+                    this.hala = this.hala + 1
+                }
+            }
+        })
+
         ;
         (function VueInit() {
             var vm = new Vue({
