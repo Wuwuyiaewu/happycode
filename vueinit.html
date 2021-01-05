@@ -10,65 +10,35 @@
 <body>
 
     <div id="app">
-        <div v-for="item,name,key of obb" :key="name">
-            value值{{ item }} key名稱{{name}} index數值{{key}}
-        </div>
-        <input type="text" v-model="inputText" @keyup.13="inputHandler">
-        <button @click="filHandler(2)">篩選</button>
-        <new-component :component-obb="obb"></new-component>
+        <blog-post v-for="post of posts" v-bind:key="post.id" v-bind:title="post.title" :ano="post.another"></blog-post>
     </div>
 
     <script src="js/axios.js"></script>
     <script src="js/vue.js"></script>
     <script>
-        Vue.component('newComponent', {
-            data() {
-                return {
-                    hala: 1
-                }
-            },
-            props: ['componentObb'],
-            template: `<button>{{componentObb}}</button>`,
-            methods: {
-                addOne() {
-                    this.hala = this.hala + 1
-                }
-            }
+        Vue.component('blogPost', {
+            props: ['title', 'ano'],
+            template: '<h3>{{ title }}</h3><p>{{ano}}</p>'
         })
 
         ;
         (function VueInit() {
             var vm = new Vue({
                 el: "#app",
-                data() {
-                    return {
-                        obb: {
-                            name0: {
-                                xd1: {
-                                    fine1: 'fine1'
-                                },
-                                xd2: "xd2"
-                            },
-                            name1: 'david1',
-                            name2: 'david2',
-                            name3: 'david3',
-                            name4: 'david4',
-                        },
-                        inputText: '',
-                        fildata: [{
-                            name: "aa"
-                        }, {
-                            name: "bb"
-                        }, {
-                            name: "cc"
-                        }, {
-                            name: "dd"
-                        }, {
-                            name: "ee"
-                        }, {
-                            name: "ff"
-                        }, ]
-                    }
+                data: {
+                    posts: [{
+                        id: 1,
+                        title: 'My journey with Vue',
+                        another: 'yoyo'
+                    }, {
+                        id: 2,
+                        title: 'Blogging with Vue',
+                        another: 'noidea'
+                    }, {
+                        id: 3,
+                        title: 'Why Vue is so fun',
+                        another: 'right'
+                    }]
                 },
                 methods: {
                     axios() {
@@ -79,15 +49,6 @@
                                 console.log(error, '第一次錯誤');
                             });
                     },
-                    inputHandler() {
-                        console.log('66');
-                    },
-                    filHandler(index) {
-                        this.fildata = this.fildata.filter((item, i) => {
-                            return i != index
-                        })
-                        console.log(this.fildata)
-                    }
                 },
                 computed: {},
                 watch: {},
