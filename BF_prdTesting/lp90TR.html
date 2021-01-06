@@ -64,7 +64,7 @@
 
         <div class="news_header">
             <div>
-                <img src="/public/images/logo.png" alt="">
+                <img src="/public/images/logo.png" class="logo" alt="">
                 <a href="javascript:void(0)" onclick="toCustomerService();gtag('event', 'cs_im', {'event_category':$GA_NAME,'event_label':'content_top','non_interaction': true});" class="cs_btn">
                     <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAeCAYAAABJ/8wUAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDYuMC1jMDAyIDc5LjE2NDQ2MCwgMjAyMC8wNS8xMi0xNjowNDoxNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OEVDN0JCQjAxMjc0MTFFQkEwRUY5MjYwNzE3Njk0QTAiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OEVDN0JCQUYxMjc0MTFFQkEwRUY5MjYwNzE3Njk0QTAiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo0MTUyNzQ5RjA5MTIxMUVCOEUwMTlEQjQwNjg3MTZDNiIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo0MTUyNzRBMDA5MTIxMUVCOEUwMTlEQjQwNjg3MTZDNiIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PuHhLyIAAAGbSURBVHjaYvz//z/DYABMDIMEDBqHsJDoaHMgdgZiYyBWAWJBIBaCyr8H4ndAfAeIzwHxHiA+CcT/iDIdlEYIYAEgbgTiJ/9JB0+gegUI2YNPkhmIi4D49X/KwWuoWcykOoQfiLf+pz7YCjWbKIeAFF78TztwEZtjsOWa+UCsR8MMoge1A29idf5PP+CML0Qy6Fh0ZOAr0Kyx6fj6ioHhyioGhgeHQEFIWPzbW4j4oyN4HWKNr0ATw6bj5BQGhk9PIWxmVgYGWUv84scnMDB8fgYVZ2NgkDbD6hBxfCHyCmuIvEH1LSFxXGw08BKfQ45i06EbDvGZgDwDg7wtceKsnAwMwiqo4njtGsBc40KoQFtHB0esG7QlK766ZhsNHLGNlLoGvfb9RAUHvCe39kXGaRQ44CkQNwGxICF7iGmhKaLxQS2uW9CyVByphfYOWjbcgrbQ9oLKNmJbaMQ4RAuJ/RyIo4F4/0A0nmEO2QXE+rRwBDFtVk4g/gXEtUDMRER6IhszEuhgAQtvBiWahQISIOSQ0Z7eqEMAAgwAIV8Ahls0ITYAAAAASUVORK5CYII=">                    咨询客服
                 </a>
@@ -164,24 +164,24 @@
                                     <th colspan="2">投入$100可盈利</th>
                                 </tr>
                                 <template v-for="(id, index) in rankedIds">
-                                    <tr>
-                                        <td><img :src="rankedImgPath[index]" class="icon" :class="'rank'+(index+1)">
-                                        </td>
-                                        <td v-bind:style="[product[rankedIds[index]].isShow ? {} : {'color':'grey'}]">
-                                            {{product[rankedIds[index]].name}}
-                                            <img v-if="!product[rankedIds[index]].isShow"
-                                                src="promote/lp90TR/images/closed2.png"
-                                                class="icon">
-                                        </td>
-                                        <td v-bind:style="[product[rankedIds[index]].isShow ? {} : {'color':'grey'}]">
-                                            {{product[rankedIds[index]].current}}</td>
-                                        <td v-bind:style="[product[rankedIds[index]].isShow ? {} : {'color':'grey'}]">
-                                            {{product[rankedIds[index]].profit.toFixed(2)}}</td>
-                                        <td><a href="https://h5.bofu210.com/JW666key/mine"
-                                                @click="gaPush('market'+rankedIds[index],'content_first')"
-                                                class="r_btn"><img :src="rankedButtonPath"></a></td>
-                                    </tr>
-                                </template>
+										<tr>
+											<td><img :src="rankedImgPath[index]" class="icon" :class="'rank'+(index+1)">
+											</td>
+											<td v-bind:style="[product[rankedIds[index]].isShow ? {} : {'color':'grey'}]">
+												{{product[rankedIds[index]].name}}
+												<img v-if="!product[rankedIds[index]].isShow"
+													 src="promote/lp90TR/images/closed2.png"
+													 class="icon">
+											</td>
+											<td v-bind:style="[product[rankedIds[index]].isShow ? {} : {'color':'grey'}]">
+												{{product[rankedIds[index]].current}}</td>
+											<td v-bind:style="[product[rankedIds[index]].isShow ? {} : {'color':'grey'}]">
+												{{product[rankedIds[index]].profit.toFixed(2)}}</td>
+											<td><a href="javascript:void(0)"
+												   @click="lpToH5PageChecking()"
+												   class="r_btn mineBtn"><img :src="rankedButtonPath"></a></td>
+										</tr>
+									</template>
                             </table>
                         </div>
                     </div>
@@ -238,17 +238,17 @@
                             </h1>
                             <div class="tech_analysis_time_menu">
                                 <template v-for="(e,index) in techDetailTimingSort">
-                                    <span v-bind:class="{selected:index===techDetailTimingIndex}"
-                                        @click="setTechDetailTimingIndex(index);gaPush('market'+rankedIds[techAnalyIndex]+'_'+techDetailTiming[techDetailTimingIndex].peid,'content_third')">{{e.timeString}}</span>
+										<span v-bind:class="{selected:index===techDetailTimingIndex}"
+											  @click="setTechDetailTimingIndex(index);gaPush('market'+rankedIds[techAnalyIndex]+'_'+techDetailTiming[techDetailTimingIndex].peid,'content_third')">{{e.timeString}}</span>
 
-                                </template>
+									</template>
                                 <div v-bind:class="{show:isShowTimeMenu}" class="other_menu" id="tech_analysis_other_menu">
                                     <i @click="isShowTimeMenu=!isShowTimeMenu"></i>
                                     <p>
 
                                         <template v-for="(e,index) in techDetailTimingMenu">
-                                            <span @click="switchTiming(index)">{{e.timeString}}</span>
-                                        </template>
+												<span @click="switchTiming(index)">{{e.timeString}}</span>
+											</template>
                                     </p>
                                 </div>
                             </div>
@@ -296,23 +296,23 @@
                 </div>
                 <!-- /tech_analysis_group-->
 
-                <div class="tech_analysis_btn" v-if="isShowTechnicalAnalysisHtml"><a href="javascript:void(0)" @click="lpToH5PageChecking('/productDetail/'+rankedIds[techAnalyIndex]);gaPush('market'+rankedIds[techAnalyIndex],'content_fifth')">立
-                        即 交 易</a></div>
+                <div class="tech_analysis_btn" v-if="isShowTechnicalAnalysisHtml"><a href="javascript:void(0)" @click="lpToH5PageChecking();">立
+						即 交 易</a></div>
                 <div class="tech_analysis_popup" v-if="isShowTechDetailMenu && start">
                     <div class="tech_analysis_popup_content">
                         <p class="tech_analysis_popup_close" @click="isShowTechDetailMenu=false;isShowInnerTimeMenu=false"></p>
                         <h1 v-if="product[rankedIds[techAnalyIndex]]">{{product[rankedIds[techAnalyIndex]].name}}</h1>
                         <div class="tech_analysis_time_menu" id="tech_analysis_time_menu">
                             <template v-for="(e,index) in techDetailTimingSort">
-                                <span v-bind:class="{selected:index===techDetailTimingIndex}"
-                                    @click="setTechDetailTimingIndex(index);getPivotpoint();gaPush('market'+rankedIds[techAnalyIndex]+'_'+techDetailTiming[techDetailTimingIndex].peid,'content_third_detail')">{{e.timeString}}</span>
-                            </template>
+									<span v-bind:class="{selected:index===techDetailTimingIndex}"
+										  @click="setTechDetailTimingIndex(index);getPivotpoint();gaPush('market'+rankedIds[techAnalyIndex]+'_'+techDetailTiming[techDetailTimingIndex].peid,'content_third_detail')">{{e.timeString}}</span>
+								</template>
                             <div v-bind:class="{show:isShowInnerTimeMenu}" class="other_menu" id="tech_analysis_other_menu">
                                 <i @click="isShowInnerTimeMenu=!isShowInnerTimeMenu"></i>
                                 <p>
                                     <template v-for="(e,index) in techDetailTimingMenu">
-                                        <span @click="switchTiming(index);getPivotpoint()">{{e.timeString}}</span>
-                                    </template>
+											<span @click="switchTiming(index);getPivotpoint()">{{e.timeString}}</span>
+										</template>
                                 </p>
                             </div>
                         </div>
@@ -458,18 +458,18 @@
                             </table>
                             <table class="tech_analysis_table table2">
                                 <template v-for="item in techAnalyInfo.ti">
-                                    <tr>
-                                        <td>{{item.name}}</td>
-                                        <td>
-                                            <p><span>{{item.info}}</span></p>
-                                        </td>
-                                        <td>
-                                            <p :class="setTechConclusionBgColor(item.conclude)">
-                                                <span>{{item.conclude}}</span>
-                                            </p>
-                                        </td>
-                                    </tr>
-                                </template>
+										<tr>
+											<td>{{item.name}}</td>
+											<td>
+												<p><span>{{item.info}}</span></p>
+											</td>
+											<td>
+												<p :class="setTechConclusionBgColor(item.conclude)">
+													<span>{{item.conclude}}</span>
+												</p>
+											</td>
+										</tr>
+									</template>
 
 
                                 <tr>
@@ -503,17 +503,18 @@
 
             </div>
 
+
         </div>
         <!-- /content3-->
 
 
-
-
         <div class="bottomBt">
             <div class="bts">
-                <a href="https://h5.bofu210.com/JW666key/mine" onclick="gtag('H5_index', 'open_demo_account', {'event_category':$GA_NAME,'event_label':'mobile_btn','non_interaction': true});" class="tr"></a>
+                <a href="javascript:void(0)" onclick="gtag('H5_index', 'open_demo_account', {'event_category':$GA_NAME,'event_label':'mobile_btn','non_interaction': true});" class="tr mineBtn"></a>
             </div>
         </div>
+
+
 
 
         <!-- /main_content-->
@@ -700,6 +701,7 @@
 
         });
 
+
         technicalAnalysisVue.lpToH5PageChecking = function(urlPath) {
             let origin = "<!--#echo var='gwfx_oa_new'-->";
             let url = new URL(window.location.href);
@@ -711,8 +713,8 @@
             let trType = url.searchParams.get("TR_type") == null ? '' : url.searchParams.get("TR_type");
             let homeUrl = origin + "/JW666key/home?utm_source=" + utm_source + "&utm_medium=" + utm_medium + "&utm_term=" + utm_term + "&utm_campaign=" + utm_campaign + "&utm_content=" + utm_content + "&openbrowser=false&experience=true&path=K18&minetipcash=true";
             let mineUrl = origin + "/JW666key/mine?utm_source=" + utm_source + "&utm_medium=" + utm_medium + "&utm_term=" + utm_term + "&utm_campaign=" + utm_campaign + "&utm_content=" + utm_content + "&openbrowser=false&experience=true&path=K18&minetipcash=true";
-            $('.homeBtn').attr('href', homeUrl)
-            if (trType == 1) $('.mineBtn').attr('href', mineUrl)
+            $('.mineBtn').attr('href', mineUrl)
+            gtag('send', 'event', $GA_NAME, 'open_real_account', 'content_ti');
         }
 
 
@@ -748,6 +750,22 @@
         }
     </script>
     <script type="text/javascript">
+        ;
+        (function() {
+            let origin = "<!--#echo var='gwfx_oa_new'-->";
+            let url = new URL(window.location.href);
+            let utm_source = url.searchParams.get("utm_source") == null ? '' : url.searchParams.get("utm_source");
+            let utm_medium = url.searchParams.get("utm_medium") == null ? '' : url.searchParams.get("utm_medium");
+            let utm_term = url.searchParams.get("utm_term") == null ? '' : url.searchParams.get("utm_term");
+            let utm_campaign = url.searchParams.get("utm_campaign") == null ? '' : url.searchParams.get("utm_campaign");
+            let utm_content = url.searchParams.get("utm_content") == null ? '' : url.searchParams.get("utm_content");
+            let trType = url.searchParams.get("TR_type") == null ? '' : url.searchParams.get("TR_type");
+            let homeUrl = origin + "/JW666key/home?utm_source=" + utm_source + "&utm_medium=" + utm_medium + "&utm_term=" + utm_term + "&utm_campaign=" + utm_campaign + "&utm_content=" + utm_content + "&openbrowser=false&experience=true&path=K18&minetipcash=true";
+            let mineUrl = origin + "/JW666key/mine?utm_source=" + utm_source + "&utm_medium=" + utm_medium + "&utm_term=" + utm_term + "&utm_campaign=" + utm_campaign + "&utm_content=" + utm_content + "&openbrowser=false&experience=true&path=K18&minetipcash=true";
+            $('.mineBtn').attr('href', mineUrl)
+        })()
+
+
         function openVideo() {
             $(".videoTutor").fadeIn();
             document.getElementById('vid').play();

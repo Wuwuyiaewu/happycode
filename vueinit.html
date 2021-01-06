@@ -10,15 +10,18 @@
 <body>
 
     <div id="app">
-        <blog-post v-for="post of posts" v-bind:key="post.id" v-bind:title="post.title" :ano="post.another"></blog-post>
+        <div :style="{ fontSize: postFontSize + 'em' }">
+            <blog-post v-for="post in posts" v-bind:key="post.id" v-bind:post="post" v-on:click="$emit('enlarge-text')"></blog-post>
+        </div>
     </div>
 
     <script src="js/axios.js"></script>
     <script src="js/vue.js"></script>
     <script>
         Vue.component('blogPost', {
-            props: ['title', 'ano'],
-            template: '<h3>{{ title }}</h3><p>{{ano}}</p>'
+            props: ['post'],
+
+            template: `<div class="blog-post"><h3>{{ post.title }}</h3><button v-on:enlarge-text="postFontSize += 0.1">Enlarge text</button><div v-html=""></div></div>`
         })
 
         ;
@@ -38,7 +41,8 @@
                         id: 3,
                         title: 'Why Vue is so fun',
                         another: 'right'
-                    }]
+                    }],
+                    postFontSize: 1
                 },
                 methods: {
                     axios() {
