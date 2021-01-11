@@ -722,7 +722,7 @@
             let html = '';
             console.log(data);
             let direction = data.direction == '0' ? '多' : '空';
-            html = '<td><span>' + data.name + '</span></td><td><span>' + direction + '</span></td><td><span>' + data.enterPrice + '</span></td><td><span>' + data.targetPrice + '</span></td><td><span>' + (data.profit / 5) + '</span></td>';
+            html = '<td><span>' + data.name + '</span></td><td><span>' + direction + '</span></td><td><span>' + data.enterPrice + '</span></td><td><span>' + data.targetPrice + '</span></td><td><span>' + ((data.profit / 5) * 1).toFixed(3) + '</span></td>';
             //console.log(html);
             $("#rank_" + rank + "_product").html(html);
         }

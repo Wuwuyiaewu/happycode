@@ -2,13 +2,16 @@ const WS_BASE_URL = "wss://api.mircoinfolab.com:1315/websocket";
 const HTTP_BASE_URL = "https://api.mircoinfolab.com:1315";
 const TECH_ANA_URL = "https://api.bingxuegirl.com/inv/currencies";
 // 實時報價開關
+const gwfx_oa_cdn = "<!--#echo var='gwfx_oa_new'-->"
+const gwfx_m = "<!--#echo var='gwfx_m'-->"
+const gwfx_pc = "<!--#echo var='gwfx_pc'-->"
 const PRODUCT_SUB_ON_OFF = true
     // 訂閱所有實時報價產品 開關
-const PRODUCT_ALL_SEL = false
+const PRODUCT_ALL_SEL = true
     // 指定實時報價產品
 const PRODUCT_SEL_ID = ['573004', '573139', '573032']
     // 最後一口價開關 (若不打開則實時報價也會關閉)
-const LASTPRICE_ON_OFF = false
+const LASTPRICE_ON_OFF = true
     // 輪播 開關
 const LOOPING_ON_OFF = false
     // 輪播 ID
@@ -120,11 +123,16 @@ var vm = new Vue({
                     techOn_off: TECH_ANA,
                     // 行情技術分析
                     currenctTemp: "",
+                    // 商品
+                    commodity: [],
+                    // 外匯
+                    Fe: [],
+                    // 指數
+                    StockIndex: [],
+
                 }
             },
-            computed: {
-
-            },
+            computed: {},
             methods: {
                 // 紀錄分頁
                 recordHis() {
@@ -393,14 +401,37 @@ var vm = new Vue({
                 WsUpdateReal(data) {
                     let vm = this
                     // 實時數據資料
-                    vm.realtimeData.forEach(el => {
-                        if (el.code_id == data[0]) {
+                    vm.commodity[0].forEach(el => {
+                        if (el.id == data[0]) {
                             el.sell_price = data[1]
                             el.buy_price = data[2]
                             el.cur_price = data[3]
                             el.time = data[4]
                             el.high_price = data[5]
                             el.low_price = data[6]
+                            el.profit = (100 * (el.high_price - el.low_price) / (parseFloat(el.cur_price) * el.delta)).toFixed(2);
+                        }
+                    })
+                    vm.Fe[0].forEach(el => {
+                        if (el.id == data[0]) {
+                            el.sell_price = data[1]
+                            el.buy_price = data[2]
+                            el.cur_price = data[3]
+                            el.time = data[4]
+                            el.high_price = data[5]
+                            el.low_price = data[6]
+                            el.profit = (100 * (el.high_price - el.low_price) / (parseFloat(el.cur_price) * el.delta)).toFixed(2);
+                        }
+                    })
+                    vm.StockIndex[0].forEach(el => {
+                        if (el.id == data[0]) {
+                            el.sell_price = data[1]
+                            el.buy_price = data[2]
+                            el.cur_price = data[3]
+                            el.time = data[4]
+                            el.high_price = data[5]
+                            el.low_price = data[6]
+                            el.profit = (100 * (el.high_price - el.low_price) / (parseFloat(el.cur_price) * el.delta)).toFixed(2);
                         }
                     })
                 },
@@ -512,7 +543,36 @@ var vm = new Vue({
                             newarr.content.forEach(el => {
                                 vm.allLastProduct = vm.allLastProduct.concat(el)
                             })
+                            vm.commodity.push(vm.jsonDate.filter(el=>{
+                                return el.type === ("能源") || el.type === ("贵金属") || el.type === ("农产品")
+                            }))
+                            vm.StockIndex.push(vm.jsonDate.filter(el=>{
+                                return el.type === "指数"
+                            }))
+                            vm.Fe.push(vm.jsonDate.filter(el=>{
+                                return el.type === ("外汇")
+                            }))
+                            const method = (el) =>{
+                                let cur_price = vm.allLastProduct.filter(el2=>{
+                                    if(el.id == el2.code_id){
+                                        return [el2.cur_price,el2.high_price,el2.low_price]
+                                    }
+                                })
+                                el.cur_price = cur_price[0].cur_price
+                                el.high_price = cur_price[0].high_price
+                                el.low_price = cur_price[0].low_price
+                                el.profit = (100 * (el.high_price - el.low_price) / (parseFloat(el.cur_price) * el.delta)).toFixed(2);
+                            }
                             vm.realtimeData = JSON.parse(JSON.stringify(vm.allLastProduct))
+                            vm.commodity[0].forEach(el=>{
+                                method(el)
+                            })
+                            vm.StockIndex[0].forEach(el=>{
+                                method(el)
+                            })
+                            vm.Fe[0].forEach(el=>{
+                                method(el)
+                            })
                             if (vm.productAllOn_Off) {
                                 _content_pr = {
                                     code_ids: vm.typeId,
