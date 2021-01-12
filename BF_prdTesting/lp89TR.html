@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>0元抢$100实盘体验金-柏富</title>
+    <title>0元抢$100实盘体验金-柏富(CMS 保存更新困難)</title>
     <meta name="keywords" content="" />
     <meta name="description" content="" />
     <meta content="telephone=no" name="format-detection">
@@ -18,8 +18,18 @@
     <link href="public/css/animate.css" rel="stylesheet" type="text/css">
     <script type="text/javascript" src="public/js/jquery.min.js"></script>
     <script type="text/javascript" src="public/js/wow.min.js"></script>
-
     <link href="promote/lp89TR/css/style.css" rel="stylesheet" type="text/css">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-163210082-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+        gtag('config', 'UA-163210082-1');
+        gtag('config', 'AW-463374640');
+    </script>
 </head>
 
 <body>
@@ -27,7 +37,7 @@
         <div class="header-info">
             <h1><img src="promote/lp89TR/images/logo.png" class="logo"></h1>
             <div class="headerBtQ">
-                <a href=""><img src="promote/lp89TR/images/button_question.png"></a>
+                <a href="javascript:void(0)" onclick="toCustomerService();gtag('event', 'cs_im', {'event_category':$GA_NAME,'event_label':'content_top','non_interaction': true});"><img src="promote/lp89TR/images/button_question.png"></a>
             </div>
         </div>
     </header>
@@ -36,7 +46,7 @@
             <h2><img src="promote/lp89TR/images/101.png" class="s1 wow lightSpeedIn"><img src="promote/lp89TR/images/102.png" class="s2 wow bounceIn"></h2>
             <img src="promote/lp89TR/images/103.png" class="i1 wow fadeInUp">
             <div class="mBt wow fadeInUp">
-                <a href="">
+                <a href="javascript:void(0);" class="homeBtn">
                     <p>$100体验金<strong>免注册  马上抢</strong></p>
                 </a>
             </div>
@@ -91,12 +101,12 @@
                                 </ul>
                                 <div class="mInfo">
                                     <table>
-                                        <tr v-for="item of commodity[0]" :key="item.id">
+                                        <tr v-for="item of commodity" :key="item.id">
                                             <td>{{item.name}}</td>
-                                            <td :class="item.id">{{item.cur_price}}</td>
+                                            <td :class="[item.id,item.color_recognition]">{{item.buy_price}}</td>
                                             <td>{{item.profit}}</td>
                                             <td>
-                                                <a href="">
+                                                <a @click="gotoTR(item.id)" href="javascript:void(0)" class="TrBtn">
                                                     <p>无本<br>试投</p>
                                                 </a>
                                             </td>
@@ -113,12 +123,12 @@
                                 </ul>
                                 <div class="mInfo">
                                     <table>
-                                        <tr v-for="item of Fe[0]" :key="item.id">
+                                        <tr v-for="item of Fe" :key="item.id">
                                             <td>{{item.name}}</td>
-                                            <td :class="item.id">{{item.cur_price}}</td>
+                                            <td :class="[item.id,item.color_recognition]">{{item.buy_price}}</td>
                                             <td>{{item.profit}}</td>
                                             <td>
-                                                <a href="">
+                                                <a @click="gotoTR(item.id)" href="javascript:void(0)" class="TrBtn">
                                                     <p>无本<br>试投</p>
                                                 </a>
                                             </td>
@@ -135,12 +145,12 @@
                                 </ul>
                                 <div class="mInfo">
                                     <table>
-                                        <tr v-for="item of StockIndex[0]" :key="item.id">
+                                        <tr v-for="item of StockIndex" :key="item.id">
                                             <td>{{item.name}}</td>
-                                            <td :class="item.id">{{item.cur_price}}</td>
+                                            <td :class="[item.id,item.color_recognition]">{{item.buy_price}}</td>
                                             <td>{{item.profit}}</td>
                                             <td>
-                                                <a href="">
+                                                <a @click="gotoTR(item.id)" href="javascript:void(0)" class="TrBtn">
                                                     <p>无本<br>试投</p>
                                                 </a>
                                             </td>
@@ -171,34 +181,34 @@
                 <img src="promote/lp89TR/images/wechat trade gif - TR.gif" class="i1_1 wow fadeInUp">
             </div>
             <div class="mBt wow fadeInUp">
-                <a href="">
+                <a href="javascript:void(0);" class="homeBtn">
                     <p>立即交易</p>
                 </a>
             </div>
         </div>
-        <div class="footerINfo">
+        <div class="footerINfo numRun">
             <h3 class=" wow bounceIn"><img src="promote/lp89TR/images/about.png" alt="关于柏富"></h3>
-            <p class="i1 wow fadeInUp">覆盖外汇、贵金属、指数、原油等170+种交易产品，随时随地把握投资先机。<a href="">更多></a></p>
+            <p class="i1 wow fadeInUp">覆盖外汇、贵金属、指数、原油等170+种交易产品，随时随地把握投资先机。<a href="javascript:void(0);" class="homeBtn">更多></a></p>
             <div class="i2">
-                <a href=""><img src="promote/lp89TR/images/115_101.png" class="wow fadeInLeft" alt="关于我们"></a>
-                <a href=""><img src="promote/lp89TR/images/115_102.png" class="wow fadeInDown" alt="资金安全"></a>
-                <a href=""><img src="promote/lp89TR/images/115_103.png" class="wow fadeInRight" alt="联系我们"></a>
+                <a href="javascript:gotoInnerAboutUsPage(1);" onclick="gtag('event', 'aboutUs', {'event_category':$GA_NAME,'event_label':'content_second','non_interaction': true});"><img src="promote/lp89TR/images/115_101.png" class="wow fadeInLeft" alt="关于我们"></a>
+                <a href="javascript:gotoInnerAboutUsPage(2);" onclick="gtag('event', 'aboutUs', {'event_category':$GA_NAME,'event_label':'content_third','non_interaction': true});"><img src="promote/lp89TR/images/115_102.png" class="wow fadeInDown" alt="资金安全"></a>
+                <a href="javascript:gotoInnerAboutUsPage(3);" onclick="gtag('event', 'aboutUs', {'event_category':$GA_NAME,'event_label':'content_fourth','non_interaction': true});"><img src="promote/lp89TR/images/115_103.png" class="wow fadeInRight" alt="联系我们"></a>
                 <div class="clearFix"></div>
             </div>
             <ul class="i3">
                 <li class="wow fadeInLeft">
                     <h4>累计成交手数</h4>
-                    <p>15,470,467<strong>手</strong></p>
+                    <p id="total_count_1">15,470,467<strong>手</strong></p>
                 </li>
                 <li class="wow fadeInRight">
                     <h4>累计服务人数</h4>
-                    <p>1,670,298<strong>人</strong></p>
+                    <p id="total_count_2">1,670,298<strong>人</strong></p>
                 </li>
             </ul>
             <div class="clearFix"></div>
         </div>
     </div>
-    <a href="" class="btHdtk wow fadeInRight">活动条款</a>
+    <a href="rule202009.html" class="btHdtk wow fadeInRight">活动条款</a>
     <link rel="stylesheet" media="screen" href="public/css/swiper3.1.0.min.css" />
     <script type="text/javascript" src="public/js/swiper.min.3.4.2.js"></script>
     <script src='public/js/vue.js'></script>
@@ -210,6 +220,23 @@
     <script src="public/js/pako.js"></script>
     <script src="promote/lp89TR/js/http_websocket.js"></script>
     <script type="text/javascript">
+        var $GA_NAME = "lp89TR";;
+        (function() {
+            let origin = "https://h5.bofu210.com";
+            let url = new URL(window.location.href);
+            let utm_source = url.searchParams.get("utm_source") == null ? '' : url.searchParams.get("utm_source");
+            let utm_medium = url.searchParams.get("utm_medium") == null ? '' : url.searchParams.get("utm_medium");
+            let utm_term = url.searchParams.get("utm_term") == null ? '' : url.searchParams.get("utm_term");
+            let utm_campaign = url.searchParams.get("utm_campaign") == null ? '' : url.searchParams.get("utm_campaign");
+            let utm_content = url.searchParams.get("utm_content") == null ? '' : url.searchParams.get("utm_content");
+            let trType = url.searchParams.get("TR_type") == null ? '' : url.searchParams.get("TR_type");
+            let homeUrl = origin + "/JW666key/home?utm_source=" + utm_source + "&utm_medium=" + utm_medium + "&utm_term=" + utm_term + "&utm_campaign=" + utm_campaign + "&utm_content=" + utm_content + "&openbrowser=false&experience=true&path=K18";
+            $('.homeBtn').attr('href', homeUrl)
+
+            let mineUrl = origin + "/JW666key/mine?utm_source=" + utm_source + "&utm_medium=" + utm_medium + "&utm_term=" + utm_term + "&utm_campaign=" + utm_campaign + "&utm_content=" + utm_content + "&openbrowser=false&experience=true&path=K18";
+            $('.mineBtn').attr('href', mineUrl)
+        })()
+
         jQuery(document).ready(function() {
             //animate
             new WOW().init();
@@ -259,6 +286,9 @@
             });
         });
     </script>
+    <script src="public/js/IX_postMessage.js" charset="utf-8"></script>
+    <script src="public/js/toH5page.js" charset="utf-8"></script>
+    <script src="public/js/numrun.js" charset="utf-8"></script>
 </body>
 
 </html>
