@@ -1,0 +1,363 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>您的100美金已到账-柏富</title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-orientation" content="portrait">
+    <meta name="browsermode" content="application">
+    <meta name="x5-page-mode" content="app">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link href="/public/css/animate.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="/public/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/public/js/wow.min.js"></script>
+    <script src="<!--#echo var='gwfx_m'-->/public/js/vue.js" charset="utf-8"></script>
+    <link href="<!--#echo var='gwfx_m'-->/promote/K18/css/tech.css" type="text/css" rel="stylesheet" />
+    <link href="<!--#echo var='gwfx_m'-->/promote/K18/css/popup.css" type="text/css" rel="stylesheet" />
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+        /*.part_02 .i1 {
+			width: 6.6rem !important;
+			height: 8.1rem !important;
+		}*/
+        
+        .trade {
+            padding-top: 0.5rem;
+        }
+    </style>
+
+    <link href="/promote/K18/css/style.css" rel="stylesheet" type="text/css">
+    <@_includePlace path="/analytics-head.html" />
+</head>
+
+
+<body>
+    <@_includePlace path="/analytics-body.html" />
+    <#-- analytics-body -->
+        <script src="public/js/rem.js" charset="utf-8"></script>
+        <script type="text/javascript">
+            remCompute(750, true);
+        </script>
+        <header class="headerMain">
+            <div class="header-info">
+                <h1><img src="public/images/logo.png" class="logo" alt="智选天下"></h1>
+                <div class="headerBtQ">
+                    <a href="javascript:toCustomerService();" onclick="gtag('event', 'toCustomerService', {'event_category':$GA_NAME,'event_label':'header','non_interaction': true});"><img src="/promote/K18/images/button_question.png"></a>
+                </div>
+            </div>
+        </header>
+        <div class="wrapper">
+            <div class="part_01">
+                <h2><img src="/promote/K18/images/101.png" class="wow fadeInUp"></h2>
+                <img src="/promote/K18/images/102.png" class="i1 wow fadeInUp">
+                <div class="arrow1 wow fadeInDown">
+                    <img src="/promote/K18/images/arrow1.png">
+                    <img src="/promote/K18/images/arrow1.png">
+                    <img src="/promote/K18/images/arrow1.png">
+                </div>
+            </div>
+            <div class="part_02">
+                <div class="i1 wow fadeInUp">
+                    <a href="javascript:void(0)" onclick="technicalAnalysisVue.getTechnicalAnalysisInfo();technicalAnalysisVue.isShowTechDetailMenu=true;technicalAnalysisVue.isShowInnerTimeMenu=false;" class="b1">下单小贴士</a>
+                    <@_includePlace path="/public/lp/Trading_v2_h5.html" />
+                    <#-- 體驗場_v2 -->
+                </div>
+                <div class="i2">
+                    <a href="javascript:void(0)" onclick="popup_show('tnc');gtag('event', 'rule', {'event_category':$GA_NAME,'event_label':'content_first','non_interaction': true});" class=" wow fadeInLeft">活动规则</a>
+                    <a href="javascript:void(0)" onclick="popup_show('video');gtag('event', 'video', {'event_category':$GA_NAME,'event_label':'content_first','non_interaction': true});" class=" wow fadeInRight">视频教学</a>
+                </div>
+                <div class="i3 wow fadeInUp">
+                    <p>温馨提示：戳右上角/下方工具栏 <img src="/promote/K18/images/201.png"> &nbsp;收藏此页面，方便下次交易</p>
+                </div>
+
+            </div>
+
+
+            <div class="footerINfo numRun">
+                <h3 class="wow fadeInUp">关于柏富</h3>
+                <p class="i1 wow fadeInUp">覆盖外汇、贵金属、指数、原油等170+种交易产品，随时随地把握投资先机。
+                    <a href="javascript:gotoInnerAboutUsPage(1);" onclick="gtag('event', 'aboutUs', {'event_category':$GA_NAME,'event_label':'content_first','non_interaction': true});">更多></a></p>
+                <div class="i2">
+                    <a href="javascript:gotoInnerAboutUsPage(1);" onclick="gtag('event', 'aboutUs', {'event_category':$GA_NAME,'event_label':'content_second','non_interaction': true});">
+                        <img src="/promote/K18/images/115_101.png" class="wow fadeInLeft" alt="关于我们"></a>
+                    <a href="javascript:gotoInnerAboutUsPage(2);" onclick="gtag('event', 'aboutUs', {'event_category':$GA_NAME,'event_label':'content_third','non_interaction': true});">
+                        <img src="/promote/K18/images/115_102.png" class="wow fadeInDown" alt="资金安全"></a>
+                    <a href="javascript:gotoInnerAboutUsPage(3);" onclick="gtag('event', 'aboutUs', {'event_category':$GA_NAME,'event_label':'content_fourth','non_interaction': true});"><img src="/promote/K18/images/115_103.png" class="wow fadeInRight" alt="联系我们"></a>
+                    <div class="clearFix"></div>
+                </div>
+                <ul class="i3">
+                    <li class="wow fadeInLeft">
+                        <h4>累计成交手数</h4>
+                        <p><span id="total_count_1">0</span><strong>手</strong></p>
+                    </li>
+                    <li class="wow fadeInRight">
+                        <h4>累计服务人数</h4>
+                        <p><span id="total_count_2">0</span><strong>人</strong></p>
+                    </li>
+                </ul>
+                <div class="clearFix"></div>
+            </div>
+
+            <div id="technical_analysis_content" class="tech_analysis_popup" v-if="isShowTechDetailMenu && start" v-cloak>
+                <div class="tech_analysis_popup_content">
+                    <p class="tech_analysis_popup_close" @click="isShowTechDetailMenu=false;isShowInnerTimeMenu=false"></p>
+                    <h1 v-if="product[code]">{{product[code].name}}</h1>
+                    <div class="tech_analysis_time_menu">
+                        <template v-for="(e,index) in 4">
+								<span v-bind:class="{selected:index===techDetailTimingIndex}" @click="setTechDetailTimingIndex(index)">{{techDetailTiming[index].timeString}}</span>
+							</template>
+                        <div v-bind:class="{show:isShowTimeMenu}" class="other_menu" id="tech_analysis_other_menu">
+                            <i @click="isShowTimeMenu=!isShowTimeMenu"></i>
+                            <p>
+                                <template v-for="(e,index) in 5">
+										<span @click="switchTiming(index+4)">{{techDetailTiming[index+4].timeString}}</span>
+									</template>
+                            </p>
+                        </div>
+                    </div>
+
+                    <table class="tech_analysis_table">
+                        <tr>
+                            <th>总结</th>
+                            <th colspan="3">
+                                <p :class="techAnalyInfo.conclusionBg"><span>{{techAnalyInfo.conclusion}}</span></p>
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>移动平均指数</p>
+                            </td>
+                            <td>
+                                <p :class="techAnalyInfo.conclusionMATextColor">{{techAnalyInfo.conclusionMAText}}</p>
+                            </td>
+                            <td>
+                                <p v-html="techAnalyInfo.conclusionMABuyText"></p>
+                            </td>
+                            <td>
+                                <p v-html="techAnalyInfo.conclusionMASellText"></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>技术指标</p>
+                            </td>
+                            <td>
+                                <p :class="techAnalyInfo.conclusionTechIndiTextColor">
+                                    {{techAnalyInfo.conclusionTechIndiText}}</p>
+                            </td>
+                            <td>
+                                <p v-html="techAnalyInfo.conclusionTechIndiBuyText"></p>
+                            </td>
+                            <td>
+                                <p v-html="techAnalyInfo.conclusionTechIndiSellText"></p>
+                            </td>
+                        </tr>
+                    </table>
+
+
+                </div>
+
+            </div>
+            <!-- /tech_analysis_popup_content-->
+
+
+
+
+
+            <script src="<!--#echo var='gwfx_m'-->/promote/K18/js/main.js" charset="utf-8"></script>
+
+
+            <div class="popup_div" id="tnc">
+                <div class="popup_div_content">
+                    <p class="popup_close" onClick="popup_close('tnc');gtag('event', 'close', {'event_category':$GA_NAME,'event_label':'tnc','non_interaction': true});"><img src="/promote/K18/images/close.png"></p>
+                    <h1>活动条款</h1>
+                    <div class="popup_inside">
+                        <div class="popup_inside_over">
+                            <h2>活动时间：</h2>
+                            2020-11-03 14:45:00 至 2020-12-31 23:59:59
+                            <br>
+                            <br>
+                            <h2>活动对象：</h2>
+                            新用户
+                            <br>
+                            <br>
+                            <ol>
+                                <li><span style="color:red">不用注册</span>，下单交易自动开立体验账号，初始金额100美元</li>
+                                <li>交易亏损可<span style="color:red">无限次【重置账户】</span>恢复余额变成100美元。</li>
+                                <li>交易盈利，平仓且总余额（100美元本金+盈利）≥$100，<span style="color:red">可触发赠金为总余额（充值金额需≥赠金）</span>。</li>
+                                <li>每笔盈利上限500美元，单次总余额上限$1000，每人最多5次赠金领取机会，<span style="color:red">最大可领取5000美元</span>，每次赠金待领时限为1小时；</li>
+                            </ol>
+                            <br>
+
+                            <h2> 赠金提现：</h2>
+                            <ul>
+                                <li> 用户在充值领取到赠金、转换真实账户后，需在<span style="color:blue">30天的账户有效期内</span>，交易达到一定手数方可提现当笔赠金（股票产品除外）：</li>
+                            </ul>
+
+                            <div class="popup_table">
+                                <table style="width: 100%;text-align:center">
+                                    <tr>
+                                        <th>赠金n（单位：美元）</th>
+                                        <th>需交易手数</th>
+                                    </tr>
+                                    <tr>
+                                        <td>100≤n＜150</td>
+                                        <td>13手</td>
+                                    </tr>
+                                    <tr>
+                                        <td>150≤n＜200</td>
+                                        <td>25手</td>
+                                    </tr>
+                                    <tr>
+                                        <td>200≤n＜350</td>
+                                        <td>35手</td>
+                                    </tr>
+                                    <tr>
+                                        <td>350≤n＜500</td>
+                                        <td>50手</td>
+                                    </tr>
+                                    <tr>
+                                        <td>500≤n＜700</td>
+                                        <td>70手</td>
+                                    </tr>
+                                    <tr>
+                                        <td>700≤n＜1000</td>
+                                        <td>100手</td>
+                                    </tr>
+
+                                </table>
+                            </div>
+                            <br>
+                            <ul>
+                                <li> 关于活动，如有未尽事宜，请咨询客服。</li>
+                            </ul>
+
+                            <br>
+                            <br>
+
+                            <h2>其他说明：</h2>
+                            <ol>
+                                <li><span style="color:blue">体验账户自开户后的30天内有效</span>，每位客户（同一身份ID）仅可参加一次体验账户赠金活动；若同期有其他优惠活动，客户所享有的其他优惠则以其他优惠之条款规定为准。</li>
+                                <li>交易手数的定义：交易有效期内云端交易平台账户所有产品（股票类产品除外）的总交易手数，以每个标准来回手计算（客户开仓1手，然后再行平仓1手，则整个交易来回算1手）。注：股票产品不参与手数统计。</li>
+                                <li>赠金将有可能用作抵扣交易帐户负数结余、补足保证金或其他因交易而产生的结欠。</li>
+                                <li>每IP/每家庭/每人/每交易账户限领取赠金一次，销户重开客户不可参与此活动。</li>
+                                <li>活动期间如发现客户不正规交易，柏富有权停止客户新交易并取消奖励资格。</li>
+                                <li>客户需注意网站上存取款说明有关手续费的安排，本公司保留随时修改、更新有关安排的权利，恕不另行通知。</li>
+                                <li>任何因计算机及/或网络的通讯或技术问题、故障、意外或任何原因而引致数据送交迟延、遗失资料、数据错误 或无法辨识等情况，柏富概不负责。上述活动记录均以系统记录为准。</li>
+                                <li>柏富及其旗下公司员工不可参加。</li>
+                                <li>柏富保留本条款的最终解释权，及随时修改或终止本优惠的权利，而毋须事先作出通知。</li>
+
+                            </ol>
+                            <br>
+                            <br>
+
+
+                        </div>
+                        <!--popup_inside_over-->
+                    </div>
+                    <!--popup_inside-->
+                </div>
+            </div>
+
+
+
+            <div class="tech_analysis_popup" id="video" style="display:none">
+                <div class="tech_analysis_popup_content">
+                    <p class="tech_analysis_popup_close" onclick="popup_close('video');video1.pause();gtag('event', 'close', {'event_category':$GA_NAME,'event_label':'video','non_interaction': true})"></p>
+                    <h1>教学视频</h1>
+                    <div class="tech_analysis_time_menu" style="text-align:center">
+
+                        <video class="" id="video1" style="width: 220px;text-align:center" loop x-webkit-airplay="true" controls webkit-playsinline="true">
+								  <source src="/public/images/BF TR v5.mp4" type="video/mp4">
+								  Your browser does not support the video tag.
+							</video>
+
+                    </div>
+
+                </div>
+                <!-- /tech_analysis_popup_content-->
+
+
+
+
+            </div>
+
+
+
+
+            <script type="text/javascript">
+                jQuery(document).ready(function() {
+                    //animate
+                    new WOW().init();
+                    //隐藏菜单	
+                    var  p = 0,
+                        t = 0;    
+                    $(window).scroll(function(e) {            
+                        p  =  $(this).scrollTop();                            
+                        if (t <= p) {  
+                            if ($(window).scrollTop() == 0) { 
+                                $("header").fadeIn();
+                            } else {                 
+                                $("header").fadeOut();
+                            }            
+                        }                          
+                        else {                
+                            $("header").fadeIn();            
+                        }              
+                        setTimeout(function() {
+                            t  =  p;
+                        }, 0);             
+                    });
+                });
+
+                function popup_show(div_name) {
+                    $("#" + div_name).fadeIn();
+                    return false;
+                }
+
+                function popup_close(div_name) {
+                    $("#" + div_name).fadeOut();
+                    return false;
+                }
+            </script>
+
+            <script>
+                console.log('01141531')
+                var $GA_NAME = "K18";
+                var $UA;
+
+                function scroll(h) {
+                    console.log(h)
+                    document.getElementById(h).scrollIntoView({
+                        block: "center",
+                        inline: "nearest"
+                    });
+                }
+            </script>
+            <script>
+                var createProductsBar = function() {
+                    let TRDom = document.getElementById('TR_products')
+                    let product = `<a style="flex: 0 0 20.0%;font-size:0.18rem;" data-id="573004" class="active" href="javascript:void(0)">现货黄金</a><a style="flex: 0 0 20.0%;font-size:0.18rem;" data-id="573010" class="" href="javascript:void(0)">美国原油</a><a style="flex: 0 0 20.0%;font-size:0.18rem;" data-id="573014" class="" href="javascript:void(0)">美国TECH100</a><a style="flex: 0 0 20.0%;font-size:0.18rem;" data-id="573139" class="" href="javascript:void(0)">欧元美元</a><a style="flex: 0 0 20.0%;font-size:0.18rem;color:#ccc;cursor: pointer" onclick="gotoh5Trade();gtag('event', 'more', {'event_category':$GA_NAME,'event_label':'content_first','non_interaction': true});">更多》</a>`
+                    TRDom.innerHTML = product;
+                }
+            </script>
+            <script>
+                if (window.location.search.includes("K18")) {
+                    console.log("change height for h5 K18!");
+                    document.head.insertAdjacentHTML("beforeend", `<style>.part_02 .i1 { height: 11rem !important; } @media (max-width: 750px) { .part_02 .i1 { height: 11.6rem !important; } }.wrapper { width: 7.2rem !important }</style>`)
+                }
+            </script>
+            <script src="/public/js/numrun.js"></script>
+            <@_includePlace path="/toH5Page.html" />
+</body>
+
+</html>

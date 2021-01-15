@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vueinit</title>
+</head>
+
+<body>
+
+    <div id="app">
+        <blog-post :title=st v-on:enlarge-text="onEnlargeText"></blog-post>
+    </div>
+
+    <script src="js/axios.js"></script>
+    <script src="js/vue.js"></script>
+    <script>
+        Vue.component('blogPost', {
+            props: {
+                title: [String, Number],
+            },
+            data() {
+                return {
+                    C: this.Cord
+                }
+            },
+            template: `<button class="blog-post" @click="$emit('enlarge-text',title)">{{title}}</button>`,
+            methods: {
+                onEnlargeText(data) {
+                    alert(data)
+                }
+            }
+        });
+        (function VueInit() {
+            var vm = new Vue({
+                el: "#app",
+                data: {
+                    C_cord: ["C", "E", "G"],
+                    st: '666',
+                    nu: 9527,
+                    bl: true,
+                    arr: [],
+                    fn: () => {
+                        console.log('我是');
+                    },
+                    firstName: "",
+                    lastName: ""
+                },
+                methods: {
+                    onEnlargeText(data) {
+                        alert(data)
+                    }
+                },
+                computed: {},
+                watch: {},
+                mounted() {},
+                created() {},
+                destroyed() {}
+            })
+        })()
+    </script>
+</body>
+
+</html>
