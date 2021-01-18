@@ -10,7 +10,7 @@
 <body>
 
     <div id="app">
-        <blog-post :title=st v-on:enlarge-text="onEnlargeText"></blog-post>
+        <blog-post :title=st :Cord=C_cord @update="alertcom"></blog-post>
     </div>
 
     <script src="js/axios.js"></script>
@@ -19,16 +19,17 @@
         Vue.component('blogPost', {
             props: {
                 title: [String, Number],
+                Cord: [String, Number, Array]
             },
             data() {
                 return {
-                    C: this.Cord
+                    message: this.Cord
                 }
             },
-            template: `<button class="blog-post" @click="$emit('enlarge-text',title)">{{title}}</button>`,
+            template: `<button class="blog-post" @click=onEnlargeText(Cord)>{{title}}{{Cord}}</button>`,
             methods: {
                 onEnlargeText(data) {
-                    alert(data)
+                    this.$emit('update', this.message);
                 }
             }
         });
@@ -37,7 +38,7 @@
                 el: "#app",
                 data: {
                     C_cord: ["C", "E", "G"],
-                    st: '666',
+                    st: '6667',
                     nu: 9527,
                     bl: true,
                     arr: [],
@@ -49,7 +50,11 @@
                 },
                 methods: {
                     onEnlargeText(data) {
-                        alert(data)
+                        this.$emit('update', this.message);
+                    },
+                    alertcom(val) {
+                        alert(val)
+
                     }
                 },
                 computed: {},
