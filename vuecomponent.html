@@ -5,58 +5,111 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vueinit</title>
+    <style>
+        body {
+            position: relative;
+            display: flex;
+            justify-content: center;
+        }
+        
+        #app {
+            margin-top: 30%;
+        }
+    </style>
 </head>
 
 <body>
 
     <div id="app">
-        <blog-post :title=st :Cord=C_cord @update="alertcom"></blog-post>
+        <major></major>
+        <minor></minor>
+        <!-- <input v-model="searchText"> -->
+        <i_chord v-bind:cord=scale click="xd"></i_chord>
+        <ii_chord v-bind:cord=scale></ii_chord>
+        <iii_chord v-bind:cord=scale></iii_chord>
+        {{displayScale}}
+        <!-- <custom-input v-model="searchText" v-on:input="searchText = $event"></custom-input> -->
     </div>
 
     <script src="js/axios.js"></script>
     <script src="js/vue.js"></script>
     <script>
-        Vue.component('blogPost', {
+        //         Vue.component('custom-input', {
+        //             props: ['value'],
+        //             template: `
+        //     <button
+        //     v-bind:value="value"
+        //     @click="sendSearchtext($event.target.value)"
+        //     >sendSearchtext</button>
+        //   `,
+        //             methods: {
+        //                 sendSearchtext(val) {
+        //                     alert(val)
+        //                 }
+        //             }
+        //         })
+        Vue.component('major', {
+            props: {},
+            data() {
+                return {}
+            },
+            template: `<button>Major</button>`,
+            methods: {
+
+            }
+        });
+        Vue.component('minor', {
+            props: {},
+            data() {
+                return {}
+            },
+            template: `<button>Minor</button>`,
+            methods: {
+
+            }
+        });
+        Vue.component('i_chord', {
             props: {
-                title: [String, Number],
-                Cord: [String, Number, Array]
+                cord: {
+                    type: Array,
+                }
             },
             data() {
-                return {
-                    message: this.Cord
-                }
+                return {}
             },
-            template: `<button class="blog-post" @click=onEnlargeText(Cord)>{{title}}{{Cord}}</button>`,
+            template: `<button>{{cord[0]}}</button>`,
             methods: {
-                onEnlargeText(data) {
-                    this.$emit('update', this.message);
-                }
+
+            }
+        });
+        Vue.component('ii_chord', {
+            props: {},
+            data() {
+                return {}
+            },
+            template: `<button>II_chord</button>`,
+            methods: {
+
+            }
+        });
+        Vue.component('iii_chord', {
+            props: {},
+            data() {
+                return {}
+            },
+            template: `<button>III_chord</button>`,
+            methods: {
+
             }
         });
         (function VueInit() {
             var vm = new Vue({
                 el: "#app",
                 data: {
-                    C_cord: ["C", "E", "G"],
-                    st: '6667',
-                    nu: 9527,
-                    bl: true,
-                    arr: [],
-                    fn: () => {
-                        console.log('我是');
-                    },
-                    firstName: "",
-                    lastName: ""
+                    scale: ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'],
+                    displayScale: ""
                 },
-                methods: {
-                    onEnlargeText(data) {
-                        this.$emit('update', this.message);
-                    },
-                    alertcom(val) {
-                        alert(val)
-
-                    }
-                },
+                methods: {},
                 computed: {},
                 watch: {},
                 mounted() {},
