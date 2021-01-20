@@ -24,9 +24,9 @@
         <major></major>
         <minor></minor>
         <!-- <input v-model="searchText"> -->
-        <i_chord v-bind:cord=scale click="xd"></i_chord>
-        <ii_chord v-bind:cord=scale></ii_chord>
-        <iii_chord v-bind:cord=scale></iii_chord>
+        <i_chord v-bind:cord=scale @inC_component="setScale"></i_chord>
+        <ii_chord v-bind:cord=scale @inD_component="setScale"></ii_chord>
+        <iii_chord v-bind:cord=scale @inE_component="setScale"></iii_chord>
         {{displayScale}}
         <!-- <custom-input v-model="searchText" v-on:input="searchText = $event"></custom-input> -->
     </div>
@@ -77,29 +77,43 @@
             data() {
                 return {}
             },
-            template: `<button>{{cord[0]}}</button>`,
+            template: `<button @click="inC(0,4,7)">{{cord[0]}}</button>`,
             methods: {
-
+                inC(val1, val2, val3) {
+                    this.$emit("inc_component", val1, val2, val3)
+                }
             }
         });
         Vue.component('ii_chord', {
-            props: {},
+            props: {
+                cord: {
+                    type: Array,
+                }
+            },
             data() {
                 return {}
             },
-            template: `<button>II_chord</button>`,
+            template: `<button @click="inD(2,6,9)">{{cord[2]}}</button>`,
             methods: {
-
+                inD(val1, val2, val3) {
+                    this.$emit("ind_component", val1, val2, val3)
+                }
             }
         });
         Vue.component('iii_chord', {
-            props: {},
+            props: {
+                cord: {
+                    type: Array,
+                }
+            },
             data() {
                 return {}
             },
-            template: `<button>III_chord</button>`,
+            template: `<button @click="inE(4,8,11)">{{cord[4]}}</button>`,
             methods: {
-
+                inE(val1, val2, val3) {
+                    this.$emit("ine_component", val1, val2, val3)
+                }
             }
         });
         (function VueInit() {
@@ -107,10 +121,24 @@
                 el: "#app",
                 data: {
                     scale: ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'],
-                    displayScale: ""
+                    scaleSel: [],
                 },
-                methods: {},
-                computed: {},
+                methods: {
+                    setScale(val1, val2, val3) {
+                        this.scaleSel = [...arguments]
+                    }
+                },
+                computed: {
+                    displayScale() {
+                        let ArrScale = []
+                        this.scale.forEach((element, index) => {
+                            this.scaleSel.filter(el2 => {
+                                return el2 === index ? ArrScale.push(element) : null
+                            })
+                        });
+                        return ArrScale
+                    }
+                },
                 watch: {},
                 mounted() {},
                 created() {},
