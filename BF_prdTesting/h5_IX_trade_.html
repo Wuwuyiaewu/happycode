@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src='public/js/axios.js'></script>
+    <script src='public/js/vue.min.js'></script>
+
+    <title>行情</title>
+    <link rel="stylesheet" href="promote/lp99TR/css/tabar.css">
+    <link rel="stylesheet" href="public/css/h5_tade.css">
+</head>
+
+<body>
+    <!--#if expr="$QUERY_STRING=/utm_source/"-->
+    <!--#set var="wx_url" value="?$QUERY_STRING"-->
+    <!--#set var="wx_url2" value="&$QUERY_STRING"-->
+    <!--#set var="wx_url3" value="$QUERY_STRING"-->
+    <!--#else-->
+    <!--#set var="wx_url" value=""-->
+    <!--#set var="wx_url2" value=""-->
+    <!--#set var="wx_url3" value=""-->
+    <!--#endif-->
+    <!--#if expr="$QUERY_STRING=/app=ix_app_orig/"-->
+    <!--#set var="wx_url" value="?wx=ix_app_orig"-->
+    <!--#set var="app_url" value="?app=ix_app_orig"-->
+    <!--#set var="app_urld" value="noTopBlank"-->
+    <!--#else-->
+    <!--#set var="app_url" value=""-->
+    <!--#set var="wx_url" value=""-->
+    <div id="app" class="trading_wrap">
+        <div id="selection_bar" class="navbar u-flex jcs">
+            <a href="javascript:;" v-for="(item,key) in subscrition" class="btn_bar" @click="selectProduct = item;showtar(key)" :class='{active:item === selectProduct}'>{{item}}</a>
+        </div>
+        <ul class="head_classification">
+            <li class="u-flex">
+                <span class="title_left f-2 ">名称代码</span>
+                <span class="title_center f-4">卖出价</span>
+                <span class="title_right f-4">买入价</span>
+            </li>
+        </ul>
+        <ul>
+            <li v-for="(item,key) in temps" class="list_wrap" :id="item.code_id">
+                <a :href="item.alink" class="u-flex productList_alink " v-if="item.title === selectProduct">
+                    <div class="productList_left u-flex jcs aib">
+                        <span class="prn">{{item.ProductName}}</span>
+                        <span class="en">{{item.enName}}</span>
+                    </div>
+                    <div class="productList_center u-flex jce aib">
+                        <span class="sell">{{item.sell_price}}</span>
+                    </div>
+                    <div class="productList_right u-flex jcs u-fw">
+                        <span class="buy">{{item.buy_price}}</span>
+                        <div class="cell u-flex jce">
+                            <span style="color:#53CC9A;" class="wave" v-if="((item.cur_price - item.yesterday_price)) >= 0">+{{(item.cur_price - item.yesterday_price).toFixed(3)}}</span>
+                            <span style="color:#E3525C;" class="wave" v-else>{{(item.cur_price - item.yesterday_price).toFixed(3)}}</span>
+                            <span style="color:#53CC9A;" class="wave_percent" v-if="(((item.cur_price - item.yesterday_price) / item.yesterday_price)) >= 0">+{{((((item.cur_price - item.yesterday_price) / item.yesterday_price))*100).toFixed(3)}}%</span>
+                            <span style="color:#E3525C;" class="wave_percent" v-else>{{((((item.cur_price - item.yesterday_price) / item.yesterday_price))*100).toFixed(3)}}%</span>
+                        </div>
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="floatwrapper">
+        <div class="nav-list">
+            <a data-num="0" href="javascript:;" onclick="lp_home()">
+                <s class="icons icons5"></s>
+                <b class="txt">首页</b>
+            </a>
+            <a data-num="1" href="javascript:;" class="on" onclick="toh5_trade()">
+                <s class="icons icons6"></s>
+                <b class="txt">行情</b>
+            </a>
+            <a href="javascript:;" onclick="">
+                <s class="icons icons7"></s>
+                <b class="txt">资讯</b>
+            </a>
+            <a href="javascript:;" onclick="">
+                <s class="icons icons8"></s>
+                <b class="txt">升级</b>
+            </a>
+        </div>
+    </div>
+
+
+    <script src="public/js/IX_postMessage.js" charset="utf-8"></script>
+    <script type="text/javascript">
+        function gotoRegister() {
+            if (isApp()) {
+                IX_postMessage.toPage('/register/openRealAccount/1' + window.location.search);
+            } else {
+                let url = "<!--#echo var='gwfx_oa_new'-->/yz352001/register/openRealAccount/1" + window.location.search;
+                window.location.href = url;
+            }
+        }
+
+        function gotoLogin() {
+            if (isApp()) {
+                IX_postMessage.toPage('/login');
+            } else {
+                let url = "<!--#echo var='gwfx_oa_new'-->/yz352001/login";
+                window.location.href = url;
+            }
+        }
+
+        function toh5_trade() {
+            let url = "h5_IX_trade_.html" + window.location.search;
+            window.location.href = url;
+            console.log(url)
+        }
+
+        function lp_home() {
+            if (isApp()) {
+                IX_postMessage.toPage('/trade');
+            } else {
+                let url = "<!--#echo var='gwfx_m'-->/lp99TR.html" + window.location.search;
+                window.location.href = url;
+            }
+        }
+
+        function gotoHome() {
+            let url = "<!--#echo var='gwfx_oa_new'-->/yz352001/home" + window.location.search;
+            window.location.href = url;
+        }
+
+        function gotoAboutTab(page) {
+            let url = "<!--#echo var='gwfx_pc'-->/03-App-lp/h5aboutTab.html?page=" + page;
+            window.location.href = url;
+        }
+
+        function gotoMiddlePageCheck(urlPath, title) {
+            if (isApp()) {
+                if (urlPath.indexOf('?') >= 0) {
+                    IX_postMessage.toMiddlePage({
+                        path: '/nest/queryinfo',
+                        query: {
+                            url: urlPath,
+                            title: title
+                        }
+                    })
+                } else {
+                    IX_postMessage.toMiddlePage({
+                        path: '/nest/queryinfo',
+                        query: {
+                            url: urlPath + window.location.search,
+                            title: title
+                        }
+                    })
+                }
+            } else {
+                window.location.href = urlPath + window.location.search;
+            }
+
+        }
+
+        function toH5SubPage(urlPath) {
+            if (isApp()) {
+                IX_postMessage.toPage(urlPath);
+            } else {
+                let url = "<!--#echo var='gwfx_oa_new'-->/yz352001" + urlPath;
+                location.href = url;
+            }
+        }
+
+        function gotoMiddlePageNoCheck(urlPath, title) {
+            IX_postMessage.toMiddlePage({
+                path: '/nest/queryinfo',
+                query: {
+                    url: urlPath + window.location.search,
+                    title: title
+                }
+            })
+        }
+
+        function toH5SubPageNoCheck(urlPath) {
+            IX_postMessage.toPage(urlPath + window.location.search);
+
+        }
+
+
+
+
+        function isApp() {
+            let app = new URL(window.location.href).searchParams.get("app");
+            return (app == 'ix_app_orig');
+
+        }
+
+        function toCustomerService() {
+            window.onbeforeunload = null;
+            var live800Prompt = "http://www.onlineservice-hk.com/k800/chatClient/chatbox.jsp?companyID=284&configID=55&jid=";
+            // 设置参数
+            let url = new URL(window.location.href);
+            let utm_source = url.searchParams.get("utm_source") == null ? '' : url.searchParams.get("utm_source");
+            let utm_medium = url.searchParams.get("utm_medium") == null ? '' : url.searchParams.get("utm_medium");
+            let utm_campaign = url.searchParams.get("utm_campaign") == null ? '' : url.searchParams.get("utm_campaign");
+            let utm_term = url.searchParams.get("utm_term") == null ? '' : url.searchParams.get("utm_term");
+            let utm_content = url.searchParams.get("utm_content") == null ? '' : url.searchParams.get("utm_content");
+
+            var accountNo = '';
+            var realCompanyId = '';
+            var params =
+                "company_id=14" +
+                "&utm_source=" + utm_source +
+                "&utm_medium=" + utm_medium +
+                "&utm_campaign=" + utm_campaign +
+                "&utm_term=" + utm_term +
+                "&utm_content=" + utm_content +
+                "&chat_type=1" +
+                "&lang=" + window.navigator.language +
+                "&uagent=" + encodeURIComponent(window.navigator.userAgent) +
+                "&reffer=" + encodeURIComponent(window.location.href) +
+                "&lastPageDesc=" + encodeURIComponent(document.title) +
+                "&account_no=" + accountNo +
+                "&real_co_id=" + realCompanyId;
+
+            var liveUrl = "https://cs.se6868w.com:8188?" + params;
+
+            if (isApp()) {
+                gotoMiddlePageCheck(liveUrl, '联系客服');
+            } else {
+                try {
+                    window.open(liveUrl, 'Live800Chatindow', 'height=645,width=740,top=0,left=0,toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no');
+                } catch (e) {
+                    window.open(liveUrl);
+                }
+            }
+        }
+    </script>
+    <script src="public/js/h5_trad_rem.js"></script>
+    <script src="public/js/ws-index-url.js"></script>
+
+    <script type="text/javascript">
+        remCompute(750, true);
+    </script>
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data() {
+                return {
+                    // 03 總產品清單 json url
+                    jsonUrl: 'public/js/json/code_BF_ix.json',
+                    // Http 登入獲取 token
+                    Http_config: {
+                        method: 'post',
+                        url: `${HTTP_BASE_URL}/account/appProperties/getAccountProperties`,
+                        headers: {
+                            'Content-type': 'application/json',
+                            'module': 'uat-account',
+                            'rpcType': 'http',
+                            'method': '/account/appProperties/getAccountProperties',
+                            'httpMethod': 'post',
+                            'trace': 'h5_' + this.get_current_time(),
+                            // 發送後才可以取 token
+                            'Authorization': ''
+                        },
+                        data: {
+                            "head": {
+                                "appKey": "yz352001"
+                            },
+                            "data": {
+                                "login_name": "Guest",
+                                "password": ""
+                            }
+                        },
+                    },
+                    // 建立 websocket 記憶體
+                    websock: null,
+                    // 初始化 ws 格式
+                    Ws_config: {
+                        trace: `h5 ${this.get_current_time()}`,
+                        version_code: 1,
+                        device: "h5",
+                        head: {
+                            server: "yz",
+                            msgType: "",
+                            sendTime: this.get_current_time(),
+                            Authorization: "",
+                            lang: "zh-TW"
+                        },
+                        content: {
+                            appKey: "",
+                            clientIp: "",
+                            company_id: "",
+                            login_name: "Guest",
+                            password: "",
+                            user_type: 1
+                        },
+                    },
+                    selectProduct: '贵金属',
+                    // 訂閱產品
+                    subscrition: [],
+                    // JSON 總產品
+                    jsonDate: null,
+                    // 最後一口總產品
+                    temp: [],
+                    // 單筆更新時實數據
+                    realTime_singleProduct: [],
+                    // 所有產品 id
+                    typeId: [],
+                    // 物件化所有產品 id ( 包含產品分類 )
+                    sortProduct: [],
+                    // 紅漲綠跌判斷
+                    tempLastA: [],
+                    tempLastB: []
+                }
+            },
+            computed: {
+                temps() {
+                    return this.temp
+                }
+            },
+            methods: {
+                // 接收產品類別參數
+                getValue(varname) {
+                    let vm = this
+                    let url = new URL(document.location).searchParams;
+                    let type = url.get('link')
+                    console.log(type)
+                    if (type !== null) {
+                        let arrType = type.split(' ')
+                        arrType.forEach(el => {
+                            switch (el) {
+                                case 'met':
+                                    vm.subscrition.push('贵金属')
+                                    break;
+                                case 'eng':
+                                    vm.subscrition.push('能源')
+                                    break;
+                                case 'exc':
+                                    vm.subscrition.push('外汇')
+                                    break;
+                                case 'ind':
+                                    vm.subscrition.push('指数')
+                                    break;
+                                case 'agr':
+                                    vm.subscrition.push('农产品')
+                                    break;
+                                case 'us':
+                                    vm.subscrition.push('美股')
+                                    break;
+                                case 'hk':
+                                    vm.subscrition.push('港股')
+                                    break;
+                            }
+                        })
+                    } else {
+                        vm.subscrition = ['贵金属', '能源', '外汇', '指数', '农产品', '美股', '港股']
+                    }
+                },
+                // scroll 位置調整
+                showtar(e) {
+                    let vm = this
+                    let productBar_All = [...document.querySelectorAll('.btn_bar')]
+                    let parentBar = productBar_All[e].parentElement
+                    let productScrollWidth = productBar_All[e].parentElement.scrollWidth
+                    if (productScrollWidth >= 612) {
+                        return
+                    } else if (e === vm.subscrition.length - 1 || 0) {
+                        parentBar.scrollLeft = productBar_All[e].offsetLeft
+                    } else {
+                        parentBar.scrollLeft = productBar_All[e].offsetLeft / 3
+                    }
+                },
+                // 時間具有唯一性
+                get_current_time() {
+                    var d = new Date();
+                    return d.getTime();
+                },
+                // utm_source帶入
+                toh5_trade() {
+                    let url = "h5_IX_trade_.html" + window.location.search;
+                    window.location.href = url;
+                },
+                // 要做 ws 以前都要先做 http 發送登入，才能夠要到 token 做 ws 操作 ix 文檔
+                // https://testdocs.ixmiddle.com/ixmiddle/http-interface-doc/account/appProperties/getAccountProperties.html
+                gotourl() {
+                    let vm = this
+                    axios(vm.Http_config)
+                        .then(function(response) {
+                            // 進行 ws 操作
+                            // 從 HTTP 所取得的 response 帶入 websocket head
+                            vm.Ws_config.head.Authorization = response.headers.authorization
+                            vm.Ws_config.head.msgType = 'login'
+                            vm.Ws_config.content.appKey = response.data.data.transBaseConfigVo.appKey
+                            vm.Ws_config.content.clientIp = response.data.data.clientIp
+                            vm.Ws_config.content.company_id = response.data.data.toKenCompanyInfoVo.companyId
+                            vm.Ws_config.content.login_name = vm.Http_config.data.data.login_name
+                            vm.Ws_config.content.password = vm.Http_config.data.data.password
+                            vm.Ws_config.content.user_type = -1
+                            vm.initWebSocket(vm.Ws_config)
+                            return axios(vm.jsonUrl)
+                        }).then(function(jsonRes) {
+                            vm.jsonDate = JSON.parse(JSON.stringify(jsonRes.data))
+                        })
+                        .catch(function(error) {
+                            console.log(error, 'axios 發送的 Http 、 Ws 出現錯誤');
+                        });
+                },
+                initWebSocket(Ws_config) { //初始化 websocket
+                    this.websock = new WebSocket(WS_BASE_URL);
+                    this.websock.onmessage = this.websocketonmessage;
+                    this.websock.onopen = this.websocketonopen;
+                    this.websock.onerror = this.websocketonerror;
+                    this.websock.onclose = this.websocketclose;
+                },
+                websocketonopen() { //連接建立後執行 send 發送數據
+                    let vm = this
+                    console.log('open connect', vm.Ws_config)
+                    if (this.websock.readyState === 1) {
+                        this.websocketsend(JSON.stringify(vm.Ws_config));
+                    } else {
+                        alert("還沒進入 websocket.readyState === 1")
+                    }
+                },
+                websocketonerror() { //連結失敗，重新連線
+                    console.log('///連結失敗，重新連線')
+                    this.initWebSocket();
+                },
+                websocketonmessage(e) { //資料接收後
+                    let vm = this
+                        // 接收資料後判斷數據
+                    vm.Wsevent(e.data)
+                },
+                websocketsend(Data) { //資料發送
+                    this.websock.send(Data);
+                },
+                websocketclose(e) { //關閉
+                    console.log('websocket 連線已經中斷', e);
+                },
+                // --初始化所有產品 與 產品分類
+                defineProduct(e) {
+                    let newArr = JSON.parse(e)
+                        // 分類 id
+                    let idTypeArr = []
+                        // 分類類型
+                    let productType = []
+                        // 無分類所有 id
+                    let allProductId = []
+                    let typeArr = newArr.content.product_category
+                        // 組裝推送 id 與前置分類
+                    typeArr.forEach(element => {
+                        idTypeArr.push(element.code_ids)
+                        allProductId = allProductId.concat(element.code_ids)
+                        productType = productType.concat(element.title)
+                    });
+                    // 所有 id 推入
+                    vm.typeId = allProductId
+                        // 組分類物件
+                    let _consis = {
+                        id: [],
+                        title: ""
+                    }
+                    let product_finish = []
+                    for (let index = 0; index < idTypeArr.length; index++) {
+                        let id = idTypeArr[index];
+                        let type = productType[index]
+                        _consis.id = id
+                        _consis.title = type
+                        let _new_consis = JSON.parse(JSON.stringify(_consis))
+                        product_finish.push(_new_consis)
+                    }
+                    vm.sortProduct = product_finish
+                },
+                // 需要 token 者 ( 依照文檔目前只在判斷客戶來源使用 )
+                WsBuildup(msgType, _content) {
+                    let vm = this
+                    vm.Ws_config.head.msgType = msgType
+                    vm.Ws_config.content = _content
+                        // 登入後正式進入 Wsevent 判斷
+                    vm.websocketsend(JSON.stringify(vm.Ws_config));
+                },
+                // 共通 head
+                Ws_Head(msgType) {
+                    let vm = this
+                    let _head = {
+                        "server": "yz",
+                        "msgType": msgType,
+                        "sendTime": vm.get_current_time()
+                    }
+                    return _head
+                },
+                // 訂閱所有行情最後一口價 ( 可直接訂閱 )
+                // --最後一口價--
+                WsLastpriceBuildup(msgType, _content) {
+                    let vm = this
+                    let Ws_LsConfig = {
+                        "head": vm.Ws_Head(msgType),
+                        "content": _content,
+                        "trace": vm.get_current_time(),
+                        "device": "h5",
+                        "version_code": 1
+                    }
+                    vm.websocketsend(JSON.stringify(Ws_LsConfig));
+                },
+                // 訂閱產品實時報價
+                // --產品報價
+                WsProductCurBuildup(msgType, _content) {
+                    let vm = this
+                    let ws_PrCurConfig = {
+                        "head": vm.Ws_Head(msgType),
+                        "content": _content,
+                        "device": "h5",
+                        "trace": vm.get_current_time(),
+                        "version_code": 1
+                    }
+                    vm.websocketsend(JSON.stringify(ws_PrCurConfig));
+                },
+                // lastPrice form(object)
+                // buy_price code_id cur_price high_price low_price open_price sell_price seq time title yesterday_price
+                // realTime form(array)
+                // id 賣價(sell_price) 買價(buy_price) 當前價(cur_price) 秒 最高價格(high_price) 最低價格(low_price)
+                // --更新時實數據
+                WsUpdateReal(data) {
+                    let vm = this
+
+                    vm.temp.filter(elO => {
+                        if ((data[0] * 1) === elO.code_id) {
+                            elO.cur_price = data[3]
+                        }
+                    })
+                    vm.tempLastA = JSON.parse(JSON.stringify(vm.temp))
+                    vm.tempLastA.forEach(elA => {
+                        if ((elA.code_id * 1) === (data[0] * 1)) {
+
+                            //sellPrice 漲跌判斷
+                            if (data[1] > elA.sell_price) {
+                                vm.temp.filter(elO => {
+                                    if ((elO.code_id * 1) === (elA.code_id * 1)) {
+                                        if (document.getElementById(`${elO.code_id}`) == null) {
+                                            return
+                                        }
+                                        let site = document.getElementById(`${elO.code_id}`)
+                                        if (site.querySelector('.sell') == null) {
+                                            return
+                                        }
+                                        site.querySelector('.sell').classList.remove('fall')
+                                        site.querySelector('.sell').classList.add('rise')
+                                        elO.sell_price = data[1]
+                                    }
+                                })
+                            } else if (data[1] < elA.sell_price) {
+                                vm.temp.filter(elO => {
+                                    if ((elO.code_id * 1) === (elA.code_id * 1)) {
+                                        if (document.getElementById(`${elO.code_id}`) == null) {
+                                            return
+                                        }
+                                        let site = document.getElementById(`${elO.code_id}`)
+                                        if (site.querySelector('.sell') == null) {
+                                            return
+                                        }
+                                        site.querySelector('.sell').classList.remove('rise')
+                                        site.querySelector('.sell').classList.add('fall')
+                                        elO.sell_price = data[1]
+                                    }
+                                })
+                            } else {
+                                return
+                            }
+
+                            // buyPrice 漲跌判斷
+                            if (data[2] > elA.buy_price) {
+                                vm.temp.filter(elO => {
+                                    if ((elO.code_id * 1) === (elA.code_id * 1)) {
+                                        if (document.getElementById(`${elO.code_id}`) == null) {
+                                            return
+                                        }
+                                        let site = document.getElementById(`${elO.code_id}`)
+                                        if (site.querySelector('.buy') == null) {
+                                            return
+                                        }
+                                        site.querySelector('.buy').classList.remove('fall')
+                                        site.querySelector('.buy').classList.add('rise')
+                                        elO.buy_price = data[2]
+                                    }
+                                })
+                            } else if (data[2] < elA.buy_price) {
+                                vm.temp.filter(elO => {
+                                    if ((elO.code_id * 1) === (elA.code_id * 1)) {
+                                        if (document.getElementById(`${elO.code_id}`) == null) {
+                                            return
+                                        }
+                                        let site = document.getElementById(`${elO.code_id}`)
+                                        if (site.querySelector('.buy') == null) {
+                                            return
+                                        }
+                                        site.querySelector('.buy').classList.remove('rise')
+                                        site.querySelector('.buy').classList.add('fall')
+                                        elO.buy_price = data[2]
+                                    }
+                                })
+                            } else {
+                                return
+                            }
+
+                        }
+                    })
+                },
+                Wsevent(e) {
+                    let vm = this
+                    var msg = null;
+                    // 進來的字串，需要再轉字串才能使用方法
+                    if (e.toString().indexOf("p(") > -1) {
+                        // --產品報價處理
+                        // p( 因為非物件開頭 所以不能單純使用 json.parse 去做處理
+                        // ws_realTimeProduct( [0]產品ID,[1]賣價,[2]買價,[3]當前價,[4]時間,[5]最高價格,[6]最低價格 )
+                        // 字串處理
+                        let newData = e.slice(2, e.length - 1);
+                        let ws_realTimeProduct = newData.split(",");
+                        if (ws_realTimeProduct.length < 7) {
+                            console.log("報價有錯 " + e);
+                        }
+                        // string 轉為 num
+                        var numSplit = ws_realTimeProduct[0] * 1
+
+                        // 時刻訂閱產品 id
+                        if (vm.realTime_singleProduct.indexOf(numSplit) < 0) {
+                            vm.realTime_singleProduct.push(numSplit)
+                        }
+                        vm.WsUpdateReal(ws_realTimeProduct)
+
+                        // ws 登入後會回傳數據
+                        // 將數據轉換成可以比對的 msg_type 
+                        // msg_type 請看 ix 文檔
+                        // https://testdocs.ixmiddle.com/ixmiddle/ix-socket-proxy-doc/trade-login.html
+                        // 為字串且排除產品訂閱的條件後，再行轉換
+                    } else if (typeof(e) === "string" && e.toString().indexOf("p(") < 0) {
+                        msg = JSON.parse(e);
+                        var msg_code = msg.msg_code;
+                    }
+                    // 比對什麼回傳訊息
+                    // 再做什麼樣的事
+                    switch (msg_code) {
+                        // 比對到使用者登入
+                        case "UserLoginInfoRet":
+                            // 已經有用戶帳戶資料 參考 ix 文檔
+                            // https://testdocs.ixmiddle.com/ixmiddle/ix-socket-proxy-doc/trade-login/tui-song-deng-lu-jie-guo.html
+
+                            break;
+                        case "HeartBeatConf":
+                            break;
+                        case "InitProductInfo":
+                            // --初始化所有產品 與 產品分類
+                            vm.defineProduct(e)
+                                // 訂閱所有產品最後一口價
+                            _content_ls = {
+                                    code_ids: vm.typeId,
+                                }
+                                // --最後一口價
+                            vm.WsLastpriceBuildup("lastPrice", _content_ls)
+                            break;
+                        case "LastPrice":
+                            // console.log(`找到最後一口報價`, msg)
+                            let newarr = []
+                            let tempType = ''
+                            vm.temp = msg.content
+                                // 比對 id 填入產品名稱、英文代碼
+                            vm.temp.filter(tempGroup => {
+                                    vm.jsonDate.forEach(jsonEl => {
+                                        if (tempGroup.code_id === (jsonEl.id * 1)) {
+                                            tempGroup.ProductName = jsonEl.name
+                                            tempGroup.enName = jsonEl.en
+                                                // tempGroup.alink = `https://h5.smart-elite.com/JW666key/productDetail/${jsonEl.id}${location.search}`
+                                            tempGroup.alink = `https://h5.bofu210.com/JW666key/upgrade/account/1`
+                                        }
+                                    })
+                                })
+                                // 插入 title
+                            vm.sortProduct.forEach(el => {
+                                    el.id.forEach(innerid => {
+                                        vm.temp.filter(tempGroup => {
+                                            if (innerid !== tempGroup.code_id) {
+                                                return
+                                            } else if (innerid === tempGroup.code_id && tempType === '' && tempGroup.title === undefined) {
+                                                // console.log(`id 相等 tempType 尚未賦予 `)
+                                                tempGroup.title = el.title
+                                                tempType = el.title
+                                            } else if (innerid === tempGroup.code_id && tempType === el.title && tempGroup.title === undefined) {
+                                                // console.log(`id 相等 tempType 已經有了，title 還沒定義`)
+                                                tempGroup.title = el.title
+                                            } else if (innerid === tempGroup.code_id && tempType !== el.title && tempGroup.title === undefined) {
+                                                // console.log(`id 並不相等 tempType 已經有了，title 還沒定義`)
+                                                tempGroup.title = el.title
+                                                tempType = el.title
+                                            }
+                                        })
+                                    })
+                                })
+                                // 訂閱實時報價
+                            _content_pr = {
+                                    code_ids: vm.typeId,
+                                    subscribeType: "reSubscribe",
+                                    type: "yz"
+                                }
+                                // --產品報價
+                            vm.WsProductCurBuildup("productSubscription", _content_pr)
+                            break
+                        default:
+                            break;
+                    }
+                }
+            },
+            mounted() {},
+            created() {
+                this.getValue("link")
+                this.gotourl()
+            },
+            destroyed() {}
+        })
+    </script>
+
+</body>
+
+</html>
