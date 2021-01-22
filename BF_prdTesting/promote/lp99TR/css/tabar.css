@@ -22,6 +22,7 @@
     *zoom: 1;
     *display: inline;
     width: 22%;
+    text-decoration: none;
 }
 
 .nav-list a .icons {
