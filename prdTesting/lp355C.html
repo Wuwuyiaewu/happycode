@@ -11,14 +11,14 @@
     <meta name="author" content="[2021.01] Designed by Gray ;Coded by Pong">
     <meta name="format-detection" content="telephone=no">
     <link rel="shortcut icon" type="image/x-icon" href="promote/lp355C/images/favicon.ico" />
-
+    <link href="https://img-pc.bbyou.net/common/css/lp_public.css" rel="stylesheet" />
     <link href="promote/lp355C/css/animate.css" type="text/css" rel="stylesheet" />
     <link href="promote/lp355C/css/swiper.min.css" type="text/css" rel="stylesheet" />
     <link href="promote/lp355C/css/popup.css" type="text/css" rel="stylesheet" />
     <link href="promote/lp355C/css/lp355C.css" type="text/css" rel="stylesheet" />
 
     <script src="public/js/jquery.min.js" type="text/javascript"></script>
-    <script src="public/js/swiper.min.js" type="text/javascript"></script>
+    <script src="promote/lp355C/js/swiper.min.js" type="text/javascript"></script>
     <script src="public/js/rem.js" charset="utf-8"></script>
     <script src="public/js/wow.min.js" type="text/javascript"></script>
     <script src="promote/lp355C/js/lp355C.js" charset="utf-8"></script>
@@ -33,8 +33,11 @@
     <!--#else-->
     <!--#set var="app_url" value=""-->
     <!--#set var="wx_url" value=""-->
+    <div class="fixed-top">
+    </div>
     <!--#set var="app_urld" value=""-->
     <!--#endif-->
+
     <!--#if expr="$QUERY_STRING=/utm_source/"-->
     <!--#set var="wx_url" value="?$QUERY_STRING"-->
     <!--#set var="wx_url2" value="&$QUERY_STRING"-->
@@ -46,12 +49,6 @@
     <!--#endif-->
     <div class="main_content">
 
-        <div class="news_header">
-            <div>
-                <p class="logo"></p>
-                <a href="javascript:toCustomerService();" onclick="_gaq.push(['_trackEvent',$GA_NAME,'cs_im', 'content_top', 1,true]);" class="cs_btn"><img src="promote/lp355C/images/cs_icon2.png">在线客服</a>
-            </div>
-        </div>
 
         <div class="main_banner">
 
@@ -89,7 +86,7 @@
             <div class="g_title wow flipInX"><img src="promote/lp355C/images/g_title1.png"></div>
 
             <div class="tnc_btn">
-                <p onClick="popup_show('tnc')">活动详情<img src="promote/lp355C/images/tnc_icon.png"></p>
+                <p onClick="popup_show('tnc');_gaq.push(['_trackEvent',$GA_NAME,'event', 'content1', 1,true]);">活动详情<img src="promote/lp355C/images/tnc_icon.png"></p>
             </div>
 
             <ul class="candy_box_list">
@@ -111,7 +108,7 @@
 
             <div class="main_btn wow fadeInUp">
                 <p class="btn3">
-                    <a href="javascript:void(0)" onClick="popup_show('bfh1')">马上领奖励</a>
+                    <a href="javascript:void(0)" onClick="popup_show('bfh1');_gaq.push(['_trackEvent',$GA_NAME,'event', 'main_btn', 1,true]);">马上领奖励</a>
                 </p>
             </div>
         </div>
@@ -150,7 +147,7 @@
 
             <div class="main_btn wow fadeInUp">
                 <p class="btn2">
-                    <a href="javascript:void(0)" onClick="popup_show('bfh1')">立即登记</a>
+                    <a href="javascript:void(0)" onClick="popup_show('bfh1');_gaq.push(['_trackEvent',$GA_NAME,'event', 'main_btn', 1,true]);">立即登记</a>
                 </p>
             </div>
 
@@ -221,34 +218,35 @@
             <div class="big_title wow fadeInLeft"><img src="promote/lp355C/images/new_content_title.png"></div>
             <span class="wow fadeIn">
 					覆盖外汇、贵金属、指数、原油等90+种交易产品，随时随地把握投资先机。
-					<a href="#" class="more_btn2">更多 ></a>
-					<ul class="blue_icon">
-						<li class="wow fadeInLeft">
-							<a href="#"></a>
-							<img src="promote/lp355C/images/3icon_1.png">
-							<b>多元化产品</b>
-						</li>
-						<li class="wow fadeInDown">
-							<a href="#"></a>
-							<img src="promote/lp355C/images/3icon_2.png">
-							<b>独创网页交易</b>
-						</li>
-						<li class="wow fadeInRight">
-							<a href="#"></a>
-							<img src="promote/lp355C/images/3icon_3.png">
-							<b>快速出入金</b>
-						</li>
-					</ul>
+				</span>
+            <a href="<!--#echo var='gwfx_pc'-->/03-App-lp/H5TradeInfo.html?page=1<!--#echo var='wx_url2'-->" onclick="_gaq.push(['_trackEvent',$GA_NAME,'open_to_H5TradeInfo', 'content_first', 1,true]);" class="more_btn2">更多 ></a>
+            <ul class="blue_icon">
+                <li class="wow fadeInLeft">
+                    <a href="<!--#echo var='gwfx_pc'-->/03-App-lp/H5TradeInfo.html?page=1<!--#echo var='wx_url2'-->" onclick="_gaq.push(['_trackEvent',$GA_NAME,'open_to_H5TradeInfo', 'content_first', 1,true]);"></a>
+                    <img src="promote/lp355C/images/3icon_1.png">
+                    <b>多元化产品</b>
+                </li>
+                <li class="wow fadeInDown">
+                    <a href="<!--#echo var='gwfx_pc'-->/03-App-lp/H5TradeInfo.html?page=2<!--#echo var='wx_url2'-->" onclick="_gaq.push(['_trackEvent',$GA_NAME,'open_to_H5TradeInfo', 'content_second', 1,true]);"></a>
+                    <img src="promote/lp355C/images/3icon_2.png">
+                    <b>独创网页交易</b>
+                </li>
+                <li class="wow fadeInRight">
+                    <a href="<!--#echo var='gwfx_pc'-->/03-App-lp/H5TradeInfo.html?page=3<!--#echo var='wx_url2'-->" onclick="_gaq.push(['_trackEvent',$GA_NAME,'open_to_H5TradeInfo', 'content_third', 1,true]);"></a>
+                    <img src="promote/lp355C/images/3icon_3.png">
+                    <b>快速出入金</b>
+                </li>
+            </ul>
 
-					<ul class="price_list">
-						<li class="list1 ">
-							<span><img src="promote/lp355C/images/g_icon1.png">累计成交手数</span>
-            <p><b>15,470,467</b>手</p>
-            </li>
-            <li class="list2 ">
-                <span><img src="promote/lp355C/images/g_icon2.png">累计服务人数</span>
-                <p><b>1,670,298</b>人</p>
-            </li>
+            <ul class="price_list">
+                <li class="list1">
+                    <span><img src="promote/lp355C/images/g_icon1.png">累计成交手数</span>
+                    <p><b id="total_count_1">15,470,467</b>手</p>
+                </li>
+                <li class="list2">
+                    <span><img src="promote/lp355C/images/g_icon2.png">累计服务人数</span>
+                    <p><b id="total_count_2">1,670,298</b>人</p>
+                </li>
             </ul>
         </div>
 
@@ -258,17 +256,17 @@
 
 
     <div class="mobile_btn">
-        <a href="#" class="btn1">咨询客服</a>
-        <a href="javascript:void(0)" onClick="popup_show('bfh1')" class="btn2">立即登记</a>
+        <a href="javascript:toCustomerService();" onclick="_gaq.push(['_trackEvent',$GA_NAME,'cs_im', 'content_top', 1,true]);" class="btn1">咨询客服</a>
+        <a href="javascript:void(0);" onclick="popup_show('bfh1');_gaq.push(['_trackEvent',$GA_NAME,'cs_im', 'toRegister', 1,true]);" class="btn2">立即登记</a>
     </div>
 
-    <p class="mobile_tnc" onClick="popup_show('tnc')"></p>
+    <p class="mobile_tnc" onClick="popup_show('tnc');_gaq.push(['_trackEvent',$GA_NAME,'event', 'main_btn', 1,true]);"></p>
 
 
 
     <div class="popup_div" id="tnc">
         <div class="popup_div_content">
-            <p class="popup_close" onClick="popup_close('tnc')"><img src="promote/lp355C/images/close.png"></p>
+            <p class="popup_close" onClick="popup_close('tnc');_gaq.push(['_trackEvent',$GA_NAME,'event', 'main_btn', 1,true]);"><img src="promote/lp355C/images/close.png"></p>
             <h1>活动条款</h1>
             <div class="popup_inside">
                 <div class="popup_inside_over">
@@ -385,7 +383,7 @@
                         <span id="error_text"></span>
                         <!-- <button onClick="login_done()">点击提交</button> -->
                         <button id="submit_btn">点击提交</button>
-                        <a href="https://pc.zhixuanpc.com/yz352001/register/openRea">还没有账户？立即注册</a>
+                        <a href="javascript:gotoRegister();" onclick="_gaq.push(['_trackEvent',$GA_NAME,'cs_im', 'toRegister', 1,true]);">还没有账户？立即注册</a>
                     </div>
                 </div>
                 <!--popup_inside_over-->
@@ -394,9 +392,11 @@
         </div>
     </div>
 
+
+
     <div class="popup_div small_div" id="bfh2">
         <div class="popup_div_content">
-            <p class="popup_close" onClick="popup_close('bfh2')"><img src="promote/lp355C/images/close2.png"></p>
+            <p class="popup_close" onClick="popup_close('bfh2');_gaq.push(['_trackEvent',$GA_NAME,'event', 'main_btn', 1,true]);"><img src="promote/lp355C/images/close2.png"></p>
             <h1>您已成功登记活动</h1>
             <!-- <h1>您已登记过活动了！</h1>-->
             <div class="popup_inside">
@@ -411,7 +411,6 @@
             <!--popup_inside-->
         </div>
     </div>
-
 
     <div class="popup_div small_div" id="bfh3">
         <div class="popup_div_content">
@@ -431,17 +430,15 @@
         </div>
     </div>
 
-
-
     <div class="popup_div small_div" id="bfh4">
         <div class="popup_div_content">
-            <p class="popup_close" onClick="popup_close('bfh4')"><img src="promote/lp355C/images/close2.png"></p>
+            <p class="popup_close" onClick="popup_close('bfh4');_gaq.push(['_trackEvent',$GA_NAME,'event', 'main_btn', 1,true]);"><img src="promote/lp355C/images/close2.png"></p>
             <h1>您不符合此次活动资格</h1>
             <div class="popup_inside">
                 <div class="popup_inside_over">
                     <div class="done_text">
                         请联系客服了解更多优惠信息！
-                        <a href="https://pc.zhixuanpc.com/yz352001/home" target="_blank" class="done_btn">马上交易</a>
+                        <a href="javascript:void(0);" onClick="toCustomerService();;_gaq.push(['_trackEvent',$GA_NAME,'event', 'main_btn', 1,true]);" target="_blank" class="done_btn">联系客服</a>
                     </div>
                 </div>
                 <!--popup_inside_over-->
@@ -465,11 +462,11 @@
     </div>
     <!-- /iphone_popup-->
 
-
+    <script>
+        const $GA_NAME = "lp355C";
+    </script>
     <script src="promote/lp355C/js/main.js"></script>
-    <@_includePlace path="/toH5Page.html" />
-    <#-- toH5Page -->
-        <!--#include file="/common/template/lp/lp_analytics_container.html"-->
+    <!--#include file="/common/template/lp/lp_analytics_container.html"-->
 </body>
 
 </html>

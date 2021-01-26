@@ -22,52 +22,25 @@
 
     <div id="app">
         <major @scale_rang="setRang"></major>
-        <minor @scale_rang="setRang"></minor>
-        <!-- <input v-model="searchText"> -->
         <i_chord v-bind:cord=scale @inC_component="setScale"></i_chord>
         <ii_chord v-bind:cord=scale @inD_component="setScale"></ii_chord>
         <iii_chord v-bind:cord=scale @inE_component="setScale"></iii_chord>
         {{displayScale}}
-        <!-- <custom-input v-model="searchText" v-on:input="searchText = $event"></custom-input> -->
     </div>
 
     <script src="js/axios.js"></script>
     <script src="js/vue.js"></script>
     <script>
-        //         Vue.component('custom-input', {
-        //             props: ['value'],
-        //             template: `
-        //     <button
-        //     v-bind:value="value"
-        //     @click="sendSearchtext($event.target.value)"
-        //     >sendSearchtext</button>
-        //   `,
-        //             methods: {
-        //                 sendSearchtext(val) {
-        //                     alert(val)
-        //                 }
-        //             }
-        //         })
         Vue.component('major', {
             props: {},
             data() {
-                return {}
+                return {
+                    rang: [0, 4, 7]
+                }
             },
             template: `<button @click="major_scale(0,4,7)">Major</button>`,
             methods: {
-                major_scale() {
-                    this.$emit("scale_rang", val1, val2, val3)
-                }
-            }
-        });
-        Vue.component('minor', {
-            props: {},
-            data() {
-                return {}
-            },
-            template: `<button @click="minor_scale(0,3,7)>Minor</button>`,
-            methods: {
-                minor_scale() {
+                major_scale(val1, val2, val3) {
                     this.$emit("scale_rang", val1, val2, val3)
                 }
             }
@@ -132,7 +105,7 @@
                         this.Root = val1
                     },
                     setRang(val1, val2, val3) {
-
+                        console.log(val1);
                     }
                 },
                 computed: {

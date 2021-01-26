@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./js/vue.js"></script>
+    <title>RE_vue_S1E9</title>
+</head>
+
+<body>
+    <div id="app">
+        <Input_typing></Input_typing>
+        <div>
+            <input type="text" v-model="this.input_text" @compositionstart>
+        </div>
+    </div>
+
+    <script>
+        Vue.component('Input_typing', {
+            template: '',
+            data: function() {
+                return {
+                    input_text: '',
+                }
+            },
+            methods: {}
+        });;
+        (function VueInit() {
+            var vm = new Vue({
+                el: "#app",
+                data() {
+                    return {}
+                },
+                methods: {
+
+                },
+                computed: {},
+                watch: {},
+                mounted() {},
+                created() {},
+                destroyed() {}
+            })
+        })()
+    </script>
+
+</body>
+
+</html>
