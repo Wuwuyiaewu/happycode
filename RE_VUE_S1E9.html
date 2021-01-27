@@ -10,21 +10,40 @@
 
 <body>
     <div id="app">
-        <Input_typing></Input_typing>
-        <div>
-            <input type="text" v-model="this.input_text" @compositionstart>
-        </div>
+        <Input_typing @custom-input="input2Handler"></Input_typing>
+
     </div>
 
     <script>
         Vue.component('Input_typing', {
-            template: '',
             data: function() {
                 return {
                     input_text: '',
+                    compositionStatus: false,
                 }
             },
-            methods: {}
+            template: `
+  <p>
+    <input type="text" 
+      v-on:input="$emit('input', $event.target.value)"
+      @compositionstart="cstartHandler"
+      @compositionend="cendHandler"
+      @keyup.enter="inputHandler">
+  </p>
+`,
+            methods: {
+                // Create
+                cstartHandler() {
+                    this.compositionStatus = true;
+                },
+                cendHandler() {
+                    this.compositionStatus = false;
+                },
+                inputHandler() {
+                    if (this.compositionStatus) return false;
+                    this.$emit("custom-input");
+                }
+            }
         });;
         (function VueInit() {
             var vm = new Vue({
@@ -37,7 +56,11 @@
                 },
                 computed: {},
                 watch: {},
-                mounted() {},
+                mounted() {
+                    input2Handler() {
+                        console.log();
+                    }
+                },
                 created() {},
                 destroyed() {}
             })
