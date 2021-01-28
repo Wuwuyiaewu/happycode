@@ -25,7 +25,7 @@
             template: `
   <p>
     <input type="text" 
-      v-on:input="$emit('input', $event.target.value)"
+    v-model="input_text"
       @compositionstart="cstartHandler"
       @compositionend="cendHandler"
       @keyup.enter="inputHandler">
@@ -39,9 +39,9 @@
                 cendHandler() {
                     this.compositionStatus = false;
                 },
-                inputHandler() {
+                inputHandler(val) {
                     if (this.compositionStatus) return false;
-                    this.$emit("custom-input");
+                    this.$emit("custom-input", val);
                 }
             }
         });;
@@ -52,15 +52,13 @@
                     return {}
                 },
                 methods: {
-
+                    input2Handler(val) {
+                        console.log(val)
+                    }
                 },
                 computed: {},
                 watch: {},
-                mounted() {
-                    input2Handler() {
-                        console.log();
-                    }
-                },
+                mounted() {},
                 created() {},
                 destroyed() {}
             })
