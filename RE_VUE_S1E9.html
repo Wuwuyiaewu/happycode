@@ -11,10 +11,46 @@
 <body>
     <div id="app">
         <Input_typing @custom-input="input2Handler"></Input_typing>
-
+        <ul>
+            <li is="filter-c" :ittr=item v-for="(item,index) of list" :key="item.time" :index="index" @deletecom="deleteCnn" @edit="editCnn" :editing="editing"></li>
+        </ul>
     </div>
 
     <script>
+        Vue.component('filterC', {
+            props: ['ittr', 'index', 'editing'],
+            template: `<li>
+                <template v-if="editing === ittr.list">
+                    <span>{{edit_text}}</span>
+                    <input type="checkbox" @click="completeHandler">
+                    <button @click="editHandler">修改</button>
+                    <button @click="deleteHandler">刪除</button>
+                    </template>
+                <template v-else>
+                    <span>{{ittr.list}}</span>
+                    <button>完成</button>
+                    <button>取消</button>
+                    </template>
+            </li>`,
+            data: function() {
+                return {
+                    edit_text: "",
+                }
+            },
+            methods: {
+                completeHandler() {
+
+                },
+                editHandler() {
+                    this.$emit('emit', this.ittr.list)
+                    this.edit_text = this.ittr.list
+                },
+                deleteHandler() {
+                    this.$emit('deletecom', this.index)
+                }
+
+            }
+        });
         Vue.component('Input_typing', {
             data: function() {
                 return {
@@ -39,9 +75,10 @@
                 cendHandler() {
                     this.compositionStatus = false;
                 },
-                inputHandler(val) {
+                inputHandler() {
                     if (this.compositionStatus) return false;
-                    this.$emit("custom-input", val);
+                    this.$emit("custom-input", this.input_text);
+                    this.input_text = ""
                 }
             }
         });;
@@ -49,11 +86,25 @@
             var vm = new Vue({
                 el: "#app",
                 data() {
-                    return {}
+                    return {
+                        list: [],
+                        editing: null,
+                    }
                 },
                 methods: {
-                    input2Handler(val) {
-                        console.log(val)
+                    input2Handler(text) {
+                        let item = {
+                            time: new Date().getTime(),
+                            status: true,
+                            list: text
+                        }
+                        this.list.push(item)
+                    },
+                    deleteCnn(index) {
+                        this.list.splice(index, 1)
+                    },
+                    editCnn(item) {
+                        this.editing = item
                     }
                 },
                 computed: {},
