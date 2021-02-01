@@ -21,15 +21,16 @@
             props: ['ittr', 'index', 'editing'],
             template: `<li>
                 <template v-if="editing === ittr.list">
-                    <span>{{edit_text}}</span>
-                    <input type="checkbox" @click="completeHandler">
-                    <button @click="editHandler">修改</button>
-                    <button @click="deleteHandler">刪除</button>
+                    <input type="text" v-model="edit_text"
+      @keyup.enter="completeHandler">
+                    <button>完成</button>
+                    <button>取消</button>
                     </template>
                 <template v-else>
                     <span>{{ittr.list}}</span>
-                    <button>完成</button>
-                    <button>取消</button>
+                    <input type="checkbox" @click="completeHandler">
+                    <button @click="editHandler">修改</button>
+                    <button @click="deleteHandler">刪除</button>
                     </template>
             </li>`,
             data: function() {
@@ -39,10 +40,11 @@
             },
             methods: {
                 completeHandler() {
-
+                    console.log(this.ittr.list);
+                    this.$emit('editCnn', this.ittr.list)
                 },
                 editHandler() {
-                    this.$emit('emit', this.ittr.list)
+                    this.$emit('edit', this.ittr.list)
                     this.edit_text = this.ittr.list
                 },
                 deleteHandler() {
