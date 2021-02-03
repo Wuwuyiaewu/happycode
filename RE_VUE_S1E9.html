@@ -10,243 +10,75 @@
 
 <body>
     <div id="app">
-        <input-component @custom-input="inputHandler" v-model:value="inputText"></input-component>
-        <input-component2 @custom-input="input2Handler"></input-component2>
-        <filter-component @filter="filterHandler"></filter-component>
-        <ul>
-            <li is="list-item-component" v-for="item of filterList" :key="item.timestamp" :item="item" :editing="editing" @change="changeHandler" @delete="deleteHandler" @edit="editHandler" @complete="completeHandler" @cancel="cancelHandler"></li>
-        </ul>
+        <component-input-inner></component-input-inner>
+        <component-input-outer v-model="input_text" @custom-input-outer="inputChang"></component-input-outer>
+        <btn v-model="btn_text"></btn>
     </div>
 
     <script>
-        // Vue.component("filter-component",{})
-        Vue.component("FilterComponent", {
+        Vue.component('btn', {
             data: function() {
-                return {
-                    buttonList: [{
-                        text: '全部',
-                        value: 'all'
-                    }, {
-                        text: '未完成',
-                        value: 'open'
-                    }, {
-                        text: '完成',
-                        value: 'done'
-                    }, ]
-                }
+                return {}
             },
-            template: `
-    <p>
-      <button v-for="item of buttonList" :key="item.text" @click="$emit('filter',item.value)">
-        {{item.text}}
-      </button>
-    </p>
-  `
-        })
-
-        // 1 外到內
-        Vue.component("input-component", {
-                data: function() {
-                    return {
-                        // 輸入法狀態
-                        compositionStatus: false
-                    }
-                },
-                props: ['value'],
-                template: `
-  <p>
-    <input type="text" 
-      v-bind:value="value"
-      @input="$emit('input', $event.target.value)"
-      @compositionstart="cstartHandler"
-      @compositionend="cendHandler"
-      @keyup.enter="inputHandler">
-  </p>
-`,
-                methods: {
-                    // Create
-                    cstartHandler() {
-                        this.compositionStatus = true;
-                    },
-                    cendHandler() {
-                        this.compositionStatus = false;
-                    },
-                    inputHandler() {
-                        if (this.compositionStatus) return false;
-                        this.$emit("custom-input");
-                    }
-                }
-            })
-            // 2 內到外
-        Vue.component("input-component2", {
-            data: function() {
-                return {
-                    // 輸入文字
-                    inputText: "",
-                    // 輸入法狀態
-                    compositionStatus: false
-                }
-            },
-            template: `
-  <p>
-    <input type="text" 
-      v-model="inputText"
-      @compositionstart="cstartHandler"
-      @compositionend="cendHandler"
-      @keyup.enter="inputHandler">
-  </p>
-`,
-            methods: {
-                // Create
-                cstartHandler() {
-                    this.compositionStatus = true;
-                },
-                cendHandler() {
-                    this.compositionStatus = false;
-                },
-                inputHandler() {
-                    if (this.compositionStatus) return false;
-                    this.$emit("custom-input", this.inputText);
-                    this.inputText = "";
-                }
-            }
-        })
-
-        // 1.傳物件 2.傳資料
-        Vue.component("list-item-component", {
-            data() {
-                return {
-                    // 修改內容
-                    editingText: ""
-                }
-            },
-            props: ["item", "editing"],
-            template: `
-      <li>
-      <template v-if="editing === item">
-        <input type="text" v-model="editingText">
-        <button @click="completeHandler">完成</button>
-        <button @click="cancelHandler">取消</button>
-      </template>
-      <template v-else>
-        <input type="checkbox" v-model="status">
-        {{ item.content }}
-        <button @click="editHandler(item)">修改</button>
-        <button @click="deleteHandler(item)">刪除</button>
-      </template>
-    </li>
-  `,
-            computed: {
-                status: {
-                    get() {
-                        return this.item.status
-                    },
-                    set(value) {
-                        this.$emit("change", this.item, value)
-                    }
-                }
-            },
-            methods: {
-                // Delete
-                deleteHandler(item) {
-                    this.$emit("delete", item)
-                        // this.list = this.list.filter((target) => {
-                        //   return target != item;
-                        // });
-                        // this.list.splice(index,1)
-                },
-                // Update
-                editHandler(item) {
-                    this.$emit("edit", item)
-                        // this.editing = item
-                    this.editingText = item.content
-                },
-                completeHandler() {
-                    this.$emit("complete", this.editingText)
-                        // this.editing.content = this.editingText
-                    this.cancelHandler()
-                },
-                cancelHandler() {
-                    this.editingText = ""
-                    this.$emit("cancel")
-                },
-            }
-        })
-
-
-        // Create Read Delete Update
-        new Vue({
-            el: "#app",
-            data: {
-                // 輸入文字
-                inputText: "",
-                // 所有資料
-                list: [],
-                // 修改資料對象
-                editing: null,
-                // 顯示類型
-                show: "all"
-            },
-            computed: {
-                // Read
-                filterList() {
-                    //all,open,done
-                    if (this.show === "all") {
-                        return this.list
-                    } else if (this.show === "open") {
-                        return this.list.filter((item) => {
-                            return item.status === false
-                        })
-                    } else if (this.show === "done") {
-                        return this.list.filter((item) => {
-                            return item.status === true
-                        })
-                    } else {
-                        return []
-                    }
-                },
-            },
-            methods: {
-                filterHandler(value) {
-                    this.show = value
-                },
-                inputHandler() {
-                    this.list.push({
-                        timestamp: new Date().getTime(),
-                        status: false,
-                        content: this.inputText
-                    });
-                    this.inputText = "";
-                },
-                input2Handler(value) {
-                    this.list.push({
-                        timestamp: new Date().getTime(),
-                        status: false,
-                        content: value
-                    });
-                },
-                // Delete
-                deleteHandler(item) {
-                    this.list = this.list.filter((target) => {
-                        return target != item;
-                    });
-                    // this.list.splice(index,1)
-                },
-                // Update
-                editHandler(item) {
-                    this.editing = item
-                },
-                completeHandler(value) {
-                    this.editing.content = value
-                },
-                cancelHandler() {
-                    this.editing = null
-                },
-                changeHandler(item, value) {
-                    item.status = value
-                }
-            },
+            props: ['text'],
+            template: `<div><button>{{this.text}}</button</div>`,
+            computed: {},
+            watch: {},
+            methods: {}
         });
+        Vue.component('component-input-inner', {
+            template: `<div>
+                <input type="text" @input="$emit('custom-input',$event.target.value)" v-model="input_text" @keyup.enter="gogogo">
+                </div>`,
+            data: function() {
+                return {
+                    input_text: ""
+                }
+            },
+            methods: {
+                gogogo() {
+                    console.log(this.input_text);
+                },
+            }
+        });
+        Vue.component('component-input-outer', {
+            template: `<div>
+                <input type="text" :value="value" v-on:input="$emit('input', $event.target.value)" @keyup.enter="gogogo">
+                </div>`,
+            props: ['value'],
+            data: function() {
+                return {}
+            },
+            computed: {
+
+            },
+            methods: {
+                gogogo() {
+                    this.$emit("custom-input-outer");
+                },
+            }
+        });
+        (function VueInit() {
+            var vm = new Vue({
+                el: "#app",
+                data() {
+                    return {
+                        input_text: "666",
+                        btn_text: "btn"
+                    }
+                },
+                methods: {
+                    inputChang() {
+                        console.log(this.input_text);
+                    },
+                },
+                computed: {},
+                watch: {},
+                mounted() {},
+                created() {},
+                destroyed() {}
+            })
+        })()
     </script>
 
 </body>
