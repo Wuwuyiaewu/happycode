@@ -12,19 +12,44 @@
     <div id="app">
         <component-input-inner></component-input-inner>
         <component-input-outer v-model="input_text" @custom-input-outer="inputChang"></component-input-outer>
-        <btn v-model="btn_text"></btn>
+        <btn v-model="btn_text" :text="btn_text"></btn>
     </div>
 
     <script>
         Vue.component('btn', {
             data: function() {
-                return {}
+                return {
+                    firstName: 'PJ',
+                    lastName: 'Chen'
+                }
             },
             props: ['text'],
-            template: `<div><button>{{this.text}}</button</div>`,
-            computed: {},
+            template: `<div>
+            <button @click="change">{{text_computer}}</button>
+            {{fullName}}
+            </div>`,
+            computed: {
+                text_computer() {
+                    return this.text
+                },
+                fullName: {
+                    get() {
+                        console.log('computed getter')
+                        return this.firstName + ' ' + this.lastName
+                    },
+                    set(value) {
+                        console.log('computed setter')
+                        this.firstName = value.split(' ')[0]
+                        this.lastName = value.split(' ')[1]
+                    }
+                }
+            },
             watch: {},
-            methods: {}
+            methods: {
+                change() {
+                    this.text_computer + "6"
+                }
+            }
         });
         Vue.component('component-input-inner', {
             template: `<div>
