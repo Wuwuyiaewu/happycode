@@ -6,124 +6,134 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="./js/vue.js"></script>
     <title>RE_vue_S1E9</title>
+    <style>
+        html,
+        body {
+            display: flex;
+            justify-content: center;
+            height: 100%;
+            align-items: center;
+        }
+    </style>
 </head>
 
 <body>
     <div id="app">
-        <component-input-inner @send="get_input_text"></component-input-inner>
-        <component-filter :status=show @change_status="change_status"></component-filter>
-        <component-list :list=computed_list_filter></component-list>
+        <component-display :c_list="component_filter"></component-display>
+        <component-input @post-input="receive_input"></component-input>
+        <component-select @send-change="receive_change"></component-select>
     </div>
 
     <script>
-        Vue.component('component-filter', {
-            props: ['status'],
+        Vue.component('component-input', {
+            data: function() {
+                return {
+                    input_text: "",
+                }
+            },
+            template: `<div>
+            <input type="text" v-model="input_text" @keyup.enter="send">
+            </div>`,
+            computed: {},
+            watch: {},
+            methods: {
+                send(value) {
+                    this.$emit('post-input', value.target.value)
+                }
+            }
+        });
+        Vue.component('component-select', {
             data: function() {
                 return {
                     button: [{
-                        text: '完成',
-                        status: "完成"
+                        text: "未完成",
+                        value: "undone"
                     }, {
-                        text: '未完成',
-                        status: "未完成"
+                        text: "完成",
+                        value: "done"
                     }, {
-                        text: '全部',
-                        status: "all"
+                        text: "全部",
+                        value: "all"
                     }]
                 }
             },
-            template: `
-            <div>
-                <button @click="change('完成')">完成</button>
-                <button @click="change('未完成')">未完成</button>
-                <button @click="change('全部')">全部</button>
-                </div>`,
+            template: `<div>
+                <button v-for="item of button" :key="item.value" @click="change(item.value)">{{item.text}}</button></div>`,
             computed: {},
             watch: {},
             methods: {
                 change(val) {
-                    this.$emit("change_status", val)
+                    this.$emit('send-change', val)
                 }
             }
         });
-        Vue.component('component-list', {
-            props: ['list'],
-            data: function() {
-                return {}
-            },
-            template: `<div>
-                <template v-if="edit_text === item.content">
-                    <ul>
-                    <li v-for="item of list" :key="item.time">{{item.content}}</li>
-                    <input type="checkbox" @complected="">
-                    </ul>   
-                    </template>
-                <template v-else>
-                    <ul>
-                    <li v-for="item of list" :key="item.time">{{item.content}}</li>
-                    <button @click="edit_text">修改</button>
-                    <button>刪除</button>
-                    </ul>    
-                    </template>
-                </div>`,
-            computed: {},
-            watch: {},
-            methods: {
-                edit_text() {
-
-                }
-            }
-        });
-        Vue.component('component-input-inner', {
-            template: `<div>
-                <input type="text" @input="custom_input" v-model="input_text" @keyup.enter="gogogo">
-                </div>`,
+        Vue.component('component-display', {
+            props: ['c_list'],
             data: function() {
                 return {
                     input_text: ""
                 }
             },
+            template: `<div>
+                    <ul>
+                        <template>
+                            <li v-for="item of c_list" :key="item.time">{{item.content}} 
+                            <input type="checkbox" v-model="item.status">
+                            <button @click="">完成</button>
+                            <button @click=cancle>取消</button>
+                            </li>    
+                        </template>
+                        <template>
+                            <li v-for="item of c_list" :key="item.time">{{item.content}} 
+                            <input type="checkbox" v-model="item.status">
+                            <button @click="editvalue(item.content)">修改</button>
+                            <button @click=cancle>刪除</button>
+                            </li>    
+                        </template>
+                        
+                        </ul>
+                </div>`,
+            computed: {},
+            watch: {},
             methods: {
-                gogogo() {
-                    this.$emit('send', this.input_text)
-                    this.input_text = ""
+                editvalue(val) {
+                    this.input_text = val
+                    this.emit()
                 },
-                custom_input(value) {
-                    this.input_text = value.target.value
+                cancle() {
+
                 }
             }
         });
         (function VueInit() {
             var vm = new Vue({
                 el: "#app",
-                data() {
-                    return {
-                        list: [],
-                        show: '完成'
-                    }
+                data: {
+                    list: [],
+                    show: 'all',
                 },
                 methods: {
-                    get_input_text(val) {
+                    receive_change(val) {
+                        this.show = val
+                    },
+                    receive_input(value) {
                         let item = {
-                            status: false,
-                            time: new Date().getTime(),
-                            content: val
+                            content: value,
+                            status: true,
+                            time: new Date().getTime()
                         }
                         this.list.push(item)
-                    },
-                    change_status(val) {
-                        this.show = val
                     }
                 },
                 computed: {
-                    computed_list_filter() {
-                        if (this.show === '完成') {
-                            this.list.filter(el => {
-                                return el.status === true
-                            })
-                        } else if (this.show === '未完成') {
-                            this.list.filter(el => {
+                    component_filter() {
+                        if (this.show === 'undone') {
+                            return this.list.filter(el => {
                                 return el.status === false
+                            })
+                        } else if (this.show === 'done') {
+                            return this.list.filter(el => {
+                                return el.status === true
                             })
                         } else {
                             return this.list
