@@ -19,7 +19,9 @@
 
 <body>
     <div id="app">
-        <component-display :c_list="component_filter"></component-display>
+        <ul>
+            <li is="component-display" v-for="item of component_filter" :c_list="item" @send-edit="receive_edit" @send-completed="receive_completed" :edit_text="edit_text"></li>
+        </ul>
         <component-input @post-input="receive_input"></component-input>
         <component-select @send-change="receive_change"></component-select>
     </div>
@@ -68,37 +70,34 @@
             }
         });
         Vue.component('component-display', {
-            props: ['c_list'],
+            props: ['c_list', 'edit_text'],
             data: function() {
-                return {
-                    input_text: ""
-                }
+                return {}
             },
-            template: `<div>
-                    <ul>
-                        <template>
-                            <li v-for="item of c_list" :key="item.time">{{item.content}} 
-                            <input type="checkbox" v-model="item.status">
-                            <button @click="">完成</button>
+            template: `
+            <li>
+                        <template v-if="edit_text === c_list.content">
+                            <input type="text" :value="c_list.content">
+                            <input type="checkbox" v-model="c_list.status">
+                            <button @click="completed(c_list.content)">完成</button>
                             <button @click=cancle>取消</button>
-                            </li>    
                         </template>
-                        <template>
-                            <li v-for="item of c_list" :key="item.time">{{item.content}} 
-                            <input type="checkbox" v-model="item.status">
-                            <button @click="editvalue(item.content)">修改</button>
+                        <template v-else>
+                            {{c_list.content}} 
+                            <input type="checkbox" v-model="c_list.status">
+                            <button @click="editvalue(c_list.content)">修改</button>
                             <button @click=cancle>刪除</button>
-                            </li>    
                         </template>
-                        
-                        </ul>
-                </div>`,
+                        </li>
+                      `,
             computed: {},
             watch: {},
             methods: {
                 editvalue(val) {
-                    this.input_text = val
-                    this.emit()
+                    this.$emit('send-edit', val)
+                },
+                completed(val) {
+                    this.$emit('send-completed', val)
                 },
                 cancle() {
 
@@ -111,6 +110,7 @@
                 data: {
                     list: [],
                     show: 'all',
+                    edit_text: '',
                 },
                 methods: {
                     receive_change(val) {
@@ -123,6 +123,12 @@
                             time: new Date().getTime()
                         }
                         this.list.push(item)
+                    },
+                    receive_edit(val) {
+                        this.edit_text = val
+                    },
+                    receive_completed(val) {
+                        console.log(val);
                     }
                 },
                 computed: {
