@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        html,
+        body {
+            display: flex;
+            justify-content: center;
+            height: 100%;
+            align-items: center;
+        }
+        
+        canvas#app {
+            border: 1px solid #666;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="app" width="400" height="400"></canvas>
+
+    <script>
+        let canvas_one = document.getElementById('app')
+        let ctx_one = canvas_one.getContext('2d')
+
+        function draw() {
+            ctx_one.beginPath()
+            for (let index = 0; index < 10; index++) {
+                let pos = index * 50;
+                // 橫向畫線
+                ctx_one.moveTo(pos, 0);
+                ctx_one.lineTo(pos, 400);
+                ctx_one.fillText(pos, pos + 5, 10);
+                // 垂直畫線
+                ctx_one.moveTo(0, pos);
+                ctx_one.lineTo(400, pos);
+                ctx_one.fillText(pos, 5, pos + 10);
+            }
+            ctx_one.strokeStyle = "rgba(0, 0, 0, 0.1)";
+            ctx_one.stroke();
+
+            ctx_one.beginPath();
+            ctx_one.moveTo(25, 350);
+            ctx_one.lineTo(375, 350);
+            ctx_one.lineWidth = 2;
+            ctx_one.strokeStyle = "black";
+            ctx_one.stroke();
+
+            ctx_one.fillStyle = "#ed5a2a";
+
+            ctx_one.fillRect(300, 300, 50, 50);
+
+        }
+        draw()
+    </script>
+</body>
+
+</html>
