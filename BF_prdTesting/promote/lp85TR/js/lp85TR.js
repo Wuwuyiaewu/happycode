@@ -1,31 +1,13 @@
 (function() {
+    function cleanHTML(html) {
+        var root = document.implementation.createHTMLDocument().body;
 
-    let htmlObjectPop = null;
-    let techAnalyInfo = {};
-    let defaultTechAnalyInfo = {
-        conclusion: '中性',
-        suggestion: '高抛低吸',
-        conclusionBg: 'bg_normal', //bg_green,bg_red,bg_normal
-        conclusionMAText: '---',
-        conclusionMATextColor: 'text_normal', //text_green,text_red,text_normal
-        conclusionMABuyText: '---',
-        conclusionMASellText: '---',
-        conclusionTechIndiText: '---',
-        conclusionTechIndiTextColor: 'text_normal', //text_green,text_red,text_normal
-        conclusionTechIndiBuyText: '---',
-        conclusionTechIndiSellText: '---',
-    };
+        root.innerHTML = html;
 
-    let products = {
-        613023: { pid: 945629 },
+        //Manipulate the DOM here
+        $(root).find("script, style, img").remove(); //jQuery is not relevant, I just didn't want to write exhausting boilerplate code just to make a point
+        return root;
     }
-
-    function parseHTML(str) {
-        let tmp = document.implementation.createHTMLDocument();
-        tmp.body.innerHTML = str;
-        return tmp.body.children;
-    }
-
     // 傳入產品技術分析所需 peid、pid
     function ajaxTech_Url(peid, pid) {
         $.ajax({
@@ -33,8 +15,23 @@
             url: "https://api.bingxuegirl.com/inv/currencies",
             data: { pid: pid, peid: peid },
             success: function(msg) {
-                let htmlObject = parseHTML(msg);
-                console.log(htmlObject);
+                let htmlObject = cleanHTML(msg);
+                let conclusion = htmlObject.children[0].querySelector('div:nth-child(1) span').innerHTML
+                if (conclusion == '强力买入') {
+                    $('#conclusionText').text('现价买入')
+                    $('span.buyarrow').css('display', 'block')
+                } else if (conclusion == '买入') {
+                    $('#conclusionText').text('逢低买入')
+                    $('span.buyarrow').css('display', 'block')
+                } else if (conclusion == '中性') {
+                    $('#conclusionText').text('高抛低吸')
+                } else if (conclusion == '卖出') {
+                    $('#conclusionText').text('逢高卖出')
+                    $('span.sellarrow').css('display', 'block')
+                } else if (conclusion == '强力卖出') {
+                    $('#conclusionText').text('现价卖出')
+                    $('span.sellarrow').css('display', 'block')
+                }
 
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
@@ -43,7 +40,8 @@
             }
         });
     }
-    ajaxTech_Url(900, 945629)
+    // 比特幣 https://m.cn.investing.com/crypto/bitcoin/btc-usd-technical
+    ajaxTech_Url(3600, 945629)
 
     function mountedData() {
         var url = new URL(window.location.href);
@@ -53,9 +51,9 @@
         var utm_campaign = url.searchParams.get("utm_campaign") == null ? '' : url.searchParams.get("utm_campaign");
         var utm_content = url.searchParams.get("utm_content") == null ? '' : url.searchParams.get("utm_content");
         let productId = 613023
-        let sellUrl = "javascript:h5toExp(" + `'/order/${productId}?direction=sell&utm_source=${utm_source}&utm_medium=${utm_medium}&utm_term=${utm_term}&utm_campaign=${utm_campaign}&utm_content=${utm_content}&openbrowser=false&experience=true&path=K18'` + ")";
-        let buyUrl = "javascript:h5toExp(" + `'/order/${productId}?direction=buy&utm_source=${utm_source}&utm_medium=${utm_medium}&utm_term=${utm_term}&utm_campaign=${utm_campaign}&utm_content=${utm_content}&openbrowser=false&experience=true&path=K18'` + ")";
-        let productUrl = "javascript:h5toExp(" + `'/productDetail/${productId}?&utm_source=${utm_source}&utm_medium=${utm_medium}&utm_term=${utm_term}&utm_campaign=${utm_campaign}&utm_content=${utm_content}&openbrowser=false&experience=true&path=K18'` + ")";
+        let sellUrl = "javascript:h5toExp(" + `'/order/${productId}?direction=sell&utm_source=${utm_source}&utm_medium=${utm_medium}&utm_term=${utm_term}&utm_campaign=${utm_campaign}&utm_content=${utm_content}&openbrowser=false&experience=true'` + ")";
+        let buyUrl = "javascript:h5toExp(" + `'/order/${productId}?direction=buy&utm_source=${utm_source}&utm_medium=${utm_medium}&utm_term=${utm_term}&utm_campaign=${utm_campaign}&utm_content=${utm_content}&openbrowser=false&experience=true'` + ")";
+        let productUrl = "javascript:h5toExp(" + `'/productDetail/${productId}?&utm_source=${utm_source}&utm_medium=${utm_medium}&utm_term=${utm_term}&utm_campaign=${utm_campaign}&utm_content=${utm_content}&openbrowser=false&experience=true'` + ")";
         console.log(productUrl)
         $('.sellBtn').attr('href', sellUrl)
         $('.buyBtn').attr('href', buyUrl)

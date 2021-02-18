@@ -52,9 +52,55 @@
             ctx_one.stroke();
 
             ctx_one.fillStyle = "#ed5a2a";
-
             ctx_one.fillRect(300, 300, 50, 50);
+            ctx_one.strokeRect(300, 300, 50, 50)
 
+            ctx_one.beginPath()
+            ctx_one.fillStyle = "#ffe14f"
+            ctx_one.rect(50, 300, 50, 50)
+            ctx_one.rect(250, 250, 50, 100)
+            ctx_one.fill()
+            ctx_one.stroke()
+
+            ctx_one.beginPath()
+            ctx_one.fillStyle = "#ff9f5e"
+            ctx_one.rect(100, 250, 50, 100)
+            ctx_one.rect(200, 250, 50, 100)
+            ctx_one.fill()
+            ctx_one.stroke()
+
+            ctx_one.beginPath()
+            ctx_one.moveTo(100, 200)
+            ctx_one.lineTo(250, 200)
+            ctx_one.lineTo(250, 250)
+            ctx_one.lineTo(200, 250)
+            ctx_one.arc(175, 250, 25, 0, Math.PI, true)
+            ctx_one.lineTo(100, 250)
+            ctx_one.closePath()
+            ctx_one.fillStyle = "#ffffff"
+            ctx_one.fill()
+            ctx_one.stroke();
+
+            // 三角形屋頂
+            ctx_one.beginPath()
+            ctx_one.moveTo(175, 150)
+            ctx_one.lineTo(250, 200)
+            ctx_one.lineTo(100, 200)
+            ctx_one.closePath()
+            ctx_one.fillStyle = "#ed5a2a"
+            ctx_one.fill()
+            ctx_one.stroke();
+
+            // 旗幟
+            ctx_one.beginPath()
+            ctx_one.moveTo(175, 150)
+            ctx_one.lineTo(175, 100)
+            ctx_one.lineTo(200, 110)
+            ctx_one.lineTo(175, 125)
+            ctx_one.closePath()
+            ctx_one.fillStyle = "#ed5a2a"
+            ctx_one.fill()
+            ctx_one.stroke();
         }
         draw()
     </script>
