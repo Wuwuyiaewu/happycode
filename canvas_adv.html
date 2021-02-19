@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        html,
+        body {
+            display: flex;
+            justify-content: center;
+            height: 100%;
+            align-items: center;
+            margin: 0;
+            background-color: #eee;
+        }
+        
+        canvas#app {
+            background-color: #fff;
+            box-shadow: 0 0 20px rgba(black, 0.1);
+            max-width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="app"></canvas>
+
+    <script>
+        let canvas = document.getElementById('app');
+        let ctx = canvas.getContext('2d');
+        let blockWidth = 200
+        let PI = Math.PI
+        let PI2 = Math.PI * 2
+
+        canvas.width = blockWidth * 3
+        canvas.height = blockWidth * 3
+
+        let color = {
+            red: '#f74456',
+            white: '#fff',
+            yellow: '#f1da56',
+            blue: '#036faf',
+        }
+
+        function drawBlock(pos, bgColor, draw, time) {
+            ctx.save()
+            ctx.translate(pos.x * blockWidth, pos.y * blockWidth)
+            ctx.fillStyle = bgColor
+            ctx.fillRect(0, 0, blockWidth, blockWidth)
+            ctx.translate(100, 100);
+            draw()
+            ctx.restore()
+        }
+        let time = 0
+
+        function draw_canvas() {
+            time++
+            drawBlock({
+                x: 0,
+                y: 0
+            }, color.blue, function() {
+                ctx.beginPath()
+                ctx.arc(0, 0, 30, 0, PI2)
+                ctx.strokeStyle = "white";
+                ctx.lineWidth = 15
+                ctx.stroke()
+            }, time)
+            drawBlock({
+                x: 1,
+                y: 0
+            }, color.red, function() {}, time)
+            drawBlock({
+                x: 2,
+                y: 0
+            }, color.yellow, function() {}, time)
+            drawBlock({
+                x: 0,
+                y: 1
+            }, color.yellow, function() {}, time)
+            drawBlock({
+                x: 1,
+                y: 1
+            }, color.white, function() {}, time)
+            drawBlock({
+                x: 2,
+                y: 1
+            }, color.blue, function() {}, time)
+            drawBlock({
+                x: 0,
+                y: 2
+            }, color.red, function() {}, time)
+            drawBlock({
+                x: 1,
+                y: 2
+            }, color.blue, function() {}, time)
+            drawBlock({
+                    x: 2,
+                    y: 2
+                }, color.yellow, function() {}, time)
+                // requestAnimationFrame(draw_canvas)
+        }
+        draw_canvas()
+            // requestAnimationFrame(draw_canvas)
+    </script>
+</body>
+
+</html>

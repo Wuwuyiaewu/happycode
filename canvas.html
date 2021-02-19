@@ -13,10 +13,12 @@
             justify-content: center;
             height: 100%;
             align-items: center;
+            background-color: #000;
         }
         
         canvas#app {
             border: 1px solid #666;
+            background-color: #fff;
         }
     </style>
 </head>
@@ -103,7 +105,7 @@
             ctx_one.lineTo(200, 110 + (time % 3 - mouse.x / 5))
             ctx_one.lineTo(175, 125 - mouse.y / 5)
             ctx_one.closePath()
-            ctx_one.fillStyle = "#ed5a2a"
+            ctx_one.fillStyle = `hsl(${mouse.x%360},50%,50%)`
             ctx_one.fill()
             ctx_one.stroke();
 
