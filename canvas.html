@@ -27,8 +27,13 @@
     <script>
         let canvas_one = document.getElementById('app')
         let ctx_one = canvas_one.getContext('2d')
+        let time = 0
 
         function draw() {
+            time++;
+            // ctx_one.clearRect(0, 0, 400, 400)
+            ctx_one.fillStyle = "rgba(255, 255, 255, 0.8)"
+            ctx_one.fillRect(0, 0, 400, 400)
             ctx_one.beginPath()
             for (let index = 0; index < 10; index++) {
                 let pos = index * 50;
@@ -94,15 +99,35 @@
             // 旗幟
             ctx_one.beginPath()
             ctx_one.moveTo(175, 150)
-            ctx_one.lineTo(175, 100)
-            ctx_one.lineTo(200, 110)
-            ctx_one.lineTo(175, 125)
+            ctx_one.lineTo(175, 100 - mouse.y / 5)
+            ctx_one.lineTo(200, 110 + (time % 3 - mouse.x / 5))
+            ctx_one.lineTo(175, 125 - mouse.y / 5)
             ctx_one.closePath()
             ctx_one.fillStyle = "#ed5a2a"
             ctx_one.fill()
             ctx_one.stroke();
+
+            // 車子
+            ctx_one.fillStyle = "white"
+            let carx = time
+            ctx_one.fillRect(carx % 440, 325, 40, 25)
+            ctx_one.strokeRect(carx % 440, 325, 40, 25)
+            ctx_one.beginPath()
+            ctx_one.arc(carx % 440 + 10, 350, 5, 0, Math.PI * 2)
+            ctx_one.arc(carx % 440 + 30, 350, 5, 0, Math.PI * 2)
+            ctx_one.fillStyle = "black"
+            ctx_one.fill()
+            ctx_one.stroke()
         }
-        draw()
+        setInterval(draw, 30)
+        let mouse = {
+            x: 0,
+            y: 0
+        }
+        canvas_one.addEventListener('mousemove', function(e) {
+            mouse.x = e.offsetX
+            mouse.y = e.offsetY
+        })
     </script>
 </body>
 
