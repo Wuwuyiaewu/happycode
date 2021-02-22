@@ -473,7 +473,7 @@ var technicalAnalysisVue = new Vue({
                             Vue.set(this.product, responseData.content[i].code_id, JSON.parse(JSON.stringify(target)));
                         }
                         //SORT
-                        this.rankedIds = [573100, 573110, 573107, 573115, 573097];
+                        this.rankedIds = [573100, 573110, 573107, 573115, 573016];
                         // this.rankedIds=[];
                         //console.log(this.selectedProductIds);
                         this.selectedProductIds.sort((x, y) => {

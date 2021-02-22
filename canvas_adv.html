@@ -58,49 +58,130 @@
 
         function draw_canvas() {
             time++
+            let stime = parseInt(time / 20)
+                // 左上
             drawBlock({
-                x: 0,
-                y: 0
-            }, color.blue, function() {
-                ctx.beginPath()
-                ctx.arc(0, 0, 30, 0, PI2)
-                ctx.strokeStyle = "white";
-                ctx.lineWidth = 15
-                ctx.stroke()
-            }, time)
+                    x: 0,
+                    y: 0
+                }, color.blue, function() {
+                    ctx.beginPath()
+                    ctx.arc(0, 0, 30 / (stime % 3 + 1), 0, PI2)
+                    ctx.strokeStyle = "white";
+                    ctx.lineWidth = 15
+                    ctx.stroke()
+                    for (let i = 0; i < 8; i++) {
+                        ctx.fillStyle = (stime % 8 === i) ? "red" : "white"
+                        if ((i + stime) % 4 != 0) {
+                            ctx.fillRect(60, -4, 20, 8)
+                        }
+                        ctx.rotate(PI2 / 8)
+                    }
+                }, time)
+                // 中上
             drawBlock({
-                x: 1,
-                y: 0
-            }, color.red, function() {}, time)
-            drawBlock({
-                x: 2,
-                y: 0
-            }, color.yellow, function() {}, time)
-            drawBlock({
-                x: 0,
-                y: 1
-            }, color.yellow, function() {}, time)
-            drawBlock({
-                x: 1,
-                y: 1
-            }, color.white, function() {}, time)
-            drawBlock({
-                x: 2,
-                y: 1
-            }, color.blue, function() {}, time)
-            drawBlock({
-                x: 0,
-                y: 2
-            }, color.red, function() {}, time)
-            drawBlock({
-                x: 1,
-                y: 2
-            }, color.blue, function() {}, time)
+                    x: 1,
+                    y: 0
+                }, color.red, function() {
+                    // ctx.save()
+                    ctx.scale(0.8, 0.8)
+                    ctx.translate(-60, -60)
+                    for (let i = 0; i < 3; i++) {
+                        ctx.save()
+                        for (let o = 0; o < 3; o++) {
+                            ctx.beginPath()
+                            ctx.arc(0, 0, 20, 0, PI2)
+                            ctx.fillStyle = color.white
+                                // 順序填色
+                            if ((i + o + stime) % 2 == 0) {
+                                ctx.fillStyle = color.yellow
+                            }
+                            ctx.fill()
+                            ctx.translate(0, 60)
+                        }
+                        ctx.restore()
+                        ctx.translate(60, 0)
+                    }
+                    // ctx.restore()
+                }, time)
+                // 右上
             drawBlock({
                     x: 2,
-                    y: 2
-                }, color.yellow, function() {}, time)
-                // requestAnimationFrame(draw_canvas)
+                    y: 0
+                }, color.yellow, function() {
+                    for (let i = 0; i < 4; i++) {
+                        ctx.beginPath()
+                        ctx.moveTo(0, 0)
+                        ctx.lineTo(80, 0)
+                        ctx.lineTo(80, 80)
+                        ctx.closePath()
+                        ctx.fillStyle = "white"
+                        ctx.fill()
+                        if ((stime % 4 === i)) {
+                            ctx.beginPath()
+                            ctx.arc(60, 20, 6, 0, PI2)
+                            ctx.fillStyle = color.red
+                            ctx.fill()
+                        }
+                        ctx.rotate(PI2 / 4)
+                    }
+                }, time)
+                // 左中
+            drawBlock({
+                    x: 0,
+                    y: 1
+                }, color.yellow, function() {
+                    ctx.translate(-60, -60)
+                    ctx.fillStyle = color.white
+                    ctx.fillRect(0, 0, 60, 60)
+                    ctx.translate(30, 30)
+                        // 旋轉
+                    ctx.rotate(-PI / 4)
+                        // D 字體
+                    ctx.beginPath()
+                    ctx.moveTo(0, 0)
+                    ctx.lineTo(40, 0)
+                    ctx.arc(40, 40, 40, -PI / 2, PI / 2)
+                    ctx.lineTo(0, 80)
+                    ctx.fillStyle = color.red
+                    ctx.fill()
+                    ctx.closePath()
+                        // 長方形
+                    ctx.translate(-100 + 10 * Math.sin(time / 10), 60)
+                    ctx.fillStyle = color.blue
+                    ctx.fillRect(0, 0, 100, 40)
+                        // 小長方形
+                    ctx.translate(100 + 10 * Math.cos(time / 10), 40)
+                    ctx.fillStyle = color.white
+                    ctx.fillRect(0, 0, 50, 20)
+                }, time)
+                // 正中
+            drawBlock({
+                x: 1,
+                y: 1
+            }, color.white, function() {
+                ctx.beginPath()
+                ctx.fillStyle = color.red
+                let angle1 = 0
+                let angle2 = PI / 2
+                ctx.moveTo(0, 0)
+            }, time)
+            drawBlock({
+                x: 2,
+                y: 1
+            }, color.blue, function() {}, time)
+            drawBlock({
+                x: 0,
+                y: 2
+            }, color.red, function() {}, time)
+            drawBlock({
+                x: 1,
+                y: 2
+            }, color.blue, function() {}, time)
+            drawBlock({
+                x: 2,
+                y: 2
+            }, color.yellow, function() {}, time)
+            requestAnimationFrame(draw_canvas)
         }
         draw_canvas()
             // requestAnimationFrame(draw_canvas)
