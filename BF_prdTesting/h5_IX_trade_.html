@@ -10,6 +10,11 @@
     <title>行情</title>
     <link rel="stylesheet" href="promote/lp99TR/css/tabar.css">
     <link rel="stylesheet" href="public/css/h5_tade.css">
+    <style>
+        html {
+            font-family: Trebuchet MS, roboto, ubuntu, "sans-serif";
+        }
+    </style>
 </head>
 
 <body>
@@ -63,70 +68,154 @@
             </li>
         </ul>
     </div>
-    <div class="floatwrapper">
-        <div class="nav-list">
-            <a data-num="0" href="javascript:;" onclick="lp_home()">
-                <s class="icons icons5"></s>
-                <b class="txt">首页</b>
-            </a>
-            <a data-num="1" href="javascript:;" class="on" onclick="toh5_trade()">
-                <s class="icons icons6"></s>
-                <b class="txt">行情</b>
-            </a>
-            <a href="javascript:;" onclick="">
-                <s class="icons icons7"></s>
-                <b class="txt">资讯</b>
-            </a>
-            <a href="javascript:;" onclick="">
-                <s class="icons icons8"></s>
-                <b class="txt">升级</b>
-            </a>
-        </div>
-    </div>
 
 
-    <script src="public/js/IX_postMessage.js" charset="utf-8"></script>
+    <script src="/public/js/IX_postMessage.js" charset="utf-8"></script>
     <script type="text/javascript">
+        ;
+        (function to_TR_withoutBuySell() {
+            if (typeof(productId) !== "undefined") {
+                let productCode = "";
+                let productName = "";
+                let digits = 0;
+                let origin = "<!--#echo var='gwfx_oa_new'-->";
+                let fallColor = "#E3525C";
+                let riseColor = "#11B873";
+
+                let url = new URL(window.location.href);
+                let utm_source = url.searchParams.get("utm_source") == null ? '' : url.searchParams.get("utm_source");
+                let utm_medium = url.searchParams.get("utm_medium") == null ? '' : url.searchParams.get("utm_medium");
+                let utm_term = url.searchParams.get("utm_term") == null ? '' : url.searchParams.get("utm_term");
+                let utm_campaign = url.searchParams.get("utm_campaign") == null ? '' : url.searchParams.get("utm_campaign");
+                let utm_content = url.searchParams.get("utm_content") == null ? '' : url.searchParams.get("utm_content");
+                $('.TR_sell')
+                    .attr('href', origin + '/JW666key/order/' + productId + '?path=K18&direction=sell&utm_source=' + utm_source + '&utm_medium=' + utm_medium + '&utm_term=' + utm_term + '&utm_campaign=' + utm_campaign + '&utm_content=' + utm_content + '&openbrowser=false&experience=true&minetipcash=true')
+
+                $('.TR_buy')
+                    .attr('href', origin + '/JW666key/order/' + productId + '?path=K18&direction=buy&utm_source=' + utm_source + '&utm_medium=' + utm_medium + '&utm_term=' + utm_term + '&utm_campaign=' + utm_campaign + '&utm_content=' + utm_content + '&openbrowser=false&experience=true&minetipcash=true')
+            }
+
+        })()
+
+        function toTrLp() {
+            let url = new URL(window.location.href);
+            let utm_source = url.searchParams.get("utm_source") == null ? '' : url.searchParams.get("utm_source");
+            let utm_medium = url.searchParams.get("utm_medium") == null ? '' : url.searchParams.get("utm_medium");
+            let utm_term = url.searchParams.get("utm_term") == null ? '' : url.searchParams.get("utm_term");
+            let utm_campaign = url.searchParams.get("utm_campaign") == null ? '' : url.searchParams.get("utm_campaign");
+            let utm_content = url.searchParams.get("utm_content") == null ? '' : url.searchParams.get("utm_content");
+            let trUrl = 'https://m.bofu210.com/lp96TR.html?utm_medium=' + utm_medium + '&utm_term=' + utm_term + '&utm_campaign=' + utm_campaign + '&utm_content=' + utm_content + '&openbrowser=false&experience=true&utm_source=' + utm_source
+            location.href = trUrl
+        }
+
         function gotoRegister() {
             if (isApp()) {
                 IX_postMessage.toPage('/register/openRealAccount/1' + window.location.search);
             } else {
-                let url = "<!--#echo var='gwfx_oa_new'-->/yz352001/register/openRealAccount/1" + window.location.search;
+                let url = "<!--#echo var='gwfx_oa_new'-->/JW666key/register/openRealAccount/1" + window.location.search;
                 window.location.href = url;
             }
         }
 
-        function gotoLogin() {
+        function gotoRegister_pcui() {
             if (isApp()) {
-                IX_postMessage.toPage('/login');
+                IX_postMessage.toPage('/register/openRealAccount/1' + window.location.search);
             } else {
-                let url = "<!--#echo var='gwfx_oa_new'-->/yz352001/login";
+                let url = "https://web.bofu210.com/JW666key/register/openRealAccount/1" + window.location.search;
                 window.location.href = url;
             }
         }
 
-        function toh5_trade() {
-            let url = "h5_IX_trade_.html" + window.location.search;
-            window.location.href = url;
-            console.log(url)
+        function gotoLogin(phone) {
+            let search = window.location.search;
+            if (!(phone == null)) {
+                if (search.length > 0) {
+                    search += '&phone=' + phone;
+                } else {
+                    search = '?phone=' + phone;
+                }
+            }
+            if (isApp()) {
+                IX_postMessage.toPage('/login' + search);
+            } else {
+                let url = "<!--#echo var='gwfx_oa_new'-->/JW666key/login";
+                window.location.href = url + search;
+            }
         }
 
-        function lp_home() {
+        function depositFunds(phone) {
+            let search = window.location.search;
+            if (isApp()) {
+                IX_postMessage.toPage('/login' + search);
+            } else {
+                let url = "https://h5.bftrades.com/JW666key/my/depositFunds";
+                window.location.href = url + search;
+            }
+        }
+
+        function gotoLogin2(phone) {
+            let search = window.location.search;
+            if (!(phone == null)) {
+                if (search.length > 0) {
+                    search += '&phone=' + phone;
+                } else {
+                    search = '?phone=' + phone;
+                }
+            }
+            if (isApp()) {
+                IX_postMessage.toPage('/login' + search);
+            } else {
+                let url = "https://h5.bftrades.com/JW666key/login";
+                window.location.href = url + search;
+            }
+        }
+
+        function gotoh5Trade() {
+            if (isApp()) {
+                IX_postMessage.toPage('/trade' + window.location.search);
+            } else {
+                let url = "<!--#echo var='gwfx_oa_new'-->/JW666key/trade" + window.location.search;
+                window.location.href = url;
+            }
+        }
+
+        function gotoGitah5Trade() {
             if (isApp()) {
                 IX_postMessage.toPage('/trade');
             } else {
-                let url = "<!--#echo var='gwfx_m'-->/lp99TR.html" + window.location.search;
+                let url = "<!--#echo var='gwfx_oa_new'-->/JW666key/trade" + window.location.search;
                 window.location.href = url;
             }
         }
 
         function gotoHome() {
-            let url = "<!--#echo var='gwfx_oa_new'-->/yz352001/home" + window.location.search;
+            let url = "<!--#echo var='gwfx_oa_new'-->/JW666key/home" + window.location.search;
             window.location.href = url;
         }
 
+        function toMore() {
+            let url = "<!--#echo var='gwfx_m'-->/H5TradeInfo.html?TR_page=36&" + window.location.search;
+            window.location.href = url;
+        }
+
+        function gotoProduct(e) {
+            if (isApp()) {
+                IX_postMessage.toPage(`/productDetail/` + e);
+            } else {
+                let url = "<!--#echo var='gwfx_oa_new'-->/JW666key/productDetail/" + e + window.location.search;
+                window.location.href = url;
+            }
+        }
+
         function gotoAboutTab(page) {
-            let url = "<!--#echo var='gwfx_pc'-->/03-App-lp/h5aboutTab.html?page=" + page;
+            //let search=window.location.search;
+            //if (search==''){
+            //	search='?page='+page;
+            //}
+            //else {
+            //	search+='&page='+page;	
+            //}
+            let url = "<!--#echo var='gwfx_pc'-->/h5aboutTab.html?page=" + page;
             window.location.href = url;
         }
 
@@ -157,12 +246,49 @@
 
         function toH5SubPage(urlPath) {
             if (isApp()) {
-                IX_postMessage.toPage(urlPath);
+                IX_postMessage.toPage(urlPath + window.location.search);
             } else {
-                let url = "<!--#echo var='gwfx_oa_new'-->/yz352001" + urlPath;
+                let url = "<!--#echo var='gwfx_oa_new'-->/JW666key" + urlPath + window.location.search;
+                location.href = url;
+            }
+
+
+        }
+
+        function h5toMine() {
+            if (isApp()) {
+                console.log('iphone1601')
+                let url = "<!--#echo var='gwfx_oa_new'-->/JW666key/mine" + location.search;
+                window.top.location = url;
+            } else {
+                let url = "<!--#echo var='gwfx_oa_new'-->/JW666key/mine" + location.search;
                 location.href = url;
             }
         }
+
+        function h5toExp(urlPath) {
+            if (isApp()) {
+                console.log('iphone1601')
+                let url = "<!--#echo var='gwfx_oa_new'-->/JW666key" + urlPath;
+                window.top.location = url;
+            } else {
+                let url = "<!--#echo var='gwfx_oa_new'-->/JW666key" + urlPath;
+                location.href = url;
+            }
+        }
+
+        function toH5SubPageNoParam(urlPath) {
+            if (isApp()) {
+                IX_postMessage.toPage(urlPath);
+            } else {
+                let url = "<!--#echo var='gwfx_oa_new'-->/JW666key" + urlPath;
+                location.href = url;
+            }
+
+
+        }
+
+
 
         function gotoMiddlePageNoCheck(urlPath, title) {
             IX_postMessage.toMiddlePage({
@@ -179,14 +305,26 @@
 
         }
 
-
+        function gotoInnerAboutUsPage(page) {
+            if (window.location.search == null || window.location.search == "") {
+                window.location.href =
+                    "<!--#echo var='gwfx_pc'-->/H5TradeInfo.html?page=" +
+                    page;
+            } else {
+                window.location.href =
+                    "<!--#echo var='gwfx_pc'-->/H5TradeInfo.html" +
+                    window.location.search +
+                    "&page=" +
+                    page;
+            }
+        }
 
 
         function isApp() {
             let app = new URL(window.location.href).searchParams.get("app");
             return (app == 'ix_app_orig');
-
         }
+
 
         function toCustomerService() {
             window.onbeforeunload = null;
@@ -202,7 +340,7 @@
             var accountNo = '';
             var realCompanyId = '';
             var params =
-                "company_id=14" +
+                "company_id=210" +
                 "&utm_source=" + utm_source +
                 "&utm_medium=" + utm_medium +
                 "&utm_campaign=" + utm_campaign +
@@ -216,7 +354,7 @@
                 "&account_no=" + accountNo +
                 "&real_co_id=" + realCompanyId;
 
-            var liveUrl = "https://cs.se6868w.com:8188?" + params;
+            var liveUrl = "https://im.bofu210.com:8188/?" + params;
 
             if (isApp()) {
                 gotoMiddlePageCheck(liveUrl, '联系客服');
@@ -228,6 +366,41 @@
                 }
             }
         }
+
+        function gotoH5TradeInfoPage(page) {
+            if (window.location.search.length > 0) {
+                window.location.href = "<!--#echo var='gwfx_pc'-->/H5TradeInfo.html" + window.location.search + "&page=" + page;
+            } else {
+                window.location.href = "<!--#echo var='gwfx_pc'-->/H5TradeInfo.html?page=" + page;
+            }
+
+        }
+
+
+
+        function toWebOrMobileH5(page) {
+            if (/Android|webOS|iPhone|iPad|iPod|Opera Mini/i.test(navigator.userAgent)) {
+                window.location.href = "https://h5.bofu210.com/JW666key" + page;
+            } else {
+                window.location.href = "https://web.bofu210.com/JW666key" + page;
+            }
+
+        }
+
+
+        function lpGetPeopleCount() {
+            let baseDate = new Date(2021, 0, 25);
+            let todayDate = new Date();
+            let diffDays = parseInt((todayDate - baseDate) / (1000 * 60 * 60 * 24), 10);
+            return 132887 + 688 * diffDays;
+        }
+
+        function inputPeopleCount() {
+            $('.peopleNum').text(lpGetPeopleCount())
+        }
+        inputPeopleCount();
+
+        $('.about_sale').text('200+');
     </script>
     <script src="public/js/h5_trad_rem.js"></script>
     <script src="public/js/ws-index-url.js"></script>
@@ -241,7 +414,7 @@
             data() {
                 return {
                     // 03 總產品清單 json url
-                    jsonUrl: 'public/js/json/code_BF_ix.json',
+                    jsonUrl: 'public/js/json/gura.json',
                     // Http 登入獲取 token
                     Http_config: {
                         method: 'post',
@@ -281,12 +454,12 @@
                             lang: "zh-TW"
                         },
                         content: {
-                            appKey: "",
-                            clientIp: "",
-                            company_id: "",
-                            login_name: "Guest",
-                            password: "",
-                            user_type: 1
+                            // appKey: "",
+                            // clientIp: "",
+                            // company_id: "",
+                            // login_name: "Guest",
+                            // password: "",
+                            // user_type: 1
                         },
                     },
                     selectProduct: '贵金属',
@@ -314,55 +487,76 @@
             },
             methods: {
                 // 接收產品類別參數
-                getValue(varname) {
+                getValue() {
                     let vm = this
                     let url = new URL(document.location).searchParams;
-                    let type = url.get('link')
-                    console.log(type)
-                    if (type !== null) {
-                        let arrType = type.split(' ')
+                    let type = url.get('tab')
+                    let chose = url.get('link')
+
+
+                    if (chose !== null) {
+                        let arrType = chose.split(' ')
                         arrType.forEach(el => {
                             switch (el) {
-                                case 'met':
+                                case '1':
                                     vm.subscrition.push('贵金属')
                                     break;
-                                case 'eng':
-                                    vm.subscrition.push('能源')
-                                    break;
-                                case 'exc':
-                                    vm.subscrition.push('外汇')
-                                    break;
-                                case 'ind':
+                                case '2':
                                     vm.subscrition.push('指数')
                                     break;
-                                case 'agr':
-                                    vm.subscrition.push('农产品')
+                                case '3':
+                                    vm.subscrition.push('能源')
                                     break;
-                                case 'us':
+                                case '4':
+                                    vm.subscrition.push('数字货币')
+                                    break;
+                                case '5':
                                     vm.subscrition.push('美股')
                                     break;
-                                case 'hk':
+                                case '6':
                                     vm.subscrition.push('港股')
+                                    break;
+                                case '7':
+                                    vm.subscrition.push('外汇')
+                                    break;
+                                case '8':
+                                    vm.subscrition.push('农产品')
+                                    break;
+                                case '9':
+                                    vm.subscrition.push('ETF')
                                     break;
                             }
                         })
+                        vm.selectProduct = vm.subscrition[0]
                     } else {
-                        vm.subscrition = ['贵金属', '能源', '外汇', '指数', '农产品', '美股', '港股']
+                        console.log(vm.sortProduct);
+                        vm.sortProduct.filter(el => {
+                            if (el.id.length > 0) {
+                                vm.subscrition.push(el.title)
+                            }
+                        })
+                        vm.subscrition.pop()
+                        vm.selectProduct = vm.subscrition[0]
+                    }
+                    if (type !== null) {
+                        vm.selectProduct = vm.subscrition[(type * 1) - 1]
+                        console.log(vm.selectProduct);
                     }
                 },
                 // scroll 位置調整
                 showtar(e) {
                     let vm = this
                     let productBar_All = [...document.querySelectorAll('.btn_bar')]
-                    let parentBar = productBar_All[e].parentElement
+                    let parentBar = productBar_All[e].parentElement.clientWidth
                     let productScrollWidth = productBar_All[e].parentElement.scrollWidth
-                    if (productScrollWidth >= 612) {
-                        return
-                    } else if (e === vm.subscrition.length - 1 || 0) {
-                        parentBar.scrollLeft = productBar_All[e].offsetLeft
-                    } else {
-                        parentBar.scrollLeft = productBar_All[e].offsetLeft / 3
-                    }
+                    console.log(parentBar, productBar_All[e].offsetLeft);
+                    parentBar.scrollLeft = productBar_All[e].offsetLeft
+                        // if (productScrollWidth >= 500) {
+                        //     return
+                        // } else if () {
+                        //     console.log(productBar_All[e].offsetLeft);
+                        //     parentBar.scrollLeft = productBar_All[e].offsetLeft
+                        // }
                 },
                 // 時間具有唯一性
                 get_current_time() {
@@ -462,7 +656,9 @@
                         let _new_consis = JSON.parse(JSON.stringify(_consis))
                         product_finish.push(_new_consis)
                     }
+                    // 決定產品分類與數量
                     vm.sortProduct = product_finish
+                    vm.getValue()
                 },
                 // 需要 token 者 ( 依照文檔目前只在判斷客戶來源使用 )
                 WsBuildup(msgType, _content) {
@@ -657,38 +853,69 @@
                             let tempType = ''
                             vm.temp = msg.content
                                 // 比對 id 填入產品名稱、英文代碼
+                            console.log(vm.jsonDate);
                             vm.temp.filter(tempGroup => {
                                     vm.jsonDate.forEach(jsonEl => {
-                                        if (tempGroup.code_id === (jsonEl.id * 1)) {
+                                        if ((tempGroup.code_id * 1) === (jsonEl.id * 1)) {
+
                                             tempGroup.ProductName = jsonEl.name
                                             tempGroup.enName = jsonEl.en
-                                                // tempGroup.alink = `https://h5.smart-elite.com/JW666key/productDetail/${jsonEl.id}${location.search}`
-                                            tempGroup.alink = `https://h5.bofu210.com/JW666key/upgrade/account/1`
+                                            tempGroup.alink = `javascript:gotoProduct(${jsonEl.id})`
+                                                //tempGroup.alink = `https://h5.bofu210.com/JW666key/upgrade/account/1`
                                         }
                                     })
                                 })
                                 // 插入 title
-                            vm.sortProduct.forEach(el => {
-                                    el.id.forEach(innerid => {
-                                        vm.temp.filter(tempGroup => {
-                                            if (innerid !== tempGroup.code_id) {
-                                                return
-                                            } else if (innerid === tempGroup.code_id && tempType === '' && tempGroup.title === undefined) {
-                                                // console.log(`id 相等 tempType 尚未賦予 `)
-                                                tempGroup.title = el.title
-                                                tempType = el.title
-                                            } else if (innerid === tempGroup.code_id && tempType === el.title && tempGroup.title === undefined) {
-                                                // console.log(`id 相等 tempType 已經有了，title 還沒定義`)
-                                                tempGroup.title = el.title
-                                            } else if (innerid === tempGroup.code_id && tempType !== el.title && tempGroup.title === undefined) {
-                                                // console.log(`id 並不相等 tempType 已經有了，title 還沒定義`)
-                                                tempGroup.title = el.title
-                                                tempType = el.title
-                                            }
-                                        })
+
+                            // vm.sortProduct.filter(el => {
+                            //     if (el.id.length > 0) {
+                            //         vm.subscrition.push(el.title)
+                            //     }
+                            // })
+                            // vm.subscrition.pop()
+                            vm.sortProduct.filter(el => {
+                                el.id.forEach(innerid => {
+                                    vm.temp.filter(tempGroup => {
+                                        if (innerid !== tempGroup.code_id) {
+                                            return
+                                        } else if (innerid === tempGroup.code_id && tempType === '' && tempGroup.title === undefined) {
+                                            // console.log(`id 相等 tempType 尚未賦予 `)
+                                            tempGroup.title = el.title
+                                            tempType = el.title
+                                        } else if (innerid === tempGroup.code_id && tempType === el.title && tempGroup.title === undefined) {
+                                            // console.log(`id 相等 tempType 已經有了，title 還沒定義`)
+                                            tempGroup.title = el.title
+                                        } else if (innerid === tempGroup.code_id && tempType !== el.title && tempGroup.title === undefined) {
+                                            // console.log(`id 並不相等 tempType 已經有了，title 還沒定義`)
+                                            tempGroup.title = el.title
+                                            tempType = el.title
+                                        }
                                     })
                                 })
-                                // 訂閱實時報價
+                            })
+
+                            // console.log(vm.temp, vm.jsonDate, vm.sortProduct);
+                            // vm.sortProduct.forEach(el => {
+                            //         el.id.forEach(innerid => {
+                            //             vm.temp.filter(tempGroup => {
+                            //                 if (innerid !== tempGroup.code_id) {
+                            //                     return
+                            //                 } else if (innerid === tempGroup.code_id && tempType === '' && tempGroup.title === undefined) {
+                            //                     // console.log(`id 相等 tempType 尚未賦予 `)
+                            //                     tempGroup.title = el.title
+                            //                     tempType = el.title
+                            //                 } else if (innerid === tempGroup.code_id && tempType === el.title && tempGroup.title === undefined) {
+                            //                     // console.log(`id 相等 tempType 已經有了，title 還沒定義`)
+                            //                     tempGroup.title = el.title
+                            //                 } else if (innerid === tempGroup.code_id && tempType !== el.title && tempGroup.title === undefined) {
+                            //                     // console.log(`id 並不相等 tempType 已經有了，title 還沒定義`)
+                            //                     tempGroup.title = el.title
+                            //                     tempType = el.title
+                            //                 }
+                            //             })
+                            //         })
+                            //     })
+                            // 訂閱實時報價
                             _content_pr = {
                                     code_ids: vm.typeId,
                                     subscribeType: "reSubscribe",
@@ -704,7 +931,6 @@
             },
             mounted() {},
             created() {
-                this.getValue("link")
                 this.gotourl()
             },
             destroyed() {}

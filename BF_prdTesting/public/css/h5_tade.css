@@ -1,6 +1,6 @@
 /* http://meyerweb.com/eric/tools/css/reset/ 
-   v2.0 | 20110126
-   License: none (public domain)
+v2.0 | 20110126
+License: none (public domain)
 */
 
 * {
@@ -168,17 +168,18 @@ body {
     display: none;
 }
 
-.navbar .active {
+.navbar .btn_bar.active {
     color: #0025c8 !important;
     -webkit-transform: scale(1.1);
     transform: scale(1.1);
     font-weight: 600;
+    font-size: .28rem;
 }
 
 .navbar .btn_bar {
     display: inline-block;
     background: #fff;
-    font-size: 0.24rem;
+    font-size: .2rem;
     padding: 6px 0;
     margin-right: 12px;
     text-decoration: none;
@@ -202,10 +203,11 @@ body {
     line-height: 1.5;
     color: #aaa;
     border-bottom: 1px solid #eee;
+    padding-bottom: 0.1rem;
 }
 
 .head_classification li span {
-    font-size: 0.24rem;
+    font-size: 0.2rem;
     text-align: left;
 }
 
@@ -244,12 +246,12 @@ body {
     flex: 1 1 30%;
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
-    padding: 6px 0;
+    padding: 0.16rem 0 0.28rem 0;
 }
 
 .productList_alink .productList_left span {
-    line-height: 1.5;
-    font-weight: 400;
+    line-height: 1.4;
+    font-weight: 600;
     -webkit-box-flex: 1;
     -ms-flex: 1 1 100%;
     flex: 1 1 100%;
@@ -257,22 +259,24 @@ body {
 }
 
 .productList_alink .productList_left .prn {
-    font-size: 0.36rem;
+    font-size: 0.27rem;
 }
 
 .productList_alink .productList_left .en {
     color: #aaa;
-    font-size: 0.30rem;
+    font-size: 0.16rem;
+    font-weight: 400;
 }
 
 .productList_alink .productList_center {
     -webkit-box-flex: 1;
     -ms-flex: 1 1 30%;
     flex: 1 1 30%;
+    padding: .16rem 0;
 }
 
 .productList_alink .productList_center span {
-    font-size: 0.36rem;
+    font-size: 0.20rem;
     font-weight: 600;
     text-align: right;
 }
@@ -281,11 +285,12 @@ body {
     -webkit-box-flex: 1;
     -ms-flex: 1 1 40%;
     flex: 1 1 40%;
+    padding: .16rem 0;
 }
 
 .productList_alink .productList_right .buy {
     line-height: 1.5;
-    font-size: 0.36rem;
+    font-size: 0.20rem;
     font-weight: 600;
     text-align: right;
 }
@@ -303,15 +308,15 @@ body {
 }
 
 .productList_alink .productList_right .wave {
-    font-size: 0.26rem;
-    margin-right: 6px;
+    font-size: 0.2rem;
+    margin-right: 0.2rem;
     line-height: 1.5;
-    font-size: 0.26rem;
+    font-size: 0.2rem;
     font-weight: 600;
 }
 
 .productList_alink .productList_right .wave_percent {
-    font-size: 0.26rem;
+    font-size: 0.2rem;
     line-height: 1.5;
     font-weight: 600;
 }
