@@ -11,8 +11,18 @@
     <link rel="stylesheet" href="promote/lp99TR/css/tabar.css">
     <link rel="stylesheet" href="public/css/h5_tade.css">
     <style>
-        html {
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
             font-family: Trebuchet MS, roboto, ubuntu, "sans-serif";
+        }
+        
+        .trading_wrap_background {
+            max-width: 7.5rem;
+            margin: 0 auto;
+            height: 100%;
         }
     </style>
 </head>
@@ -34,170 +44,66 @@
     <!--#else-->
     <!--#set var="app_url" value=""-->
     <!--#set var="wx_url" value=""-->
-    <div id="app" class="trading_wrap">
-        <div id="selection_bar" class="navbar u-flex jcs">
-            <a href="javascript:;" v-for="(item,key) in subscrition" class="btn_bar" @click="selectProduct = item;showtar(key)" :class='{active:item === selectProduct}'>{{item}}</a>
-        </div>
-        <ul class="head_classification">
-            <li class="u-flex">
-                <span class="title_left f-2 ">名称代码</span>
-                <span class="title_center f-4">卖出价</span>
-                <span class="title_right f-4">买入价</span>
-            </li>
-        </ul>
-        <ul>
-            <li v-for="(item,key) in temps" class="list_wrap" :id="item.code_id">
-                <a :href="item.alink" class="u-flex productList_alink " v-if="item.title === selectProduct">
-                    <div class="productList_left u-flex jcs aib">
-                        <span class="prn">{{item.ProductName}}</span>
-                        <span class="en">{{item.enName}}</span>
-                    </div>
-                    <div class="productList_center u-flex jce aib">
-                        <span class="sell">{{item.sell_price}}</span>
-                    </div>
-                    <div class="productList_right u-flex jcs u-fw">
-                        <span class="buy">{{item.buy_price}}</span>
-                        <div class="cell u-flex jce">
-                            <span style="color:#53CC9A;" class="wave" v-if="((item.cur_price - item.yesterday_price)) >= 0">+{{(item.cur_price - item.yesterday_price).toFixed(3)}}</span>
-                            <span style="color:#E3525C;" class="wave" v-else>{{(item.cur_price - item.yesterday_price).toFixed(3)}}</span>
-                            <span style="color:#53CC9A;" class="wave_percent" v-if="(((item.cur_price - item.yesterday_price) / item.yesterday_price)) >= 0">+{{((((item.cur_price - item.yesterday_price) / item.yesterday_price))*100).toFixed(3)}}%</span>
-                            <span style="color:#E3525C;" class="wave_percent" v-else>{{((((item.cur_price - item.yesterday_price) / item.yesterday_price))*100).toFixed(3)}}%</span>
+    <!--#endif-->
+    <div class="trading_wrap_background">
+        <div id="app" class="trading_wrap">
+            <div id="selection_bar" class="navbar u-flex jcs">
+                <a href="javascript:;" v-for="(item,key) in subscrition" class="btn_bar" @click="selectProduct = item;showtar(key)" :class='{active:item === selectProduct}'>{{item}}</a>
+            </div>
+            <ul class="head_classification">
+                <li class="u-flex">
+                    <span class="title_left f-2 ">名称代码</span>
+                    <span class="title_center f-4">卖出价</span>
+                    <span class="title_right f-4">买入价</span>
+                </li>
+            </ul>
+            <ul>
+                <li v-for="(item,key) in temps" class="list_wrap" :id="item.code_id">
+                    <a :href="item.alink" class="u-flex productList_alink " v-if="item.title === selectProduct">
+                        <div class="productList_left u-flex jcs aib">
+                            <span class="prn">{{item.ProductName}}</span>
+                            <span class="en">{{item.enName}}</span>
                         </div>
-                    </div>
-                </a>
-            </li>
-        </ul>
+                        <div class="productList_center u-flex jce aib">
+                            <span class="sell">{{item.sell_price}}</span>
+                        </div>
+                        <div class="productList_right u-flex jcs u-fw">
+                            <span class="buy">{{item.buy_price}}</span>
+                            <div class="cell u-flex jce">
+                                <span style="color:#53CC9A;" class="wave" v-if="((item.cur_price - item.yesterday_price)) >= 0">+{{(item.cur_price - item.yesterday_price).toFixed(3)}}</span>
+                                <span style="color:#E3525C;" class="wave" v-else>{{(item.cur_price - item.yesterday_price).toFixed(3)}}</span>
+                                <span style="color:#53CC9A;" class="wave_percent" v-if="(((item.cur_price - item.yesterday_price) / item.yesterday_price)) >= 0">+{{((((item.cur_price - item.yesterday_price) / item.yesterday_price))*100).toFixed(3)}}%</span>
+                                <span style="color:#E3525C;" class="wave_percent" v-else>{{((((item.cur_price - item.yesterday_price) / item.yesterday_price))*100).toFixed(3)}}%</span>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="floatwrapper">
+        <div class="nav-list">
+            <a data-num="0" href="javascript:;" onclick="lp_home()">
+                <s class="icons icons5"></s>
+                <b class="txt">首页</b>
+            </a>
+            <a data-num="1" href="javascript:;" class="on" onclick="toh5_trade()">
+                <s class="icons icons6"></s>
+                <b class="txt">行情</b>
+            </a>
+            <a href="javascript:;" onclick="">
+                <s class="icons icons7"></s>
+                <b class="txt">资讯</b>
+            </a>
+            <a href="javascript:;" onclick="">
+                <s class="icons icons8"></s>
+                <b class="txt">升级</b>
+            </a>
+        </div>
     </div>
 
-
-    <script src="/public/js/IX_postMessage.js" charset="utf-8"></script>
+    <script src="/public/js/app_ix_postMessage.js" charset="utf-8"></script>
     <script type="text/javascript">
-        ;
-        (function to_TR_withoutBuySell() {
-            if (typeof(productId) !== "undefined") {
-                let productCode = "";
-                let productName = "";
-                let digits = 0;
-                let origin = "<!--#echo var='gwfx_oa_new'-->";
-                let fallColor = "#E3525C";
-                let riseColor = "#11B873";
-
-                let url = new URL(window.location.href);
-                let utm_source = url.searchParams.get("utm_source") == null ? '' : url.searchParams.get("utm_source");
-                let utm_medium = url.searchParams.get("utm_medium") == null ? '' : url.searchParams.get("utm_medium");
-                let utm_term = url.searchParams.get("utm_term") == null ? '' : url.searchParams.get("utm_term");
-                let utm_campaign = url.searchParams.get("utm_campaign") == null ? '' : url.searchParams.get("utm_campaign");
-                let utm_content = url.searchParams.get("utm_content") == null ? '' : url.searchParams.get("utm_content");
-                $('.TR_sell')
-                    .attr('href', origin + '/JW666key/order/' + productId + '?path=K18&direction=sell&utm_source=' + utm_source + '&utm_medium=' + utm_medium + '&utm_term=' + utm_term + '&utm_campaign=' + utm_campaign + '&utm_content=' + utm_content + '&openbrowser=false&experience=true&minetipcash=true')
-
-                $('.TR_buy')
-                    .attr('href', origin + '/JW666key/order/' + productId + '?path=K18&direction=buy&utm_source=' + utm_source + '&utm_medium=' + utm_medium + '&utm_term=' + utm_term + '&utm_campaign=' + utm_campaign + '&utm_content=' + utm_content + '&openbrowser=false&experience=true&minetipcash=true')
-            }
-
-        })()
-
-        function toTrLp() {
-            let url = new URL(window.location.href);
-            let utm_source = url.searchParams.get("utm_source") == null ? '' : url.searchParams.get("utm_source");
-            let utm_medium = url.searchParams.get("utm_medium") == null ? '' : url.searchParams.get("utm_medium");
-            let utm_term = url.searchParams.get("utm_term") == null ? '' : url.searchParams.get("utm_term");
-            let utm_campaign = url.searchParams.get("utm_campaign") == null ? '' : url.searchParams.get("utm_campaign");
-            let utm_content = url.searchParams.get("utm_content") == null ? '' : url.searchParams.get("utm_content");
-            let trUrl = 'https://m.bofu210.com/lp96TR.html?utm_medium=' + utm_medium + '&utm_term=' + utm_term + '&utm_campaign=' + utm_campaign + '&utm_content=' + utm_content + '&openbrowser=false&experience=true&utm_source=' + utm_source
-            location.href = trUrl
-        }
-
-        function gotoRegister() {
-            if (isApp()) {
-                IX_postMessage.toPage('/register/openRealAccount/1' + window.location.search);
-            } else {
-                let url = "<!--#echo var='gwfx_oa_new'-->/JW666key/register/openRealAccount/1" + window.location.search;
-                window.location.href = url;
-            }
-        }
-
-        function gotoRegister_pcui() {
-            if (isApp()) {
-                IX_postMessage.toPage('/register/openRealAccount/1' + window.location.search);
-            } else {
-                let url = "https://web.bofu210.com/JW666key/register/openRealAccount/1" + window.location.search;
-                window.location.href = url;
-            }
-        }
-
-        function gotoLogin(phone) {
-            let search = window.location.search;
-            if (!(phone == null)) {
-                if (search.length > 0) {
-                    search += '&phone=' + phone;
-                } else {
-                    search = '?phone=' + phone;
-                }
-            }
-            if (isApp()) {
-                IX_postMessage.toPage('/login' + search);
-            } else {
-                let url = "<!--#echo var='gwfx_oa_new'-->/JW666key/login";
-                window.location.href = url + search;
-            }
-        }
-
-        function depositFunds(phone) {
-            let search = window.location.search;
-            if (isApp()) {
-                IX_postMessage.toPage('/login' + search);
-            } else {
-                let url = "https://h5.bftrades.com/JW666key/my/depositFunds";
-                window.location.href = url + search;
-            }
-        }
-
-        function gotoLogin2(phone) {
-            let search = window.location.search;
-            if (!(phone == null)) {
-                if (search.length > 0) {
-                    search += '&phone=' + phone;
-                } else {
-                    search = '?phone=' + phone;
-                }
-            }
-            if (isApp()) {
-                IX_postMessage.toPage('/login' + search);
-            } else {
-                let url = "https://h5.bftrades.com/JW666key/login";
-                window.location.href = url + search;
-            }
-        }
-
-        function gotoh5Trade() {
-            if (isApp()) {
-                IX_postMessage.toPage('/trade' + window.location.search);
-            } else {
-                let url = "<!--#echo var='gwfx_oa_new'-->/JW666key/trade" + window.location.search;
-                window.location.href = url;
-            }
-        }
-
-        function gotoGitah5Trade() {
-            if (isApp()) {
-                IX_postMessage.toPage('/trade');
-            } else {
-                let url = "<!--#echo var='gwfx_oa_new'-->/JW666key/trade" + window.location.search;
-                window.location.href = url;
-            }
-        }
-
-        function gotoHome() {
-            let url = "<!--#echo var='gwfx_oa_new'-->/JW666key/home" + window.location.search;
-            window.location.href = url;
-        }
-
-        function toMore() {
-            let url = "<!--#echo var='gwfx_m'-->/H5TradeInfo.html?TR_page=36&" + window.location.search;
-            window.location.href = url;
-        }
-
         function gotoProduct(e) {
             if (isApp()) {
                 IX_postMessage.toPage(`/productDetail/` + e);
@@ -207,200 +113,10 @@
             }
         }
 
-        function gotoAboutTab(page) {
-            //let search=window.location.search;
-            //if (search==''){
-            //	search='?page='+page;
-            //}
-            //else {
-            //	search+='&page='+page;	
-            //}
-            let url = "<!--#echo var='gwfx_pc'-->/h5aboutTab.html?page=" + page;
-            window.location.href = url;
-        }
-
-        function gotoMiddlePageCheck(urlPath, title) {
-            if (isApp()) {
-                if (urlPath.indexOf('?') >= 0) {
-                    IX_postMessage.toMiddlePage({
-                        path: '/nest/queryinfo',
-                        query: {
-                            url: urlPath,
-                            title: title
-                        }
-                    })
-                } else {
-                    IX_postMessage.toMiddlePage({
-                        path: '/nest/queryinfo',
-                        query: {
-                            url: urlPath + window.location.search,
-                            title: title
-                        }
-                    })
-                }
-            } else {
-                window.location.href = urlPath + window.location.search;
-            }
-
-        }
-
-        function toH5SubPage(urlPath) {
-            if (isApp()) {
-                IX_postMessage.toPage(urlPath + window.location.search);
-            } else {
-                let url = "<!--#echo var='gwfx_oa_new'-->/JW666key" + urlPath + window.location.search;
-                location.href = url;
-            }
-
-
-        }
-
-        function h5toMine() {
-            if (isApp()) {
-                console.log('iphone1601')
-                let url = "<!--#echo var='gwfx_oa_new'-->/JW666key/mine" + location.search;
-                window.top.location = url;
-            } else {
-                let url = "<!--#echo var='gwfx_oa_new'-->/JW666key/mine" + location.search;
-                location.href = url;
-            }
-        }
-
-        function h5toExp(urlPath) {
-            if (isApp()) {
-                console.log('iphone1601')
-                let url = "<!--#echo var='gwfx_oa_new'-->/JW666key" + urlPath;
-                window.top.location = url;
-            } else {
-                let url = "<!--#echo var='gwfx_oa_new'-->/JW666key" + urlPath;
-                location.href = url;
-            }
-        }
-
-        function toH5SubPageNoParam(urlPath) {
-            if (isApp()) {
-                IX_postMessage.toPage(urlPath);
-            } else {
-                let url = "<!--#echo var='gwfx_oa_new'-->/JW666key" + urlPath;
-                location.href = url;
-            }
-
-
-        }
-
-
-
-        function gotoMiddlePageNoCheck(urlPath, title) {
-            IX_postMessage.toMiddlePage({
-                path: '/nest/queryinfo',
-                query: {
-                    url: urlPath + window.location.search,
-                    title: title
-                }
-            })
-        }
-
-        function toH5SubPageNoCheck(urlPath) {
-            IX_postMessage.toPage(urlPath + window.location.search);
-
-        }
-
-        function gotoInnerAboutUsPage(page) {
-            if (window.location.search == null || window.location.search == "") {
-                window.location.href =
-                    "<!--#echo var='gwfx_pc'-->/H5TradeInfo.html?page=" +
-                    page;
-            } else {
-                window.location.href =
-                    "<!--#echo var='gwfx_pc'-->/H5TradeInfo.html" +
-                    window.location.search +
-                    "&page=" +
-                    page;
-            }
-        }
-
-
         function isApp() {
             let app = new URL(window.location.href).searchParams.get("app");
             return (app == 'ix_app_orig');
         }
-
-
-        function toCustomerService() {
-            window.onbeforeunload = null;
-            var live800Prompt = "http://www.onlineservice-hk.com/k800/chatClient/chatbox.jsp?companyID=284&configID=55&jid=";
-            // 设置参数
-            let url = new URL(window.location.href);
-            let utm_source = url.searchParams.get("utm_source") == null ? '' : url.searchParams.get("utm_source");
-            let utm_medium = url.searchParams.get("utm_medium") == null ? '' : url.searchParams.get("utm_medium");
-            let utm_campaign = url.searchParams.get("utm_campaign") == null ? '' : url.searchParams.get("utm_campaign");
-            let utm_term = url.searchParams.get("utm_term") == null ? '' : url.searchParams.get("utm_term");
-            let utm_content = url.searchParams.get("utm_content") == null ? '' : url.searchParams.get("utm_content");
-
-            var accountNo = '';
-            var realCompanyId = '';
-            var params =
-                "company_id=210" +
-                "&utm_source=" + utm_source +
-                "&utm_medium=" + utm_medium +
-                "&utm_campaign=" + utm_campaign +
-                "&utm_term=" + utm_term +
-                "&utm_content=" + utm_content +
-                "&chat_type=1" +
-                "&lang=" + window.navigator.language +
-                "&uagent=" + encodeURIComponent(window.navigator.userAgent) +
-                "&reffer=" + encodeURIComponent(window.location.href) +
-                "&lastPageDesc=" + encodeURIComponent(document.title) +
-                "&account_no=" + accountNo +
-                "&real_co_id=" + realCompanyId;
-
-            var liveUrl = "https://im.bofu210.com:8188/?" + params;
-
-            if (isApp()) {
-                gotoMiddlePageCheck(liveUrl, '联系客服');
-            } else {
-                try {
-                    window.open(liveUrl, 'Live800Chatindow', 'height=645,width=740,top=0,left=0,toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no');
-                } catch (e) {
-                    window.open(liveUrl);
-                }
-            }
-        }
-
-        function gotoH5TradeInfoPage(page) {
-            if (window.location.search.length > 0) {
-                window.location.href = "<!--#echo var='gwfx_pc'-->/H5TradeInfo.html" + window.location.search + "&page=" + page;
-            } else {
-                window.location.href = "<!--#echo var='gwfx_pc'-->/H5TradeInfo.html?page=" + page;
-            }
-
-        }
-
-
-
-        function toWebOrMobileH5(page) {
-            if (/Android|webOS|iPhone|iPad|iPod|Opera Mini/i.test(navigator.userAgent)) {
-                window.location.href = "https://h5.bofu210.com/JW666key" + page;
-            } else {
-                window.location.href = "https://web.bofu210.com/JW666key" + page;
-            }
-
-        }
-
-
-        function lpGetPeopleCount() {
-            let baseDate = new Date(2021, 0, 25);
-            let todayDate = new Date();
-            let diffDays = parseInt((todayDate - baseDate) / (1000 * 60 * 60 * 24), 10);
-            return 132887 + 688 * diffDays;
-        }
-
-        function inputPeopleCount() {
-            $('.peopleNum').text(lpGetPeopleCount())
-        }
-        inputPeopleCount();
-
-        $('.about_sale').text('200+');
     </script>
     <script src="public/js/h5_trad_rem.js"></script>
     <script src="public/js/ws-index-url.js"></script>

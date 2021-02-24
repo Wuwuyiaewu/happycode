@@ -14,9 +14,9 @@ const LOOPING_ON_OFF = false
     // 輪播 ID
 const LOOPING_PRODUCT_ID = ['573004']
     // K 線開關
-const KLINE_ON_OFF = false;
+const KLINE_ON_OFF = true;
 // K 線日期起算
-const KLINE_DATE_START = "2020-10-25 08:00:00"
+const KLINE_DATE_START = "2020-1-1 08:00:00"
     // k 線數據日期單位 (1min、5min、15min、30min、1hour、2hour、4hour、day、week、month)
 const KLINE_DATE_INTERVAL = "day"
     // 技術分析 開關
@@ -495,7 +495,7 @@ var vm = new Vue({
                             } else { console.log('輪播開關狀態: OFF'); }
                             if (vm.klineOn_Off) {
                                 _content_kline = {
-                                    code_id: 573004,
+                                    code_id: 573010,
                                     startTime: vm.klinestartTime,
                                     ktype: vm.ktypeDay,
                                     num: 500,

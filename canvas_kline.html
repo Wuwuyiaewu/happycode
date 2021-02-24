@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas_k線圖</title>
+    <style>
+        html,
+        body {
+            display: flex;
+            justify-content: center;
+            height: 100%;
+            align-items: center;
+            background-color: #000;
+        }
+        
+        canvas#ctx {
+            border: 1px solid #666;
+            background-color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="app">
+        <vue_canvas_1 :kdata="kdata"></vue_canvas_1>
+    </div>
+    <script src="js/vue.js"></script>
+    <script>
+        Vue.component('vue_canvas_1', {
+            props: ['kdata'],
+            data: function() {
+                return {}
+            },
+            template: `<div>
+                <canvas id="ctx"></canvas>        
+                </div>`,
+            computed: {},
+            watch: {},
+            methods: {
+                canvas_init() {
+                    let canvas = document.getElementById('ctx');
+                    let ctx = canvas.getContext('2d');
+                    let blockWidth = 200
+                    let PI = Math.PI
+                    let PI2 = Math.PI * 2
+                    canvas.width = 600
+                    canvas.height = 600
+
+                },
+                draw_Kline() {
+                    let vm = this
+                    let canvas = document.getElementById('ctx');
+                    let ctx = canvas.getContext('2d');
+                    ctx.save()
+                    ctx.translate(0, 600)
+                    ctx.fillStyle = "red"
+                    ctx.fillRect(20, (vm.kdata[0].height_price) * -1, 10, (vm.kdata[0].height_price - vm.kdata[0].low_price))
+                    ctx.restore()
+                },
+                draw_Kunit() {
+                    let vm = this
+                    let canvas = document.getElementById('ctx');
+                    let ctx = canvas.getContext('2d');
+                    for (i = 0; i < 10; i++) {
+                        ctx.moveTo(0, i * 60)
+                        ctx.lineTo(600, i * 60)
+                        ctx.save()
+                        ctx.translate(580, 600)
+                        ctx.fillText(i, 0, (-i * 60) + 5)
+                        ctx.strokeStyle = "rgba(0,0,0,0.1)"
+                        ctx.lineWidth = 2
+                        ctx.stroke()
+                        ctx.restore()
+                    }
+                }
+            },
+            mounted() {
+                this.canvas_init()
+                this.draw_Kline()
+                this.draw_Kunit()
+            },
+            created() {}
+        });
+        (function VueInit() {
+            var vm = new Vue({
+                el: "#app",
+                data() {
+                    return {
+                        kdata: [{
+                            time: 1,
+                            height_price: 500,
+                            low_price: 380
+                        }, {
+                            time: 2,
+                            height_price: 350,
+                            low_price: 220
+                        }, {
+                            time: 3,
+                            height_price: 450,
+                            low_price: 230
+                        }]
+                    }
+                },
+                methods: {},
+                computed: {},
+                watch: {},
+                mounted() {},
+                created() {},
+                destroyed() {}
+            })
+        })()
+    </script>
+</body>
+
+</html>
