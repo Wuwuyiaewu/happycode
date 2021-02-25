@@ -439,11 +439,11 @@
             </div>
             <div class="floatwrapper">
                 <div class="nav-list">
-                    <a data-num="0" href="javascript:;" onclick="lp_home()" class="on">
+                    <a data-num="0" href="javascript:;" onclick="lp_home('lp99TR')" class="on">
                         <s class="icons icons5"></s>
                         <b class="txt">首页</b>
                     </a>
-                    <a data-num="1" href="javascript:;" onclick="toh5_trade()">
+                    <a data-num="1" href="javascript:;" onclick="toh5_trade('lp115TR','link=1')">
                         <s class="icons icons6"></s>
                         <b class="txt">行情</b>
                     </a>
@@ -562,13 +562,13 @@
                 }
             }
 
-            function toh5_trade() {
-                let url = "h5_IX_trade_.html" + window.location.search;
+            function toh5_trade(bar, link) {
+                let url = "h5_IX_trade_.html" + window.location.search + '&fw=' + bar + '&link=' + link;
                 window.location.href = url;
                 console.log(url)
             }
 
-            function lp_home() {
+            function lp_home(page) {
                 if (isApp()) {
                     IX_postMessage.toPage('/trade');
                 } else {
@@ -581,6 +581,7 @@
         <script>
             let origin = "<!--#echo var='gwfx_oa_new'-->";
             let url = new URL(window.location.href);
+            let menu_bar = url.searchParams.get("menubar") === 'bf' ? $('.floatwrapper').css('display', 'block') : $('.floatwrapper').css('display', 'none')
             let utm_source = url.searchParams.get("utm_source") == null ? '' : url.searchParams.get("utm_source");
             let utm_medium = url.searchParams.get("utm_medium") == null ? '' : url.searchParams.get("utm_medium");
             let utm_term = url.searchParams.get("utm_term") == null ? '' : url.searchParams.get("utm_term");

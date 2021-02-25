@@ -4,11 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="public/js/jquery.min.js"></script>
     <script src='public/js/axios.js'></script>
     <script src='public/js/vue.min.js'></script>
 
     <title>行情</title>
-    <link rel="stylesheet" href="promote/lp99TR/css/tabar.css">
+    <link rel="stylesheet" href="public/css/menubar.css">
     <link rel="stylesheet" href="public/css/h5_tade.css">
     <style>
         html,
@@ -85,24 +86,20 @@
         <div class="nav-list">
             <a data-num="0" href="javascript:;" onclick="lp_home()">
                 <s class="icons icons5"></s>
-                <b class="txt">首页</b>
+                <b class="txt">无本炒<span id="link_adj">汇</span></b>
             </a>
-            <a data-num="1" href="javascript:;" class="on" onclick="toh5_trade()">
+            <a data-num="1" href="javascript:void(0);" class="on" onclick="toh5_trade()">
                 <s class="icons icons6"></s>
                 <b class="txt">行情</b>
             </a>
-            <a href="javascript:;" onclick="">
+            <a href="infoList.html" onclick="">
                 <s class="icons icons7"></s>
                 <b class="txt">资讯</b>
-            </a>
-            <a href="javascript:;" onclick="">
-                <s class="icons icons8"></s>
-                <b class="txt">升级</b>
             </a>
         </div>
     </div>
 
-    <script src="/public/js/app_ix_postMessage.js" charset="utf-8"></script>
+    <script src="public/js/IX_postMessage.js" charset="utf-8"></script>
     <script type="text/javascript">
         function gotoProduct(e) {
             if (isApp()) {
@@ -116,6 +113,72 @@
         function isApp() {
             let app = new URL(window.location.href).searchParams.get("app");
             return (app == 'ix_app_orig');
+        }
+
+        let menubar_path = 'public/images/menubar_img/';
+        let icon_list = {
+            "lp55TR_v2": ['lp55TR_v2/blue1.png', 'lp55TR_v2/blue2.png', 'lp55TR_v2/blue3.png', 'lp55TR_v2/grey1.png', 'lp55TR_v2/grey2.png', 'lp55TR_v2/grey3.png'],
+            "lp115TR": ['lp115TR/red1.png', 'lp115TR/red2.png', 'lp115TR/red3.png', 'lp115TR/grey1.png', 'lp115TR/grey2.png', 'lp115TR/grey3.png']
+        }
+        let url = new URL(window.location.href)
+        let from_lp = url.searchParams.get('fw')
+        let menu_bar = url.searchParams.get("menubar") === 'bf' ? menubar_block() : menubar_none()
+        let menu_style = url.searchParams.get('version') === 'orig' ? true : change_menubar_b(menubar_path, icon_list)
+
+        function menubar_block() {
+            $('.floatwrapper').css('display', 'block');
+            $('.bottom_btn').css('display', 'none');
+        }
+
+        function menubar_none() {
+            $('.floatwrapper').css('display', 'block');
+            $('.bottom_btn').css('display', 'none');
+        }
+
+        function toh5_trade() {
+            let trade_url = new URL(window.location.href)
+
+            window.location.href = 'h5_IX_trade_.html' + trade_url.search;
+        }
+
+        function change_menubar_b(menubar_path, icon_list) {
+            let str1 = `${menubar_path}${icon_list[from_lp][3]}`
+            let str2 = `${menubar_path}${icon_list[from_lp][1]}`
+            let str3 = `${menubar_path}${icon_list[from_lp][5]}`
+            $('a .icons5').css({
+                "background": 'url(' + str1 + ') no-repeat top center',
+                "background-size": '100% 100%'
+            })
+            $('a.on .icons6').css({
+                "background": 'url(' + str2 + ') no-repeat top center',
+                "background-size": '100% 100%'
+            })
+            $('a .icons7').css({
+                "background": 'url(' + str3 + ') no-repeat top center',
+                "background-size": '100% 100%'
+            })
+        }
+
+        function lp_home() {
+            if (isApp()) {
+                IX_postMessage.toPage('/trade');
+            } else {
+                let url = "<!--#echo var='gwfx_m'-->" + from_lp + ".html" + window.location.search;
+                window.location.href = url;
+            }
+        }
+
+        function lp_infoList() {
+            let trade_url = new URL(window.location.href)
+
+            window.location.href = 'infoList.html' + trade_url.search;
+        }
+        let link_adj = url.searchParams.get('link')
+        console.log(link_adj);
+        if (link_adj === '1') {
+            document.getElementById('link_adj').textContent = "金"
+        } else if (link_adj === '7') {
+            document.getElementById('link_adj').textContent = "汇"
         }
     </script>
     <script src="public/js/h5_trad_rem.js"></script>
@@ -280,10 +343,7 @@
                     return d.getTime();
                 },
                 // utm_source帶入
-                toh5_trade() {
-                    let url = "h5_IX_trade_.html" + window.location.search;
-                    window.location.href = url;
-                },
+
                 // 要做 ws 以前都要先做 http 發送登入，才能夠要到 token 做 ws 操作 ix 文檔
                 // https://testdocs.ixmiddle.com/ixmiddle/http-interface-doc/account/appProperties/getAccountProperties.html
                 gotourl() {

@@ -1,0 +1,87 @@
+.floatwrapper {
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    left: 50%;
+    background: #ffffff;
+    margin-left: -50%;
+    z-index: 6;
+}
+
+.nav-list {
+    position: relative;
+    margin: 0.2rem auto 0;
+    text-align: center;
+    font-size: 0;
+    max-width: 7.5rem;
+}
+
+.nav-list a {
+    display: inline-block;
+    vertical-align: top;
+    *zoom: 1;
+    *display: inline;
+    width: 22%;
+    text-decoration: none;
+}
+
+.nav-list a .icons {
+    display: block;
+    margin: 0 auto;
+    width: 0.43rem;
+    height: 0.43rem;
+    cursor: pointer;
+}
+
+.nav-list a .icons5 {
+    background: url(../images/home.png) no-repeat top center;
+    background-size: 100% 100%;
+}
+
+.nav-list a.on .icons5 {
+    background: url(../images/home.png) no-repeat top center;
+    background-size: 100% 100%;
+    background: rgb(146, 172, 255);
+}
+
+.nav-list a .icons6 {
+    background: url(../images/market_updates.png) no-repeat top center;
+    background-size: 100% 100%;
+}
+
+.nav-list a.on .icons6 {
+    background: url(../images/market_updates.png) no-repeat top center;
+    background-size: 100% 100%;
+    background: rgb(146, 172, 255);
+}
+
+.nav-list a .icons7 {
+    background: url(../images/News.png) no-repeat top center;
+    background-size: 100% 100%;
+}
+
+.nav-list a.on .icons7 {
+    background: url(../images/News.png) no-repeat top center;
+    background-size: 100% 100%;
+    background: rgb(146, 172, 255);
+}
+
+.nav-list a .icons8 {
+    background: url(../images/upgrade.png) no-repeat top center;
+    background-size: 100% 100%;
+}
+
+.nav-list a.on .icons8 {
+    background: url(../images/upgrade.png) no-repeat top center;
+    background-size: 100% 100%;
+    background: rgb(146, 172, 255);
+}
+
+.nav-list a .txt {
+    display: block;
+    margin: 0 auto;
+    font-size: 0.2rem;
+    color: #A5A5A5;
+    line-height: 0.28rem;
+    font-weight: normal;
+}

@@ -66,16 +66,17 @@
                     let canvas = document.getElementById('ctx');
                     let ctx = canvas.getContext('2d');
                     for (i = 0; i < 10; i++) {
+                        ctx.lineWidth = 2
                         ctx.moveTo(0, i * 60)
                         ctx.lineTo(600, i * 60)
                         ctx.save()
                         ctx.translate(580, 600)
-                        ctx.fillText(i, 0, (-i * 60) + 5)
-                        ctx.strokeStyle = "rgba(0,0,0,0.1)"
-                        ctx.lineWidth = 2
-                        ctx.stroke()
+                        ctx.fillText(i, 0, (-i * 60))
                         ctx.restore()
                     }
+                    ctx.strokeStyle = "rgba(0,0,0,0.1)"
+                    ctx.stroke()
+
                 }
             },
             mounted() {
