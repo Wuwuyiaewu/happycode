@@ -76,16 +76,10 @@
                     }
                     ctx.strokeStyle = "rgba(0,0,0,0.1)"
                     ctx.stroke()
-                    let all_kdata = vm.kdata
+
                 }
             },
             mounted() {
-                if (utmSource === "bf-tr" || utmSource === "bdjj-tr") {
-                    // id1521202767  已下架
-                    window.location.href = "https://apps.apple.com/cn/app/id1519716129";
-                } else {
-                    window.location.href = "https://apps.apple.com/cn/app/id1519716129";
-                }
                 this.canvas_init()
                 this.draw_Kline()
                 this.draw_Kunit()
