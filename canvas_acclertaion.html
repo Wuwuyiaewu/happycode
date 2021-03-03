@@ -12,108 +12,52 @@
             display: flex;
             justify-content: center;
             height: 100%;
+            margin: 0;
             align-items: center;
-            background-color: #000;
+            /* background-color: #000; */
         }
         
-        canvas#ctx {
-            border: 1px solid #666;
-            background-color: #fff;
+        canvas#mycanvas {
+            width: 100%;
+            /* background-color: #000; */
         }
     </style>
 </head>
 
 <body>
-
-    <div id="app">
-        <vue_canvas_1 :kdata="kdata"></vue_canvas_1>
-    </div>
+    <canvas id="mycanvas"></canvas>
     <script src="js/vue.js"></script>
     <script>
-        Vue.component('vue_canvas_1', {
-            props: ['kdata'],
-            data: function() {
-                return {}
-            },
-            template: `<div>
-                <canvas id="ctx"></canvas>        
-                </div>`,
-            computed: {},
-            watch: {},
-            methods: {
-                canvas_init() {
-                    let canvas = document.getElementById('ctx');
-                    let ctx = canvas.getContext('2d');
-                    let blockWidth = 200
-                    let PI = Math.PI
-                    let PI2 = Math.PI * 2
-                    canvas.width = 600
-                    canvas.height = 600
+        let canvas = document.getElementById("mycanvas")
+        let ctx = canvas.getContext('2d')
+        ww = canvas.width = window.innerWidth
+        wh = canvas.height = window.innerHeight
 
-                },
-                draw_Kline() {
-                    let vm = this
-                    let canvas = document.getElementById('ctx');
-                    let ctx = canvas.getContext('2d');
-                    ctx.save()
-                    ctx.translate(0, 600)
-                    ctx.fillStyle = "red"
-                    ctx.fillRect(20, (vm.kdata[0].height_price) * -1, 10, (vm.kdata[0].height_price - vm.kdata[0].low_price))
-                    ctx.restore()
-                },
-                draw_Kunit() {
-                    let vm = this
-                    let canvas = document.getElementById('ctx');
-                    let ctx = canvas.getContext('2d');
-                    for (i = 0; i < 10; i++) {
-                        ctx.lineWidth = 2
-                        ctx.moveTo(0, i * 60)
-                        ctx.lineTo(600, i * 60)
-                        ctx.save()
-                        ctx.translate(580, 600)
-                        ctx.fillText(i, 0, (-i * 60))
-                        ctx.restore()
-                    }
-                    ctx.strokeStyle = "rgba(0,0,0,0.1)"
-                    ctx.stroke()
-
-                }
-            },
-            mounted() {
-                this.canvas_init()
-                this.draw_Kline()
-                this.draw_Kunit()
-            },
-            created() {}
-        });
-        (function VueInit() {
-            var vm = new Vue({
-                el: "#app",
-                data() {
-                    return {
-                        kdata: [{
-                            time: 1,
-                            height_price: 500,
-                            low_price: 380
-                        }, {
-                            time: 2,
-                            height_price: 350,
-                            low_price: 220
-                        }, {
-                            time: 3,
-                            height_price: 450,
-                            low_price: 230
-                        }]
-                    }
-                },
-                methods: {},
-                computed: {},
-                watch: {},
-                mounted() {},
-                created() {},
-                destroyed() {}
-            })
-        })()
+        let Ball = function (){
+            this.p={
+                x:ww/2,
+                y:wh/2
+            }
+            this.v={
+                x:5,
+                y:5
+            }
+            this.a={
+                x:0,
+                y:1
+            }
+            this.r = 50
+            this.dragging = false
+        }
+        Ball.prototype.draw = function(){ 
+            ctx.beginPath()
+            ctx.save()
+                ctx.translate(this.p.x,this.p.y)
+                ctx.arc(0,0,this.r,0,Math.PI * 2)
+                ctx.fillStyle = "white"
+                ctx.fill()
+            ctx.restore()
+        }
     </script>
 </body>
 
