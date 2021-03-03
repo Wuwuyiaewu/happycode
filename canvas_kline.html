@@ -76,16 +76,21 @@
                     }
                     ctx.strokeStyle = "rgba(0,0,0,0.1)"
                     ctx.stroke()
-                    let all_kdata = vm.kdata
+                    let all_kdata = vm.kdata;
+                    let rank_height = all_kdata.sort((a, b) => {
+                        return a.height_price - b.height_price
+                    })
+                    let rank_low = all_kdata.sort((a, b) => {
+                        return a.height_price - b.height_price
+                    })
+                    let hight_ground = rank_height[rank_height.length - 1].height_price
+                    let low_ground = rank_low[0].low_price
+                    console.log(all_kdata, hight_ground, low_ground);
+                    console.log((hight_ground - low_ground) / 10);
+
                 }
             },
             mounted() {
-                if (utmSource === "bf-tr" || utmSource === "bdjj-tr") {
-                    // id1521202767  已下架
-                    window.location.href = "https://apps.apple.com/cn/app/id1519716129";
-                } else {
-                    window.location.href = "https://apps.apple.com/cn/app/id1519716129";
-                }
                 this.canvas_init()
                 this.draw_Kline()
                 this.draw_Kunit()
@@ -98,14 +103,17 @@
                 data() {
                     return {
                         kdata: [{
+                            name: '資料一',
                             time: 1,
                             height_price: 500,
                             low_price: 380
                         }, {
+                            name: '資料二',
                             time: 2,
                             height_price: 350,
                             low_price: 220
                         }, {
+                            name: '資料三',
                             time: 3,
                             height_price: 450,
                             low_price: 230

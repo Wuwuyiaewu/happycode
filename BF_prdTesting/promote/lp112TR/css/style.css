@@ -566,7 +566,7 @@ body {
 }
 
 .videoClose {
-    background-image: url(../images/close_btn.png);
+    background-image: url(public/images/close_btn.png);
     background-size: 100% 100%;
     width: 1rem;
     height: 1rem;

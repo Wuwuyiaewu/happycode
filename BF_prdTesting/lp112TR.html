@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>投资就要在柏富</title>
+    <title>柏富 9 大市场</title>
     <meta name="keywords" content="" />
     <meta name="description" content="" />
     <meta content="telephone=no" name="format-detection">
@@ -54,7 +54,7 @@
     <div class="videoTutor" style="display: none;">
         <div class="videoClose" onclick="closeVideo();"></div>
         <div class="videoWrap">
-            <video id="vid" controls src="public/images/BF TR v5.mp4"></video>
+            <video id="vid" controls src="/public/images/BF TR v5.mp4"></video>
         </div>
     </div>
     <header class="headerMain">
@@ -100,7 +100,7 @@
                                 <th>目标</th>
                                 <th>盈利空间</th>
                             </tr>
-                            <tr>
+                            <tr class="fp_dom">
                                 <td>多</td>
                                 <td>52000</td>
                                 <td>54000</td>
@@ -117,7 +117,7 @@
                                 <th>目标</th>
                                 <th>盈利空间</th>
                             </tr>
-                            <tr>
+                            <tr class="fp_dom">
                                 <td>多</td>
                                 <td>52000</td>
                                 <td>54000</td>
@@ -134,7 +134,7 @@
                                 <th>目标</th>
                                 <th>盈利空间</th>
                             </tr>
-                            <tr>
+                            <tr class="fp_dom">
                                 <td>多</td>
                                 <td>52000</td>
                                 <td>54000</td>
@@ -151,7 +151,7 @@
                                 <th>目标</th>
                                 <th>盈利空间</th>
                             </tr>
-                            <tr>
+                            <tr class="fp_dom">
                                 <td>多</td>
                                 <td>52000</td>
                                 <td>54000</td>
@@ -168,7 +168,7 @@
                                 <th>目标</th>
                                 <th>盈利空间</th>
                             </tr>
-                            <tr>
+                            <tr class="fp_dom">
                                 <td>多</td>
                                 <td>52000</td>
                                 <td>54000</td>
@@ -195,11 +195,11 @@
                     <script>
                         var createProductsBar = function() {
                             let TRDom = document.getElementById('TR_products')
-                            let product = `<a data-id="573100" class="active btnProduct" href="javascript:void(0)">腾讯控股</a>
-<a data-id="573110" class="btnProduct" href="javascript:void(0)">美团点评</a>
-<a data-id="573107" class="btnProduct" href="javascript:void(0)">小米集团</a>
-<a data-id="573115" class="btnProduct" href="javascript:void(0)">阿里巴巴</a>
-<a data-id="573097" class="btnProduct" href="javascript:void(0)">香港交易所</a>`
+                            let product = `<a data-id="573004" class="active btnProduct" href="javascript:void(0)">黄金</a>
+<a data-id="573010" class="btnProduct" href="javascript:void(0)">原油</a>
+<a data-id="613023" class="btnProduct" href="javascript:void(0)">比特币</a>
+<a data-id="573100" class="btnProduct" href="javascript:void(0)">腾讯</a>
+<a data-id="593043" class="btnProduct" href="javascript:void(0)">特斯拉</a>`
                             TRDom.innerHTML = product;
                         }
                     </script>
@@ -249,7 +249,48 @@
 
         function closeVideo() {
             $(".videoTutor").fadeOut();
+            document.getElementById('vid').pause();
         }
+        $.ajax({
+                method: 'get',
+                async: false,
+                dataType: `jsonp`,
+                url: "https://www.bofu210.com/fApi/lp112TR?id=42023",
+                jsonpCallBack: 'callback'
+            })
+            .done(function(msg) {
+                let financial_product_arr = msg.financial_product.split(',')
+                let product_0_arr = msg.product_0.split(',')
+                let product_1_arr = msg.product_1.split(',')
+                let product_2_arr = msg.product_2.split(',')
+                let product_3_arr = msg.product_3.split(',')
+                let product_4_arr = msg.product_4.split(',')
+                let domseltitle = document.getElementById('btbfl')
+                for (let index = 0; index < 5; index++) {
+                    domseltitle.children[index].textContent = financial_product_arr[index]
+                }
+                let domsel = document.querySelectorAll('.fp_dom')
+                for (let index = 0; index < 4; index++) {
+                    domsel[0].children[index].textContent = product_0_arr[index]
+                }
+                for (let index = 0; index < 4; index++) {
+                    domsel[1].children[index].textContent = product_1_arr[index]
+                }
+                for (let index = 0; index < 4; index++) {
+                    domsel[2].children[index].textContent = product_2_arr[index]
+                }
+                for (let index = 0; index < 4; index++) {
+                    domsel[3].children[index].textContent = product_3_arr[index]
+                }
+                for (let index = 0; index < 4; index++) {
+                    domsel[4].children[index].textContent = product_4_arr[index]
+                }
+                console.log("WE ARE IN THIS AJAX FUNCTION");
+            })
+            .fail(function() {
+                console.log(msg);
+                console.log("ajax failed!");
+            })
         jQuery(document).ready(function() {
             $(window).scroll(function() {
                     let winHeight = $(window).scrollTop();
