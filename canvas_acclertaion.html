@@ -27,37 +27,127 @@
 <body>
     <canvas id="mycanvas"></canvas>
     <script src="js/vue.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.7/dat.gui.js' integrity='sha512-u+vtyZDzyd0zgAEffKfoNx2BnCahAOBBYvzGu6vma1B18zQ6lEGF3F6dAFvqaxDoIU/GZRxcXV5oq23OIrkQwg==' crossorigin='anonymous'></script>
     <script>
         let canvas = document.getElementById("mycanvas")
         let ctx = canvas.getContext('2d')
         ww = canvas.width = window.innerWidth
         wh = canvas.height = window.innerHeight
 
-        let Ball = function (){
-            this.p={
-                x:ww/2,
-                y:wh/2
+        let Ball = function() {
+                this.p = {
+                    x: ww / 2,
+                    y: wh / 2
+                }
+                this.v = {
+                    x: -10,
+                    y: 3
+                }
+                this.a = {
+                    x: 0,
+                    y: 1
+                }
+                this.r = 50
+                this.dragging = false
             }
-            this.v={
-                x:5,
-                y:5
-            }
-            this.a={
-                x:0,
-                y:1
-            }
-            this.r = 50
-            this.dragging = false
-        }
-        Ball.prototype.draw = function(){ 
-            ctx.beginPath()
-            ctx.save()
-                ctx.translate(this.p.x,this.p.y)
-                ctx.arc(0,0,this.r,0,Math.PI * 2)
+            // 球體繪製
+        Ball.prototype.draw = function() {
+                ctx.beginPath()
+                ctx.save()
+                ctx.translate(this.p.x, this.p.y)
+                ctx.arc(0, 0, this.r, 0, Math.PI * 2)
                 ctx.fillStyle = "white"
                 ctx.fill()
-            ctx.restore()
+                ctx.restore()
+            }
+            // 運算更新位置
+        Ball.prototype.update = function() {
+                this.p.x += this.v.x
+                this.p.y += this.v.y
+
+                this.v.x += this.a.x
+                this.v.y += this.a.y
+
+                this.v.x *= controls.fade
+                this.v.y *= controls.fade
+
+                controls.vx = this.v.x
+                controls.vy = this.v.y
+                controls.ay = this.a.y
+                this.checkBoundary()
+            }
+            // 邊界回彈
+        Ball.prototype.checkBoundary = function() {
+            // 右邊界
+            if (this.p.x + this.r > ww) {
+                this.v.x = -Math.abs(this.v.x)
+            }
+            // 左邊界
+            if (this.p.x < this.r) {
+                this.v.x = Math.abs(this.v.x)
+            }
+            // 下邊界
+            if (this.p.y + this.r > wh) {
+                this.v.y = -Math.abs(this.v.y)
+            }
+            // 上邊界
+            if (this.p.y < this.r) {
+                this.v.y = Math.abs(this.v.y)
+            }
         }
+        let controls = {
+            vx: 0,
+            vy: 0,
+            ay: 0.6,
+            fade: 0.99,
+            update: true,
+            color: "#fff",
+            step: function() {
+                ball.update()
+            },
+            FPS: 30,
+        }
+        let gui = new dat.GUI()
+        gui.add(controls, "vx", -50, 50).listen().onChange(function(value) {
+            ball.v.x = value
+        })
+        gui.add(controls, "vy", -50, 50).listen().onChange(function(value) {
+            ball.v.y = value
+        })
+        gui.add(controls, "ay", -1, 1).listen().step(0.005).onChange(function(value) {
+            ball.a.y = value
+        });
+        // 摩擦力模擬 (加速度乘以百分比)
+        gui.add(controls, "fade", 0, 1).listen().step(0.05)
+            // 是否更新
+        gui.add(controls, "update").listen()
+
+
+        let ball
+
+        // 初始化球體、建構 ball = Ball
+        function init() {
+            ball = new Ball()
+        }
+        init()
+            // 更新邏輯內(外)
+        function update() {
+            if (controls.update) {
+                ball.update()
+            }
+        }
+        // 更新頻率
+        setInterval(update, 1000 / 30)
+
+        // 繪製畫面
+        function draw() {
+            ctx.fillStyle = "rgba(0,0,0,.5)"
+            ctx.fillRect(0, 0, ww, wh)
+            ball.draw()
+
+            requestAnimationFrame(draw)
+        }
+        requestAnimationFrame(draw)
     </script>
 </body>
 
