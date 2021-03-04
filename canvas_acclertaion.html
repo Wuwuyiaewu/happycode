@@ -56,12 +56,17 @@
                 ctx.save()
                 ctx.translate(this.p.x, this.p.y)
                 ctx.arc(0, 0, this.r, 0, Math.PI * 2)
-                ctx.fillStyle = "white"
+                // 顏色賦予
+                ctx.fillStyle = controls.color
                 ctx.fill()
                 ctx.restore()
             }
             // 運算更新位置
         Ball.prototype.update = function() {
+            // 正處於拖曳狀態則返回
+            if(ball.dragging){
+                return
+            }
                 this.p.x += this.v.x
                 this.p.y += this.v.y
 
@@ -118,9 +123,13 @@
             ball.a.y = value
         });
         // 摩擦力模擬 (加速度乘以百分比)
-        gui.add(controls, "fade", 0, 1).listen().step(0.05)
-            // 是否更新
-        gui.add(controls, "update").listen()
+        gui.add(controls, "fade", 0, 1).listen().step(0.05);
+        // 是否更新
+        gui.add(controls, "update");
+        // 顏色選擇
+        gui.addColor(controls, "color");
+        gui.add(controls, "step");
+        gui.add(controls, "FPS",1,120);
 
 
         let ball
@@ -143,11 +152,48 @@
         function draw() {
             ctx.fillStyle = "rgba(0,0,0,.5)"
             ctx.fillRect(0, 0, ww, wh)
-            ball.draw()
-
-            requestAnimationFrame(draw)
+            ball.draw();
+// 控制顯示偵數
+            setTimeout(draw,1000/controls.FPS)
         }
-        requestAnimationFrame(draw)
+        draw()
+
+        let mousePos = {x:0,y:0}
+        function getDistance(p1,p2) {
+            let temp1 = Math.pow(p1.x - p2.x,2)
+            let temp2 = Math.pow(p1.y - p2.y,2)
+            let dist = Math.sqrt(temp1+temp2)
+            return dist
+        }
+        // 監聽拖動
+        canvas.addEventListener('mousedown',function(evt){
+            mousePos = {x:evt.x,y:evt.y}
+            let dist = getDistance(mousePos,ball.p)
+            if(dist<ball.r){
+                ball.dragging = true
+            }
+        })
+
+        // 解除拖動
+        canvas.addEventListener('mouseup',function(evt){
+            ball.dragging = false
+
+        });
+
+        // 偵聽移動
+        canvas.addEventListener('mousemove',function(evt){
+            let nowPos = {x:evt.x,y:evt.y}
+            if(ball.dragging){
+                let dx = nowPos.x - mousePos.x
+                let dy = nowPos.y - mousePos.y
+
+                ball.p.x += dx
+                ball.p.y += dy
+            }
+            mousePos = nowPos
+        });
+
+
     </script>
 </body>
 
