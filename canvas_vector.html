@@ -14,9 +14,9 @@
             height: 100%;
             margin: 0;
             align-items: center;
-            /* background-color: #000; */
+            background-color: #000;
         }
-        
+
         canvas#mycanvas {
             width: 100%;
             /* background-color: #000; */
@@ -27,8 +27,46 @@
 <body>
     <canvas id="mycanvas"></canvas>
     <script src="js/vue.js"></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.7/dat.gui.js' integrity='sha512-u+vtyZDzyd0zgAEffKfoNx2BnCahAOBBYvzGu6vma1B18zQ6lEGF3F6dAFvqaxDoIU/GZRxcXV5oq23OIrkQwg==' crossorigin='anonymous'></script>
-
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.7/dat.gui.js'
+        integrity='sha512-u+vtyZDzyd0zgAEffKfoNx2BnCahAOBBYvzGu6vma1B18zQ6lEGF3F6dAFvqaxDoIU/GZRxcXV5oq23OIrkQwg=='
+        crossorigin='anonymous'></script>
+    <script>
+        console.clear();
+        let Vector = function (x, y) {
+            this.x = x;
+            this.y = y;
+        }
+        Vector.prototype.moveTo = function (x, y) {
+            this.x += x;
+            this.y += y;
+            return this
+        }
+        // Vector.prototype.toString = function (){
+        //     return "("+this.x+","+this.y+")"
+        // }
+        // 字串方式需要建構才能不顯示[object object]
+        Vector.prototype.toString = function (){
+            return `(${this.x},${this.y})`
+        }
+        Vector.prototype.add = function (v) {
+            // 如此才不會導致物件傳參考，創造新的參考
+            return new Vector(this.x + v.x, this.y + v.y)
+        }
+        Vector.prototype.sub = function (v) {
+            return new Vector(this.x - v.x, this.y - v.y)
+        }
+        Vector.prototype.mul = function (s) {
+            return new Vector(this.x*s, this.y*s)
+        }
+        let a = new Vector(4, 0)
+        let b = new Vector(0, 3)
+        let c = a.add(b)
+        let c2 = a.sub(b)
+        let c3 = a.mul(2)
+        console.log(a+"+"+b+"=");
+        console.log(a+"-"+b+"="+c2);
+        console.log(a+"*2="+c3);
+    </script>
 </body>
 
 </html>
