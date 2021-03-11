@@ -1,0 +1,353 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>开年最旺原油</title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="author" content="[2021.03] Designed by Gray; Coded by Pong">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="shortcut icon" type="image/x-icon" href="promote/lp120F/images/favicon.ico" />
+
+
+    <script src="promote/lp120F/js/jquery.min.js" type="text/javascript"></script>
+    <script src="promote/lp120F/js/rem.js" charset="utf-8"></script>
+    <script src="promote/lp120F/js/wow.min.js" type="text/javascript"></script>
+    <script src="promote/lp120F/js/lp120TR.js" charset="utf-8"></script>
+
+    <link href="promote/lp120F/css/animate.css" type="text/css" rel="stylesheet" />
+    <link href="promote/lp120F/css/lp120TR.css" type="text/css" rel="stylesheet" />
+    <@_includePlace path="/analytics-head.html" />
+    <#-- analytics-head -->
+        <style>
+            /*體驗場影片css  */
+            
+            .videoTutor {
+                width: 100%;
+                height: 100%;
+                display: none;
+                position: fixed;
+                background-color: rgba(0, 0, 0, 0.75);
+                z-index: 999999;
+            }
+            
+            .videoClose {
+                background-image: url(public/images/close_btn.png);
+                background-size: 100% 100%;
+                width: 1rem;
+                height: 1rem;
+                position: absolute;
+                right: 0;
+                cursor: pointer;
+            }
+            
+            .videoWrap {
+                width: 3.8rem;
+                margin: 0 auto;
+                margin-top: 1rem;
+            }
+            
+            @media screen and (max-width: 751px) {
+                .videoWrap {
+                    width: 6.5rem;
+                    margin: 0 auto;
+                    margin-top: 1rem;
+                }
+            }
+            
+            video {
+                width: 100%;
+                height: auto;
+            }
+        </style>
+</head>
+
+<body>
+    <!--#if expr="$QUERY_STRING=/utm_source/"-->
+    <!--#set var="wx_url" value="?$QUERY_STRING"-->
+    <!--#set var="wx_url2" value="&$QUERY_STRING"-->
+    <!--#set var="wx_url3" value="$QUERY_STRING"-->
+    <!--#else-->
+    <!--#set var="wx_url" value=""-->
+    <!--#set var="wx_url2" value=""-->
+    <!--#set var="wx_url3" value=""-->
+    <!--#endif-->
+    <!--#if expr="$QUERY_STRING=/app=ix_app_orig/"-->
+    <!--#set var="wx_url" value="?wx=ix_app_orig"-->
+    <!--#set var="app_url" value="?app=ix_app_orig"-->
+    <!--#set var="app_urld" value="noTopBlank"-->
+    <!--#else-->
+    <!--#set var="app_url" value=""-->
+    <!--#set var="wx_url" value=""-->
+    <!--#endif-->
+    <div class="main_content">
+        <div class="videoTutor" style="display: none;">
+            <div class="videoClose" onclick="closeVideo();"></div>
+            <div class="videoWrap">
+                <video id="vid" controls src="/public/images/BF TR v5.mp4"></video>
+            </div>
+        </div>
+        <div class="news_header">
+            <div>
+                <span class="logo"><img src="promote/lp120F/images/top_logo.png"></span>
+
+                <a href="javascript:openVideo();" onclick="gtag('send','event',$GA_NAME,'open_to_video','content_first');" class="video_btn"><img src="promote/lp120F/images/video_icon.png">视频教程</a>
+                <a href="javascript:void(0)" onclick="toCustomerService();gtag('event', 'toCustomerService', {'event_category':$GA_NAME,'event_label':'header','non_interaction': true});" class="cs_btn"><img src="promote/lp120F/images/cs_icon.png">联系客服</a>
+            </div>
+        </div>
+
+        <div class="main_banner">
+
+            <div class="banner_title">
+                <p class="title1 wow fadeInLeft">
+                    <img src="promote/lp120F/images/banner_title1.png">
+                    <span class="flash"><img src="promote/lp120F/images/banner_flash.png"></span>
+                </p>
+                <p class="title2 wow fadeInRight">
+                    <img src="promote/lp120F/images/banner_title2.png">
+                    <span class="flash"><img src="promote/lp120F/images/banner_flash.png"></span>
+                </p>
+            </div>
+
+
+
+        </div>
+        <!-- /main_banner-->
+
+
+        <div class="content1">
+
+            <div class="pic_title wow fadeInDown"><img src="promote/lp120F/images/pic_title1.png"></div>
+
+            <div class="tab_table wow fadeIn" id="tab_table1">
+                <ul class="table_menu">
+                    <li page="1" onclick="table1_change(1)">
+                        <p>美国原油</p>
+                    </li>
+                    <!--<li page="2" onclick="table1_change(2)">
+							<p>英国原油</p>
+						</li>-->
+                </ul>
+                <ul class="table_content">
+                    <li page="1">
+                        <div class="chart">
+                            <img src="" id="US_pic">
+                        </div>
+                    </li>
+                    <li page="2">
+                        <div class="chart">
+                            <img src="" id="UK_pic">
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+
+        </div>
+        <!-- /content1-->
+
+
+
+        <div class="content2">
+
+            <div class="pic_title  wow fadeInDown"><img src="promote/lp120F/images/pic_title2.png"></div>
+
+            <div class="tab_table wow fadeIn" id="tab_table2">
+                <ul class="table_menu">
+                    <li page="1" onclick="table2_change(1)">
+                        <p>美国原油</p>
+                    </li>
+                    <!--<li page="2" onclick="table2_change(2)">
+							<p>英国原油</p>
+						</li>-->
+                </ul>
+                <ul class="table_content table2">
+                    <li page="1">
+                        <div class="text" id="US_character">
+                            中文中文中文中文中文中文中文中文中文中文中文中文中 中文中文中文中文中文中文中文中文中文中文中文中文中 中文中文中文中文中文中文中文中文中文中文中文中文中 中文中文中文中文中文中文中文中文中文中文中文中文中
+                        </div>
+                    </li>
+                    <li page="2">
+                        <div class="text" id="UK_character">
+                            字字字字字字字字字字字字字字字字字字字字字字字字字 字字字字字字字字字字字字字字字字字字字字字字字字字 字字字字字字字字字字字字字字字字字字字字字字字字字 字字字字字字字字字字字字字字字字字字字字字字字字字
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+        <!-- /content2-->
+
+
+
+        <div class="content3">
+
+            <div class="pic_title wow fadeInDown"><img src="promote/lp120F/images/pic_title3.png"></div>
+
+            <div class="demo wow fadeIn">
+
+                <@_includePlace path="/public/lp/Trading_v2.html" />
+                <#-- 體驗場_v2 -->
+                    <script>
+                        var createProductsBar = function() {
+                            let TRDom = document.getElementById('TR_products')
+                            let product =
+                                `<a data-id="573010" class="btnProduct" href="javascript:void(0)">美国原油</a>`
+                            TRDom.innerHTML = product;
+                        }
+                    </script>
+            </div>
+
+        </div>
+        <!-- /content3-->
+
+
+
+        <div class="content4">
+
+            <div class="pic_title wow fadeInDown"><img src="promote/lp120F/images/pic_title4.png"></div>
+
+            <ul class="content4_list">
+                <li class="wow flipInX">
+                    <b class="wow flipInY"><img src="promote/lp120F/images/content4_number1.png"></b>
+                    <p class="wow fadeIn">点击上方 “买入” / “卖出” 立得$100</p>
+                    <span class="arrow"></span>
+                </li>
+                <li class="wow flipInX">
+                    <b class="wow flipInY"><img src="promote/lp120F/images/content4_number2.png"></b>
+                    <p class="wow fadeIn">如亏损，可重置再领$100</p>
+                    <span class="arrow"></span>
+                </li>
+                <li class="wow flipInX">
+                    <b class="wow flipInY"><img src="promote/lp120F/images/content4_number3.png"></b>
+                    <p class="wow fadeIn">如盈利，能提现装进钱包</p>
+                    <span class="arrow"></span>
+                </li>
+                <li class="wow flipInX">
+                    <b class="wow flipInY"><img src="promote/lp120F/images/content4_number4.png"></b>
+                    <p class="wow fadeIn">无限次可领取$100</p>
+                </li>
+            </ul>
+
+        </div>
+        <!-- /content4-->
+
+
+
+        <div class="new_content">
+            <div class="pic_title2 wow fadeInDown"><img src="promote/lp120F/images/pic_title5.png"></div>
+
+            <span class="wow fadeIn">
+					覆盖外汇、贵金属、指数、原油等200+交易产品，随时随地把握投资先机。</span>
+            <a href="javascript:void(0)" onclick="toMore();_gtag('event', 'aboutUs', {'event_category':$GA_NAME,'event_label':'content_first','non_interaction': true});" class="more_btn2">更多 ></a>
+            <ul class="blue_icon">
+                <li class="wow fadeInLeft">
+                    <a href="javascript:void(0)" onclick="gotoInnerAboutUsPage(1);_gtag('event','aboutUs',{'event_category':$GA_NAME,'event_label':'content_second','non_interaction':true});"></a>
+                    <img src="promote/lp120F/images/3icon_1.png">
+                    <b>多元化产品</b>
+                </li>
+                <li class="wow fadeInDown">
+                    <a href="javascript:void(0)" onclick="gotoInnerAboutUsPage(2);_gtag('event','aboutUs',{'event_category':$GA_NAME,'event_label':'content_third','non_interaction':true});"></a>
+                    <img src="promote/lp120F/images/3icon_2.png">
+                    <b>独创网页交易</b>
+                </li>
+                <li class="wow fadeInRight">
+                    <a href="javascript:void(0)" onclick="gotoInnerAboutUsPage(3);_gtag('event','aboutUs',{'event_category':$GA_NAME,'event_label':'content_fourth','non_interaction':true});"></a>
+                    <img src="promote/lp120F/images/3icon_3.png">
+                    <b>快速出入金</b>
+                </li>
+            </ul>
+
+            <ul class="price_list numRun">
+                <li class="list1 ">
+                    <span><img src="promote/lp120F/images/g_icon1.png">累计成交手数</span>
+                    <p><b id="total_count_1">15,534,817</b>手</p>
+                </li>
+                <li class="list2 ">
+                    <span><img src="promote/lp120F/images/g_icon2.png">累计服务人数</span>
+                    <p><b id="total_count_2">1,673,532</b>人</p>
+                </li>
+            </ul>
+        </div>
+
+
+    </div>
+    <!-- /main_content-->
+
+
+
+
+    <div class="bottom_btn">
+        <div>
+            <p>
+                安卓: 点击右下角<img src="promote/lp120F/images/bottom_icon1.png" class="bottom_icon"> ,点击「添加至」选择「桌面」<br> iOS: 点击 <img src="promote/lp120F/images/bottom_icon2.png" class="bottom_icon">,选择「添加到主屏幕」；
+            </p>
+            <div class="main_btn">
+                <a href="javascript:jump_scroll('TR_products');" class="btn1">无限领钱体验</a>
+                <a href="javascript:h5_ky_toMine();_gtag('event','toMine',{'event_category':$GA_NAME,'event_label':'toMine','non_interaction':true});" class="btn2">真实开户炒油</a>
+            </div>
+        </div>
+    </div>
+    <!-- /bottom_btn-->
+    <script>
+        var $GA_NAME = "lp120F";
+        var $UA;
+
+        function jump_scroll(h) {
+            console.log(h)
+            document.querySelector('.TRbox').scrollIntoView({
+                block: "center",
+                inline: "nearest"
+            });
+        }
+
+        function openVideo() {
+            $(".videoTutor").fadeIn();
+            document.getElementById('vid').play();
+        }
+
+        function closeVideo() {
+            $(".videoTutor").fadeOut();
+            document.getElementById('vid').pause();
+        }
+
+        function h5_ky_toMine() {
+            if (isApp()) {
+                let url = "<!--#echo var='gwfx_oa_new'-->/JW666key/mine" + location.search + '&experience=true&fullEnteredDialog=true';
+                window.top.location = url;
+            } else {
+                let url = "<!--#echo var='gwfx_oa_new'-->/JW666key/mine" + location.search + '&experience=true&fullEnteredDialog=true';
+                location.href = url;
+            }
+        }
+        $.ajax({
+                method: 'get',
+                async: false,
+                dataType: `jsonp`,
+                url: "https://www.bofu210.com/fApi/lp120F?id=42205",
+                jsonpCallBack: 'callback'
+            })
+            .done(function(msg) {
+                console.log(msg, document.getElementById("UK_character"));
+                document.getElementById("UK_character").textContent = msg.UK_character
+                document.getElementById("US_character").textContent = msg.US_character
+                document.getElementById("UK_pic").setAttribute('src', msg.UK_pic)
+                document.getElementById("US_pic").setAttribute('src', msg.US_pic)
+                console.log("WE ARE IN THIS AJAX FUNCTION");
+            })
+            .fail(function() {
+                console.log(msg);
+                console.log("ajax failed!");
+            })
+    </script>
+
+    <@_includePlace path="/numRun.html" />
+    <#-- numRun -->
+        <@_includePlace path="/toH5Page.html" />
+        <#-- toH5Page -->
+</body>
+
+</html>
