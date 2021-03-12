@@ -167,12 +167,12 @@
                 <ul class="table_content table2">
                     <li page="1">
                         <div class="text" id="US_character">
-                            中文中文中文中文中文中文中文中文中文中文中文中文中 中文中文中文中文中文中文中文中文中文中文中文中文中 中文中文中文中文中文中文中文中文中文中文中文中文中 中文中文中文中文中文中文中文中文中文中文中文中文中
+                            基本面：供需基本面无虞，原油大涨 EIA原油成品油汽油与精炼油减少幅度大于预期，供需基本面强劲，有基本面支撑的油价，带动上行。 技术面：有望挑战68前高 K棒几乎没有留太多上引线，多头动能强。目前来到66整数位压力附近，投资人待65.3-65.5压回逢低布局；或是待价格站上66整数关卡布局多方。
                         </div>
                     </li>
                     <li page="2">
                         <div class="text" id="UK_character">
-                            字字字字字字字字字字字字字字字字字字字字字字字字字 字字字字字字字字字字字字字字字字字字字字字字字字字 字字字字字字字字字字字字字字字字字字字字字字字字字 字字字字字字字字字字字字字字字字字字字字字字字字字
+
                         </div>
                     </li>
                 </ul>
@@ -332,13 +332,11 @@
             })
             .done(function(msg) {
                 console.log(msg, document.getElementById("UK_character"));
-                document.getElementById("UK_character").textContent = msg.UK_character
-                document.getElementById("US_character").textContent = msg.US_character
-                document.getElementById("UK_pic").setAttribute('src', msg.UK_pic)
+                document.getElementById("US_character").innerHTML = msg.US_character
                 document.getElementById("US_pic").setAttribute('src', msg.US_pic)
                 console.log("WE ARE IN THIS AJAX FUNCTION");
             })
-            .fail(function() {
+            .fail(function(msg) {
                 console.log(msg);
                 console.log("ajax failed!");
             })
