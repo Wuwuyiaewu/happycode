@@ -1,4 +1,4 @@
-[{
+const TR_DATA = [{
         "type": "数字货币",
         "name": "BTC/USDT",
         "id": "613023",
@@ -577,7 +577,7 @@
         "name": "美国原油",
         "id": "573010",
         "en": "USOil",
-        "pid": "",
+        "pid": "1043109",
         "delta": "",
         "multiple": "",
         "cur_price": "",
@@ -759,7 +759,7 @@
         "name": "美国TECH100",
         "id": "573014",
         "en": "TECH100",
-        "pid": "",
+        "pid": "17327",
         "delta": "",
         "multiple": "",
         "cur_price": "",
@@ -829,7 +829,7 @@
         "name": "现货黄金",
         "id": "573004",
         "en": "XAUUSD",
-        "pid": "",
+        "pid": "997694",
         "delta": "",
         "multiple": "",
         "cur_price": "",

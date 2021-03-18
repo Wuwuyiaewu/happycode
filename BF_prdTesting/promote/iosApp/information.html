@@ -1,0 +1,130 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>资讯参考</title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="author" content="[2021.03] Designed by Kim;Coded by Pong">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico" />
+    <link href="/promote/iosApp/css/animate.css" type="text/css" rel="stylesheet" />
+    <link href="/promote/iosApp/css/swiper.min.css" type="text/css" rel="stylesheet" />
+    <link href="/promote/iosApp/css/AU01.css" type="text/css" rel="stylesheet" />
+    <style>
+        #homeContent {
+            overflow: auto;
+            height: 86vh;
+            padding-bottom: 1rem;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="main">
+        <div class="main_content">
+
+            <div class="information_menu">
+                <div class="wrapper">
+                    <div id="homeContent">
+                        <div class="lists">
+                            <div id="informationflowBox" ref="informationflowBox">
+                                <demo :orgid='6' lang="zh-cn"></demo>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 
+        <div id="newsContent">
+            <div id="newsHeader">
+                <a href="javascript:void(0)" onclick="closeContent()" class="back">
+                    <i></i>
+                </a>
+                <span>詳情</span>
+            </div>
+            <iframe src="" frameborder="0" class="contentIframe"></iframe>
+        </div> -->
+                    <!-- <div class="floatwrapper">
+            <div class="nav-list">
+                <a data-num="0" href="javascript:;" onclick="lp_home()">
+                    <s class="icons icons5"></s>
+                    <b class="txt">首页</b>
+                </a>
+                <a data-num="1" href="javascript:;" onclick="toh5_trade()">
+                    <s class="icons icons6"></s>
+                    <b class="txt">行情</b>
+                </a>
+                <a href="javascript:;" onclick="" class="on">
+                    <s class="icons icons7"></s>
+                    <b class="txt">资讯</b>
+                </a>
+                <a href="javascript:;" onclick="">
+                    <s class="icons icons8"></s>
+                    <b class="txt">升级</b>
+                </a>
+            </div>
+        </div> -->
+                </div>
+            </div>
+            <!-- /information_menu-->
+
+
+
+
+        </div>
+
+    </div>
+    <!-- /main-->
+
+    <script src="/promote/iosApp/js/jquery.min.js"></script>
+    <script src="/promote/iosApp/js/swiper.min.js" type="text/javascript"></script>
+    <script src="/promote/iosApp/js/AU01.js" charset="utf-8"></script>
+    <script src="/promote/iosApp/js/wow.min.js" type="text/javascript"></script>
+    <script src="/promote/iosApp/js/rem.js" charset="utf-8"></script>
+    <script type="text/javascript">
+        remCompute(750, true);
+    </script>
+    <script src="/promote/iosApp/js/vue.js"></script>
+    <script src="/promote/iosApp/js/loadjs.js"></script>
+    <script>
+        loadjs(['https://zixuninfo.oss-cn-hangzhou.aliyuncs.com/js/prod/wequickNewsList.css',
+                'https://zixuninfo.oss-cn-hangzhou.aliyuncs.com/js/prod/vant.min.js',
+                'https://zixuninfo.oss-cn-hangzhou.aliyuncs.com/js/prod/wequickNewsList.umd.min.js'
+            ],
+            'infoflow', {
+                async: false,
+            });
+        loadjs.ready('infoflow', {
+            success: function() { /* foo.js & bar.js loaded */
+                new Vue({
+                    components: {
+                        demo: wequickNewsList
+                    }
+                }).$mount('#informationflowBox')
+
+            },
+            error: function(depsNotFound) { /* foobar bundle load failed */
+
+            },
+        });
+    </script>
+    <script>
+        function openContent() {
+            $('#homeContent').css('display', 'none')
+            $('#newsContent').css('display', 'block')
+            $('.floatwrapper').css('display', 'none')
+        }
+
+        function closeContent() {
+
+            $('#homeContent').css('display', 'block')
+            $('#newsContent').css('display', 'none')
+            $('.floatwrapper').css('display', 'block')
+        }
+    </script>
+</body>
+
+</html>

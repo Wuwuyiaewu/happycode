@@ -192,12 +192,12 @@
                 <@_includePlace path="/public/lp/Trading_v2.html" />
                 <#-- 體驗場_v2 -->
                     <script>
-                        var createProductsBar = function() {
-                            let TRDom = document.getElementById('TR_products')
-                            let product =
-                                `<a data-id="573010" class="btnProduct" href="javascript:void(0)">美国原油</a>`
-                            TRDom.innerHTML = product;
-                        }
+                        // var createProductsBar = function() {
+                        //     let TRDom = document.getElementById('TR_products')
+                        //     let product =
+                        //         `<a data-id="573010" class="btnProduct" href="javascript:void(0)">美国原油</a>`
+                        //     TRDom.innerHTML = product;
+                        // }
                     </script>
             </div>
 
@@ -292,6 +292,7 @@
         </div>
     </div>
     <!-- /bottom_btn-->
+    <script src="public/js/json/gura.js"></script>
     <script>
         var $GA_NAME = "lp120F";
         var $UA;
@@ -331,15 +332,69 @@
                 jsonpCallBack: 'callback'
             })
             .done(function(msg) {
-                console.log(msg, document.getElementById("UK_character"));
                 document.getElementById("US_character").innerHTML = msg.US_character
                 document.getElementById("US_pic").setAttribute('src', msg.US_pic)
+                console.log("WE ARE IN THIS AJAX FUNCTION");
+            })
+            .fail(function(msg) {
+                console.log("ajax failed!");
+            })
+
+        $.ajax({
+                method: 'get',
+                async: false,
+                dataType: `jsonp`,
+                url: "https://www.bofu210.com/fApi/CMS_TR?id=42451",
+                jsonpCallBack: 'callback'
+            })
+            .done(function(msg) {
+                let localtionName = new URL(window.location)
+                let localPath = localtionName.pathname
+                let lpPath = localtionName.pathname.slice(localPath.indexOf('/lp') + 1, localPath.indexOf('.html'));
+                let lpNum = msg[lpPath].split(',')
+                console.log(lpNum[0] * 1);
+                let newProduct = TR_DATA.filter(element => {
+                    return (element.id * 1) === (573010 * 1)
+                });
+                console.log(newProduct);
+                var createProductsBar = function() {
+                    let TRDom = document.getElementById('TR_products')
+
+                    let product =
+                        `<a data-id="573010" class="btnProduct" href="javascript:void(0)">美国原油</a>`
+                    TRDom.innerHTML = product;
+                }
                 console.log("WE ARE IN THIS AJAX FUNCTION");
             })
             .fail(function(msg) {
                 console.log(msg);
                 console.log("ajax failed!");
             })
+
+
+        // function get(url) {
+        //     return new Promise((resolve, reject) => {
+        //         $.ajax({
+        //             method: 'get',
+        //             async: false,
+        //             dataType: `jsonp`,
+        //             url: url,
+        //             jsonpCallBack: 'callback'
+        //         }).done(function(msg) {
+        //             resolve(msg);
+        //         }).fail(function(msg) {
+        //             reject(new Error(msg))
+        //         })
+        //     });
+        // }
+
+
+        // Promise.all([get('https://www.bofu210.com/fApi/CMS_TR?id=42451'), get('https://www.bofu210.com/public/js/json/gura.json')])
+        //     .then(res => {
+        //         console.log(res);
+        //     }).catch(res => {
+        //         console.log(res);
+        //     });
     </script>
 
     <@_includePlace path="/numRun.html" />
