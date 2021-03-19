@@ -43,6 +43,15 @@
     <!--#set var="app_url" value=""-->
     <!--#set var="wx_url" value=""-->
     <!--#endif-->
+    <div id="TR_products">
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+
+    </div>
     <div class="main_content">
 
         <div class="news_header">
@@ -97,17 +106,7 @@
             <div class="demo wow fadeIn">
                 <@_includePlace path="/public/lp/Trading_v2.html" />
                 <#-- 體驗場_v2 -->
-                    <script>
-                        var createProductsBar = function() {
-                            let TRDom = document.getElementById('TR_products')
-                            let product = `<a data-id="573100" class="active btnProduct" href="javascript:void(0)">腾讯控股</a>
-<a data-id="573110" class="btnProduct" href="javascript:void(0)">美团点评</a>
-<a data-id="573107" class="btnProduct" href="javascript:void(0)">小米集团</a>
-<a data-id="573115" class="btnProduct" href="javascript:void(0)">阿里巴巴</a>
-<a data-id="573097" class="btnProduct" href="javascript:void(0)">香港交易所</a>`
-                            TRDom.innerHTML = product;
-                        }
-                    </script>
+
             </div>
 
         </div>
@@ -493,6 +492,7 @@
         <script src="public/js/axios.js"></script>
         <script src="public/js/vue.js"></script>
         <script src="promote/lp102TR/js/main.js"></script>
+        <script src="public/js/json/gura.js"></script>
         <script>
             var $GA_NAME = "lp102TR";
             var $UA;
@@ -510,6 +510,49 @@
                     analysis.textContent = msg.analysis;
                 })
                 .fail(function() {
+                    console.log("ajax failed!");
+                })
+            var createProductsBar
+            $.ajax({
+                    method: 'get',
+                    async: false,
+                    dataType: 'jsonp',
+                    url: "https://www.bofu210.com/fApi/CMS_TR?id=42451",
+                    jsonpCallBack: 'callback'
+                })
+                .done(function(msg) {
+                    let locationName = new URL(window.location)
+                    let location_type = locationName.searchParams.get('type');
+                    let location_type2 = url.searchParams.get('TR_type')
+                    let localPath = locationName.pathname
+                    let lpPath = locationName.pathname.slice(localPath.indexOf('/lp') + 1, localPath.indexOf('.html'));
+                    if ((location_type * 1) === 1 || (location_type2 * 1) === 1) {
+                        lpPath = lpPath + "_1"
+                    }
+                    // fapi 內撈取物件名稱
+                    let lpNum = msg[lpPath].split(',')
+                    let newProduct = []
+                    TR_DATA.filter(element => {
+                        lpNum.filter(el2 => {
+                            if (el2 === element.id) {
+                                newProduct.push(element)
+                            }
+                        })
+                    })
+                    createProductsBar = function() {
+                        let TRDom = document.getElementById('TR_products')
+                        let str = ''
+                        newProduct.forEach(el => {
+                            str += "<a data-id=" + el.id + " class='btnProduct' href='javascript:void(0)'>" + el.name + "</a>"
+                        })
+                        TRDom.innerHTML = str
+                        console.log(newProduct, lpPath);
+                    }
+                    createProductsBar()
+                    console.log("WE ARE IN THIS AJAX FUNCTION");
+                })
+                .fail(function(msg) {
+                    console.log(msg);
                     console.log("ajax failed!");
                 })
         </script>
