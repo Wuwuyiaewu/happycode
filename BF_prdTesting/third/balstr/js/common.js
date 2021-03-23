@@ -29,7 +29,7 @@ $(function() {
 
 
     $(window).scroll(function() {
-            if ($(window).scrollTop() >= 500) {
+            if ($(window).scrollTop() >= 200) {
                 $(".header").addClass('header-inverted');
                 $(".sidebar").fadeIn();
             } else {
