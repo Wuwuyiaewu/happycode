@@ -404,7 +404,21 @@
 
 
         <script src="js/home.js"></script>
-        <script></script>
+        <script>
+            let url = new URL(window.location.href)
+            let login_search = url.searchParams.get('isLogin')
+            login_search == 1 ? login_change() : false
+
+            function login_change() {
+                document.querySelector('.home_top_btn .btn1 b').textContent = '立即交易'
+                document.querySelector('.home_top_btn .btn1 span').textContent = '赚钱之旅'
+                document.querySelector('.home_top_btn .btn1').setAttribute('href', "javascript:appGoSelfSymbol()")
+                document.querySelector('.home_top_btn .btn2 b').textContent = '立即入金'
+                document.querySelector('.home_top_btn .btn2 span').textContent = '轻松获利'
+                document.querySelector('.home_top_btn .btn2').setAttribute('href', "javascript:appGoDeposit()")
+
+            }
+        </script>
 
     </div>
     <!-- /main-->
