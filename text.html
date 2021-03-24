@@ -11,6 +11,7 @@
 
 </body>
 <script src="/BF_prdTesting/public/js/jquery.min.js"></script>
+<script src="/BF_prdTesting/public/js/json/gura.js"></script>
 <script>
     let compare = {
         'banner1': {
@@ -26,11 +27,7 @@
         url: "https://www.bofu210.com/fApi/CMS_test?id=42549",
         jsonpCallBack: 'callback'
     }).done(function(msg) {
-        fapi_compare = msg
-        if (fapi_compare.nnn == compare.banner1.val) {
-            alert(compare.banner1.name)
-        }
-        console.log(fapi_compare.nnn, compare.banner1.val);
+        console.log(msg);
     }).fail(function(msg) {
         console.log(msg);
     })
