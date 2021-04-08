@@ -1,19 +1,24 @@
 {
-  "name": "happycode",
-  "version": "1.0.0",
-  "description": "init",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Wuwuyiaewu/happycode.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Wuwuyiaewu/happycode/issues"
-  },
-  "homepage": "https://github.com/Wuwuyiaewu/happycode#readme"
+    "name": "happycode",
+    "version": "1.0.0",
+    "description": "init",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build": "babel src -d dist"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Wuwuyiaewu/happycode.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/Wuwuyiaewu/happycode/issues"
+    },
+    "homepage": "https://github.com/Wuwuyiaewu/happycode#readme",
+    "devDependencies": {
+        "babel-cli": "^6.26.0",
+        "babel-preset-env": "^1.7.0"
+    }
 }

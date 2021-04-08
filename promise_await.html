@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>非同步</title>
+</head>
+
+<body>
+
+    <script src="js/jquery.min.js"></script>
+    <script>
+        fetch('https://www.bofu210.com/fApi/lp120F?id=42205', {
+                mode: 'cors',
+                headers: {
+                    'Access-Control-Allow-Origin': '*'
+                }
+            })
+            .then((response) => {
+                // 這裡會得到一個 ReadableStream 的物件
+                console.log(response);
+                // 可以透過 blob(), json(), text() 轉成可用的資訊
+                return response.json();
+            }).then((jsonData) => {
+                console.log(jsonData);
+            }).catch((err) => {
+                console.log('錯誤:', err);
+            });
+
+        $.ajax({
+                method: 'get',
+                async: false,
+                dataType: `jsonp`,
+                url: "https://www.bofu210.com/fApi/lp120F?id=42205",
+                jsonpCallBack: 'callback'
+            })
+            .done(function(msg) {
+                console.log(msg, document.getElementById("UK_character"));
+            })
+            .fail(function(msg) {
+                console.log(msg);
+            })
+    </script>
+</body>
+
+</html>
