@@ -6,14 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vueinit</title>
     <style>
+        html,
         body {
-            position: relative;
             display: flex;
             justify-content: center;
-        }
-        
-        #app {
-            margin-top: 30%;
+            height: 100%;
+            align-items: center;
         }
     </style>
 </head>
@@ -21,104 +19,89 @@
 <body>
 
     <div id="app">
-        <major @scale_rang="setRang"></major>
-        <i_chord v-bind:cord=scale @inC_component="setScale"></i_chord>
-        <ii_chord v-bind:cord=scale @inD_component="setScale"></ii_chord>
-        <iii_chord v-bind:cord=scale @inE_component="setScale"></iii_chord>
-        {{displayScale}}
+        <input-text :textname="text" :propa="arr"></input-text>
     </div>
 
     <script src="js/axios.js"></script>
     <script src="js/vue.js"></script>
     <script>
-        Vue.component('major', {
-            props: {},
-            data() {
+        var componentA = {
+            data: function() {
                 return {
-                    rang: [0, 4, 7]
+                    text: '測試'
                 }
             },
-            template: `<button @click="major_scale(0,4,7)">Major</button>`,
-            methods: {
-                major_scale(val1, val2, val3) {
-                    this.$emit("scale_rang", val1, val2, val3)
-                }
-            }
-        });
-        Vue.component('i_chord', {
             props: {
-                cord: {
-                    type: Array,
-                }
+                checked: Boolean,
+                textname: {
+                    type: Object,
+                },
+                propa: {
+                    type: [Array, Object],
+                    default: function() {
+                        return [{
+                            message: '訊息唷'
+                        }]
+                    }
+                },
             },
-            data() {
-                return {}
+            model: {
+                prop: 'checked',
+                event: 'change'
             },
-            template: `<button @click="inC(0,4,7)">{{cord[0]}}</button>`,
-            methods: {
-                inC(val1, val2, val3) {
-                    this.$emit("inc_component", val1, val2, val3)
-                }
-            }
-        });
-        Vue.component('ii_chord', {
-            props: {
-                cord: {
-                    type: Array,
-                }
+            template: `
+            <div>
+                <input
+      type="checkbox"
+      v-bind:checked="checked"
+      v-on:change="$emit('change', $event.target.checked)"
+    >
+    <input
+      type="text"
+      v-bind:value="normalizedSize"
+    >
+    <p>{{validatorProp}}</p>
+            </div>
+            `,
+            computed: {
+                normalizedSize() {
+                    return this.textname.name.trim().toLowerCase()
+                },
+                validatorProp() {
+                    if (Array.isArray(this.propa)) {
+                        console.log(typeof(this.propa) === 'object');
+                        return '陣列'
+                    }
+                    if (typeof(this.propa) === 'object') {
+                        return '物件'
+                    }
+                },
             },
-            data() {
-                return {}
-            },
-            template: `<button @click="inD(2,6,9)">{{cord[2]}}</button>`,
-            methods: {
-                inD(val1, val2, val3) {
-                    this.$emit("ind_component", val1, val2, val3)
-                }
-            }
-        });
-        Vue.component('iii_chord', {
-            props: {
-                cord: {
-                    type: Array,
-                }
-            },
-            data() {
-                return {}
-            },
-            template: `<button @click="inE(4,8,11)">{{cord[4]}}</button>`,
-            methods: {
-                inE(val1, val2, val3) {
-                    this.$emit("ine_component", val1, val2, val3)
-                }
-            }
-        });
+            watch: {},
+            methods: {}
+        };
+
+        ;
         (function VueInit() {
             var vm = new Vue({
                 el: "#app",
-                data: {
-                    scale: ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'],
-                    Root: "",
-                },
-                methods: {
-                    setScale(val1) {
-                        this.Root = val1
-                    },
-                    setRang(val1, val2, val3) {
-                        console.log(val1);
+                data() {
+                    return {
+                        text: {
+                            name: 'NEW_one',
+                            id: '02'
+                        },
+                        arr: ['陣列唷'],
+                        obj: {
+                            bj4: '物件唷'
+                        },
                     }
                 },
-                computed: {
-                    displayScale() {
-                        let ArrScale = []
-                            // this.scale.forEach((element, index) => {
-                            //     this.scaleSel.filter(el2 => {
-                            //         return el2 === index ? ArrScale.push(element) : null
-                            //     })
-                            // });
-                        return this.Root
-                    }
+                components: {
+                    'input-text': componentA,
                 },
+                methods: {},
+                computed: {},
                 watch: {},
                 mounted() {},
                 created() {},
