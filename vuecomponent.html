@@ -19,6 +19,7 @@
 <body>
 
     <div id="app">
+        <p class="input_one"></p>
         <input-text :textname="text" :propa="arr"></input-text>
     </div>
 
@@ -100,7 +101,11 @@
                 components: {
                     'input-text': componentA,
                 },
-                methods: {},
+                methods: {
+                    change_one() {
+
+                    }
+                },
                 computed: {},
                 watch: {},
                 mounted() {},

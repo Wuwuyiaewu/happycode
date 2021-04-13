@@ -545,6 +545,7 @@ var vm = new Vue({
                         this.looping()
                     }, 1000);
                 }
+                
             },
             mounted() {
                 if (this.loopOn_Off) {
