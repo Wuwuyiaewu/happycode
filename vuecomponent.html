@@ -19,97 +19,117 @@
 <body>
 
     <div id="app">
-        <p class="input_one"></p>
-        <input-text :textname="text" :propa="arr"></input-text>
+        <get-catergory :init_arr="init_arr" @push_data="change_one"></get-catergory>
     </div>
 
+    <script src="public/js/ws-index-url.js"></script>
+    <script src="json/code_03_ix.js"></script>
     <script src="js/axios.js"></script>
     <script src="js/vue.js"></script>
     <script>
         var componentA = {
             data: function() {
                 return {
-                    text: '測試'
+                    numb: 1
                 }
             },
             props: {
-                checked: Boolean,
-                textname: {
-                    type: Object,
-                },
-                propa: {
-                    type: [Array, Object],
-                    default: function() {
-                        return [{
-                            message: '訊息唷'
-                        }]
-                    }
-                },
-            },
-            model: {
-                prop: 'checked',
-                event: 'change'
+                init_arr: {
+                    type: [Object, Array],
+                    default: []
+                }
             },
             template: `
             <div>
-                <input
-      type="checkbox"
-      v-bind:checked="checked"
-      v-on:change="$emit('change', $event.target.checked)"
-    >
-    <input
-      type="text"
-      v-bind:value="normalizedSize"
-    >
-    <p>{{validatorProp}}</p>
+                <p>{{init_arr}}</p>
+                <button @click="push_data">add</button>
             </div>
             `,
-            computed: {
-                normalizedSize() {
-                    return this.textname.name.trim().toLowerCase()
-                },
-                validatorProp() {
-                    if (Array.isArray(this.propa)) {
-                        console.log(typeof(this.propa) === 'object');
-                        return '陣列'
-                    }
-                    if (typeof(this.propa) === 'object') {
-                        return '物件'
-                    }
-                },
-            },
+            computed: {},
             watch: {},
-            methods: {}
+            methods: {
+                push_data() {
+                    console.log(this.numb);
+                    this.$emit("push_data", this.numb)
+                    this.numb++
+                }
+            }
         };
-
-        ;
         (function VueInit() {
             var vm = new Vue({
                 el: "#app",
                 data() {
                     return {
-                        text: {
-                            name: 'NEW_one',
-                            id: '02'
+                        init_arr: [],
+                        currencies: `${TECH_ANA_URL}`,
+                        // Http step
+                        Http_config: {
+                            method: 'post',
+                            url: `${HTTP_BASE_URL}/account/appProperties/getAccountProperties`,
+                            headers: {
+                                'Content-type': 'application/json',
+                                'module': 'uat-account',
+                                'rpcType': 'http',
+                                'method': '/account/appProperties/getAccountProperties',
+                                'httpMethod': 'post',
+                                'trace': 'h5_' + this.get_current_time(),
+                                // 發送後才可以取 token
+                                'Authorization': ''
+                            },
+                            data: {
+                                "data": {
+                                    "login_name": "13087654321",
+                                    "password": "a123456"
+                                },
+                                "head": {
+                                    "appKey": "JW666key",
+                                }
+                            },
                         },
-                        arr: ['陣列唷'],
-                        obj: {
-                            bj4: '物件唷'
+                        // 建立 websocket 記憶體
+                        websock: null,
+                        // 初始化 ws 格式
+                        Ws_config: {
+                            trace: `h5 ${this.get_current_time()}`,
+                            version_code: 1,
+                            device: "h5",
+                            head: {
+                                server: "yz",
+                                msgType: "",
+                                sendTime: this.get_current_time(),
+                                Authorization: "",
+                                lang: "zh-TW"
+                            },
+                            content: {
+                                appKey: "",
+                                clientIp: "",
+                                company_id: "",
+                                login_name: "",
+                                password: "",
+                                user_type: 1
+                            },
                         },
                     }
                 },
                 components: {
-                    'input-text': componentA,
+                    'get-catergory': componentA,
                 },
                 methods: {
-                    change_one() {
-
+                    change_one(e) {
+                        this.init_arr.push(e)
+                    },
+                    init() {
+                        this.init_arr.push(['aaa', 'bbb', 'ccc'])
                     }
                 },
                 computed: {},
                 watch: {},
                 mounted() {},
-                created() {},
+                created() {
+                    setTimeout(() => {
+                        this.init()
+                    }, 1000);
+                },
                 destroyed() {}
             })
         })()
