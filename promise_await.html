@@ -11,36 +11,21 @@
 
     <script src="js/jquery.min.js"></script>
     <script>
-        fetch('https://www.bofu210.com/fApi/lp120F?id=42205', {
-                mode: 'cors',
-                headers: {
-                    'Access-Control-Allow-Origin': '*'
-                }
-            })
-            .then((response) => {
-                // 這裡會得到一個 ReadableStream 的物件
-                console.log(response);
-                // 可以透過 blob(), json(), text() 轉成可用的資訊
-                return response.json();
-            }).then((jsonData) => {
-                console.log(jsonData);
-            }).catch((err) => {
-                console.log('錯誤:', err);
-            });
+        let thread_1 = function() {
+            setTimeout(() => {
+                return console.log('thread_1')
+            }, 1000);
+        }
 
-        $.ajax({
-                method: 'get',
-                async: false,
-                dataType: `jsonp`,
-                url: "https://www.bofu210.com/fApi/lp120F?id=42205",
-                jsonpCallBack: 'callback'
-            })
-            .done(function(msg) {
-                console.log(msg, document.getElementById("UK_character"));
-            })
-            .fail(function(msg) {
-                console.log(msg);
-            })
+        let thread_2 = function() {
+            setTimeout(() => {
+                return console.log('thread_1')
+            }, 2000);
+        }
+
+
+        thread_1()
+        console.log('%c yoyo', 'color:orange ;font-size:20px;');
     </script>
 </body>
 
