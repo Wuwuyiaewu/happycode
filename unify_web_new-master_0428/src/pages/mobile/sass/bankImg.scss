@@ -1,0 +1,160 @@
+@import './mixin.scss';
+
+.bank-img {
+    display: inline-block;
+    width: rem(90px);
+    height: rem(80px);
+    background: url('~@m/assets/img/bank-icons.png') no-repeat top center;
+    background-size: rem(90px) auto;
+
+}
+
+.bk-HZCBCN2HXXX {
+    background-position: 0 rem(-5px);
+    /*杭州银行*/
+}
+
+.bk-CMBCCNBSXXX {
+    background-position: 0 rem(-95px);
+    /*招商银行*/
+}
+
+.bk-ZJCBCN2NXXX {
+    background-position: 0 rem(-185px);
+    /*浙商银行*/
+}
+
+.bk-BOSHCNSHXXX {
+    background-position: 0 rem(-275px);
+    /*上海银行*/
+}
+
+.bk-SZDBCNBSXXX {
+    background-position: 0 rem(-365px);
+    /*平安银行*/
+}
+
+.bk-BKCHCNBJXXX {
+    background-position: 0 rem(-455px);
+    /*中国银行*/
+}
+
+.bk-ABOCCNBJXXX {
+    background-position: 0 rem(-545px);
+    /*中国农业银行*/
+}
+
+.bk-CIBKCNBJXXX {
+    background-position: 0 rem(-635px);
+    /*中信银行*/
+}
+
+.bk-BINHCN2NXXX {
+    background-position: 0 rem(-725px);
+    /*宁波银行*/
+}
+
+.bk-BJCNCNBJXXX {
+    background-position: 0 rem(-815px);
+    /*北京银行*/
+}
+
+.bk-CHBHCNBTXXX {
+    background-position: 0 rem(-905px);
+    /*渤海银行*/
+}
+
+.bk-ICBKCNBJXXX {
+    background-position: 0 rem(-995px);
+    /*中国工商银行*/
+}
+
+.bk-NJCBCNBNXXX {
+    background-position: 0 rem(-1085px);
+    /*南京银行*/
+}
+
+.bk-COMMCNSHXXX {
+    background-position: 0 rem(-1175px);
+    /*交通银行*/
+}
+
+.bk-BOJSCNBNXXX {
+    background-position: 0 rem(-1265px);
+    /*江苏银行*/
+}
+
+.bk-HXBKCNBJXXX {
+    background-position: 0 rem(-1355px);
+    /*华夏银行*/
+}
+
+.bk-PCBCCNBJXXX {
+    background-position: 0 rem(-1445px);
+    /*中国建设银行*/
+}
+
+.bk-FJIBCNBAXXX {
+    background-position: 0 rem(-1535px);
+    /*兴业银行*/
+}
+
+.bk-SHRCCNSHXXX {
+    background-position: 0 rem(-1625px);
+    /*上海农商银行*/
+}
+
+.bk-GDBKCN22XXX {
+    background-position: 0 rem(-1715px);
+    /*广东发展银行*/
+}
+
+.bk-EVERCNBJXXX {
+    background-position: 0 rem(-1805px);
+    /*中国光大银行*/
+}
+
+.bk-PSBCCNBJXXX {
+    background-position: 0 rem(-1895px);
+    /*中国邮政储蓄*/
+}
+
+.bk-MSBCCNBJXXX {
+    background-position: 0 rem(-1985px);
+    /*中国民生银行*/
+}
+
+.bk-GZRCCN22XXX {
+    background-position: 0 rem(-2075px);
+    /*广州农村商业银行*/
+}
+
+.bk-SPDBCNSHXXX {
+    background-position: 0 rem(-2165px);
+    /*上海浦东发展银行*/
+}
+
+.bk-BRCBCNBJXXX {
+    background-position: 0 rem(-2255px);
+    /*北京农村商业银行*/
+}
+
+.bk-SRCCCNBSXXX {
+    background-position: 0 rem(-2345px);
+    /*深圳农村商业银行*/
+}
+
+.bk-RCCSCNBSXXX {
+    background-position: 0 rem(-2435px);
+    /*顺德农村农业银行*/
+}
+
+.bk-CZCBCN2XXXX {
+    background-position: 0 rem(-2525px);
+    /*浙江稠州商业银行*/
+}
+
+.bk-other{
+    background-position: 0 rem(-545px);
+    /*其他银行*/
+}

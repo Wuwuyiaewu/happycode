@@ -1,0 +1,15 @@
+{
+	"name": "联汇环球",
+	"short_name": "联汇环球",
+	"start_url": "/",
+	"display": "browser",
+	"background_color": "#fff",
+	"description": "添加主屏幕",
+	"icons": [
+		{
+			"src": "/images/icon.png",
+			"sizes": "192x192",
+			"type": "image/png"
+		}
+	]
+}

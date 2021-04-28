@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
+    <title>交易</title>
+    <style>
+        /* .mainColor {
+                color: #477fd3 !important;
+            }
+            .mainColorBg {
+                background-color: #477fd3 !important;
+            }
+            .subColor {
+                color: #10b873 !important;
+            }
+            .subColorBg {
+                background-color: #10b873 !important;
+            }
+            .riseColor {
+                color: #e3525c !important;
+            }
+            .riseColorBg {
+                background-color: #e3525c !important;
+            }
+            .fallColor {
+                color: #10b873 !important;
+            }
+            .fallColorBg {
+                background-color: #10b873 !important;
+            } */
+        #app:empty::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin: -30px 0 0 -15px;
+            width: 30px;
+            height: 30px;
+            background: url(/images/loading.svg) center no-repeat;
+            background-size: 100%;
+            -webkit-animation: loading 1s linear infinite;
+            animation: loading 1s linear infinite;
+            opacity: 0.7;
+        }
+
+        @-webkit-keyframes loading {
+            0% {
+                transform: translateZ(0) rotate(0deg);
+            }
+
+            100% {
+                transform: translateZ(0) rotate(360deg);
+            }
+        }
+
+        @keyframes loading {
+            0% {
+                transform: translateZ(0) rotate(0deg);
+            }
+
+            100% {
+                transform: translateZ(0) rotate(360deg);
+            }
+        }
+
+    </style>
+    <!-- <script src="<%= BASE_URL %>vconsole.min.js"></script> -->
+    <script>
+        var pageStart = Date.now()
+        // console.log('pageStart', pageStart)
+        // new VConsole()
+
+    </script>
+    <script>
+        // 兼容QQ浏览器的toLocaleString方法
+        var dateFormatStr = new Date().toLocaleString('cn', {
+            hour12: false,
+            hour: '2-digit',
+            minute: '2-digit'
+        })
+        var isIPhone = navigator.appVersion.match(/iphone/gi)
+        var isAndroid = navigator.appVersion.match(/android/gi)
+        var docEl = document.documentElement
+        docEl.setAttribute('data-device-type', isIPhone ? 'iphone' : isAndroid ? 'android' : 'other')
+        if (dateFormatStr && dateFormatStr.length > 5) {
+            document.write('<script src="\/js\/intl\/intl.js"><\/script>')
+            document.write('<script src="\/js\/intl\/zh.js"><\/script>')
+        }
+        var htmlKey = location.pathname.split('/')[1]
+        var isPRD = ['192.168.35.218', 'localhost', '172.30.10.121'].indexOf(location.hostname) === -1
+        var prdService = 'www.wangzhangshun.vip' // 线上网关地址  http://47.106.164.17/
+        var uatService = '192.168.75.62:9010' // 线上网关地址 47.106.164.17:8082    192.168.75.62:9010   192.168.35.101:9010
+        var prdSocket = 'www.wangzhangshun.vip' // 线上socket网关地址
+        var uatSocket = '192.168.75.64:13021' // uat socket网关地址   192.168.75.65:13021
+        window['serviceUrl'] = isPRD ? prdService : uatService
+        window['socketUrl'] = isPRD ? prdSocket : uatSocket
+
+    </script>
+    <!-- <script src="<%= BASE_URL %>datafeeds/udf/dist/polyfills.js"></script>
+        <script src="<%= BASE_URL %>datafeeds/udf/dist/bundle.js"></script> -->
+</head>
+
+<body>
+    <noscript>
+        <strong>We're sorry but unify_web doesn't work properly without JavaScript enabled. Please enable it to
+            continue.</strong>
+    </noscript>
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
+</body>
+
+</html>

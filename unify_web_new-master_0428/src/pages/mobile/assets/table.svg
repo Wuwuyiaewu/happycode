@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 22.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.0" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 283.5 85" enable-background="new 0 0 283.5 85" xml:space="preserve">
+<font horiz-adv-x="1000">
+<!-- Copyright: Copyright 2019 Adobe System Incorporated. All rights reserved. -->
+<font-face font-family="PingFang-SC-Medium" units-per-em="1000" underline-position="-100" underline-thickness="64"/>
+<missing-glyph horiz-adv-x="1000"/>
+<glyph unicode="." horiz-adv-x="264" d="M175,102C187,91 193,77 193,60C193,43 187,28 175,17C162,6 148,0 132,0C116,0 102,6 89,17C77,29 71,43 71,60C71,77 77,91 89,102C100,113 115,119 132,119C149,119 164,113 175,102z"/>
+<glyph unicode="0" horiz-adv-x="600" d="M493,615C531,551 550,465 550,357C550,249 531,163 493,99C449,24 385,-14 300,-14C215,-14 150,24 107,99C69,163 50,249 50,357C50,465 69,551 107,615C150,690 214,728 300,728C385,728 450,690 493,615M162,555C142,507 132,441 132,357C132,274 142,208 162,159C190,90 236,56 300,56C364,56 410,90 438,159C459,210 469,276 469,357C469,440 459,506 438,555C410,624 364,658 300,658C236,658 190,624 162,555z"/>
+<glyph unicode="1" horiz-adv-x="600" d="M361,714l0,-714l-82,0l0,614C235,569 179,536 111,516l0,82C142,607 176,621 211,642C244,662 272,686 297,714z"/>
+<glyph unicode="2" horiz-adv-x="600" d="M473,671C516,632 537,582 537,520C537,459 514,403 467,352C440,323 390,285 319,237C228,176 176,122 163,73l375,0l0,-73l-476,0C62,66 86,125 133,177C164,212 215,254 288,304C345,345 382,374 400,393C437,433 455,476 455,521C455,564 442,598 416,622C390,646 354,658 307,658C257,658 219,641 194,608C165,575 151,528 150,465l-82,0C68,544 90,608 135,656C179,704 237,728 310,728C376,728 430,709 473,671z"/>
+<glyph unicode="5" horiz-adv-x="600" d="M105,714l415,0l0,-73l-348,0l-24,-239l4,0C172,426 198,444 229,456C256,467 286,473 320,473C388,473 443,452 485,409C528,364 549,304 549,228C549,156 523,97 472,51C423,8 364,-14 294,-14C231,-14 177,3 133,37C84,75 56,127 51,192l81,0C136,147 154,112 186,88C215,67 251,56 295,56C345,56 386,72 419,104C452,137 468,178 468,227C468,283 453,327 422,359C393,390 353,406 300,406C266,406 236,399 209,384C180,370 159,349 145,320l-78,0z"/>
+<glyph unicode="&#x221E;" horiz-adv-x="984" d="M367,506C404,481 446,447 492,403C535,445 573,477 606,499C655,534 700,551 739,551C797,551 844,533 880,497C915,460 932,414 932,357C932,302 915,255 880,217C844,181 797,163 739,163C704,163 663,178 616,209C582,230 541,264 492,311C445,266 403,232 367,209C320,178 279,163 245,163C186,163 140,181 106,217C70,254 52,301 52,357C52,414 70,461 106,497C140,533 186,551 245,551C280,551 321,536 367,506M642,444C614,425 580,396 541,357C581,318 615,289 643,270C681,243 713,230 739,230C778,230 808,242 831,266C854,291 865,321 865,357C865,394 854,424 831,448C808,472 778,484 739,484C712,484 679,471 642,444M153,448C130,425 119,395 119,357C119,320 130,289 153,266C175,242 206,230 245,230C273,230 308,246 351,277C376,296 407,323 442,357C404,394 370,422 341,443C304,470 272,484 245,484C206,484 175,472 153,448z"/>
+</font>
+
+	<g id="图层_1">
+	<g>
+		<defs>
+			<path id="SVGID_1_" d="M182.7,71c0-33.7-27.3-61-61-61s-61,27.3-61,61"/>
+		</defs>
+		<clipPath id="SVGID_2_">
+			<use xlink:href="#SVGID_1_"  overflow="visible"/>
+		</clipPath>
+		<radialGradient id="SVGID_3_" cx="121.6667" cy="71.0356" r="61.0119" gradientUnits="userSpaceOnUse">
+			<stop  offset="0.8006" style="stop-color:#EDEDED;stop-opacity:0"/>
+			<stop  offset="1" style="stop-color:#EDEDED;stop-opacity:0.95"/>
+		</radialGradient>
+		<circle clip-path="url(#SVGID_2_)" fill="url(#SVGID_3_)" cx="121.7" cy="71" r="61"/>
+	</g>
+	<path fill="none" stroke="#DBDBDB" stroke-miterlimit="10" d="M182.7,71c0-33.7-27.3-61-61-61s-61,27.3-61,61"/>
+	<rect x="121.2" y="10" fill="#DBDBDB" width="1" height="7.1"/>
+	<rect x="80.6" y="26.7" transform="matrix(0.7071 -0.7071 0.7071 0.7071 2.3405 66.1743)" fill="#DBDBDB" width="1" height="7.1"/>
+	
+		<rect x="162.1" y="26.6" transform="matrix(0.7071 0.7071 -0.7071 0.7071 68.9836 -106.139)" fill="#DBDBDB" width="1" height="7.1"/>
+	
+		<rect x="178.6" y="67" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 249.6527 -108.5615)" fill="#DBDBDB" width="1" height="7.1"/>
+	
+		<rect x="63.7" y="67" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 134.7718 6.3193)" fill="#DBDBDB" width="1" height="7.1"/>
+	<g>
+		<defs>
+			<path id="SVGID_4_" d="M159.7,71c0-21-17-38-38-38s-38,17-38,38"/>
+		</defs>
+		<clipPath id="SVGID_5_">
+			<use xlink:href="#SVGID_4_"  overflow="visible"/>
+		</clipPath>
+		<radialGradient id="SVGID_6_" cx="121.6667" cy="71.0356" r="38.0207" gradientUnits="userSpaceOnUse">
+			<stop  offset="0.5744" style="stop-color:#EDEDED;stop-opacity:0"/>
+			<stop  offset="1" style="stop-color:#EDEDED;stop-opacity:0.95"/>
+		</radialGradient>
+		<circle clip-path="url(#SVGID_5_)" fill="url(#SVGID_6_)" cx="121.7" cy="71" r="38"/>
+	</g>
+	
+		<linearGradient id="SVGID_7_" gradientUnits="userSpaceOnUse" x1="120.9087" y1="134.3063" x2="169.3759" y2="153.8883" gradientTransform="matrix(6.123234e-17 -1 1 6.123234e-17 -35.6059 198.0268)">
+		<stop  offset="0.1055" style="stop-color:#E3525C;stop-opacity:0"/>
+		<stop  offset="1" style="stop-color:#E3525C"/>
+	</linearGradient>
+	<path fill="url(#SVGID_7_)" d="M121.7,71h-38c0-21,17-38,38-38c5,0,9.8,1,14.2,2.7"/>
+	
+		<rect x="128.1" y="34.3" transform="matrix(0.9287 0.3709 -0.3709 0.9287 28.599 -43.9834)" fill="#E3525C" width="1" height="36.1"/>
+	<g>
+		<defs>
+			<path id="SVGID_8_" d="M125.9,71c0-2.6-2.1-4.7-4.7-4.7s-4.7,2.1-4.7,4.7"/>
+		</defs>
+		<use xlink:href="#SVGID_8_"  overflow="visible" fill="#797979"/>
+		<clipPath id="SVGID_9_">
+			<use xlink:href="#SVGID_8_"  overflow="visible"/>
+		</clipPath>
+		<circle clip-path="url(#SVGID_9_)" fill="#797979" cx="121.2" cy="71" r="4.7"/>
+	</g>
+	
+		<text transform="matrix(6.123234e-17 -1 1 6.123234e-17 79.1102 73.3896)" fill="#999999" font-family="'PingFang-SC-Medium'" font-size="10px">0</text>
+	<text transform="matrix(1 0 0 1 162.5172 74.0774)" fill="#999999" font-family="'PingFang-SC-Medium'" font-size="11px">∞</text>
+	<text transform="matrix(1 0 0 1 118.3911 29.2915)" fill="#999999" font-family="'PingFang-SC-Medium'" font-size="10px">1</text>
+	
+		<text transform="matrix(0.7071 -0.7071 0.7071 0.7071 86.6196 46.0197)" fill="#999999" font-family="'PingFang-SC-Medium'" font-size="10px">0.5</text>
+	
+		<text transform="matrix(0.7071 0.7071 -0.7071 0.7071 149.7601 38.6665)" fill="#999999" font-family="'PingFang-SC-Medium'" font-size="10px">2</text>
+</g>
+<g id="图层_2">
+</g>
+</svg>

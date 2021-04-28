@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en"
+      data-buildTime="<%= process.env.VUE_APP_build %>"
+      data-dpr="1"
+      style="font-size:40px;">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible"
+          content="IE=edge, chrome=1" />
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <!-- QQ强制竖屏 -->
+    <meta name="x5-orientation"
+          content="portrait" />
+    <!-- uc强制竖屏 -->
+    <meta name="screen-orientation"
+          content="portrait" />
+    <meta content="telephone=no"
+          name="format-detection" />
+    <meta http-equiv="Cache-Control"
+          content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma"
+          content="no-cache" />
+    <meta http-equiv="Expires"
+          content="0" />
+    <link rel="icon"
+          href="<%= BASE_URL %>favicon.ico" />
+    <title>Trade</title>
+    <script>
+        (function () {
+            try {
+                // 禁止自己嵌套自己
+                if (top !== window && top.location.host === window.location.host) {
+                    top.location = window.location
+                }
+            } catch (error) { }
+        })();
+
+    </script>
+    <script>
+        // var pageStart = Date.now()
+        // console.log('pageStart', pageStart)
+
+    </script>
+    <script src="<%= BASE_URL %>charting_library/charting_library.min.js?t=2"></script>
+    <script src="<%= BASE_URL %>libs/vueBase.f4befa3e.js?t=2"></script>
+</head>
+
+<body>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        html,
+        body,
+        #app {
+            height: 100%;
+        }
+
+        /* .mainColor {
+                color: #477fd3 !important;
+            }
+            .mainColorBg {
+                background-color: #477fd3 !important;
+            }
+            .subColor {
+                color: #10b873 !important;
+            }
+            .subColorBg {
+                background-color: #10b873 !important;
+            }
+            .riseColor {
+                color: #e3525c !important;
+            }
+            .riseColorBg {
+                background-color: #e3525c !important;
+            }
+            .fallColor {
+                color: #10b873 !important;
+            }
+            .fallColorBg {
+                background-color: #10b873 !important;
+            } */
+        #app.loading:empty::after,
+        .loadIcon::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin: -30px 0 0 -15px;
+            width: 30px;
+            height: 30px;
+            background: url(/images/loading.svg) center no-repeat;
+            background-size: 100%;
+            -webkit-animation: loading 1s linear infinite;
+            animation: loading 1s linear infinite;
+            opacity: 0.7;
+        }
+
+
+        @-webkit-keyframes loading {
+            0% {
+                transform: translateZ(0) rotate(0deg);
+            }
+
+            100% {
+                transform: translateZ(0) rotate(360deg);
+            }
+        }
+
+        @keyframes loading {
+            0% {
+                transform: translateZ(0) rotate(0deg);
+            }
+
+            100% {
+                transform: translateZ(0) rotate(360deg);
+            }
+        }
+    </style>
+
+    <div id="app"></div>
+    <script>
+        if (!/\/\w+\/(trade|selfSymbol|home)/.test(location.pathname)) {
+            document.querySelector('#app').classList.add('loading')
+        }
+
+    </script>
+
+    <script>
+        // 兼容QQ浏览器的toLocaleString方法
+        var dateFormatStr = new Date().toLocaleString('cn', {
+            hour12: false,
+            hour: '2-digit',
+            minute: '2-digit'
+        })
+        var isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
+        var isIPhone = navigator.appVersion.match(/iphone/gi)
+        var isAndroid = navigator.appVersion.match(/android/gi)
+        var docEl = document.documentElement
+        var allowBrowser = /chrome|firefox|opera|safari|360se|lbbrowser|qqbrowser/.test(navigator.userAgent.toLowerCase())
+       if(!isMac&&!isIPhone&&!isAndroid&&!allowBrowser){
+            window.location.href('/browser.html')
+       }
+        docEl.setAttribute('data-device-type', isIPhone ? 'iphone' : isAndroid ? 'android' : 'other')
+        if (dateFormatStr && dateFormatStr.length > 5) {
+            document.write('<script src="\/js\/intl\/intl.js"><\/script>')
+            document.write('<script src="\/js\/intl\/zh.js"><\/script>')
+        }
+        if (isMac) {
+            document.documentElement.classList.add('mac-os')
+        }
+        var htmlKey = location.pathname.split('/')[1]
+        var uatHost = ['192.168.35.218', 'testixmiddle.', 'testweb.', 'localhost', '192.168.1.', 'gcpuatixmiddle',
+            'preixmiddle', 'gcppreixmiddle'
+        ]
+        var isPC = true;
+        var isPRD = true;
+        (function () {
+            var hostname = location.hostname;
+            for (var i = 0; i < uatHost.length; i++) {
+                if (hostname.indexOf(uatHost[i]) === 0) {
+                    isPRD = false;
+                    break;
+                }
+            }
+        })();
+        var prdService = '' // 线上网关地址
+        var uatService = 'testapi.ixmiddle.com' // 线上网关地址 yz_uat: testapi.ixmiddle.com 4K_uat: gcpuatapi.ixmiddle.site preapi.mircoinfolab.com
+        var imsService = ''
+        window['serviceUrl'] = isPRD ? prdService : uatService
+        window['socketUrl'] = isPRD ? prdService : uatService
+        // if ( location.href.indexOf('terminal=ios') > -1) document.documentElement.classList.add('old03'); // 兼容03旧包的刘海屏 公版不做这个判断处理
+
+    </script>
+    <!-- built files will be auto injected -->
+</body>
+
+</html>

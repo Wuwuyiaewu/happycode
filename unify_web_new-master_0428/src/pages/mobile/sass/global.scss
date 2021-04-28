@@ -1,0 +1,417 @@
+@import '~@m/sass/mixin.scss';
+
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    box-sizing: border-box;
+}
+
+html {
+    // font-size: 10vw;
+    background: #f9f9f9;
+}
+html,
+body,
+#app {
+    height: 100%;
+}
+
+body {
+    font-size: 16px;
+    /*no*/
+    // font-family: 'PingFang SC', '-apple-system', 'Heiti SC', 'Helvetica', 'Helvetica Neue', 'Droid Sans Fallback', 'Droid Sans';
+    font-family: 'Trebuchet MS', 'roboto', 'ubuntu', 'sans-serif';
+    webkit-text-size-adjust: none;
+    -webkit-user-select: none;
+    background: #f8f8f8;
+}
+
+[class*='icon_'] {
+    font-family: iconfont;
+}
+
+[class*='of-1px']:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 200%;
+    transform: scale(0.5);
+    transform-origin: 0 0;
+    pointer-events: none;
+    box-sizing: border-box;
+    border: 0 solid #e2e9f1;
+}
+
+.of-1px-all {
+    &::after {
+        border-width: 1px;
+    }
+}
+
+.m-field {
+    // padding: .38667rem .42667rem;
+    border: none;
+    background-color: #fff;
+}
+
+::-webkit-input-placeholder {
+    color: rgba($color: #000000, $alpha: 0.3);
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+input[type='number'] {
+    -moz-appearance: textfield;
+}
+
+i {
+    font-style: normal;
+}
+
+#nav {
+    padding: 30px;
+
+    a {
+        font-weight: bold;
+        color: #2c3e50;
+
+        &.router-link-exact-active {
+            color: #42b983;
+        }
+    }
+}
+
+.pageRouter {
+    font-size: rem(26px);
+    min-height: 100%;
+    color: $text;
+    line-height: 1.4;
+}
+
+.protocolContent a {
+    color: $primary !important;
+}
+
+.muted {
+    color: $muted;
+}
+
+.red {
+    color: $red;
+}
+
+.green {
+    color: $green;
+}
+
+.black {
+    color: $text;
+}
+
+.grayColor {
+    color: #333 !important;
+}
+
+.alignRgiht {
+    text-align: right;
+}
+
+.alignmiddle {
+    vertical-align: middle;
+}
+
+.mtop10 {
+    margin-top: 10px;
+}
+
+.relative {
+    position: relative;
+}
+
+// 路由切换动画效果
+.routerView-fade-enter-active {
+    transition: all 0.4s;
+}
+
+.routerView-fade-leave-active {
+    // transition: all 0.3s;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity 0.5s;
+}
+
+.fade-enter,
+.fade-leave-to
+
+/* .fade-leave-active below version 2.1.8 */
+ {
+    opacity: 0;
+}
+
+.routerView-fade-enter,
+.routerView-fade-leave-to
+
+/* .slide-fade-leave-active for below version 2.1.8 */
+ {
+    // transform: translateX(10px);
+    opacity: 0.3;
+}
+
+.slideLeft-fade-enter-active {
+    transition: all 0.3s ease-out;
+}
+
+.slideLeft-fade-leave-active {
+    transition: all 0.3s;
+}
+
+.slideLeft-fade-enter,
+.slideLeft-fade-leave-to
+
+/* .slide-fade-leave-active for below version 2.1.8 */
+ {
+    transform: translateX(100%);
+    opacity: 0.3;
+}
+
+/*cappy*/
+.m-subTab {
+    background-color: #f9f9f9;
+    padding: rem(40px) rem(70px);
+    margin: 0 auto;
+
+    .van-tabs {
+        padding-top: 0;
+
+        &__nav--card {
+            border: none;
+
+            .van-tab {
+                border: none;
+                margin-left: 1px;
+                margin-right: 1px;
+                background: #fff;
+                font-size: rem(28px);
+                line-height: 30px;
+
+                &:first-child {
+                    border-radius: rem(60px) 0 0 rem(60px);
+                }
+
+                &:last-child {
+                    border-radius: 0 rem(60px) rem(60px) 0;
+                }
+            }
+        }
+    }
+}
+
+.m-dialog {
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    &.transparent {
+        background-color: transparent;
+    }
+    .dialog-header {
+        position: relative;
+        padding: rem(43px) 0 rem(45px) 0;
+        color: #333333;
+        font-size: rem(34px);
+
+        .title {
+            text-align: center;
+        }
+
+        .right {
+            position: absolute;
+            height: 100%;
+            padding: rem(45px) rem(30px);
+            right: 0;
+            bottom: 0;
+
+            i {
+                font-size: rem(40px);
+            }
+        }
+    }
+
+    .dialog-body {
+        flex: 1;
+        overflow-y: auto;
+    }
+
+    .dialog-footer {
+        display: flex;
+
+        .van-button {
+            flex: 1;
+            border: none;
+            border-radius: 0;
+            height: rem(90px);
+            font-size: rem(34px);
+        }
+
+        .van-button--plain {
+            color: #477fd3;
+        }
+    }
+}
+
+@font-face {
+    font-weight: normal;
+    font-family: 'vant-icon';
+    font-style: normal;
+    font-display: auto;
+    src: url('~@/fonts/vant-icon-db1de1.woff2') format('woff2'), url('~@/fonts/vant-icon-db1de1.woff') format('woff'), url('~@/fonts/vant-icon-db1de1.ttf') format('truetype');
+}
+
+@keyframes redPacketsRain {
+    to {
+        top: 100%;
+    }
+}
+
+@keyframes AnimFadeOut {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+@keyframes bg-red {
+    0% {
+        background: #fff;
+    }
+    30% {
+        background: linear-gradient(to right, #fff, #fcf6f7);
+    }
+    80% {
+        background: linear-gradient(to right, #fff, #faf3f3);
+    }
+    100% {
+        background:#fff;
+    }
+}
+@keyframes bg-green {
+    0% {
+        background: #fff;
+    }
+    30% {
+        background: linear-gradient(to right, #fff, #f0faf8);
+    }
+    80% {
+        background: linear-gradient(to right, #fff, #eaf8f6);
+    }
+    100% {
+        background:#fff;
+    }
+}
+.riseColorBgAni,.fallColorBgAni {
+    animation-duration: 1s;
+    animation-timing-function: ease-out;
+    animation-iteration-count: infinite;
+    transition-property: background;
+    animation-iteration-count:1;
+    animation-direction:normal;
+}
+.riseColorBgAni {
+    animation-name: bg-green;
+    
+}
+.fallColorBgAni {
+    animation-name: bg-red;
+}
+.z-index-9999 {
+    position: relative;
+    z-index: 99999;
+}
+// 移动端1px处理
+[class*='of-1px'] {
+    position: relative;
+}
+
+[class*='of-1px']::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 200%;
+    -webkit-transform: scale(0.5);
+    transform: scale(0.5);
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+    pointer-events: none;
+    box-sizing: border-box;
+    border: 0 solid #e3e3e3;
+}
+
+.of-1px-top::after {
+    border-top-width: 1px;
+}
+
+.of-1px-left::after {
+    border-left-width: 1px;
+}
+
+.of-1px-right::after {
+    border-right-width: 1px;
+}
+
+.of-1px-bottom::after {
+    border-bottom-width: 1px;
+}
+
+.of-1px-top-bottom::after {
+    border-width: 1px 0;
+}
+
+.of-1px-all::after {
+    border-width: 1px;
+}
+
+.van-button--disabled {
+    opacity: 1 !important;
+    background: #a3bfe9 !important;
+}
+
+.van-dialog__confirm .van-button__text {
+    color: #477fd3 !important;
+}
+
+.van-dialog__message.van-dialog__message--has-title {
+    color: #8f8f8f;
+}
+
+/* 兼容03旧包的刘海屏 */
+.old03 {
+    border-top: 30px solid #fff;
+}
+
+.old03 #topNav {
+    border-top: 30px solid #fff;
+    box-sizing: content-box;
+}
+
+.old03 .form-account-wrap .header {
+    top: 30px !important;
+}
+
+.old03 .popup-myAsset .layout-1 {
+    padding-top: 30px;
+}
+
+.old03 .assetDetails .menu-wrap {
+    top: 2rem !important;
+}

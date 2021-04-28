@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>系统正在维护，请耐心等待</title>
+    <meta name="keywords"
+          content="系统正在维护" />
+    <meta name="description"
+          content="系统正在维护" />
+    <meta charset="UTF-8">
+    <meta http-equiv="cache-control"
+          content="no-cache" />
+    <meta http-equiv="pragma"
+          content="no-cache" />
+    <meta http-equiv="content-type"
+          content="text/html; charset=UTF-8">
+    <meta name="viewport"
+          content="width=device-width,user-scalable=0,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0">
+</head>
+
+<body>
+    <script>
+        function recalc(x, bol) {
+            var clientWidth = document.body.clientWidth;
+
+            if (bol && (!clientWidth || clientWidth > x)) {
+                document.documentElement.style.fontSize = "";
+                return;
+            };
+            document.documentElement.style.fontSize = 100 * (clientWidth / x) + 'px';
+        }
+        var remCompute = function (width, device) {
+            if (window.addEventListener) {
+                recalc(width, device);
+                var resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';
+                window.addEventListener(resizeEvt, function () {
+                    recalc(width, device)
+                }, false);
+            };
+        };
+        remCompute(750, false)
+
+    </script>
+    <script src="<%= BASE_URL %>libs/vueBase.f4befa3e.js?t=2"></script>
+    <script>
+        window['isPRD'] = true
+        window['imsService'] = ''
+        window['serviceUrl'] = '';
+        window['socketUrl'] = '';
+    </script>
+    <div id="app"></div>
+
+</body>
+
+</html>

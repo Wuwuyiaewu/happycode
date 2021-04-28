@@ -1,0 +1,79 @@
+syntax = "proto3";
+package com.ix.quotation.proto;
+
+
+message ProductRealTimePrice {
+    string code = 1;
+    string msg_code = 2;
+    string trace = 3;
+    int64 qt = 4;
+    int64 kt = 5;
+    int64 wt = 6;
+
+    PriceContent content = 7;
+
+}
+
+message PriceContent {
+    float a1 = 1;
+    float a2 = 2;
+    float a3 = 3;
+    float a4 = 4;
+    float a5 = 5;
+    float a6 = 6;
+    float a7 = 7;
+    float a8 = 8;
+    float a9 = 9;
+    float a10 = 10;
+
+
+    float b1 = 11;
+    float b2 = 12;
+    float b3 = 13;
+    float b4 = 14;
+    float b5 = 15;
+    float b6 = 16;
+    float b7 = 17;
+    float b8 = 18;
+    float b9 = 19;
+    float b10 = 20;
+
+
+    int64 av1 = 21;
+    int64 av2 = 22;
+    int64 av3 = 23;
+    int64 av4 = 24;
+    int64 av5 = 25;
+    int64 av6 = 26;
+    int64 av7 = 27;
+    int64 av8 = 28;
+    int64 av9 = 29;
+    int64 av10 = 30;
+
+
+    int64 bv1 = 31;
+    int64 bv2 = 32;
+    int64 bv3 = 33;
+    int64 bv4 = 34;
+    int64 bv5 = 35;
+    int64 bv6 = 36;
+    int64 bv7 = 37;
+    int64 bv8 = 38;
+    int64 bv9 = 39;
+    int64 bv10 = 40;
+
+    int32 sym = 41;
+    float cur = 42;
+    int64 av = 43;
+
+    int64 tm = 44;
+    int64 stm = 45;
+    int64 mt = 46;
+
+
+    float high_price = 47;
+    float open_price = 48;
+    float low_price = 49;
+    float close_price = 50;
+
+}

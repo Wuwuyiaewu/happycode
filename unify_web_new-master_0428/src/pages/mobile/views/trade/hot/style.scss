@@ -1,0 +1,140 @@
+@import "~@m/sass/mixin.scss";
+.m-hotListTable {
+    .colA {
+        text-align: left;
+        flex: 1;
+        padding-right: rem(20px);
+    }
+    .colB {
+        text-align: right;
+        width: rem(160px);
+        padding-right: rem(30px);
+    }
+    .colC {
+        text-align: right;
+        width: rem(250px);
+    }
+    .header {
+        font-size: rem(24px);
+        padding: rem(18px) rem(30px);
+        display: flex;
+        .colC_zfb {
+            text-align: left;
+            padding-left: rem(50px);
+        }
+    }
+    .body {
+        border-bottom: rem(20px) solid #f9f9f9;
+        .link {
+            display: inline-block;
+            width: 100%;
+            padding: rem(40px) rem(30px);
+        }
+        .item {
+            display: flex;
+            align-items: center;
+            .info {
+                display: inline-block;
+                margin-left: rem(34px);
+            }
+        }
+        .rankIcon {
+            display: inline-block;
+            position: relative;
+            top: rem(-30px);
+            padding-top: rem(2px);
+            width: rem(28px);
+            height: rem(24px);
+            border-radius: rem(4px) rem(4px) 0 0;
+            font-size: rem(20px);
+            background-color: #949494;
+            color: #fff;
+            text-align: center;
+            line-height: rem(24px);
+            &::after {
+                content: "";
+                position: absolute;
+                bottom: -4px;
+                right: 0;
+                width: 0;
+                height: 0;
+                border-style: solid;
+                border-width: 4px rem(14px) 0 rem(14px);
+                border-color: #949494 transparent transparent transparent;
+            }
+            &.rankIcon-0 {
+                background-color: #e3525c;
+                &::after {
+                    border-color: #e3525c transparent transparent transparent;
+                }
+            }
+            &.rankIcon-1 {
+                background-color: #f39800;
+                &::after {
+                    border-color: #f39800 transparent transparent transparent;
+                }
+            }
+            &.rankIcon-2 {
+                background-color: #477fd3;
+                &::after {
+                    border-color: #477fd3 transparent transparent transparent;
+                }
+            }
+        }
+        .btn {
+            display: inline-block;
+            width: rem(160px);
+            height: rem(58px);
+            border-radius: rem(6px);
+            color: #fff;
+            text-align: right;
+            padding-right: rem(12px);
+            line-height: rem(58px);
+        }
+        .zds {
+            font-size: rem(34px);
+        }
+        .colB {
+            font-size: rem(28px);
+        }
+        .name {
+            font-size: rem(34px);
+            color: #333333;
+        }
+        .code {
+            color: #999999;
+            font-size: rem(24px);
+        }
+        .colC {
+            .colC-B {
+                display: inline-block;
+                width: rem(130px);
+                text-align: center;
+            }
+            .colC-C {
+                color: #477fd3;
+                font-size: rem(28px);
+                display: flex;
+                flex: 1;
+                .number,
+                .chart {
+                    display: inline-block;
+                }
+                .number {
+                    margin-right: rem(20px);
+                    width: rem(100px);
+                }
+                .chart {
+                    flex: 1;
+                    height: rem(40px);
+                    text-align: left;
+                    .percent {
+                        background-color: #477fd3;
+                        display: inline-block;
+                        height: 100%;
+                    }
+                }
+            }
+        }
+    }
+}

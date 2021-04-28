@@ -1,0 +1,186 @@
+@import '~@m/sass/mixin.scss';
+@import '~@m/sass/variables.scss';
+.m-position {
+    .link {
+        display: inline-block;
+        width: 100%;
+    }
+}
+.m-ccgd {
+    padding: 0 rem(20px);
+    background-color: #f9f9f9;
+
+    .link {
+        display: inline-block;
+        width: 100%;
+    }
+    .item {
+        position: relative;
+        background: #fff;
+        border-radius: rem(10px);
+        margin-bottom: rem(20px);
+        overflow: hidden;
+        padding: rem(20px) rem(30px) 0;
+        .cell {
+            width: 100%;
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: rem(20px);
+            color: $muted;
+            line-height: 1.45;
+            font-size: rem(20px);
+            .th {
+                flex: 1;
+            }
+            &:last-child {
+                align-items: flex-end;
+            }
+            .bd {
+                position: relative;
+                top: rem(4px);
+                display: inline-block;
+                text-align: center;
+                margin-right: rem(20px);
+            }
+            .price {
+                flex: 1;
+
+                .price_item {
+                    display: inline-block;
+                    width: rem(220px);
+                    span {
+                        padding: 0 rem(4px);
+                    }
+                    .title {
+                        margin-right: rem(4px);
+                        padding: 0;
+                    }
+                }
+            }
+            .ft {
+                text-align: right;
+                vertical-align: middle;
+            }
+            .amount {
+                font-weight: 600;
+                font-size: rem(34px);
+                padding-right: rem(6px);
+            }
+            .currency {
+                position: relative;
+                top: rem(6px);
+            }
+            .warn {
+                background-color: $warn;
+                color: #333;
+            }
+            .name {
+                display: inline-block;
+                vertical-align: bottom;
+                max-width: rem(360px);
+                font-size: rem(28px);
+                line-height: rem(38px);
+                color: $text;
+                @include ellipsis();
+            }
+            .lot {
+                display: inline-block;
+                vertical-align: bottom;
+                margin-left: 0.5em;
+            }
+
+            .time {
+                font-size: rem(20px);
+                color: #999999;
+            }
+        }
+
+        .icon_icon_chart {
+            display: inline-block;
+            font-style: normal;
+            border-radius: rem(6px);
+            width: rem(52px);
+            height: rem(46px);
+            font-size: rem(30px);
+            text-align: center;
+            line-height: rem(46px);
+            &.hidden {
+                color: #477fd3;
+                background-color: #f3f8ff;
+            }
+        }
+
+        // .klineIcon {
+        //     display: inline-block;
+        //     font-style: normal;
+        //     font-size: rem(30px);
+        //     width: rem(52px);
+        //     height: rem(46px);
+        //     line-height: rem(46px);
+        //     border-radius: rem(6px);
+        //     &.loading {
+        //         font-size: 0;
+        //         &::before {
+        //             content: '';
+        //         }
+        //         background: url(~@public/images/loading.svg) center no-repeat;
+        //         background-size: rem(52px) rem(46px);
+        //         animation: loading 1s linear infinite;
+        //         opacity: 0.7;
+        //     }
+        //     &.hidden {
+        //         color: #477fd3;
+        //         background-color: #f3f8ff;
+        //     }
+        //     &.visible {
+        //         color: #fff;
+        //         background-color: #477fd3;
+        //     }
+        // }
+        .van-button {
+            border-radius: rem(6px);
+            &__text {
+                color: #477fd3;
+            }
+            &--mini {
+                font-size: rem(24px);
+                min-width: rem(124px);
+                padding: 0 rem(10px);
+                height: rem(48px);
+                line-height: rem(48px);
+            }
+        }
+        // .van-tag {
+        //     padding: rem(4px) rem(6px);
+        //     line-height: 1;
+        //     font-size: rem(20px);
+        //     &--danger {
+        //         position: relative;
+        //         margin-left: rem(20px);
+        //         background-color: $red;
+        //         &:after {
+        //             position: absolute;
+        //             right: 99%;
+        //             top: 50%;
+        //             margin-top: rem(-4px);
+        //             content: '';
+        //             @include triangle(left, rem(4px), rem(8px), $red);
+        //         }
+        //     }
+        // }
+        // .van-notice-bar {
+        //     height: rem(50px);
+        //     margin: 0 rem(-30px);
+        //     font-size: rem(24px);
+        //     padding: 0 rem(20px);
+        //     &__right-icon {
+        //         color: #ccb197;
+        //     }
+        // }
+    }
+    .m-loading {
+        text-align: center;
+        padding-top: rem(60px);
+    }
+}

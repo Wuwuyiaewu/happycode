@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>浏览器温馨提示</title>
+  <meta name="description" content="The HTML5 Herald">
+  <meta name="author" content="SitePoint">
+<style>
+    html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,abbr,address,cite,code,del,dfn,em,img,ins,kbd,q,samp,small,strong,sub,sup,var,b,i,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,figcaption,figure,footer,header,hgroup,menu,nav,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent;}body{line-height:1;}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block;}nav ul{list-style:none;}blockquote,q{quotes:none;}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none;}a{margin:0;padding:0;font-size:100%;vertical-align:baseline;background:transparent;}ins{background-color:#ff9;color:#000;text-decoration:none;}mark{background-color:#ff9;color:#000;font-style:italic;font-weight:bold;}del{text-decoration:line-through;}abbr[title],dfn[title]{border-bottom:1px dotted;cursor:help;}table{border-collapse:collapse;border-spacing:0;}hr{display:block;height:1px;border:0;border-top:1px solid #cccccc;margin:1em 0;padding:0;}input,select{vertical-align:middle;}
+    html{
+        overflow: hidden;
+    }
+    .container{
+        width: 850px;
+        left: 50%;
+        top: 50%;
+        position: absolute;
+        font-family: Microsoft YaHei;
+        text-align: center;
+        margin-top: -115px;
+        margin-left: -425px;
+    }
+    .container .title{
+
+        font-size: 26px;
+font-weight: 400;
+color: #343434;
+line-height: 33px;
+padding-bottom: 16px;
+    }
+    .container .description{
+
+        font-size: 16px;
+
+font-weight: 400;
+color: #666666;
+line-height: 35px;
+padding-bottom: 40px;
+    }
+    .container .browser{
+
+    }
+    .container .browser ul{
+        list-style-type: none;
+        zoom:1;
+    }
+    .container .browser ul:after{
+        visibility: hidden;
+        display: block;
+        font-size: 0;
+        content: ' ';
+        clear: both;
+        height: 0;
+    }
+    .container .browser ul li{
+        float: left;
+        width: 14.28%;
+
+    }
+    .container .browser ul li .icon-box{
+
+    }
+    .container .browser ul li i{
+        display: inline-block;
+        width:70px;
+        height: 70px;
+        background-repeat: no-repeat;
+        background-position: center center;
+    }
+    .container .browser ul li i.icon-chrome{
+        background-image: url(/images/browser/chrome.png);
+    }
+    .container .browser ul li i.icon-safari{
+        background-image: url(/images/browser/safari.png);
+    }
+    .container .browser ul li i.icon-firefox{
+        background-image: url(/images/browser/firefox.png);
+    }
+    .container .browser ul li i.icon-opera{
+        background-image: url(/images/browser/opera.png);
+    }
+    .container .browser ul li i.icon-360{
+        background-image: url(/images/browser/360.png);
+    }
+    .container .browser ul li i.icon-liebao{
+        background-image: url(/images/browser/liebao.png);
+    }
+    .container .browser ul li i.icon-qq{
+        background-image: url(/images/browser/qq.png);
+    }
+    .container .browser ul li .name{
+
+        font-size: 16px;
+        font-weight: 400;
+        color: #666666;
+        line-height: 35px;
+    }
+    @media screen and (max-width: 850px) {
+        .container{
+            width: 100%;
+        }        
+    }
+
+</style>
+
+</head>
+
+<body>
+  <div class="container">
+      <div class="title">温馨提醒</div>
+      <div class="description">为确保您获得顺畅的交易体验，请使用以下浏览器访问交易平台</div>
+      <div class="browser">
+          <ul>
+              <li>
+                  <div class="icon-box"><i class="icon-chrome"></i></div>
+                  <div class="name">Chrome</div>
+              </li>
+              <li>
+                  <div class="icon-box"><i class="icon-safari"></i></div>
+                  <div class="name">Safari</div>
+              </li>
+              <li>
+                  <div class="icon-box"><i class="icon-firefox"></i></div>
+                  <div class="name">火狐</div>
+              </li>
+              <li>
+                  <div class="icon-box"><i class="icon-opera"></i></div>
+                  <div class="name">Opera</div>
+              </li>
+              <li>
+                  <div class="icon-box"><i class="icon-360"></i></div>
+                  <div class="name">360浏览器</div>
+              </li>
+              <li>
+                  <div class="icon-box"><i class="icon-liebao"></i></div>
+                  <div class="name">猎豹</div>
+              </li>
+              <li>
+                  <div class="icon-box"><i class="icon-qq"></i></div>
+                  <div class="name">QQ浏览器</div>
+              </li>
+          </ul>
+      </div>
+  </div>
+</body>
+</html>

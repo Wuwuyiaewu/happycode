@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+    <meta name="referrer"
+          content="no-referrer" />
+    <meta http-equiv="X-UA-Compatible"
+          content="ie=edge">
+    <title>被iframe嵌套的页面，用户测试子页面发送postmessage消息</title>
+    <link rel="stylesheet"
+          href="https://weui.io/weui.css">
+    <style>
+        .mtop10 {
+            margin-top: 10px;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="weui-cells__group weui-cells__group_form">
+            <div class="weui-cells__title">登录postmessage 内容</div>
+            <div class="weui-cells weui-cells_form">
+                <div class="weui-cell">
+                    <div class="weui-cell__bd">
+                        <textarea class="weui-textarea"
+                                  id="postmessageContent"
+                                  placeholder="请输入{accountNo:账号，passWord：密码}"
+                                  rows="6"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a href="javascript:;"
+           id="postmessageBtn"
+           class="weui-btn weui-btn_primary mtop10">发送登录postmessage</a>
+        <a href="javascript:topPage('/login');"
+           id="toLogin"
+           class="weui-btn weui-btn_primary mtop10">去登录</a>
+        <a href="javascript:topPage('/home');"
+           class="weui-btn weui-btn_primary mtop10">去首页</a>
+        <a href="javascript:topPage('/trade');"
+           class="weui-btn weui-btn_primary mtop10">去交易页面</a>
+        <a href="javascript:toDeposit();"
+           class="weui-btn weui-btn_primary mtop10">去入金页面</a>
+        <a href="javascript:install();"
+           class="weui-btn weui-btn_primary mtop10">调用install</a>
+    </div>
+    <script src="./js/IX_postMessage.js"></script>
+    <script>
+        console.log('IX_postMessage', IX_postMessage);
+        var postmessageBtn = document.querySelector('#postmessageBtn');
+        var toLogin = document.querySelector('#toLogin');
+        postmessageBtn.addEventListener('click', function () {
+            var content = document.querySelector('#postmessageContent').value;
+            var data = {};
+            try {
+                data = eval('(' + content + ')')
+            } catch (error) {
+                console.log(error)
+            }
+            IX_postMessage.login(data);
+        }, false);
+        toLogin.addEventListener('click', function () {
+            window.top.postMessage({ type: 'toPage', data: { name: 'Login' } }, '*')
+        }, false);
+
+        // 页面跳转
+        function topPage(url) {
+            IX_postMessage.toPage(url);
+        }
+        // 页面跳转
+        function toDeposit() {
+            IX_postMessage.toDeposit();
+        }
+        function install() {
+            IX_postMessage.install({ domain: 'http://localhost:8085', key: 'htmlKeySetl' });
+        }
+    </script>
+</body>
+
+</html>

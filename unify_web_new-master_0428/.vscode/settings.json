@@ -1,0 +1,69 @@
+{
+    "git.ignoreMissingGitWarning": true,
+    "editor.detectIndentation": false,
+    // 一个制表符等于的空格数。该设置在 "editor.detectIndentation" 启用时根据文件内容可能会被覆盖。
+    "editor.tabSize": 4,
+    "editor.formatOnType": false,
+    "editor.formatOnPaste": false,
+    // 控制是否在搜索中跟踪符号链接。
+    "search.followSymlinks": false,
+    "editor.wordWrapColumn": 180,
+    "editor.wordWrap": "on", // .then方法不换行
+    "vetur.format.options.tabSize": 4,
+    "vetur.format.defaultFormatter.js": "vscode-typescript",
+    "vetur.format.defaultFormatterOptions": {
+        "prettyhtml": {
+            "printWidth": 120,
+            "wordWrapColumn": 120,
+            "wrapAttributes": false,
+            "sortAttributes": false
+        }
+    },
+    "workbench.statusBar.visible": true,
+    "workbench.activityBar.visible": true,
+    "html.format.wrapLineLength": 160,
+    "html.format.wrapAttributes": "force-aligned",
+    "[html]": {
+        "editor.defaultFormatter": "vscode.html-language-features"
+    },
+    "editor.fastScrollSensitivity": 12,
+    "telemetry.enableCrashReporter": false,
+    "liveServer.settings.donotShowInfoMsg": true,
+
+
+    // eslint
+    "eslint.options": {
+        "configFile": ".eslintrc.js"
+      },
+      "eslint.nodePath": "./",
+    "vetur.validation.template": true,
+    "editor.formatOnSave": false,
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    },
+    "eslint.probe": [
+        "javascript",
+        "javascriptreact",
+        "typescript",
+        "typescriptreact",
+        "html",
+        "vue",
+    ],
+    "eslint.validate": [
+        "javascript",
+        "javascriptreact",
+        "vue",
+    ],
+    "eslint.run": "onSave",
+    "eslint.format.enable": true,
+    "[vue]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+    },
+    "[javascript]": {
+        "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+    },
+    "[typescript]": {
+        "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+    }
+
+}

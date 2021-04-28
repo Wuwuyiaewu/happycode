@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+        "baseUrl": "./",
+        "paths": {
+            "@/*": ["src/*"],
+            "@m/*": ["src/pages/mobile/*"],
+            "@public/*": ["public/*"],
+            "@pc/*": ["src/pages/pc/*"]
+        }
+    },
+    "exclude": ["node_modules", "dist", "cache", "zip"]
+}

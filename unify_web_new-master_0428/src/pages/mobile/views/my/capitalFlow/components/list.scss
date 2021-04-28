@@ -1,0 +1,92 @@
+.detials {
+    ::v-deep {
+        .van-cell--clickable:active {
+            background: #fff;
+        }
+
+        .van-collapse-item__content {
+            padding: 0;
+        }
+
+        .van-cell {
+            padding: 0;
+
+            &:after {
+                display: none;
+            }
+        }
+    }
+
+    .item {
+        background-color: #fff;
+
+        .scroll-view-item {
+        }
+
+        .header,
+        .body {
+            margin: 0 rem(30px);
+        }
+
+        .header {
+            padding: rem(20px) rem(0px);
+            display: flex;
+            font-size: rem(28px);
+
+            .header-left {
+                flex: 1;
+            }
+
+            .header-right {
+                flex: 1;
+                text-align: right;
+            }
+        }
+
+        .body {
+            padding: rem(20px) 0;
+            display: flex;
+            font-size: rem(26px);
+            line-height: rem(30px);
+            color: $text;
+
+            .body-item {
+                flex: 1;
+                text-align: center;
+
+                &.left {
+                    flex: 0 0 rem(280px);
+                    text-align: left;
+                }
+
+                &.right {
+                    text-align: right;
+                }
+
+                .name {
+                    margin-bottom: rem(20px);
+                }
+            }
+        }
+
+        .panel-content {
+            color: #333;
+            background: #f9f9f9;
+            padding: rem(20px) rem(30px);
+            font-size: rem(22px);
+
+            .row {
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                margin: rem(10px) 0;
+            }
+        }
+        .thLabel {
+            white-space: nowrap;
+            padding-right: rem(20px);
+        }
+    }
+}

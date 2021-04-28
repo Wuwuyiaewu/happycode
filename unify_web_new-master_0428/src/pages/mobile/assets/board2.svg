@@ -1,0 +1,43 @@
+<svg width="123" height="63.4" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" enable-background="new 0 0 123 63.4" version="1.0">
+ <!-- Copyright: Copyright 2019 Adobe System Incorporated. All rights reserved. -->
+ <g>
+  <title>background</title>
+  <rect height="65.4" width="125" fill="none" y="-1" x="-1" id="canvas_background"/>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <g id="svg_1">
+   <defs>
+    <path d="m122.5,61.5c0,-33.7 -27.3,-61 -61,-61s-61,27.3 -61,61" id="SVGID_1_"/>
+    <radialGradient gradientUnits="userSpaceOnUse" gradientTransform="matrix(1 0 0 -1 0 66.1273)" r="61" cy="4.5833" cx="61.5333" id="svg_3_1_">
+     <stop stop-color="#EDEDED" stop-opacity="0" style="stop-color:#EDEDED;stop-opacity:0" offset="0.801"/>
+     <stop stop-color="#EDEDED" stop-opacity="0.95" style="stop-color:#EDEDED;stop-opacity:0.95" offset="1"/>
+    </radialGradient>
+    <radialGradient gradientUnits="userSpaceOnUse" gradientTransform="matrix(1 0 0 -1 0 66.1273)" r="38" cy="4.5833" cx="61.5333" id="svg_6_1_">
+     <stop stop-color="#EDEDED" stop-opacity="0" style="stop-color:#EDEDED;stop-opacity:0" offset="0.574"/>
+     <stop stop-color="#EDEDED" stop-opacity="0.95" style="stop-color:#EDEDED;stop-opacity:0.95" offset="1"/>
+    </radialGradient>
+   </defs>
+   <clipPath id="SVGID_2_">
+    <use id="svg_2" overflow="visible" xlink:href="#SVGID_1_"/>
+   </clipPath>
+   <circle r="61" cy="61.5" cx="61.5" fill="url(#svg_3_1_)" clip-path="url(#SVGID_2_)" id="svg_3"/>
+  </g>
+  <path d="m122.5,61.5c0,-33.7 -27.3,-61 -61,-61s-61,27.3 -61,61" stroke-miterlimit="10" stroke="#DBDBDB" fill="none" id="svg_4"/>
+  <path d="m61,0.5l1,0l0,7.1l-1,0l0,-7.1zm-43,18.1l0.7,-0.7l5,5l-0.7,0.7c0.1,0 -5,-5 -5,-5zm86.6,-0.8l0.7,0.7l-5,5l-0.7,-0.7l5,-5zm17.9,42.8l0,1l-7.1,0l0,-1l7.1,0zm-114.9,0l0,1l-7.1,0l0,-1l7.1,0z" fill="#DBDBDB" id="svg_5"/>
+  <g id="svg_7">
+   <defs>
+    <path d="m99.5,61.5c0,-21 -17,-38 -38,-38s-38,17 -38,38" id="SVGID_3_"/>
+   </defs>
+   <clipPath id="SVGID_4_">
+    <use id="svg_8" overflow="visible" xlink:href="#SVGID_3_"/>
+   </clipPath>
+   <circle r="38" cy="61.5" cx="61.5" fill="url(#svg_6_1_)" clip-path="url(#SVGID_4_)" id="svg_6"/>
+  </g>
+  <text font-size="10px" font-family="'PingFang-SC-Medium'" fill="#999999" transform="matrix(6.123234e-17,-1,1,6.123234e-17,18.9433,63.9339) " id="svg_13">0</text>
+  <text font-size="11px" font-family="'PingFang-SC-Medium'" fill="#999999" transform="matrix(1,0,0,1,102.3503,64.621) " id="svg_14">∞</text>
+  <text font-size="10px" font-family="'PingFang-SC-Medium'" fill="#999999" transform="matrix(1,0,0,1,58.2243,19.835) " id="svg_15">1</text>
+  <text font-size="10px" font-family="'PingFang-SC-Medium'" fill="#999999" transform="matrix(0.7071,-0.7071,0.7071,0.7071,26.4555,36.5648) " id="svg_16">0.5</text>
+  <text font-size="10px" font-family="'PingFang-SC-Medium'" fill="#999999" transform="matrix(0.7071,0.7071,-0.7071,0.7071,89.597,29.211) " id="svg_17">2</text>
+ </g>
+</svg>
