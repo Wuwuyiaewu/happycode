@@ -2,27 +2,33 @@
     <section id='appMain' class='appMain'>
         <transition mode='out-in' name='routerView-fade'>
             <keep-alive :include='cachedViews'>
+                <div class="wrap_product">
                     <router-view :key='$route.path' />
+        <button @click="gotopr">gotopr</button>
+                </div>
             </keep-alive>
         </transition>
-        <my-iframe
+        <product/>
+        <!-- <my-iframe
             v-if='!isAPP'
             ref='homePage'
             class='homePageIframe'
             :class="{ 'hiddenPage': $route.name !== 'Home' }"
             page-name='homePage'
             :page-url='homePageSrc'
-        />
+        /> -->
     </section>
 </template>
 
 <script>
 import { isAPP } from '@m/base/appHybrid'
 import iframe from '@m/components/iframe'
+import ProductDetailForDemo from '@m/views/productDetail/productDetailForDemo.vue'
 export default {
     name: 'AppMain',
     components: {
-        myIframe: iframe
+        myIframe: iframe,
+        product:ProductDetailForDemo
     },
     data () {
         return {
@@ -67,6 +73,11 @@ export default {
         homePageSrc (val) {
             this.$refs.homePage && this.$refs.homePage.setIframeUrl(val)
         }
+    },
+    methods:{
+        gotopr(){
+            if (!window.isPC) this.$router.push({ name: 'ProductDetailForDemo', params: { id: 553133 } })
+        }
     }
 }
 </script>
@@ -88,6 +99,9 @@ export default {
     }
     .homePageIframe {
         padding-bottom: rem(98px);
+    }
+    .wrap_product{
+       
     }
 }
 </style>

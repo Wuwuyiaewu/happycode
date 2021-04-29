@@ -14,12 +14,12 @@ Vue.use(Router)
 if (location.search && location.search.indexOf('?') >= 0) sessionStorage.setItem('sourceParams', location.search)
 
 let pageLoading
-// 交易相关页面需要拿到 GroupSymbolListRet 信息才进入
+    // 交易相关页面需要拿到 GroupSymbolListRet 信息才进入
 const beforeEnterTradePage = (to, from, next) => {
     if (window['GroupSymbolList'].length > 0) return next()
     window.addEventListener(
         'GroupSymbolListRet',
-        function (e) {
+        function(e) {
             next(true)
         },
         false
@@ -67,16 +67,29 @@ const UpgradeAccountBeforeEnter = (to, from, next) => {
     }
 }
 
-const routes = [
-    {
+const routes = [{
         path: '',
         component: Layout,
         redirect: 'home',
-        children: [
-            {
+        children: [{
                 path: 'home',
                 name: 'Home',
-                component: () => import('@m/views/home.vue'),
+                component: () =>
+                    import ('@m/views/home.vue'),
+                meta: {
+                    title: 'router.index',
+                    disabledInApp: true,
+                    cache: true,
+                    pageFull: true,
+                    haveNav: true,
+                    roles: ['Guest']
+                } // roles: ['Guest'] 游客可以访问的页面需要增加Guest权限，其他为登录才能访问的页面
+            },
+            {
+                path: 'homedemo',
+                name: 'HomeForDemo',
+                component: () =>
+                    import ('@m/views/homeForDemo.vue'),
                 meta: {
                     title: 'router.index',
                     disabledInApp: true,
@@ -89,7 +102,8 @@ const routes = [
             {
                 path: '/nest/:id',
                 name: 'Nest',
-                component: () => import('@m/views/iframe.vue'),
+                component: () =>
+                    import ('@m/views/iframe.vue'),
                 meta: {
                     roles: ['Guest'],
                     pageFull: true
@@ -102,11 +116,11 @@ const routes = [
         component: Layout,
         redirect: '/trade/index',
         beforeEnter: beforeEnterTradePage,
-        children: [
-            {
+        children: [{
                 path: '',
                 name: 'TradeIndex',
-                component: () => import('@m/views/trade/trade.vue'),
+                component: () =>
+                    import ('@m/views/trade/trade.vue'),
                 meta: {
                     title: 'router.trade',
                     disabledInApp: true,
@@ -119,7 +133,8 @@ const routes = [
             {
                 path: 'category',
                 name: 'TradeCategory',
-                component: () => import('@m/views/trade/category/category.vue'),
+                component: () =>
+                    import ('@m/views/trade/category/category.vue'),
                 meta: {
                     title: '',
                     cache: false,
@@ -129,7 +144,8 @@ const routes = [
             {
                 path: 'myorderinfo/:id',
                 name: 'MyOrderInfo',
-                component: () => import('@m/views/myOrderInfo/'),
+                component: () =>
+                    import ('@m/views/myOrderInfo/'),
                 meta: {
                     title: 'router.positionDetail',
                     pageFull: true
@@ -142,42 +158,40 @@ const routes = [
         component: Layout,
         redirect: '/selfSymbol/index',
         beforeEnter: beforeEnterTradePage,
-        children: [
-            {
-                path: '',
-                name: 'SelfSymbolIndex',
-                component: () => import('@m/views/selfSymbol/selfSymbol.vue'),
-                meta: {
-                    title: 'optional.title',
-                    cache: false,
-                    disabledInApp: false,
-                    pageFull: true,
-                    haveNav: true,
-                    roles: ['Guest']
-                }
+        children: [{
+            path: '',
+            name: 'SelfSymbolIndex',
+            component: () =>
+                import ('@m/views/selfSymbol/selfSymbol.vue'),
+            meta: {
+                title: 'optional.title',
+                cache: false,
+                disabledInApp: false,
+                pageFull: true,
+                haveNav: true,
+                roles: ['Guest']
             }
-        ]
+        }]
     },
     {
         path: '/position',
         component: Layout,
         redirect: '/position/index',
         beforeEnter: beforeEnterTradePage,
-        children: [
-            {
-                path: '',
-                name: 'PositionIndex',
-                component: () => import('@m/views/trade/position/Index.vue'),
-                meta: {
-                    title: 'router.position',
-                    cache: true,
-                    disabledInApp: true,
-                    pageFull: true,
-                    haveNav: true,
-                    roles: ['Guest']
-                }
+        children: [{
+            path: '',
+            name: 'PositionIndex',
+            component: () =>
+                import ('@m/views/trade/position/Index.vue'),
+            meta: {
+                title: 'router.position',
+                cache: true,
+                disabledInApp: true,
+                pageFull: true,
+                haveNav: true,
+                roles: ['Guest']
             }
-        ]
+        }]
     },
     {
         path: '/order',
@@ -185,11 +199,11 @@ const routes = [
         redirect: '/order/:id',
         beforeEnter: beforeEnterTradePage,
         roles: ['Guest'],
-        children: [
-            {
+        children: [{
                 path: ':id',
                 name: 'Order',
-                component: () => import('@m/views/order/order.vue'),
+                component: () =>
+                    import ('@m/views/order/order.vue'),
                 meta: {
                     title: 'router.placeOrder',
                     disabledInApp: true,
@@ -199,7 +213,8 @@ const routes = [
             {
                 path: 'buyorderinfo/:id',
                 name: 'BuyOrderInfo',
-                component: () => import('@m/views/buyOrderInfo/'),
+                component: () =>
+                    import ('@m/views/buyOrderInfo/'),
                 meta: {
                     title: 'router.pendingDetail',
                     pageFull: true
@@ -208,7 +223,8 @@ const routes = [
             {
                 path: 'changebuyorder/:id',
                 name: 'ChangeBuyOrder',
-                component: () => import('@m/views/changeBuyOrder/'),
+                component: () =>
+                    import ('@m/views/changeBuyOrder/'),
                 meta: {
                     title: 'router.updatePending',
                     pageFull: true
@@ -217,7 +233,8 @@ const routes = [
             {
                 path: 'sellorderinfo/:id',
                 name: 'SellOrderInfo',
-                component: () => import('@m/views/sellOrderInfo/'),
+                component: () =>
+                    import ('@m/views/sellOrderInfo/'),
                 meta: {
                     title: 'router.closedDetail',
                     pageFull: true
@@ -226,7 +243,8 @@ const routes = [
             {
                 path: 'sellsuccess/:id',
                 name: 'SellSuccess',
-                component: () => import('@m/views/sellSuccess/'),
+                component: () =>
+                    import ('@m/views/sellSuccess/'),
                 meta: {
                     title: 'router.closeSuccess',
                     pageFull: true
@@ -235,7 +253,8 @@ const routes = [
             {
                 path: 'orderSuccess/:id',
                 name: 'OrderSuccess',
-                component: () => import('@m/views/order/orderSuccess.vue'),
+                component: () =>
+                    import ('@m/views/order/orderSuccess.vue'),
                 meta: {
                     title: 'router.placeOrderSuccess',
                     pageFull: true
@@ -248,11 +267,11 @@ const routes = [
         component: Layout,
         redirect: '/productDetail/:id',
         beforeEnter: beforeEnterTradePage,
-        children: [
-            {
+        children: [{
                 path: 'tag',
                 name: 'Tag',
-                component: () => import('@m/views/tag/tag.vue'),
+                component: () =>
+                    import ('@m/views/tag/tag.vue'),
                 meta: {
                     title: '',
                     disabledInApp: true,
@@ -263,7 +282,8 @@ const routes = [
             {
                 path: 'empty',
                 name: 'ProductEmpty',
-                component: () => import('@m/views/productDetail/productEmpty.vue'),
+                component: () =>
+                    import ('@m/views/productDetail/productEmpty.vue'),
                 meta: {
                     pageFull: true,
                     cache: false,
@@ -273,7 +293,20 @@ const routes = [
             {
                 path: ':id',
                 name: 'ProductDetail',
-                component: () => import('@m/views/productDetail/productDetail.vue'),
+                component: () =>
+                    import ('@m/views/productDetail/productDetail.vue'),
+                meta: {
+                    pageFull: true,
+                    disabledInApp: true,
+                    cache: false,
+                    roles: ['Guest']
+                } // pageFull 页面是否全屏显示
+            },
+            {
+                path: ':id',
+                name: 'ProductDetailForDemo',
+                component: () =>
+                    import ('@m/views/productDetail/productDetailForDemo.vue'),
                 meta: {
                     pageFull: true,
                     disabledInApp: true,
@@ -284,7 +317,8 @@ const routes = [
             {
                 path: 'chart/:id',
                 name: 'chartInApp',
-                component: () => import('@m/views/productDetail/chartInApp.vue'),
+                component: () =>
+                    import ('@m/views/productDetail/chartInApp.vue'),
                 meta: {
                     pageFull: true,
                     cache: false,
@@ -294,7 +328,8 @@ const routes = [
             {
                 path: 'contractInfo/:id',
                 name: 'ContractInfo',
-                component: () => import('@m/views/contractInfo/index.vue'),
+                component: () =>
+                    import ('@m/views/contractInfo/index.vue'),
                 meta: {
                     title: 'router.productInfo',
                     pageFull: true
@@ -305,12 +340,12 @@ const routes = [
     {
         path: '/mine',
         component: Layout,
-        children: [
-            {
+        children: [{
                 path: '',
                 name: 'Mine',
                 beforeEnter: beforeEnterTradePage,
-                component: () => import('@m/views/mine/index.vue'),
+                component: () =>
+                    import ('@m/views/mine/index.vue'),
                 meta: {
                     title: 'router.mine',
                     disabledInApp: true,
@@ -322,7 +357,8 @@ const routes = [
             {
                 path: 'setting',
                 name: 'Setting',
-                component: () => import('@m/views/mine/setting.vue'),
+                component: () =>
+                    import ('@m/views/mine/setting.vue'),
                 meta: {
                     title: 'router.setting',
                     pageFull: true,
@@ -332,7 +368,8 @@ const routes = [
             {
                 path: 'resetpwd',
                 name: 'ResetPwd',
-                component: () => import('@m/views/mine/resetPwd.vue'),
+                component: () =>
+                    import ('@m/views/mine/resetPwd.vue'),
                 meta: {
                     title: 'router.updatePwd',
                     pageFull: true
@@ -341,7 +378,8 @@ const routes = [
             {
                 path: 'fundingDetails',
                 name: 'FundingDetails',
-                component: () => import('@m/views/mine/fundingDetails/index.vue'),
+                component: () =>
+                    import ('@m/views/mine/fundingDetails/index.vue'),
                 meta: {
                     title: 'router.fundingDetails',
                     disabledInApp: false,
@@ -353,7 +391,8 @@ const routes = [
     {
         path: '/login',
         name: 'Login',
-        component: () => import('@m/views/login.vue'),
+        component: () =>
+            import ('@m/views/login.vue'),
         meta: {
             title: 'router.login',
             pageFull: true,
@@ -364,7 +403,8 @@ const routes = [
     {
         path: '/openaccount/:id',
         name: 'OpenAccount',
-        component: () => import('@m/views/openAccount/openRealAccount.vue'),
+        component: () =>
+            import ('@m/views/openAccount/openRealAccount.vue'),
         meta: {
             roles: ['Guest']
         }
@@ -372,7 +412,8 @@ const routes = [
     {
         path: '/opendemoaccount/:id',
         name: 'OpenDemoAccount',
-        component: () => import('@m/views/openAccount/openDemoAccount.vue'),
+        component: () =>
+            import ('@m/views/openAccount/openDemoAccount.vue'),
         meta: {
             roles: ['Guest']
         }
@@ -380,7 +421,8 @@ const routes = [
     {
         path: '/postmessage', // 调试页面
         name: 'Postmessage',
-        component: () => import('@m/views/postmessage.vue'),
+        component: () =>
+            import ('@m/views/postmessage.vue'),
         meta: {
             roles: ['Guest']
         }
@@ -389,11 +431,11 @@ const routes = [
         path: '/register',
         component: Layout,
         redirect: '/register/openreal/1',
-        children: [
-            {
+        children: [{
                 path: ':type/success',
                 name: 'RegisterSuccess',
-                component: () => import('@m/views/register/registerSuccess.vue'),
+                component: () =>
+                    import ('@m/views/register/registerSuccess.vue'),
                 meta: {
                     title: 'router.openAccount',
                     pageFull: true,
@@ -403,7 +445,8 @@ const routes = [
             {
                 path: ':type/fail',
                 name: 'RegisterFail',
-                component: () => import('@m/views/register/registerFail.vue'),
+                component: () =>
+                    import ('@m/views/register/registerFail.vue'),
                 meta: {
                     title: 'router.openAccount',
                     pageFull: true,
@@ -413,7 +456,8 @@ const routes = [
             {
                 path: ':type/manul',
                 name: 'RegisterManul',
-                component: () => import('@m/views/register/registerManul.vue'),
+                component: () =>
+                    import ('@m/views/register/registerManul.vue'),
                 meta: {
                     title: 'router.openAccount',
                     pageFull: true,
@@ -423,9 +467,10 @@ const routes = [
             {
                 path: ':type/:step',
                 name: 'Register',
-                component: () => import('@m/views/register/register.vue'),
+                component: () =>
+                    import ('@m/views/register/register.vue'),
                 meta: {
-                    title: 'router.openAccount' /* 注册 */,
+                    title: 'router.openAccount' /* 注册 */ ,
                     pageFull: true,
                     roles: ['Guest']
                 }
@@ -435,8 +480,7 @@ const routes = [
     {
         path: '/upgrade',
         component: Layout,
-        children: [
-            {
+        children: [{
                 path: 'account',
                 name: 'UpgradeAccount',
                 redirect: 'account/1'
@@ -445,7 +489,8 @@ const routes = [
                 path: 'account/:step',
                 name: 'UpgradeAccountStep',
                 beforeEnter: UpgradeAccountBeforeEnter,
-                component: () => import('@m/views/register/upgradeAccount.vue'),
+                component: () =>
+                    import ('@m/views/register/upgradeAccount.vue'),
                 meta: {
                     title: 'router.upgradeAccount',
                     pageFull: true,
@@ -458,18 +503,17 @@ const routes = [
         path: '/msg',
         component: Layout,
         beforeEnter: beforeEnterTradePage,
-        children: [
-            {
-                path: '',
-                name: 'MsgList',
-                component: () => import('@m/views/msg/index.vue'),
-                meta: {
-                    pageFull: true,
-                    cache: false,
-                    title: 'router.msgCenter'
-                }
+        children: [{
+            path: '',
+            name: 'MsgList',
+            component: () =>
+                import ('@m/views/msg/index.vue'),
+            meta: {
+                pageFull: true,
+                cache: false,
+                title: 'router.msgCenter'
             }
-        ]
+        }]
     },
     // {
     //     path: '/completeInfo',
@@ -527,11 +571,11 @@ const routes = [
     {
         path: '/forgetEntry',
         component: Layout,
-        children: [
-            {
+        children: [{
                 path: 'forgetCourse/:phone/:type/:account/:email',
                 name: 'forgetCourse',
-                component: () => import('@m/views/forgetPassword/forgetCourse.vue'),
+                component: () =>
+                    import ('@m/views/forgetPassword/forgetCourse.vue'),
                 meta: {
                     roles: ['Guest'],
                     pageFull: true,
@@ -542,7 +586,8 @@ const routes = [
             {
                 path: '',
                 name: 'forgetEntry',
-                component: () => import('@m/views/forgetPassword/forgetEntry.vue'),
+                component: () =>
+                    import ('@m/views/forgetPassword/forgetEntry.vue'),
                 meta: {
                     roles: ['Guest'],
                     pageFull: true,
@@ -552,7 +597,8 @@ const routes = [
             {
                 path: 'forgetResult/:state',
                 name: 'forgetResult',
-                component: () => import('@m/views/forgetPassword/forgetResult.vue'),
+                component: () =>
+                    import ('@m/views/forgetPassword/forgetResult.vue'),
                 meta: {
                     roles: ['Guest'],
                     pageFull: true,
@@ -564,36 +610,34 @@ const routes = [
     {
         path: '/search',
         component: Layout,
-        children: [
-            {
-                path: '',
-                name: 'Search',
-                component: () => import('@m/views/search/index.vue'),
-                meta: {
-                    roles: ['Guest'],
-                    disabledInApp: true,
-                    pageFull: true,
-                    cache: true,
-                    title: 'router.search'
-                }
+        children: [{
+            path: '',
+            name: 'Search',
+            component: () =>
+                import ('@m/views/search/index.vue'),
+            meta: {
+                roles: ['Guest'],
+                disabledInApp: true,
+                pageFull: true,
+                cache: true,
+                title: 'router.search'
             }
-        ]
+        }]
     },
     {
         path: '/playGuide',
         component: Layout,
-        children: [
-            {
-                path: '',
-                name: 'PlayGuide',
-                component: () => import('@m/views/playGuide.vue'),
-                meta: {
-                    roles: ['Guest'],
-                    cache: true,
-                    title: 'router.playGuide'
-                }
+        children: [{
+            path: '',
+            name: 'PlayGuide',
+            component: () =>
+                import ('@m/views/playGuide.vue'),
+            meta: {
+                roles: ['Guest'],
+                cache: true,
+                title: 'router.playGuide'
             }
-        ]
+        }]
     },
     {
         path: '/to',
@@ -608,18 +652,17 @@ const routes = [
     {
         path: '/apphybrid',
         component: Layout,
-        children: [
-            {
-                path: '',
-                name: 'AppHybrid',
-                component: () => import('@m/views/apphybrid.vue'),
-                meta: {
-                    roles: ['Guest'],
-                    pageFull: true,
-                    title: ''
-                }
+        children: [{
+            path: '',
+            name: 'AppHybrid',
+            component: () =>
+                import ('@m/views/apphybrid.vue'),
+            meta: {
+                roles: ['Guest'],
+                pageFull: true,
+                title: ''
             }
-        ]
+        }]
     },
     ...Funds
 ]
@@ -631,7 +674,7 @@ const router = new Router({
     routes: routes
 })
 
-router.scrollBehavior = function (to, from, savedPosition) {
+router.scrollBehavior = function(to, from, savedPosition) {
     if (savedPosition) {
         return savedPosition
     } else {
@@ -669,43 +712,43 @@ router.beforeEach((to, from, next) => {
     })
 })
 router.afterEach((to, from) => {
-    setProphet()
+        setProphet()
 
-    // 某些页面禁止在原生APP里面访问，直接访问APP自己的页面，例如行情、交易等
-    if (isAPP && to.meta && to.meta.disabledInApp) {
-        appGoHome()
-    }
-    // if (isAPP) {
-    //     appSetTitle(i18n.t(to.meta.title))
-    // }
+        // 某些页面禁止在原生APP里面访问，直接访问APP自己的页面，例如行情、交易等
+        if (isAPP && to.meta && to.meta.disabledInApp) {
+            appGoHome()
+        }
+        // if (isAPP) {
+        //     appSetTitle(i18n.t(to.meta.title))
+        // }
 
-    loadedRoutes.push(to.name)
-    if (pageLoading) {
-        pageLoading.clear()
-        pageLoading = null
-    }
-    // 移动端不切换标题
-    // if (to.meta && to.meta.title) {
-    //     document.title = i18n.t(to.meta.title)
-    // } else {
-    //     document.title = i18n.t('router.position')
-    // }
+        loadedRoutes.push(to.name)
+        if (pageLoading) {
+            pageLoading.clear()
+            pageLoading = null
+        }
+        // 移动端不切换标题
+        // if (to.meta && to.meta.title) {
+        //     document.title = i18n.t(to.meta.title)
+        // } else {
+        //     document.title = i18n.t('router.position')
+        // }
 
-    if (from.path != '/' && window.dataLayer && window.dataLayer.length > 0 && typeof gtag === 'function') {
-        const uaItem = window.dataLayer.find(el => el[0] === 'config' && typeof (el[1]) === 'string' && el[1].trim().indexOf('UA-') === 0)
-        const ua = uaItem && uaItem[1]
-        window.gtag('config', ua, {
-            page_path: basePath + to.path
-        })
-    }
-    sessionStorage.setItem('routeFrom', from.fullPath)
-})
-// 登录后需要拿到 UserLoginInfoRet 信息才进入
+        if (from.path != '/' && window.dataLayer && window.dataLayer.length > 0 && typeof gtag === 'function') {
+            const uaItem = window.dataLayer.find(el => el[0] === 'config' && typeof(el[1]) === 'string' && el[1].trim().indexOf('UA-') === 0)
+            const ua = uaItem && uaItem[1]
+            window.gtag('config', ua, {
+                page_path: basePath + to.path
+            })
+        }
+        sessionStorage.setItem('routeFrom', from.fullPath)
+    })
+    // 登录后需要拿到 UserLoginInfoRet 信息才进入
 const beforeEnterLoginPage = (to, from, next) => {
     const socket = Vue.prototype.$socket
     socket.addEventListener(
         'message',
-        function (evt) {
+        function(evt) {
             if (typeof evt.data === 'object' || evt.data.indexOf('{') !== 0) {
                 return
             }

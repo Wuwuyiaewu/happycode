@@ -33,15 +33,16 @@ Object.keys(filters).forEach(key => {
 })
 
 Vue.config.productionTip = false
+Vue.config.devtools = true;
 Vue.prototype.$fundsCode = '0'
 Vue.component('Ad', Ad)
-// 数据埋点
-/**
- * @param {String} actionName 事件名称
- * @param {Boolean} isFullName  true:直接统计actionName, false:统计事件名称为'页面名称_+actionName'
- */
+    // 数据埋点
+    /**
+     * @param {String} actionName 事件名称
+     * @param {Boolean} isFullName  true:直接统计actionName, false:统计事件名称为'页面名称_+actionName'
+     */
 const appKey = location.pathname.split('/')[1]
-Vue.prototype._collect = function (actionName = '', isFullName = false) {
+Vue.prototype._collect = function(actionName = '', isFullName = false) {
     // debugger
     let title = this.$route.meta.title
     try {
@@ -50,7 +51,7 @@ Vue.prototype._collect = function (actionName = '', isFullName = false) {
         console.log(err)
     }
     const name = isFullName ? actionName : `${title}_${actionName}`
-    // console.log('_collect', name)
+        // console.log('_collect', name)
     if (typeof gtag === 'function') {
         gtag('event', name, {
             event_category: appKey,
