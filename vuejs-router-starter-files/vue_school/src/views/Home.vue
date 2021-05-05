@@ -2,15 +2,15 @@
   <div class="home">
     <h1>All Destination</h1>
     <div class="destinations">
-      <div v-for="destination of destinations" :key="destination.name">
+      <div v-for="destination of destinations" :key="destination.id">
         <router-link
-          :to="{ name: 'DestinationDetail', params: { id: destination.id } }"
+          :to="{ name: 'DestinationDetails', params: { id: destination.id } }"
         >
           <h2>{{ destination.name }}</h2>
         </router-link>
         <figure>
           <router-link
-            :to="{ name: 'DestinationDetail', params: { id: destination.id } }"
+            :to="{ name: 'DestinationDetails', params: { id: destination.id } }"
           >
             <img
               :src="require(`@/assets/${destination.image}`)"

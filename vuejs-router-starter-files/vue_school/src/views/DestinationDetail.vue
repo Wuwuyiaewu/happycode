@@ -1,5 +1,6 @@
 <template>
   <div>
+    <p>{{this.$route.params.id}}</p>
     <section class="destination">
       <h1>{{ destination.name }}</h1>
       <div class="destination-details">
@@ -23,9 +24,9 @@ export default {
   },
   computed: {
     destination() {
-      return store.destinations.find((el) => {
-        return el.id === this.destinationId;
-      });
+      return store.destinations.find(el => 
+         el.id === this.destinationId
+      );
     },
   },
 };
