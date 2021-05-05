@@ -1,140 +1,131 @@
 <!DOCTYPE html>
-<html lang="en"
-      data-buildTime="<%= process.env.VUE_APP_build %>">
+<html lang="en" data-buildTime="<%= process.env.VUE_APP_build %>">
 
 <head>
     <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible"
-          content="IE=edge, chrome=1" />
-    <meta name="viewport"
-          content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <!-- QQ强制竖屏 -->
-    <meta name="x5-orientation"
-          content="portrait" />
+    <meta name="x5-orientation" content="portrait" />
     <!-- uc强制竖屏 -->
-    <meta name="screen-orientation"
-          content="portrait" />
-    <meta content="telephone=no"
-          name="format-detection" />
-    <meta http-equiv="Cache-Control"
-          content="no-cache, no-store, must-revalidate" />
-    <meta http-equiv="Pragma"
-          content="no-cache" />
-    <meta http-equiv="Expires"
-          content="0" />
+    <meta name="screen-orientation" content="portrait" />
+    <meta content="telephone=no" name="format-detection" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
     <meta name="mobile-web-app-capable" content="no">
     <meta name="apple-mobile-web-app-capable" content="no">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="<%= htmlWebpackPlugin.options.title %>"/>
+    <meta name="apple-mobile-web-app-title" content="<%= htmlWebpackPlugin.options.title %>" />
     <link rel="apple-touch-icon-precomposed" href="<%= BASE_URL %>images/icon.png">
     <link rel="manifest" href="/manifest.json?v=1">
     <% if(htmlWebpackPlugin.options.mode == "production") { %>
-    {{if keywords}}
-    <meta content="{{keywords}}" name="keywords">
-    {{/if}}
-    {{if description}}
-    <meta content="{{description}}" name="description">
-    {{/if}}
-    <% } %>
-    <link rel="icon"
-          href="<%= BASE_URL %>favicon.ico" />
-    <title><%= htmlWebpackPlugin.options.title %></title>
-    <script>
-        (function () {
-            function getQueryVariable (variable, search = location.search) {
-            var query = search.substring(1)
-            var vars = query.split('&')
-            for (var i = 0; i < vars.length; i++) {
-                var pair = vars[i].split('=')
-                if (pair[0] == variable) { return decodeURIComponent(pair[1]) }
-            }
-            return undefined
-            }
-            try {
-                // 禁止自己嵌套自己
-                if (top !== window && top.location.host === window.location.host) {
-                    top.location = window.location
-                }
-            } catch (error) { }
-            if ("devicePixelRatio" in window) {
-                var style = document.createElement("STYLE");
-                var docEl = document.documentElement;
-                var header = document.getElementsByTagName("HEAD")[0];
-                var dpr = 0;
-                var isIPhone = navigator.appVersion.match(/iphone/gi);
-                var isAndroid = navigator.appVersion.match(/android/gi);
-                var baseDpr = "devicePixelRatio" in window ? devicePixelRatio : 1;
-                var dpr = baseDpr;
-                if (baseDpr >= 3 && (!dpr || dpr >= 3)) {
-                    dpr = 3;
-                } else if (baseDpr >= 2 && (!dpr || dpr >= 2)) {
-                    dpr = 2;
-                } else {
-                    dpr = 1;
-                }
-                var deviceType = isIPhone ? "iphone" : (isAndroid ? "android" : "other")
-                docEl.setAttribute("data-dpr", dpr);
-                docEl.setAttribute("data-device-type", deviceType);
-                var width = document.documentElement.clientWidth || screen.availWidth;
-                var height = document.documentElement.clientHeight || screen.availHeight;
-                if (!isIPhone && (screen.availWidth != width)) {
-                    width = screen.availWidth;
-                    height = screen.availHeight;
-                };
-                var urlPageWidth = getQueryVariable('pagewidth')
-                if(urlPageWidth) {
-                    width = parseInt(urlPageWidth)
-                }
-                var portrait = ((Math.min(width, height, 750) / 100) * 10);
-                if (deviceType === 'other') {
-                    var pageWidth = 600;
-                    document.documentElement.clientWidth = 600
-                    portrait = pageWidth / 10;
-                    style.innerHTML = "html { font-size: " + portrait / 1.4 + "px!important;width:" + pageWidth + "px!important;margin:0 auto;position:relative; } html .m-navBar, html .errorFixedTip, html .topNav,html[data-device-type] .van-popup--top,html[data-device-type] .van-popup--bottom {width:" + pageWidth + "px!important;left:50%!important;margin-left:-" + pageWidth / 2 + "px;}";
-                } else {
-                    style.innerHTML = "html { font-size: " + portrait + "px!important;width:"+width+ "px!important;}";
-                }
+        {{if keywords}}
+        <meta content="{{keywords}}" name="keywords"> {{/if}} {{if description}}
+        <meta content="{{description}}" name="description"> {{/if}}
+        <% } %>
+            <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
+            <title>
+                <%= htmlWebpackPlugin.options.title %>
+            </title>
+            <script>
+                (function() {
+                    function getQueryVariable(variable, search = location.search) {
+                        var query = search.substring(1)
+                        var vars = query.split('&')
+                        for (var i = 0; i < vars.length; i++) {
+                            var pair = vars[i].split('=')
+                            if (pair[0] == variable) {
+                                return decodeURIComponent(pair[1])
+                            }
+                        }
+                        return undefined
+                    }
+                    try {
+                        // 禁止自己嵌套自己
+                        if (top !== window && top.location.host === window.location.host) {
+                            top.location = window.location
+                        }
+                    } catch (error) {}
+                    if ("devicePixelRatio" in window) {
+                        var style = document.createElement("STYLE");
+                        var docEl = document.documentElement;
+                        var header = document.getElementsByTagName("HEAD")[0];
+                        var dpr = 0;
+                        var isIPhone = navigator.appVersion.match(/iphone/gi);
+                        var isAndroid = navigator.appVersion.match(/android/gi);
+                        var baseDpr = "devicePixelRatio" in window ? devicePixelRatio : 1;
+                        var dpr = baseDpr;
+                        if (baseDpr >= 3 && (!dpr || dpr >= 3)) {
+                            dpr = 3;
+                        } else if (baseDpr >= 2 && (!dpr || dpr >= 2)) {
+                            dpr = 2;
+                        } else {
+                            dpr = 1;
+                        }
+                        var deviceType = isIPhone ? "iphone" : (isAndroid ? "android" : "other")
+                        docEl.setAttribute("data-dpr", dpr);
+                        docEl.setAttribute("data-device-type", deviceType);
+                        var width = document.documentElement.clientWidth || screen.availWidth;
+                        var height = document.documentElement.clientHeight || screen.availHeight;
+                        if (!isIPhone && (screen.availWidth != width)) {
+                            width = screen.availWidth;
+                            height = screen.availHeight;
+                        };
+                        var urlPageWidth = getQueryVariable('pagewidth')
+                        if (urlPageWidth) {
+                            width = parseInt(urlPageWidth)
+                        }
+                        var portrait = ((Math.min(width, height, 750) / 100) * 10);
+                        if (deviceType === 'other') {
+                            var pageWidth = 600;
+                            document.documentElement.clientWidth = 600
+                            portrait = pageWidth / 10;
+                            style.innerHTML = "html { font-size: " + portrait / 1.4 + "px!important;width:" + pageWidth + "px!important;margin:0 auto;position:relative; } html .m-navBar, html .errorFixedTip, html .topNav,html[data-device-type] .van-popup--top,html[data-device-type] .van-popup--bottom {width:" + pageWidth + "px!important;left:50%!important;margin-left:-" + pageWidth / 2 + "px;}";
+                        } else {
+                            style.innerHTML = "html { font-size: " + portrait + "px!important;width:" + width + "px!important;}";
+                        }
 
-                //style.innerHTML = "@media screen and (orientation:portrait) { html { font-size: " + portrait + "px!important; } }\n@media screen and (orientation:landscape) {html {font - size: " + landscape + "px!important;}}";
-                header.appendChild(style);
-            }
-        })();
-    </script>
-    <!-- <script src="<%= BASE_URL %>vconsole.min.js"></script> -->
-    <script>
-        // var pageStart = Date.now()
-        // console.log('pageStart', pageStart)
-        // new VConsole()
-    </script>
-    <script src="<%= BASE_URL %>charting_library/charting_library.min.js?t=2"></script>
-    <script src="<%= BASE_URL %>libs/vueBase.f4befa3e.js?t=2"></script>
-    <script type="text/javascript">
-        // var _paq = window._paq = window._paq || [];
-        // /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
-        // _paq.push(['trackPageView']);
-        // _paq.push(['enableLinkTracking']);
-        // (function() {
-        //   var u="//prophet2.cats-technologypc.com/";
-        //   _paq.push(['setTrackerUrl', u+'prophet.php']);
-        //   _paq.push(['setSiteId', '1']);
-        //   var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-        //   g.type='text/javascript'; g.async=true; g.src=u+'prophet.js'+ '?t='+Date.now(); s.parentNode.insertBefore(g,s);
-        // })();
-      </script>
+                        //style.innerHTML = "@media screen and (orientation:portrait) { html { font-size: " + portrait + "px!important; } }\n@media screen and (orientation:landscape) {html {font - size: " + landscape + "px!important;}}";
+                        header.appendChild(style);
+                    }
+                })();
+            </script>
+            <!-- <script src="<%= BASE_URL %>vconsole.min.js"></script> -->
+            <script>
+                // var pageStart = Date.now()
+                // console.log('pageStart', pageStart)
+                // new VConsole()
+            </script>
+            <script src="<%= BASE_URL %>charting_library/charting_library.min.js?t=2"></script>
+            <script src="<%= BASE_URL %>libs/vueBase.f4befa3e.js?t=2"></script>
+            <script type="text/javascript">
+                // var _paq = window._paq = window._paq || [];
+                // /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+                // _paq.push(['trackPageView']);
+                // _paq.push(['enableLinkTracking']);
+                // (function() {
+                //   var u="//prophet2.cats-technologypc.com/";
+                //   _paq.push(['setTrackerUrl', u+'prophet.php']);
+                //   _paq.push(['setSiteId', '1']);
+                //   var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+                //   g.type='text/javascript'; g.async=true; g.src=u+'prophet.js'+ '?t='+Date.now(); s.parentNode.insertBefore(g,s);
+                // })();
+            </script>
 </head>
+
 <body>
     <style>
         * {
             padding: 0;
             margin: 0;
         }
-
+        
         html,
         body,
         #app {
             height: 100%;
         }
-
         /* .mainColor {
                 color: #477fd3 !important;
             }
@@ -159,6 +150,7 @@
             .fallColorBg {
                 background-color: #10b873 !important;
             } */
+        
         #app.loading:empty::after,
         .loadIcon::after {
             content: '';
@@ -174,28 +166,25 @@
             animation: loading 1s linear infinite;
             opacity: 0.7;
         }
-
-
+        
         @-webkit-keyframes loading {
             0% {
                 transform: translateZ(0) rotate(0deg);
             }
-
             100% {
                 transform: translateZ(0) rotate(360deg);
             }
         }
-
+        
         @keyframes loading {
             0% {
                 transform: translateZ(0) rotate(0deg);
             }
-
             100% {
                 transform: translateZ(0) rotate(360deg);
             }
         }
-
+        
         #skeleton_trade,
         #skeleton_home {
             position: absolute;
@@ -207,7 +196,7 @@
             -webkit-animation: skeleton_loading .8s ease-in infinite alternate;
             animation: skeleton_loading .8s ease-in infinite alternate;
         }
-
+        
         .skeleton_top {
             position: relative;
             padding: 10px 0 10px 10px;
@@ -215,7 +204,7 @@
             width: 100%;
             box-sizing: border-box;
         }
-
+        
         .skeleton_top::before {
             content: '';
             display: block;
@@ -224,18 +213,18 @@
             background-color: #e9e9e9;
             box-shadow: 11vw 0 #e9e9e9, 22vw 0 #e9e9e9, 33vw 0 #e9e9e9, 44vw 0 #e9e9e9, 55vw 0 #e9e9e9, 65vw 0 #e9e9e9, 75vw 0 #e9e9e9, 86vw 0 #e9e9e9;
         }
-
+        
         .skeleton_middle {
             position: relative;
             margin: 10px 10px 15px;
             border-bottom: 1px solid #e9e9e9;
             height: 50px;
         }
-
+        
         .skeleton_middle:last-child {
             border-bottom: 0;
         }
-
+        
         .skeleton_middle .left {
             position: absolute;
             left: 0;
@@ -244,7 +233,7 @@
             background-color: #e9e9e9;
             box-shadow: 0 18px #e9e9e9;
         }
-
+        
         .skeleton_middle .center {
             position: absolute;
             left: 40%;
@@ -252,7 +241,7 @@
             height: 12px;
             background-color: #e9e9e9;
         }
-
+        
         .skeleton_middle .right {
             position: absolute;
             right: 0;
@@ -261,25 +250,25 @@
             background-color: #e9e9e9;
             box-shadow: 0 18px #e9e9e9;
         }
-
+        
         .skeleton_home_m1 {
             height: 139px;
             background-color: #e9e9e9;
         }
-
+        
         .skeleton_flex {
             display: -webkit-box;
             display: flex;
             -webkit-box-pack: justify;
             justify-content: space-between;
         }
-
+        
         .skeleton_home_m2 {
             padding: 20px 20px 0;
             height: 2.1rem;
             box-sizing: border-box;
         }
-
+        
         .skeleton_home_m2 span {
             margin: 5px 0 0 0;
             width: 18%;
@@ -287,40 +276,40 @@
             background-color: #e9e9e9;
             box-shadow: 0 20px #e9e9e9, 0 40px #e9e9e9;
         }
-
+        
         .skeleton_home_m5,
         .skeleton_home_m4,
         .skeleton_home_m3 {
             position: relative;
             padding: 20px 20px 0;
         }
-
+        
         .skeleton_home_m3 {
             padding: 20px 20px 0;
             height: 2.4rem;
             box-sizing: border-box;
         }
-
+        
         .skeleton_home_m3 span {
             width: 1.8rem;
             height: 1.8rem;
             border-radius: 50%;
             background-color: #e9e9e9;
         }
-
+        
         .skeleton_home_m4 span {
             width: 48%;
             height: 1.7rem;
             border-radius: 4px;
             background-color: #e9e9e9;
         }
-
+        
         .cl::after {
             content: '';
             display: block;
             clear: both;
         }
-
+        
         .skeleton_home_m5 .rightGray {
             float: right;
             width: 30%;
@@ -328,7 +317,7 @@
             border-radius: 4px;
             background-color: #e9e9e9;
         }
-
+        
         .skeleton_home_m5 .line1 {
             margin-top: 5px;
             float: left;
@@ -337,7 +326,7 @@
             background-color: #e9e9e9;
             box-shadow: 0 20px #e9e9e9;
         }
-
+        
         .skeleton_home_m5 .leftGrayIcon {
             margin-top: 1.4rem;
             clear: left;
@@ -346,22 +335,20 @@
             height: 5px;
             background-color: #e9e9e9;
         }
-
+        
         @-webkit-keyframes skeleton_loading {
             0% {
                 opacity: 1;
             }
-
             100% {
                 opacity: 0.5;
             }
         }
-
+        
         @keyframes skeleton_loading {
             0% {
                 opacity: 1;
             }
-
             100% {
                 opacity: 0.5;
             }
@@ -389,7 +376,7 @@
             <span class="leftGrayIcon"></span>
         </div>
         <script>
-            (function () {
+            (function() {
                 var skeleton_wrapper = document.querySelector('#skeleton_home')
                 if (!/\/\w+\/(home)?$/.test(location.pathname)) {
                     document.body.removeChild(skeleton_wrapper);
@@ -402,20 +389,20 @@
         <p class="skeleton_top"></p>
         <div class="skeleton_middle"> <span class="left"></span> <span class="center"></span> <span class="right"></span> </div>
         <script>
-                (function () {
-                    var skeleton_wrapper = document.querySelector('#skeleton_trade')
-                    if (/\/\w+\/(trade|selfSymbol)/.test(location.pathname)) {
-                        var SkeletonStr = '<div class="skeleton_middle"> <span class="left"></span> <span class="center"></span> <span class="right"></span> </div>';
-                        for (var SkeletonI = 0; SkeletonI < 3; SkeletonI++) {
-                            SkeletonStr += SkeletonStr;
-                        }
-                        var SkeletonEmptyDiv = document.createElement('div')
-                        SkeletonEmptyDiv.innerHTML = SkeletonStr
-                        skeleton_wrapper.appendChild(SkeletonEmptyDiv);
-                    } else {
-                        document.body.removeChild(skeleton_wrapper);
+            (function() {
+                var skeleton_wrapper = document.querySelector('#skeleton_trade')
+                if (/\/\w+\/(trade|selfSymbol)/.test(location.pathname)) {
+                    var SkeletonStr = '<div class="skeleton_middle"> <span class="left"></span> <span class="center"></span> <span class="right"></span> </div>';
+                    for (var SkeletonI = 0; SkeletonI < 3; SkeletonI++) {
+                        SkeletonStr += SkeletonStr;
                     }
-                })()
+                    var SkeletonEmptyDiv = document.createElement('div')
+                    SkeletonEmptyDiv.innerHTML = SkeletonStr
+                    skeleton_wrapper.appendChild(SkeletonEmptyDiv);
+                } else {
+                    document.body.removeChild(skeleton_wrapper);
+                }
+            })()
         </script>
     </div>
 
@@ -428,7 +415,11 @@
 
     <script>
         // 兼容QQ浏览器的toLocaleString方法
-        var dateFormatStr = new Date().toLocaleString('cn', { hour12: false, hour: '2-digit', minute: '2-digit' })
+        var dateFormatStr = new Date().toLocaleString('cn', {
+            hour12: false,
+            hour: '2-digit',
+            minute: '2-digit'
+        })
         var isIPhone = navigator.appVersion.match(/iphone/gi)
         var isAndroid = navigator.appVersion.match(/android/gi)
         var docEl = document.documentElement
@@ -440,7 +431,7 @@
         var htmlKey = location.pathname.split('/')[1]
         window['isPRD'] = true
         window['imsService'] = ''
-        window['serviceUrl'] = '';
+        window['serviceUrl'] = 'api.dragonfly8.com:1315';
         window['socketUrl'] = '';
         // if ( location.href.indexOf('terminal=ios') > -1) document.documentElement.classList.add('old03'); // 兼容03旧包的刘海屏 公版不做这个判断处理
     </script>

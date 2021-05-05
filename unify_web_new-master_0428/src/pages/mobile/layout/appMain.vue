@@ -2,17 +2,17 @@
     <section id='appMain' class='appMain'>
         <transition mode='out-in' name='routerView-fade'>
             <keep-alive :include='cachedViews'>
-                    <router-view :key='$route.path' />
+                <router-view :key='$route.path' />
             </keep-alive>
         </transition>
-        <my-iframe
+        <!-- <my-iframe
             v-if='!isAPP'
             ref='homePage'
             class='homePageIframe'
             :class="{ 'hiddenPage': $route.name !== 'Home' }"
             page-name='homePage'
             :page-url='homePageSrc'
-        />
+        /> -->
     </section>
 </template>
 

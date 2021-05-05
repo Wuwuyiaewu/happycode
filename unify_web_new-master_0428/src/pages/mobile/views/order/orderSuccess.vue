@@ -2,7 +2,6 @@
     <!-- 开仓成功 -->
     <div class='orderSuccess' :class='{ pc:isPC, miniTrade: origin === "miniTrade" }'>
         <a class='back' href='javascript:;' @click='back'>
-            <!-- 隱藏 X 關閉 -->
             <i class='icon_icon_close_small'></i>
         </a>
         <span class='successIcon'>

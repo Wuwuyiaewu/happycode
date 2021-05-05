@@ -76,6 +76,22 @@ const routes = [{
                 name: 'Home',
                 component: () =>
                     import ('@m/views/home.vue'),
+                // edit by Ezey
+                children: [{
+                    path: ':id',
+                    name: 'HomeProduct',
+                    components: {
+                        default: () =>
+                            import ('@m/views/productDetail/productDetail.vue'),
+                        order: () =>
+                            import ('@m/views/order/order.vue'),
+                        orderSuccess: () =>
+                            import ('@m/views/order/orderSuccess.vue')
+                    },
+                    meta: {
+                        haveNav: true,
+                    }
+                }],
                 meta: {
                     title: 'router.index',
                     disabledInApp: true,
@@ -86,10 +102,42 @@ const routes = [{
                 } // roles: ['Guest'] 游客可以访问的页面需要增加Guest权限，其他为登录才能访问的页面
             },
             {
+                path: '/nest/:id',
+                name: 'Nest',
+                component: () =>
+                    import ('@m/views/iframe.vue'),
+                meta: {
+                    roles: ['Guest'],
+                    pageFull: true
+                }
+            }
+        ]
+    },
+    {
+        path: 'homedemo',
+        component: Layout,
+        redirect: 'homedemo',
+        children: [{
                 path: 'homedemo',
-                name: 'HomeForDemo',
+                name: 'Homedemo',
                 component: () =>
                     import ('@m/views/homeForDemo.vue'),
+                // edit by Ezey
+                children: [{
+                    path: ':id',
+                    name: 'HomeProduct',
+                    components: {
+                        default: () =>
+                            import ('@m/views/productDetail/productDetail.vue'),
+                        order: () =>
+                            import ('@m/views/order/order.vue'),
+                        orderSuccess: () =>
+                            import ('@m/views/order/orderSuccess.vue')
+                    },
+                    meta: {
+                        haveNav: true,
+                    }
+                }],
                 meta: {
                     title: 'router.index',
                     disabledInApp: true,
@@ -295,18 +343,6 @@ const routes = [{
                 name: 'ProductDetail',
                 component: () =>
                     import ('@m/views/productDetail/productDetail.vue'),
-                meta: {
-                    pageFull: true,
-                    disabledInApp: true,
-                    cache: false,
-                    roles: ['Guest']
-                } // pageFull 页面是否全屏显示
-            },
-            {
-                path: ':id',
-                name: 'ProductDetailForDemo',
-                component: () =>
-                    import ('@m/views/productDetail/productDetailForDemo.vue'),
                 meta: {
                     pageFull: true,
                     disabledInApp: true,

@@ -44,7 +44,7 @@ export default {
                     title: this.$t('router.index'),
                     icon: 'icon_icon_home',
                     name: 'Home',
-                    baseUrl: '/home',
+                    baseUrl: '/home/573004',
                 },
                 {
                     title: this.$t('router.selfSymbol'),
