@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p>{{ this.$route.params.id }}</p>
+    <p>{{ this.$route.params.slug }}</p>
     <section class="destination">
       <h1>{{ destination.name }}</h1>
       <div class="destination-details">
@@ -19,12 +19,18 @@ import store from "@/store";
 export default {
   data() {
     return {
-      sl: this.$route.params.slug,
+      slug: this.$route.params.slug,
     };
+  },
+  props: {
+    slug: {
+      type:String,
+      required:true
+    }
   },
   computed: {
     destination() {
-      return store.destinations.find((el) => el.sl === this.sl);
+      return store.destinations.find((el) => el.slug === this.slug);
     },
   },
 };
