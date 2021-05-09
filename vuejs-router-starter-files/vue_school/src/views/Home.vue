@@ -27,7 +27,6 @@
 import store from "@/store.js";
 export default {
   name: "Home",
-  components: {},
   data() {
     return {
       destinationId:this.$route.params.id,
