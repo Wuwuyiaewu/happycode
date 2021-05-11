@@ -104,7 +104,6 @@ router.beforeEach((to, from, next) => {
     if (to.matched.some((record) => record.meta.requiresAuth)) {
         console.log(to.matched);
         if (!store.user) {
-            alert('沒有帳號')
             next({ name: "login" });
         } else {
             next();
