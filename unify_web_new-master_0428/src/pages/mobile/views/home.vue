@@ -1,13 +1,11 @@
 <template>
-    <div></div>
+    <div>
+        <h1>homedemo</h1>
+    </div>
 </template>
 
 <script>
-import geoPermission from '@/pages/mobile/mixins/geoPermission.js'
-export default {
-    name: 'Home',
-    mixins: [geoPermission]
-}
+
 </script>
 
 <style lang="scss" scoped>

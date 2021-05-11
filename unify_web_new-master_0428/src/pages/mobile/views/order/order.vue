@@ -495,11 +495,7 @@ export default {
                 localSet('pendingExpireType', this.pendingExpireType)
                 const query = { margin }
                 if (this.$route.query.fullEnteredDialog) query.fullEnteredDialog = this.$route.query.fullEnteredDialog
-                console.log(this.$route.name);
-                if(this.$route.name === 'HomeProduct'){
-                    this.$emit('orderSuccess', true)
-                }
-                // this.$router.push({ name: 'OrderSuccess', params: { id: res.OrderAddRet.id }, query })
+                this.$router.push({ name: 'OrderSuccess', params: { id: res.OrderAddRet.id }, query })
             }).catch(err => {
                 console.warn(err)
                 this.loading.clear()

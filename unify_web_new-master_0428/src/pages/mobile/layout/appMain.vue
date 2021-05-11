@@ -5,14 +5,14 @@
                 <router-view :key='$route.path' />
             </keep-alive>
         </transition>
-        <!-- <my-iframe
+        <my-iframe
             v-if='!isAPP'
             ref='homePage'
             class='homePageIframe'
             :class="{ 'hiddenPage': $route.name !== 'Home' }"
             page-name='homePage'
             :page-url='homePageSrc'
-        /> -->
+        />
     </section>
 </template>
 

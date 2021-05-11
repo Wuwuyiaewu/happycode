@@ -4,7 +4,7 @@
         :class="{ 'pageFull': $route.meta.pageFull || ($store.state.inApp && notLinkWs),'Home':$route.name ==='Home', 'pageNav':$route.meta.haveNav }"
     >
         <template>
-            <!-- <Top v-if='!$route.meta.pageFull && !($store.state.inApp && notLinkWs)' /> -->
+            <Top v-if='!$route.meta.pageFull && !($store.state.inApp && notLinkWs)' />
             <AppMain />
         </template>
         <NavBar v-if='$route.meta.haveNav' />

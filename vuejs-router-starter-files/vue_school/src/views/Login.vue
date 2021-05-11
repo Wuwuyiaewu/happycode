@@ -2,10 +2,10 @@
   <div class="login">
     <h1>Login</h1>
     <div class="form">
-      <label for="username" Username></label
+      <label for="username">Username</label
       ><input type="text" name="username" class="input" v-model="username"/><label for="password"
         >Password</label
-      ><input type="text" class="input" v-model="password"/><button class="btn" @clcik="login">Login</button>
+      ><input type="text" class="input" v-model="password"/><button class="btn" @click="login">Login</button>
     </div>
   </div>
 </template>
