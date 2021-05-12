@@ -5,24 +5,27 @@
                 <router-view :key='$route.path' />
             </keep-alive>
         </transition>
-        <my-iframe
+        <!-- <my-iframe
             v-if='!isAPP'
             ref='homePage'
             class='homePageIframe'
             :class="{ 'hiddenPage': $route.name !== 'Home' }"
             page-name='homePage'
             :page-url='homePageSrc'
-        />
+        /> -->
+        <demohome />
     </section>
 </template>
 
 <script>
 import { isAPP } from '@m/base/appHybrid'
 import iframe from '@m/components/iframe'
+import demohome from '@m/views/homeForDemo'
 export default {
     name: 'AppMain',
     components: {
-        myIframe: iframe
+        myIframe: iframe,
+        demohome
     },
     data () {
         return {

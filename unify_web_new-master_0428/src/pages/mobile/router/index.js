@@ -77,7 +77,7 @@ const routes = [{
                 component: () =>
                     import ('@m/views/home.vue'),
                 meta: {
-                    title: 'router.index',
+                    title: 'router.index6',
                     disabledInApp: true,
                     cache: true,
                     pageFull: true,
@@ -98,21 +98,21 @@ const routes = [{
         ]
     },
     {
-        path: '/homedemo',
+        path: '/demohome',
         component: Layout,
-        redirect: 'homedemo',
+        redirect: 'demohome',
         children: [{
-            path: 'demo',
-            name: 'Demo',
+            path: 'demohome',
+            name: 'Demohome',
             component: () =>
                 import ('@m/views/homeForDemo.vue'),
             meta: {
-                // title: 'router.index',
+                title: 'router.homeForDemo',
                 // disabledInApp: true,
                 // cache: true,
                 // pageFull: true,
                 // haveNav: true,
-                roles: ['Guest']
+                // roles: ['Guest']
             } // roles: ['Guest'] 游客可以访问的页面需要增加Guest权限，其他为登录才能访问的页面
         }, ]
     },

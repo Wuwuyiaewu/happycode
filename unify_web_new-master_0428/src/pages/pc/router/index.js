@@ -25,25 +25,25 @@ const beforeEnterPage = (to, from, next) => {
     })
 }
 const beforeEnterMT4Page = (to, from, next) => {
-    let loading = Vue.prototype.$loading()
-    delayAwait(() => {
-        return store.state.ix_baseInfo.companyInfo.toKenCompanyInfoVo
-    }, true).then(() => {
-        store.dispatch('funds/getUserInfo').then(res => {
-            loading.clear()
-            loading = null
-            next()
-        }).catch(() => {
-            next()
+        let loading = Vue.prototype.$loading()
+        delayAwait(() => {
+            return store.state.ix_baseInfo.companyInfo.toKenCompanyInfoVo
+        }, true).then(() => {
+            store.dispatch('funds/getUserInfo').then(res => {
+                loading.clear()
+                loading = null
+                next()
+            }).catch(() => {
+                next()
+            })
         })
-    })
-}
-// 交易相关页面需要拿到 GroupSymbolListRet 信息才进入
+    }
+    // 交易相关页面需要拿到 GroupSymbolListRet 信息才进入
 const beforeEnterTradePage = (to, from, next) => {
     if (window['GroupSymbolList'].length > 0) return next()
     window.addEventListener(
         'GroupSymbolListRet',
-        function (e) {
+        function(e) {
             next(true)
         },
         false
@@ -51,11 +51,11 @@ const beforeEnterTradePage = (to, from, next) => {
 }
 
 // 右侧弹窗路由
-const rightRoutes = [
-    {
+const rightRoutes = [{
         path: '/msg',
         name: 'MsgList',
-        component: () => import('@m/views/msg/index.vue'),
+        component: () =>
+            import ('@m/views/msg/index.vue'),
         meta: {
             title: 'router.msgCenter',
             position: 'right',
@@ -65,7 +65,8 @@ const rightRoutes = [
     {
         path: '/nest/:id',
         name: 'Nest',
-        component: () => import('@m/views/iframe.vue'),
+        component: () =>
+            import ('@m/views/iframe.vue'),
         meta: {
             title: '',
             position: 'right',
@@ -77,11 +78,11 @@ const rightRoutes = [
         path: '/mine',
         component: LayoutModule,
         redirect: '/mine/setting',
-        children: [
-            {
+        children: [{
                 path: 'setting',
                 name: 'Setting',
-                component: () => import('@m/views/mine/setting.vue'),
+                component: () =>
+                    import ('@m/views/mine/setting.vue'),
                 meta: {
                     title: 'router.setting',
                     position: 'right',
@@ -92,7 +93,8 @@ const rightRoutes = [
             {
                 path: 'resetpwd',
                 name: 'ResetPwd',
-                component: () => import('@m/views/mine/resetPwd.vue'),
+                component: () =>
+                    import ('@m/views/mine/resetPwd.vue'),
                 meta: {
                     title: 'setting.updatePwd',
                     // showTitle: true,
@@ -104,7 +106,8 @@ const rightRoutes = [
             {
                 path: 'fundingDetails',
                 name: 'FundingDetails',
-                component: () => import('@m/views/mine/fundingDetails/index.vue'),
+                component: () =>
+                    import ('@m/views/mine/fundingDetails/index.vue'),
                 meta: {
                     title: 'router.fundingDetails',
                     disabledInApp: false,
@@ -118,16 +121,15 @@ const rightRoutes = [
 ]
 
 // 居中弹窗路由
-const centerRoutes = [
-    {
+const centerRoutes = [{
         path: '/my',
         component: LayoutModule,
         redirect: '/home',
         beforeEnter: beforeEnterPage,
-        children: [
-            {
+        children: [{
                 path: 'bankList',
-                component: () => import('@m/views/my/bankList/index.vue'),
+                component: () =>
+                    import ('@m/views/my/bankList/index.vue'),
                 name: 'BankList',
                 meta: {
                     title: 'router.myBank',
@@ -139,7 +141,8 @@ const centerRoutes = [
             },
             {
                 path: 'addBank',
-                component: () => import('@m/views/my/addBank/index.vue'),
+                component: () =>
+                    import ('@m/views/my/addBank/index.vue'),
                 name: 'AddBank',
                 meta: {
                     title: 'router.addBank',
@@ -151,7 +154,8 @@ const centerRoutes = [
             },
             {
                 path: 'authentication',
-                component: () => import('@m/views/my/authentication/index.vue'),
+                component: () =>
+                    import ('@m/views/my/authentication/index.vue'),
                 name: 'Authentication',
                 meta: {
                     title: 'router.authentication',
@@ -163,7 +167,8 @@ const centerRoutes = [
             },
             {
                 path: 'certified',
-                component: () => import('@m/views/my/certified.vue'),
+                component: () =>
+                    import ('@m/views/my/certified.vue'),
                 name: 'Certified',
                 meta: {
                     title: 'router.profile',
@@ -175,7 +180,8 @@ const centerRoutes = [
             },
             {
                 path: 'withAmount',
-                component: () => import('@m/views/my/withAmount/index.vue'),
+                component: () =>
+                    import ('@m/views/my/withAmount/index.vue'),
                 name: 'WithAmount',
                 meta: {
                     title: 'router.withdraw',
@@ -187,7 +193,8 @@ const centerRoutes = [
             },
             {
                 path: 'payInfo',
-                component: () => import('@m/views/my/payInfo/payInfo.vue'),
+                component: () =>
+                    import ('@m/views/my/payInfo/payInfo.vue'),
                 name: 'PayInfo',
                 meta: {
                     title: 'router.editInfo',
@@ -200,7 +207,8 @@ const centerRoutes = [
             },
             {
                 path: 'kyc',
-                component: () => import('@m/views/my/kyc/kyc.vue'),
+                component: () =>
+                    import ('@m/views/my/kyc/kyc.vue'),
                 name: 'KYC',
                 meta: {
                     title: 'router.kyc',
@@ -210,7 +218,8 @@ const centerRoutes = [
             },
             {
                 path: 'depositFunds',
-                component: () => import('@m/views/my/depositFunds/index.vue'),
+                component: () =>
+                    import ('@m/views/my/depositFunds/index.vue'),
                 name: 'DepositFunds',
                 meta: {
                     title: 'router.deposit',
@@ -222,7 +231,8 @@ const centerRoutes = [
             },
             {
                 path: 'capitalFlow/:type',
-                component: () => import('@m/views/my/capitalFlow/index.vue'),
+                component: () =>
+                    import ('@m/views/my/capitalFlow/index.vue'),
                 name: 'CapitalFlow',
                 meta: {
                     title: 'form.title.depositRecord',
@@ -234,7 +244,8 @@ const centerRoutes = [
             },
             {
                 path: 'bankName',
-                component: () => import('@m/views/my/bankName/index.vue'),
+                component: () =>
+                    import ('@m/views/my/bankName/index.vue'),
                 name: 'BankName',
                 meta: {
                     title: 'router.deposit',
@@ -244,7 +255,8 @@ const centerRoutes = [
             },
             {
                 path: 'paymentDetails',
-                component: () => import('@m/views/my/paymentDetails/index.vue'),
+                component: () =>
+                    import ('@m/views/my/paymentDetails/index.vue'),
                 name: 'PaymentDetails',
                 meta: {
                     title: 'router.paymentDetails',
@@ -256,18 +268,19 @@ const centerRoutes = [
     },
     {
         path: '/mt4',
-        component: () => import('@m/views/mt4/index.vue'),
+        component: () =>
+            import ('@m/views/mt4/index.vue'),
         name: 'mt4',
         meta: {
             position: 'right',
             title: 'router.MT4',
         },
         beforeEnter: beforeEnterMT4Page,
-        children: [
-            {
+        children: [{
                 path: 'depositFunds',
                 name: 'MT4Depositfunds',
-                component: () => import('@m/views/my/depositFunds/index.vue'),
+                component: () =>
+                    import ('@m/views/my/depositFunds/index.vue'),
                 meta: {
                     title: 'router.MT4deposit',
                     position: 'right',
@@ -278,7 +291,8 @@ const centerRoutes = [
             {
                 path: 'withAmount',
                 name: 'MT4WithAmount',
-                component: () => import('@m/views/my/withAmount/index.vue'),
+                component: () =>
+                    import ('@m/views/my/withAmount/index.vue'),
                 meta: {
                     title: 'router.MT4withdraw',
                     position: 'right',
@@ -309,20 +323,19 @@ const centerRoutes = [
         path: '/contractInfo',
         component: LayoutModule,
         redirect: '/contractInfo/:id',
-        children: [
-            {
-                path: ':id',
-                name: 'ContractInfo',
-                component: () => import('@m/views/contractInfo/index.vue'),
-                meta: {
-                    title: 'router.productInfo',
-                    position: 'center',
-                    // showTitle: true,
-                    cache: false,
-                    roles: []
-                }
+        children: [{
+            path: ':id',
+            name: 'ContractInfo',
+            component: () =>
+                import ('@m/views/contractInfo/index.vue'),
+            meta: {
+                title: 'router.productInfo',
+                position: 'center',
+                // showTitle: true,
+                cache: false,
+                roles: []
             }
-        ]
+        }]
     },
     {
         path: '/trade',
@@ -367,11 +380,11 @@ const centerRoutes = [
         path: '/order',
         component: LayoutModule,
         redirect: '/order/:id',
-        children: [
-            {
+        children: [{
                 path: ':id',
                 name: 'Order',
-                component: () => import('@m/views/order/order.vue'),
+                component: () =>
+                    import ('@m/views/order/order.vue'),
                 meta: {
                     title: 'router.placeOrder',
                     position: 'center',
@@ -382,7 +395,8 @@ const centerRoutes = [
             {
                 path: 'buyorderinfo/:id',
                 name: 'BuyOrderInfo',
-                component: () => import('@m/views/buyOrderInfo/'),
+                component: () =>
+                    import ('@m/views/buyOrderInfo/'),
                 meta: {
                     title: 'router.pendingDetail',
                     position: 'center',
@@ -393,7 +407,8 @@ const centerRoutes = [
             {
                 path: 'changebuyorder/:id',
                 name: 'ChangeBuyOrder',
-                component: () => import('@m/views/changeBuyOrder/'),
+                component: () =>
+                    import ('@m/views/changeBuyOrder/'),
                 meta: {
                     title: 'router.updatePending',
                     position: 'center',
@@ -404,7 +419,8 @@ const centerRoutes = [
             {
                 path: 'sellorderinfo/:id',
                 name: 'SellOrderInfo',
-                component: () => import('@m/views/sellOrderInfo/'),
+                component: () =>
+                    import ('@m/views/sellOrderInfo/'),
                 meta: {
                     title: 'router.closedDetail',
                     position: 'center',
@@ -415,7 +431,8 @@ const centerRoutes = [
             {
                 path: 'sellsuccess/:id',
                 name: 'SellSuccess',
-                component: () => import('@m/views/sellSuccess/'),
+                component: () =>
+                    import ('@m/views/sellSuccess/'),
                 meta: {
                     title: 'router.closeSuccess',
                     position: 'center',
@@ -426,7 +443,8 @@ const centerRoutes = [
             {
                 path: 'orderSuccess/:id',
                 name: 'OrderSuccess',
-                component: () => import('@m/views/order/orderSuccess.vue'),
+                component: () =>
+                    import ('@m/views/order/orderSuccess.vue'),
                 meta: {
                     title: 'router.placeOrderSuccess',
                     position: 'center',
@@ -440,7 +458,8 @@ const centerRoutes = [
     {
         path: 'tag',
         name: 'Tag',
-        component: () => import('@m/views/tag/tag.vue'),
+        component: () =>
+            import ('@m/views/tag/tag.vue'),
         meta: {
             title: '',
             position: 'center',
@@ -451,8 +470,7 @@ const centerRoutes = [
     }
 ]
 
-const routes = [
-    {
+const routes = [{
         path: '/home',
         component: Layout,
         beforeEnter: beforeEnterTradePage,
@@ -467,7 +485,8 @@ const routes = [
     {
         path: '/login',
         name: 'Login',
-        component: () => import('@m/views/login.vue'),
+        component: () =>
+            import ('@m/views/login.vue'),
         meta: {
             title: 'router.index',
             cache: false,
@@ -477,11 +496,11 @@ const routes = [
     {
         path: '/forgetEntry',
         component: outLayout,
-        children: [
-            {
+        children: [{
                 path: 'forgetCourse/:phone/:type/:account/:email',
                 name: 'forgetCourse',
-                component: () => import('@m/views/forgetPassword/forgetCourse.vue'),
+                component: () =>
+                    import ('@m/views/forgetPassword/forgetCourse.vue'),
                 meta: {
                     roles: ['OnlyGuest'],
                     pageFull: true,
@@ -492,7 +511,8 @@ const routes = [
             {
                 path: '',
                 name: 'forgetEntry',
-                component: () => import('@m/views/forgetPassword/forgetEntry.vue'),
+                component: () =>
+                    import ('@m/views/forgetPassword/forgetEntry.vue'),
                 meta: {
                     roles: ['OnlyGuest'],
                     pageFull: true,
@@ -502,7 +522,8 @@ const routes = [
             {
                 path: 'forgetResult/:state',
                 name: 'forgetResult',
-                component: () => import('@m/views/forgetPassword/forgetResult.vue'),
+                component: () =>
+                    import ('@m/views/forgetPassword/forgetResult.vue'),
                 meta: {
                     roles: ['OnlyGuest'],
                     pageFull: true,
@@ -514,7 +535,8 @@ const routes = [
     {
         path: '/openaccount/:id',
         name: 'OpenAccount',
-        component: () => import('@m/views/openAccount/openRealAccount.vue'),
+        component: () =>
+            import ('@m/views/openAccount/openRealAccount.vue'),
         meta: {
             title: 'router.index',
             cache: false,
@@ -524,7 +546,8 @@ const routes = [
     {
         path: '/opendemoaccount/:id',
         name: 'OpenDemoAccount',
-        component: () => import('@m/views/openAccount/openDemoAccount.vue'),
+        component: () =>
+            import ('@m/views/openAccount/openDemoAccount.vue'),
         meta: {
             roles: ['Guest']
         }
@@ -533,11 +556,11 @@ const routes = [
         path: '/register',
         component: outLayout,
         redirect: '/register/openreal/1',
-        children: [
-            {
+        children: [{
                 path: ':type/success',
                 name: 'RegisterSuccess',
-                component: () => import('@m/views/register/registerSuccess.vue'),
+                component: () =>
+                    import ('@m/views/register/registerSuccess.vue'),
                 meta: {
                     title: 'router.openAccount',
                     pageFull: true,
@@ -547,7 +570,8 @@ const routes = [
             {
                 path: ':type/fail',
                 name: 'RegisterFail',
-                component: () => import('@m/views/register/registerFail.vue'),
+                component: () =>
+                    import ('@m/views/register/registerFail.vue'),
                 meta: {
                     title: 'router.openAccount',
                     pageFull: true,
@@ -557,7 +581,8 @@ const routes = [
             {
                 path: ':type/manul',
                 name: 'RegisterManul',
-                component: () => import('@m/views/register/registerManul.vue'),
+                component: () =>
+                    import ('@m/views/register/registerManul.vue'),
                 meta: {
                     title: 'router.openAccount',
                     pageFull: true,
@@ -567,9 +592,10 @@ const routes = [
             {
                 path: ':type/:step',
                 name: 'Register',
-                component: () => import('@m/views/register/register.vue'),
+                component: () =>
+                    import ('@m/views/register/register.vue'),
                 meta: {
-                    title: 'router.openAccount' /* 注册 */,
+                    title: 'router.openAccount' /* 注册 */ ,
                     pageFull: true,
                     roles: ['Guest']
                 }
@@ -599,7 +625,7 @@ const router = new Router({
     routes: routes
 })
 
-router.scrollBehavior = function (to, from, savedPosition) {
+router.scrollBehavior = function(to, from, savedPosition) {
     if (savedPosition) {
         return savedPosition
     } else {
@@ -610,7 +636,7 @@ router.scrollBehavior = function (to, from, savedPosition) {
     }
 }
 const loadedRoutes = [] // 加载过的路由
-router.beforeEach(async (to, from, next) => {
+router.beforeEach(async(to, from, next) => {
     // if (loadedRoutes.indexOf(to.name) === -1) {
     //     pageLoading = Toast.loading({
     //         duration: 0,
@@ -620,12 +646,12 @@ router.beforeEach(async (to, from, next) => {
     const loginData = getLoginData()
     const { roles = [] } = to.meta
     const isGuestPage = roles.some(el => ['Guest', 'OnlyGuest'].includes(el)) // 游客能访问的页面
-    // const isOnlyGuestPage = roles.includes('OnlyGuest') // 只有游客能访问的页面
-    // // if (isOnlyGuestPage && loginData) {
-    // //     return next({
-    // //         name: 'Home'
-    // //     })
-    // // }
+        // const isOnlyGuestPage = roles.includes('OnlyGuest') // 只有游客能访问的页面
+        // // if (isOnlyGuestPage && loginData) {
+        // //     return next({
+        // //         name: 'Home'
+        // //     })
+        // // }
     const isGuest = !loginData // 当前用户是否为游客
     loadLanguageAsync().then(() => {
         if (isGuest && !isGuestPage) {
@@ -646,30 +672,30 @@ router.beforeEach(async (to, from, next) => {
     })
 })
 router.afterEach((to, from) => {
-    setProphet()
-    loadedRoutes.push(to.name)
-    if (pageLoading) {
-        pageLoading.clear()
-        pageLoading = null
-    }
-    if (to.meta && to.meta.title) {
-        document.title = i18n.t(to.meta.title)
-    } else {
-        document.title = i18n.t('router.position')
-    }
-    if (from.path != '/' && window.dataLayer && window.dataLayer.length > 0 && typeof gtag === 'function') {
-        gtag('config', window.dataLayer[1][1], {
-            page_path: basePath + to.path
-        })
-    }
-    sessionStorage.setItem('routeFrom', from.fullPath)
-})
-// 登录后需要拿到 UserLoginInfoRet 信息才进入
+        setProphet()
+        loadedRoutes.push(to.name)
+        if (pageLoading) {
+            pageLoading.clear()
+            pageLoading = null
+        }
+        if (to.meta && to.meta.title) {
+            document.title = i18n.t(to.meta.title)
+        } else {
+            document.title = i18n.t('router.position')
+        }
+        if (from.path != '/' && window.dataLayer && window.dataLayer.length > 0 && typeof gtag === 'function') {
+            gtag('config', window.dataLayer[1][1], {
+                page_path: basePath + to.path
+            })
+        }
+        sessionStorage.setItem('routeFrom', from.fullPath)
+    })
+    // 登录后需要拿到 UserLoginInfoRet 信息才进入
 const beforeEnterLoginPage = (to, from, next) => {
     const socket = Vue.prototype.$socket
     socket.addEventListener(
         'message',
-        function (evt) {
+        function(evt) {
             if (typeof evt.data === 'object' || evt.data.indexOf('{') !== 0) {
                 return
             }
@@ -692,7 +718,7 @@ export default router
  * @param {*} from
  * @param {*} next
  */
-function resolveQueryOid (to, from, next) {
+function resolveQueryOid(to, from, next) {
     if (!to.params.removeOid && from.query.oid && !to.query.oid) {
         next({
             ...to,

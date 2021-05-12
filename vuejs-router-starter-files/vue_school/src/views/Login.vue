@@ -22,7 +22,7 @@ export default {
         login(){
             store.user = this.username
             const redirectPath = this.$route.query.redirect || '/';
-            this.$router.push('redirectPath')
+            this.$router.push(redirectPath)
         }
     }
 }

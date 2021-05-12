@@ -104,7 +104,10 @@ router.beforeEach((to, from, next) => {
     if (to.matched.some((record) => record.meta.requiresAuth)) {
         console.log(to.matched);
         if (!store.user) {
-            next({ name: "login" });
+            next({
+                name: "login",
+                query: { redirect: to.fullPath }
+            })
         } else {
             next();
         }
