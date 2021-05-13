@@ -47,6 +47,12 @@ export default {
                     baseUrl: '/home',
                 },
                 {
+                    title: this.$t('router.demohome'),
+                    icon: 'icon_icon_home',
+                    name: 'demohome',
+                    baseUrl: '/demohome',
+                },
+                {
                     title: this.$t('router.selfSymbol'),
                     icon: 'icon_zixuan',
                     name: 'SelfSymbolIndex',

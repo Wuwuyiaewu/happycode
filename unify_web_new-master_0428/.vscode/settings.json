@@ -57,10 +57,10 @@
     "eslint.run": "onSave",
     "eslint.format.enable": true,
     "[vue]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.defaultFormatter": "octref.vetur",
     },
     "[javascript]": {
-        "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+        "editor.defaultFormatter": "mblode.pretty-formatter"
     },
     "[typescript]": {
         "editor.defaultFormatter": "dbaeumer.vscode-eslint"
