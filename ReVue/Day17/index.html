@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .router-link-exact-active {
+            background: #000;
+            color: #fff;
+        }
+        .border{
+          box-sizing: border-box;
+          display: flex;
+          padding:10px;
+          width: 100%;
+          justify-content: center;
+          flex-direction: column;
+          align-items: center;
+          min-height: 100px;
+          border: 10px solid red
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <p>
+            <router-link to="/">index</router-link>
+            <router-link to="/page1">page1</router-link>
+            <router-link to="/user">user</router-link>
+        </p>
+        <router-view></router-view>
+    </div>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.12/vue.js'
+        integrity='sha512-YXLGLsQBiwHPHLCAA9npZWhADUsHECjkZ71D1uzT2Hpop82/eLnmFb6b0jo8pK4T0Au0g2FETrRJNblF/46ZzQ=='
+        crossorigin='anonymous'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/vue-router/3.5.1/vue-router.js'
+        integrity='sha512-mQKtM7fSv7pIQ6r4Jqe7c7K3QKEa1G+qNp0o9ohfGNeTT7pl85our+sPlSkzogl1oChZj75zhq9HGAj7Pf4Wjw=='
+        crossorigin='anonymous'></script>
+    <script>
+        const Index = {
+            template: "<div class='border'> Index </div>"
+        }
+        const Page1 = {
+            template: "<div class='border'> page1 </div>"
+        }
+        const Profile = {
+            template: "<div class='border'> Profile </div>"
+        }
+        const Post = {
+            template: "<div class='border'> Post </div>"
+        }
+        const User = {
+            template: "<div class='border'> User <router-view></router-view><div>"
+        }
+        const error = {
+            template: "<div> 404 Error </div>"
+        }
+        const router = new VueRouter({
+            routes: [{
+                    path: "/",
+                    component: Index,
+                }, {
+                    path: "/page1",
+                    component: Page1,
+                }, {
+                    path: "/user",
+                    component: User,
+                    children:[
+                      {
+                        path:"profile",
+                        component:Profile,
+                      },
+                      {
+                        path:"posts",
+                        component:Post,
+                      }
+                    ]
+                },
+                {
+                    path: "*",
+                    redirect: "/404"
+                },
+                {
+                    path: "/404",
+                    component: error
+                }
+            ]
+        });
+        (function VueInit() {
+            var vm = new Vue({
+                el: "#app",
+                data() {
+                    return {
+                        show: 1
+                    }
+                },
+                router,
+                methods: {},
+                computed: {},
+                watch: {},
+                mounted() {},
+                created() {},
+                destroyed() {}
+            })
+        })()
+    </script>
+</body>
+
+</html>
