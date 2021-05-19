@@ -8,7 +8,7 @@
             <AppMain />
         </template>
         <NavBar v-if='$route.meta.haveNav' />
-        <!-- <MainScreen v-if='screenVisible' :screen.sync='screenVisible' /> -->
+        <MainScreen v-if='screenVisible' :screen.sync='screenVisible' />
         <FullEnteredDialog v-if='fullEnteredDialogVisible' />
         <BackExperience v-if='backExperienceVisible' :class="[$route.name==='PositionIndex' ? 'left':'right']" @close='backExperienceVisible=false' />
         <LimitBalance :data='limitBalanceData' :show.sync='limitBalanceVisible' />

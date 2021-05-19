@@ -48,6 +48,9 @@
         const Page1 = {
             template: "<div class='border'> page1 </div>"
         }
+        const Page2 = {
+            template: "<div class='border'> page2 </div>"
+        }
         const Profile = {
             template: "<div class='border'> Profile </div>",
             mounted() {
@@ -79,18 +82,30 @@
             routes: [{
                 path: "/",
                 component: Index,
+                name: 'Index',
             }, {
                 path: "/page1",
                 component: Page1,
+                name: 'Page1',
+            }, {
+                path: "/page2",
+                component: Page2,
+                name: 'Page2',
             }, {
                 path: "/user",
                 component: User,
+                name: 'User',
                 children: [{
                     path: "",
                     component: UserContent,
                 }, {
                     path: "profile",
-                    component: Profile
+                    component: Profile,
+                    name: 'user-profile',
+                }, {
+                    path: "profile/:id",
+                    component: Profile,
+                    name: 'user-profile',
                 }, {
                     path: "posts",
                     component: Post
