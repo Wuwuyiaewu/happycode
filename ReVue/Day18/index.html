@@ -28,20 +28,25 @@
 
 <body>
     <div id="app">
-        <p>
-            <router-link to="/">index</router-link>
-            <router-link to="/page1">page1</router-link>
-            <router-link to="/posts">posts</router-link>
-            <router-link to="/user">User</router-link>
-            <router-link to="/user/profile">User Profile</router-link>
-            <router-link to="/user/posts">User Posts</router-link>
-            <button @click="clickHandler">router push</button>
-        </p>
+
         <router-view></router-view>
+        <router-view name="content"></router-view>
     </div>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.12/vue.js' integrity='sha512-YXLGLsQBiwHPHLCAA9npZWhADUsHECjkZ71D1uzT2Hpop82/eLnmFb6b0jo8pK4T0Au0g2FETrRJNblF/46ZzQ==' crossorigin='anonymous'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/vue-router/3.5.1/vue-router.js' integrity='sha512-mQKtM7fSv7pIQ6r4Jqe7c7K3QKEa1G+qNp0o9ohfGNeTT7pl85our+sPlSkzogl1oChZj75zhq9HGAj7Pf4Wjw==' crossorigin='anonymous'></script>
     <script>
+        const Nav = {
+            template: `
+            <p>
+            <router-link to="/">index</router-link>
+            <router-link to="/page1">page1</router-link>
+            <router-link to="/page2">page2</router-link>
+            <router-link to="/user/123">User 123</router-link>
+            <router-link :to="{name:'user',params:{id:555}}">User 555</router-link>
+            <button @click="$router.push({name:'user',params:{id:123}})">router push</button>
+        </p>
+            `
+        }
         const Index = {
             template: "<div class='border'> Index </div>"
         }
@@ -81,44 +86,45 @@
         const router = new VueRouter({
             routes: [{
                 path: "/",
-                component: Index,
+                components: {
+                    default: Nav,
+                    content: Index
+                },
                 name: 'Index',
             }, {
                 path: "/page1",
-                component: Page1,
+                components: {
+                    default: Nav,
+                    content: Page1
+                },
                 name: 'Page1',
             }, {
                 path: "/page2",
-                component: Page2,
+                components: {
+                    default: Nav,
+                    content: Page2
+                },
                 name: 'Page2',
             }, {
-                path: "/user",
+                path: "/user/:id(\\d+)",
+                components: {
+                    default: Nav,
+                    content: User
+                },
+                name: 'user',
+            }, {
+                path: "/user/:id(\\d+)",
                 component: User,
-                name: 'User',
-                children: [{
-                    path: "",
-                    component: UserContent,
-                }, {
-                    path: "profile",
-                    component: Profile,
-                    name: 'user-profile',
-                }, {
-                    path: "profile/:id",
-                    component: Profile,
-                    name: 'user-profile',
-                }, {
-                    path: "posts",
-                    component: Post
-                }, {
-                    path: "/posts",
-                    component: Post
-                }]
+                name: 'user-profile',
             }, {
                 path: "*",
                 redirect: "/404"
             }, {
                 path: "/404",
-                component: error
+                components: {
+                    default: Nav,
+                    content: error
+                },
             }]
         });
         (function VueInit() {
