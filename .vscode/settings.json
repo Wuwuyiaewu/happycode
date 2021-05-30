@@ -1,15 +1,15 @@
 {
-    "liveServer.settings.port": 443,
-    "liveServer.settings.host": "www.jf.com",
-    "liveServer.settings.root": "/Alex/extension/live_server/web/",
+    "liveServer.settings.port": 80,
+    // "liveServer.settings.host": "www.jf.com",
+    // "liveServer.settings.root": "/Alex/extension/live_server/web/",
     "liveServer.settings.https": {
-        "enable": true,
+        "enable": false,
         "cert": "D:/happycode/Alex/extension/live_server/cert.pem",
         "key": "D:/happycode/Alex/extension/live_server/key.pem",
         "passphrase": ""
     },
     "liveServer.settings.proxy": {
-        "enable": true,
+        "enable": false,
         "baseUri": "/api/",
         "proxyUri": "http://localhost:3000"
     },
