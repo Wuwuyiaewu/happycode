@@ -11,6 +11,15 @@
 <body>
     <h1>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eos minima nihil, magni vero esse perspiciatis maxime
         ex nulla quod accusamus eveniet quis unde asperiores ab saepe nesciunt tempore autem eligendi?</h1>
+
+        <script src="/public/js/axios.js"></script>
+        <script>
+            axios.get("/api/user").then((res)=>{
+                console.log(res)
+            }).catch((err)=>{
+                console.log(err)
+            })
+        </script>
 </body>
 
 </html>
