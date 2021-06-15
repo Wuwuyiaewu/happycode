@@ -1,0 +1,202 @@
+/**
+ * postMessage API
+ */
+var APPFUNCTION = {
+    inApp: function () {
+        if (window.JsHook && JsHook.appGoHome) {
+            return true
+        } else if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.appGoHome) {
+            return true
+        } else {
+            return false
+        }
+    },
+    toAppPages: function (key) {
+        if (window.JsHook && JsHook.appGoHome) {
+            if (arguments.length == 1) {
+                JsHook[key]()
+            } else if (arguments.length == 2) {
+                JsHook[key](arguments[1])
+            } else if (arguments.length == 3) {
+                JsHook[key](arguments[1], arguments[2])
+            }
+        } else if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.appGoHome) {
+            var _arr = [].slice.call(arguments)
+            _arr = _arr.splice(1)
+            window.webkit.messageHandlers[key].postMessage(_arr)
+        }
+    },
+    appLoginInfo: function () {
+        var def = new $.Deferred()
+        var IOS_funcname = 'IOS_funcname' + Date.now()
+        window[IOS_funcname] = function (dataStr) {
+            if (typeof dataStr === 'string') dataStr = JSON.parse(dataStr)
+            def.resolve(dataStr)
+        }
+        try {
+            if (window.JsHook && window.JsHook.appAccountInfo) {
+                // Android
+                let result = window.JsHook.appAccountInfo()
+                if (typeof result === 'string') result = JSON.parse(result)
+                def.resolve(result)
+            } else if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers['appAccountInfo']) {
+                // ios
+                window.webkit.messageHandlers['appAccountInfo'].postMessage([IOS_funcname])
+            } else {
+                def.reject({})
+            }
+        } catch (err) {
+            def.reject(err.message)
+        }
+        return def
+
+    }
+
+}
+var IX_postMessage = (function (window) {
+    function IX_postMessage() {
+        this.domain = ''
+        this.key = ''
+        this.inIframe = !(window.self === window.top)
+        this.callback = {}
+    }
+    const parent = window.parent != window.top ? window.parent : window.top;
+    /** 初始化调用
+     */
+    IX_postMessage.prototype.install = function (config) {
+        this.domain = config.domain
+        this.key = config.key
+        parent.postMessage({ type: 'IX_postMessage_install' }, '*')
+    }
+    /** 页面跳转(所有内嵌页面可用)
+     * @param {String} urlPath  /home, /trade
+     */
+    IX_postMessage.prototype.toPage = function (urlPath) {
+        if (!urlPath) return console.error(new Error('IX_postMessage.toPage 方法请传入urlPath'))
+        if (urlPath.indexOf('/') !== 0) urlPath = '/' + urlPath
+        if (APPFUNCTION.inApp()) {
+            // 在app里边
+
+            // appGoNewOrder(long symbolId, int direction)//跳转到下单页；1买 2卖
+            // appGoPositionList()    //跳转到持仓列表
+            // appGoOrderList()  //跳转到挂单列表
+            // appGoDealList()    //跳转到已平仓列表
+            // appGoCS()  //跳转到客服
+
+            if (urlPath.indexOf('/productDetail/') == 0) {
+                //去行情页面
+                APPFUNCTION.toAppPages('appGoChart', urlPath.substring(urlPath.lastIndexOf('/') + 1))
+            } else if (urlPath.indexOf('/login') == 0) {
+                // 去登陆
+                APPFUNCTION.toAppPages('appGoLogin')
+            } else if (urlPath.indexOf('/mine') == 0) {
+                APPFUNCTION.toAppPages('appGoMine')
+            } else if (urlPath.indexOf('/home') == 0) {
+                APPFUNCTION.toAppPages('appGoHome')
+            } else if (urlPath.indexOf('/trade') == 0) {
+                APPFUNCTION.toAppPages('appGoQuote')
+            } else if (urlPath.indexOf('/register') == 0) {
+                APPFUNCTION.toAppPages('appGoRegister')
+            } else if (urlPath.indexOf('/my/depositFunds') == 0) {
+                APPFUNCTION.toAppPages('appGoDeposit')
+            } else if (urlPath.indexOf('/my/withAmount') == 0) {
+                APPFUNCTION.toAppPages('appGoWithdrawal')
+            } else if (urlPath.indexOf('/order') == 0) {
+                var productId = urlPath.match(/\d+/)[0]
+                var direction = urlPath.indexOf('direction=buy') >= 0 ? 1 : 2
+                APPFUNCTION.toAppPages('appGoNewOrder', Number(productId), direction)
+            }
+        } else {
+            if (this.inIframe) {
+                parent.postMessage({ type: 'toPage', data: { path: urlPath } }, '*')
+            } else if (this.domain && this.key) {
+                location.href = `${this.domain}/${this.key + urlPath}`
+            } else {
+                console.error(new Error('请先调用install方法'))
+            }
+        }
+    }
+    IX_postMessage.prototype.toMiddlePage = function (data) {
+        var lang = location.search.indexOf('en-US')>0?'en':'cn'
+        var lang = lang==='en'?'Details':'详情'
+        if (!data) return console.error(new Error('IX_postMessage.toMiddlePage 方法请传入data'))
+        if (APPFUNCTION.inApp()) {
+			console.log('go_1');
+            if (data.path === '/nest/queryinfo') {
+				console.log('go_2');
+                APPFUNCTION.toAppPages('appOpenNewpage', data.query.url, data.query.title)
+            }else if(data.path === '/article'){ 
+				console.log('go_3');
+				   APPFUNCTION.toAppPages('appOpenNewpage', data.query.url, data.title || lang)
+            }
+        } else {
+			console.log('go_4');
+			// debugger
+            if (this.inIframe) {
+                if(data.path === '/article'){ 
+                    this.toMiddlePage({ path: '/nest/queryinfo', query: { url: data.query.url, title: data.title || lang } })
+                }else{
+                    parent.postMessage({ type: 'toPage', data }, '*')
+                }   
+            }
+        }
+    }
+
+    /** 登录接口(只存在开户页面可用)
+     * @param {Object} data  {accountNo:**，passWord:**}
+     */
+    IX_postMessage.prototype.login = function (data) {
+        if (!data || !data.accountNo || !data.passWord) return console.error(new Error('IX_postMessage.login 方法请传入{accountNo:**，passWord:**}格式数据'))
+        if (!this.inIframe) return
+       parent.postMessage({ type: 'autoLogin', data: data }, '*')
+    }
+
+    /** 跳转入金页面(首页可用) id： deposit 入金， drawings 出金
+     */
+    IX_postMessage.prototype.toDepositDrawings = function (id) {
+        if (['deposit', 'drawings'].indexOf(id) < 0) {
+            return
+        }
+        if (APPFUNCTION.inApp()) {
+            if (id === 'deposit') {
+                APPFUNCTION.toAppPages('appGoDeposit')
+            } else if (id === 'drawings') {
+                APPFUNCTION.toAppPages('appGoWithdrawal')
+            }
+        } else {
+            if (!this.inIframe) return
+            //if()
+            parent.postMessage({ type: 'toPage', data: { name: 'NestAccess', params: { id: id } } }, '*')
+        }
+    }
+    /*
+     * 返回
+     */
+    IX_postMessage.prototype.back = function () {
+        if (!this.inIframe) return
+        parent.postMessage({ type: 'back', data: {} }, '*')
+    }
+    /* 获取app的基本信息 */
+    IX_postMessage.prototype.getAppToken = function (data) {
+        if (!this.inIframe) return
+        if (data && data.success) {
+            this.callback['getAppToken'] = data.success
+        }
+        window.parent.postMessage({ type: 'getAppToken', data: {} }, '*')
+    }
+    var pm = new IX_postMessage()
+
+    window.addEventListener(
+        'message',
+        function (evt) {
+            var data = evt.data || {}
+            if (data.type === 'appToken') {
+                pm.callback['getAppToken'](data.data || {})
+            } else if (data.type === 'appProductInfo') {
+                pm.callback['getAppProductInfo'](data.data || [])
+            }
+        },
+        false
+    )
+    return pm
+})(window)

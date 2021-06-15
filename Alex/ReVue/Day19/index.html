@@ -1,57 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <style></style>
-  </head>
 
-  <body>
-    <div id="app">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <style></style>
+</head>
+
+<body>
+  <div id="app">
+    <router-link to="/aaa">aaa</router-link>
+    <router-link to="/bbb" :tag="$route.params.ic !== 'bbb'? 'a': 'b' ">bbb</router-link>
+    <transition name="XXX">
       <router-view></router-view>
-    </div>
+    </transition>
 
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.12/vue.js"
-      integrity="sha512-YXLGLsQBiwHPHLCAA9npZWhADUsHECjkZ71D1uzT2Hpop82/eLnmFb6b0jo8pK4T0Au0g2FETrRJNblF/46ZzQ=="
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/vue-router/3.5.1/vue-router.js"
-      integrity="sha512-mQKtM7fSv7pIQ6r4Jqe7c7K3QKEa1G+qNp0o9ohfGNeTT7pl85our+sPlSkzogl1oChZj75zhq9HGAj7Pf4Wjw=="
-      crossorigin="anonymous"
-    ></script>
+    <Index :uid="$route.params.ic" :test="$route.query.test"></Index>
+    <button @click="change">bbb</button>
+  </div>
 
-    <script>
-      const Index = {
-        template: "<div class='border'> Index 4541561456141456</div>",
-      };
-      const router = new VueRouter({
-        routes: [
-          {
-            path: "/:ic",
-            component: Index,
-            name: "Index",
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.12/vue.js"
+    integrity="sha512-YXLGLsQBiwHPHLCAA9npZWhADUsHECjkZ71D1uzT2Hpop82/eLnmFb6b0jo8pK4T0Au0g2FETrRJNblF/46ZzQ=="
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-router/3.5.1/vue-router.js"
+    integrity="sha512-mQKtM7fSv7pIQ6r4Jqe7c7K3QKEa1G+qNp0o9ohfGNeTT7pl85our+sPlSkzogl1oChZj75zhq9HGAj7Pf4Wjw=="
+    crossorigin="anonymous"></script>
+
+  <script>
+    const Index = {
+      template: `<div class='border'> Index 
+              <p>{{this.uid}}</p>
+              <p>{{this.test}}</p>
+          </div>`,
+      props: ["uid", "test"],
+      methods: {
+
+      },
+      beforeRouteEnter(to, from, next) {
+        next()
+
+      },
+      beforeRouteUpdate(to, from, next) {
+        next()
+
+      },
+      beforeRouteLeave(to, from, next) {
+        next()
+
+      }
+    };
+    const router = new VueRouter({
+      routes: [
+        {
+          path: "/:ic",
+          components: { default: Index },
+          name: "Index",
+          // props: { default: true },
+          props: { default: (route) => ({ uid: route.params.ic, test: route.query.test }), },
+          beforeEnter: (to, from, next) => {
+            next()
           },
-        ],
-      });
-      (function VueInit() {
+        },
+      ],
+    });
+    router.beforeEach((to, from, next) => {
+      console.log(to, from, next);
+      next()
+    })
+    router.afterEach((to, from) => {
+      console.log(to, from);
+    })
+      ; (function VueInit() {
         var vm = new Vue({
           el: "#app",
           router,
+          components: {
+            Index
+          },
           data() {
             return {};
           },
-          methods: {},
+          methods: {
+            change() {
+              this.$router.push('/bbb').catch((err) => {
+                console.log(VueRouter.isNavigationFailure(err));
+              })
+            }
+          },
           computed: {},
           watch: {},
-          mounted() {},
-          created() {},
-          destroyed() {},
+          mounted() { },
+          created() { },
+          destroyed() { },
         });
       })();
-    </script>
-  </body>
+  </script>
+</body>
+
 </html>

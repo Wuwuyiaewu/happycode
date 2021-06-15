@@ -1,0 +1,21 @@
+{
+  "name": "ix_middle_home",
+  "version": "1.0.0",
+  "description": "middle index page",
+  "main": "index.js",
+  "scripts": {
+    "publish": "node build/publish"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://git.gwghk.com:5080/amir/ix_middle_home.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "chalk": "^3.0.0",
+    "gulp": "^4.0.2",
+    "ora": "^4.0.3",
+    "scp2": "^0.5.0"
+  }
+}

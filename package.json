@@ -20,5 +20,9 @@
     "devDependencies": {
         "babel-cli": "^6.26.0",
         "babel-preset-env": "^1.7.0"
+    },
+    "dependencies": {
+        "@vue/cli": "^4.5.13",
+        "sass-loader": "^10.2.0"
     }
 }
