@@ -1,6 +1,6 @@
 {
-    "liveServer.settings.port": 80,
-    // "liveServer.settings.host": "www.jf.com",
+    "liveServer.settings.port": 8080,
+    // "liveServer.settings.host": "http://stockpage.10jqka.com.cn/",
     // "liveServer.settings.root": "/Alex/extension/live_server/web/",
     "liveServer.settings.https": {
         "enable": false,
