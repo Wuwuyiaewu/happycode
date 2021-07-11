@@ -61,7 +61,6 @@ class Calculator {
         const integerDigits = parseFloat(stringNumber.split('.')[0])
         const decimalDigits = stringNumber.split('.')[1]
         let integerDisplay
-            // 處理位數逗點
         if (isNaN(integerDigits)) {
             integerDisplay = ''
         } else {
@@ -79,9 +78,8 @@ class Calculator {
             this.getDisplayNumber(this.currentOperand)
         if (this.operation != null) {
             this.previousOperandTextElement.innerText =
-                this.getDisplayNumber(`${this.previousOperand}${this.operation}`)
+                `${this.getDisplayNumber(this.previousOperand)} ${this.operation}`
         } else {
-            // 有無操作符號去清空顯示
             this.previousOperandTextElement.innerText = ''
         }
     }
@@ -111,7 +109,6 @@ operationButtons.forEach(button => {
         calculator.updateDisplay()
     })
 })
-
 
 equalsButton.addEventListener('click', button => {
     calculator.compute()

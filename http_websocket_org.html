@@ -66,11 +66,16 @@
             right: .10rem;
         }
     </style>
-    <title>websocket_資料無修正_步兵手刻</title>
+    <title>websocket_資料無修正</title>
 </head>
 
 <body>
     <div id="getPriceTemplate" class="trading_wrap">
+        <form action="" @submit.prevent>
+            <input type="text" placeholder="輸入手機號碼" v-model="input_account.account" maxlength="11">
+            <input type="text" placeholder="輸入密碼" v-model="input_account.password">
+            <button @click="sendLogin">送出</button>
+        </form>
         <h1>輪播買賣</h1>
         <div class="container">
             <div class="carousel">
@@ -227,13 +232,20 @@
                                 },
                                 data: {
                                     "head": {
-                                        "appKey": "yz352001"
+                                        "appKey": "JW666key"
                                     },
                                     "data": {
                                         "login_name": "Guest",
                                         "password": ""
                                     }
                                 },
+                            },
+                            // token
+                            Authorization: '',
+                            // 帳號登入
+                            input_account: {
+                                accoutn: '',
+                                password: ''
                             },
                             // 建立 websocket 記憶體
                             websock: null,
@@ -296,6 +308,46 @@
 
                     },
                     methods: {
+                        // 登入 非 ws 操作
+                        sendLogin() {
+                            let vm = this
+                            let login_data = {
+                                method: 'post',
+                                url: `${HTTP_BASE_URL}/account/appProperties/getAccountProperties`,
+                                headers: {
+                                    'Content-type': 'application/json',
+                                    'module': 'uat-account',
+                                    'rpcType': 'http',
+                                    'method': '/account/appProperties/getAccountProperties',
+                                    'httpMethod': 'post',
+                                    'trace': 'h5_' + this.get_current_time(),
+                                    // 發送後才可以取 token
+                                    'Authorization': vm.Authorization
+                                },
+                                data: {
+                                    "head": {
+                                        "appKey": "JW666key",
+                                        "language": "zh-CN",
+                                        "msgType": "login"
+                                    },
+                                    "data": {
+                                        "imei": "H5_APP",
+                                        "accountType": "real",
+                                        "accountNo": vm.input_account.account,
+                                        "password": vm.input_account.password,
+                                        "mobilePhonePrefix": "86",
+                                        "rawPassword": true
+                                    }
+                                },
+                            }
+                            axios(login_data)
+                                .then(function(response) {
+                                    console.log(response);
+                                })
+                                .catch(function(error) {
+                                    console.log(error, 'axios 發送的 Http 、 Ws 出現錯誤');
+                                });
+                        },
                         // 紀錄分頁
                         recordHis() {
                             let vm = this
@@ -418,13 +470,6 @@
                         }
                     }, 3000);
                 },
-                //css prfix
-                setVendorCss(element, property, value) {
-                    element.style["webkit" + property] = value;
-                    element.style["moz" + property] = value;
-                    element.style["ms" + property] = value;
-                    element.style["o" + property] = value;
-                },
                 // 要做 ws 以前都要先做 http 發送登入，才能夠要到 token 做 ws 操作 ix 文檔
                 // https://testdocs.ixmiddle.com/ixmiddle/http-interface-doc/account/appProperties/getAccountProperties.html
                 gotourl() {
@@ -433,6 +478,7 @@
                         .then(function (response) {
                             // 進行 ws 操作
                             // 從 HTTP 所取得的 response 帶入 websocket head
+                            vm.Authorization = response.headers.authorization
                             vm.Ws_config.head.Authorization = response.headers.authorization
                             vm.Ws_config.head.msgType = 'login'
                             vm.Ws_config.content.appKey = response.data.data.transBaseConfigVo.appKey
