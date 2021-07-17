@@ -1,9 +1,0 @@
-{
-    "version": 3,
-    "mappings": "AAAA,AAAA,QAAQ,AAAC,CACL,OAAO,CAAE,MAAM,CAClB,AAED,AAAA,cAAc,AAAC,CACX,OAAO,CAAE,SAAS,CACrB",
-    "sources": [
-        "tablet.scss"
-    ],
-    "names": [],
-    "file": "tablet.min.css"
-}
